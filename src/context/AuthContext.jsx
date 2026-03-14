@@ -7,7 +7,7 @@ export const useAuth = () => useContext(AuthContext);
 const mockUsers = {
   'admin@demo.com': { id: 1, email: 'admin@demo.com', role: 'admin', companyId: 1 },
   'ops@demo.com': { id: 2, email: 'ops@demo.com', role: 'operations', companyId: 1 },
-  'maint@demo.com': { id: 3, email: 'maint@demo.com', role: 'maintenance', companyId: 1 },
+  'maint@demo.com': { id: 3, email: 'maint@demo.com', role: 'maintenance_manager', companyId: 1 },
   'ticket@demo.com': { id: 4, email: 'ticket@demo.com', role: 'ticket', companyId: 1 },
   'hr@demo.com': { id: 5, email: 'hr@demo.com', role: 'hr', companyId: 1 },
   'emp@demo.com': { id: 6, email: 'emp@demo.com', role: 'employee', companyId: 1 },

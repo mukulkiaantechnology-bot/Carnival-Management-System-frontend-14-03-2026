@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, Clock, ClipboardCheck, Wrench, 
   DollarSign, Ticket, GraduationCap, FileText, Calendar, 
-  BarChart, Settings, X, Menu
+  BarChart, Settings, X, Menu, ClipboardList, FileBarChart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -19,6 +19,12 @@ const NAV_ITEMS = [
   { name: 'Calendar', icon: Calendar, path: '/events' },
   { name: 'Reports', icon: BarChart, path: '/reports' },
   { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
+const maintenanceMenu = [
+  { name: "Dashboard", path: "/maintenance/dashboard", icon: LayoutDashboard },
+  { name: "Work Orders", path: "/maintenance/work-orders", icon: ClipboardList },
+  { name: "Maintenance Reports", path: "/maintenance/reports", icon: FileBarChart }
 ];
 
 export function Sidebar({ isOpen, toggleSidebar }) {
@@ -48,22 +54,28 @@ export function Sidebar({ isOpen, toggleSidebar }) {
             Navigation
           </p>
           <nav className="space-y-1">
-            {NAV_ITEMS.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                className={({ isActive }) =>
-                  `flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                    isActive
-                      ? 'bg-blue-50 text-blue-700'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                  }`
-                }
-              >
-                <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 ${item.path === '/' ? 'text-blue-500' : ''}`} />
-                {item.name}
-              </NavLink>
-            ))}
+            {(() => {
+              let menuItems = NAV_ITEMS;
+              if (user?.role === 'maintenance_manager' || user?.role === 'maintenance') {
+                menuItems = maintenanceMenu;
+              }
+              return menuItems.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? 'bg-blue-50 text-blue-700'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                    }`
+                  }
+                >
+                  <item.icon className={`mr-3 h-5 w-5 flex-shrink-0 ${item.path === '/maintenance/dashboard' || (item.path === '/' && !['maintenance_manager', 'maintenance'].includes(user?.role)) ? 'text-blue-500' : ''}`} />
+                  {item.name}
+                </NavLink>
+              ));
+            })()}
           </nav>
         </div>
       </aside>

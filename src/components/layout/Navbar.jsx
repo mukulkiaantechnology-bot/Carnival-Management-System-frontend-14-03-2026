@@ -15,9 +15,11 @@ export function Navbar({ toggleSidebar }) {
         </button>
         
         <div className="hidden lg:block">
-          <h2 className="text-xl font-semibold text-slate-800 tracking-tight">
-            Dashboard Overview
-          </h2>
+          {!['maintenance_manager', 'maintenance'].includes(user?.role) && (
+            <h2 className="text-xl font-semibold text-slate-800 tracking-tight">
+              Dashboard Overview
+            </h2>
+          )}
         </div>
 
         <div className="flex items-center space-x-4">

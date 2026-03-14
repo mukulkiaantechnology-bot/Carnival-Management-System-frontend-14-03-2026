@@ -11,6 +11,8 @@ import TicketDashboard from './pages/dashboards/ticket/TicketDashboard';
 import HRDashboard from './pages/dashboards/hr/HRDashboard';
 import EmployeeDashboard from './pages/dashboards/employee/EmployeeDashboard';
 import PlaceholderPage from './pages/modules/PlaceholderPage';
+import WorkOrders from './pages/modules/maintenance/WorkOrders';
+import MaintenanceReports from './pages/modules/maintenance/MaintenanceReports';
 
 function RootRedirect() {
   const { user } = useAuth();
@@ -18,7 +20,8 @@ function RootRedirect() {
   const dashboardRoutes = {
     admin: '/admin-dashboard',
     operations: '/operations-dashboard',
-    maintenance: '/maintenance-dashboard',
+    maintenance: '/maintenance/dashboard',
+    maintenance_manager: '/maintenance/dashboard',
     ticket: '/ticket-dashboard',
     hr: '/hr-dashboard',
     employee: '/employee-dashboard'
@@ -51,8 +54,11 @@ export default function App() {
           </Route>
 
           {/* Maintenance Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance']} />}>
-            <Route path="/maintenance-dashboard" element={<MaintenanceDashboard />} />
+          <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance', 'maintenance_manager']} />}>
+            <Route path="/maintenance/dashboard" element={<MaintenanceDashboard />} />
+            <Route path="/maintenance-dashboard" element={<Navigate to="/maintenance/dashboard" replace />} />
+            <Route path="/maintenance/work-orders" element={<WorkOrders />} />
+            <Route path="/maintenance/reports" element={<MaintenanceReports />} />
             <Route path="/maintenance/*" element={<PlaceholderPage title="Maintenance Module" />} />
           </Route>
 
