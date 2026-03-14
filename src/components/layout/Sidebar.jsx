@@ -9,14 +9,14 @@ import { useAuth } from '../../context/AuthContext';
 const NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
   { name: 'Employees', icon: Users, path: '/employees' },
-  { name: 'Time Clock', icon: Clock, path: '/timeclock' },
+  { name: 'Time Clock', icon: Clock, path: '/time-clock' },
   { name: 'Inspections', icon: ClipboardCheck, path: '/inspections' },
   { name: 'Maintenance', icon: Wrench, path: '/maintenance' },
   { name: 'Financial', icon: DollarSign, path: '/financial' },
   { name: 'Ticket Sales', icon: Ticket, path: '/tickets' },
   { name: 'Training', icon: GraduationCap, path: '/training' },
   { name: 'Contracts', icon: FileText, path: '/contracts' },
-  { name: 'Calendar', icon: Calendar, path: '/events' },
+  { name: 'Calendar', icon: Calendar, path: '/calendar' },
   { name: 'Reports', icon: BarChart, path: '/reports' },
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];

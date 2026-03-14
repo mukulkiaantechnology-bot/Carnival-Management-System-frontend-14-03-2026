@@ -10,7 +10,17 @@ import MaintenanceDashboard from './pages/dashboards/maintenance/MaintenanceDash
 import TicketDashboard from './pages/dashboards/ticket/TicketDashboard';
 import HRDashboard from './pages/dashboards/hr/HRDashboard';
 import EmployeeDashboard from './pages/dashboards/employee/EmployeeDashboard';
-import PlaceholderPage from './pages/modules/PlaceholderPage';
+import Employees from './pages/modules/Employees';
+import TimeClock from './pages/modules/TimeClock';
+import Inspections from './pages/modules/Inspections';
+import Maintenance from './pages/modules/Maintenance';
+import Financial from './pages/modules/Financial';
+import TicketSales from './pages/modules/TicketSales';
+import Training from './pages/modules/Training';
+import Contracts from './pages/modules/Contracts';
+import Calendar from './pages/modules/Calendar';
+import Reports from './pages/modules/Reports';
+import Settings from './pages/modules/Settings';
 
 function RootRedirect() {
   const { user } = useAuth();
@@ -37,41 +47,42 @@ export default function App() {
           {/* Admin Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/employees/*" element={<PlaceholderPage title="Employees Module" />} />
-            <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
-            <Route path="/contracts/*" element={<PlaceholderPage title="Contracts Module" />} />
+            <Route path="/employees/*" element={<Employees />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/contracts/*" element={<Contracts />} />
+            <Route path="/financial" element={<Financial />} />
           </Route>
 
           {/* Operations Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'operations']} />}>
             <Route path="/operations-dashboard" element={<OperationsDashboard />} />
-            <Route path="/inspections/*" element={<PlaceholderPage title="Inspections Module" />} />
-            <Route path="/events/*" element={<PlaceholderPage title="Events Module" />} />
-            <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
+            <Route path="/inspections/*" element={<Inspections />} />
+            <Route path="/calendar/*" element={<Calendar />} />
+            <Route path="/reports" element={<Reports />} />
           </Route>
 
           {/* Maintenance Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance']} />}>
             <Route path="/maintenance-dashboard" element={<MaintenanceDashboard />} />
-            <Route path="/maintenance/*" element={<PlaceholderPage title="Maintenance Module" />} />
+            <Route path="/maintenance/*" element={<Maintenance />} />
           </Route>
 
           {/* Ticket Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket']} />}>
             <Route path="/ticket-dashboard" element={<TicketDashboard />} />
-            <Route path="/tickets/*" element={<PlaceholderPage title="Tickets Module" />} />
+            <Route path="/tickets/*" element={<TicketSales />} />
           </Route>
 
           {/* HR Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'hr']} />}>
             <Route path="/hr-dashboard" element={<HRDashboard />} />
-            <Route path="/training/*" element={<PlaceholderPage title="Training Module" />} />
+            <Route path="/training/*" element={<Training />} />
           </Route>
 
           {/* Employee Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['employee']} />}>
+          <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
             <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
-            <Route path="/timeclock" element={<PlaceholderPage title="Time Clock" />} />
+            <Route path="/time-clock" element={<TimeClock />} />
           </Route>
 
           <Route path="*" element={<RootRedirect />} />
