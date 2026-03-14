@@ -41,7 +41,7 @@ export default function MaintenanceDashboard() {
     <div className="space-y-6 max-w-[100vw] overflow-hidden px-1 sm:px-2">
       <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Maintenance Dashboard</h1>
       
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {stats.map((stat) => (
           <Card key={stat.label} className="border-none shadow-sm">
             <CardContent className="p-3 sm:p-6 flex flex-col xs:flex-row items-center xs:space-x-4 text-center xs:text-left">

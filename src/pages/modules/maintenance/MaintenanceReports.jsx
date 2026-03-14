@@ -38,21 +38,21 @@ export default function MaintenanceReports() {
     <div className="space-y-6 max-w-[100vw] overflow-hidden px-1">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-800">Maintenance Reports</h1>
-        <div className="grid grid-cols-2 sm:flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
           <Button 
             variant="outline" 
             onClick={exportToCSV}
-            className="flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-50 text-xs sm:text-sm py-2 px-3"
+            className="flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-50 text-xs sm:text-sm py-2.5 px-3 w-full sm:w-auto shadow-sm"
           >
             <Download size={16} className="sm:w-[18px]" />
-            CSV
+            Export CSV
           </Button>
           <Button 
             onClick={exportToPDF}
-            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 text-xs sm:text-sm py-2 px-3"
+            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 text-xs sm:text-sm py-2.5 px-3 w-full sm:w-auto shadow-md shadow-blue-500/20"
           >
             <Download size={16} className="sm:w-[18px]" />
-            PDF
+            Export PDF
           </Button>
         </div>
       </div>
