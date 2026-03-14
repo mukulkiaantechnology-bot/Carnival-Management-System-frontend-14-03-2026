@@ -5,27 +5,42 @@ import { DashboardLayout } from './components/layout/DashboardLayout';
 
 import Login from './pages/auth/Login';
 import AdminDashboard from './pages/dashboards/admin/AdminDashboard';
-import OperationsDashboard from './pages/dashboards/operations/OperationsDashboard';
 import MaintenanceDashboard from './pages/dashboards/maintenance/MaintenanceDashboard';
-import TicketDashboard from './pages/dashboards/ticket/TicketDashboard';
-import HRDashboard from './pages/dashboards/hr/HRDashboard';
 import EmployeeDashboard from './pages/dashboards/employee/EmployeeDashboard';
+import HRDashboard from './pages/dashboards/hr/HRDashboard';
 import PlaceholderPage from './pages/modules/PlaceholderPage';
 import WorkOrders from './pages/modules/maintenance/WorkOrders';
 import MaintenanceReports from './pages/modules/maintenance/MaintenanceReports';
 
+// Operations Manager Module
+import OpsManagerDashboard from './pages/operations/dashboard/OperationsDashboard';
+import Inspections from './pages/operations/inspections/Inspections';
+import Events from './pages/operations/events/Events';
+import EmployeesView from './pages/operations/employees/EmployeesView';
+import OperationsReports from './pages/operations/reports/OperationsReports';
+
+// Ticket Manager Module
+import TicketManagerDashboard from './pages/tickets/dashboard/TicketDashboard';
+import TicketBoxes from './pages/tickets/boxes/TicketBoxes';
+import TicketTracking from './pages/tickets/tracking/TicketTracking';
+import Settlement from './pages/tickets/settlement/Settlement';
+
 function RootRedirect() {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
+  
   const dashboardRoutes = {
     admin: '/admin-dashboard',
-    operations: '/operations-dashboard',
+    operations: '/operations/dashboard',
+    operations_manager: '/operations/dashboard',
     maintenance: '/maintenance/dashboard',
     maintenance_manager: '/maintenance/dashboard',
-    ticket: '/ticket-dashboard',
+    ticket: '/tickets/dashboard',
+    ticket_manager: '/tickets/dashboard',
     hr: '/hr-dashboard',
-    employee: '/employee-dashboard'
+    employee: '/employee-dashboard',
   };
+  
   return <Navigate to={dashboardRoutes[user.role] || '/login'} replace />;
 }
 
@@ -34,6 +49,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        
         <Route element={<DashboardLayout />}>
           <Route path="/" element={<RootRedirect />} />
           
@@ -45,12 +61,14 @@ export default function App() {
             <Route path="/contracts/*" element={<PlaceholderPage title="Contracts Module" />} />
           </Route>
 
-          {/* Operations Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'operations']} />}>
-            <Route path="/operations-dashboard" element={<OperationsDashboard />} />
-            <Route path="/inspections/*" element={<PlaceholderPage title="Inspections Module" />} />
-            <Route path="/events/*" element={<PlaceholderPage title="Events Module" />} />
-            <Route path="/reports" element={<PlaceholderPage title="Reports" />} />
+          {/* Operations & Operations Manager Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager']} />}>
+             <Route path="/operations-dashboard" element={<OpsManagerDashboard />} />
+             <Route path="/operations/dashboard" element={<OpsManagerDashboard />} />
+             <Route path="/operations/inspections" element={<Inspections />} />
+             <Route path="/operations/events" element={<Events />} />
+             <Route path="/operations/employees" element={<EmployeesView />} />
+             <Route path="/operations/reports" element={<OperationsReports />} />
           </Route>
 
           {/* Maintenance Routes */}
@@ -62,24 +80,24 @@ export default function App() {
             <Route path="/maintenance/*" element={<PlaceholderPage title="Maintenance Module" />} />
           </Route>
 
-          {/* Ticket Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket']} />}>
-            <Route path="/ticket-dashboard" element={<TicketDashboard />} />
-            <Route path="/tickets/*" element={<PlaceholderPage title="Tickets Module" />} />
+          {/* Ticket & Ticket Manager Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket', 'ticket_manager']} />}>
+            <Route path="/tickets/dashboard" element={<TicketManagerDashboard />} />
+            <Route path="/tickets/boxes" element={<TicketBoxes />} />
+            <Route path="/tickets/tracking" element={<TicketTracking />} />
+            <Route path="/tickets/settlement" element={<Settlement />} />
           </Route>
 
           {/* HR Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'hr']} />}>
             <Route path="/hr-dashboard" element={<HRDashboard />} />
-            <Route path="/training/*" element={<PlaceholderPage title="Training Module" />} />
           </Route>
 
-          {/* Employee Routes */}
           <Route element={<ProtectedRoute allowedRoles={['employee']} />}>
             <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
-            <Route path="/timeclock" element={<PlaceholderPage title="Time Clock" />} />
           </Route>
 
+          {/* Catch-all */}
           <Route path="*" element={<RootRedirect />} />
         </Route>
       </Routes>
