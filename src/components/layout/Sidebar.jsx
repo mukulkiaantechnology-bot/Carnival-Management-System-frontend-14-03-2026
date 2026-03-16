@@ -8,7 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 
 // Default Admin navigation (Local Refined)
 const ADMIN_NAV_ITEMS = [
-  { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/admin-dashboard' },
   { name: 'Employees', icon: Users, path: '/employees' },
   { name: 'Time Clock', icon: Clock, path: '/time-clock' },
   { name: 'Inspections', icon: ClipboardCheck, path: '/inspections' },
@@ -22,11 +22,39 @@ const ADMIN_NAV_ITEMS = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
-const hrNavItems = [
+const OPS_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/operations/dashboard' },
+  { name: 'Inspections', icon: ClipboardCheck, path: '/operations/inspections' },
+  { name: 'Events', icon: Calendar, path: '/operations/events' },
+  { name: 'Employees', icon: Users, path: '/operations/employees' },
+  { name: 'Reports', icon: BarChart, path: '/operations/reports' },
+];
+
+const MAINTENANCE_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/maintenance/dashboard' },
+  { name: 'Work Orders', icon: ClipboardList, path: '/maintenance/work-orders' },
+  { name: 'Maintenance Reports', icon: FileBarChart, path: '/maintenance/reports' },
+];
+
+const EMPLOYEE_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/employee-dashboard' },
+  { name: 'Time Clock', icon: Clock, path: '/employee-timeclock' },
+  { name: 'My Tasks', icon: ClipboardCheck, path: '/employee-tasks' },
+  { name: 'Training', icon: GraduationCap, path: '/employee-training' },
+];
+
+const HR_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/hr-dashboard' },
   { name: 'Employees', icon: Users, path: '/hr/employees' },
   { name: 'Training Library', icon: GraduationCap, path: '/hr/training-library' },
   { name: 'Employee Training', icon: ClipboardCheck, path: '/hr/employee-training' },
+];
+
+const TICKET_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/tickets/dashboard' },
+  { name: 'Ticket Boxes', icon: Store, path: '/tickets/boxes' },
+  { name: 'Ticket Tracking', icon: Scan, path: '/tickets/tracking' },
+  { name: 'Settlement', icon: HandCoins, path: '/tickets/settlement' },
 ];
 
 const maintenanceMenu = [
@@ -39,38 +67,27 @@ export function Sidebar({ isOpen, toggleSidebar }) {
   const { user } = useAuth();
   const role = user?.role;
   
-  // Operations roles navigation (Remote)
-  const opsNavItems = [
-    { name: 'Dashboard',   icon: LayoutDashboard, path: '/operations/dashboard' },
-    { name: 'Inspections', icon: ClipboardCheck,  path: '/operations/inspections' },
-    { name: 'Events',      icon: Calendar,        path: '/operations/events' },
-    { name: 'Employees',   icon: Users,           path: '/operations/employees' },
-    { name: 'Reports',     icon: BarChart,        path: '/operations/reports' },
-  ];
-
-  // Ticket roles navigation (Remote)
-  const ticketNavItems = [
-    { name: 'Dashboard',       icon: LayoutDashboard, path: '/tickets/dashboard' },
-    { name: 'Ticket Boxes',    icon: Store,           path: '/tickets/boxes' },
-    { name: 'Ticket Tracking', icon: Scan,            path: '/tickets/tracking' },
-    { name: 'Settlement',      icon: HandCoins,       path: '/tickets/settlement' },
-  ];
-
   let menuItems = ADMIN_NAV_ITEMS;
-  let sectionTitle = 'Navigation';
+  let sectionTitle = 'Portal';
 
-  if (role === 'hr' || role === 'hr_manager') {
-    menuItems = hrNavItems;
+  if (role === 'admin') {
+    menuItems = ADMIN_NAV_ITEMS;
+    sectionTitle = 'Admin Portal';
+  } else if (role === 'hr' || role === 'hr_manager') {
+    menuItems = HR_NAV_ITEMS;
     sectionTitle = 'HR Hub';
   } else if (role === 'operations' || role === 'operations_manager') {
-    menuItems = opsNavItems;
+    menuItems = OPS_NAV_ITEMS;
     sectionTitle = 'Operations Hub';
   } else if (role === 'ticket' || role === 'ticket_manager') {
-    menuItems = ticketNavItems;
+    menuItems = TICKET_NAV_ITEMS;
     sectionTitle = 'Ticketing Hub';
-  } else if (role === 'maintenance_manager') {
-    menuItems = maintenanceMenu;
+  } else if (role === 'maintenance' || role === 'maintenance_manager') {
+    menuItems = MAINTENANCE_NAV_ITEMS;
     sectionTitle = 'Maintenance Hub';
+  } else if (role === 'employee') {
+    menuItems = EMPLOYEE_NAV_ITEMS;
+    sectionTitle = 'Employee Portal';
   }
 
   return (

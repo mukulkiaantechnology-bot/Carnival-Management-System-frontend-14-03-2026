@@ -1,7 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
-  Video, Eye, Pencil, Trash2, Clock, FileText, BookOpen 
+  Video, Eye, Pencil, Trash2, Clock, FileText, BookOpen, ArrowLeft 
 } from 'lucide-react';
 import { Card, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -15,26 +15,44 @@ const MOCK_TRAINING_MODULES = [
 
 export default function TrainingLibrary() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEmployeeView = location.pathname.startsWith('/employee-training');
 
   return (
     <div className="space-y-6 px-1">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Training Library</h1>
-          <p className="text-slate-500 text-sm">Manage and organize carnival training materials.</p>
+        <div className="flex items-center gap-4">
+          {isEmployeeView && (
+            <button 
+              onClick={() => navigate('/employee-training')}
+              className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
+            >
+              <ArrowLeft size={20} />
+            </button>
+          )}
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
+              {isEmployeeView ? 'Training Catalog' : 'Training Library'}
+            </h1>
+            <p className="text-slate-500 text-sm">
+              {isEmployeeView ? 'Browse all available training modules.' : 'Manage and organize carnival training materials.'}
+            </p>
+          </div>
         </div>
-        <Button 
-          variant="primary" 
-          className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            navigate('/hr/training/add');
-          }}
-        >
-          <Video size={18} />
-          Upload Training Video
-        </Button>
+        {!isEmployeeView && (
+          <Button 
+            variant="primary" 
+            className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              navigate('/hr/training/add');
+            }}
+          >
+            <Video size={18} />
+            Upload Training Video
+          </Button>
+        )}
       </div>
 
       <Card className="border-none shadow-sm overflow-hidden">
@@ -73,15 +91,22 @@ export default function TrainingLibrary() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" onClick={() => navigate(`/hr/training/${module.id}`)}>
+                      <button 
+                        className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" 
+                        onClick={() => navigate(isEmployeeView ? `/employee-training/module/${module.id}` : `/hr/training/${module.id}`)}
+                      >
                         <Eye size={16} />
                       </button>
-                      <button className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
-                        <Pencil size={16} />
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all">
-                        <Trash2 size={16} />
-                      </button>
+                      {!isEmployeeView && (
+                        <>
+                          <button className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
+                            <Pencil size={16} />
+                          </button>
+                          <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all">
+                            <Trash2 size={16} />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>

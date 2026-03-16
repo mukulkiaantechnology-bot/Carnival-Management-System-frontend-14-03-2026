@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Play, Download, Clock, BookOpen, FileText } from 'lucide-react';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { ArrowLeft, Play, Download, Clock, BookOpen, FileText, Video, GraduationCap } from 'lucide-react';
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
@@ -14,16 +14,21 @@ const MOCK_TRAINING_MODULES = [
 export default function TrainingDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const module = MOCK_TRAINING_MODULES.find(m => m.id === parseInt(id)) || MOCK_TRAINING_MODULES[0];
+
+  const backPath = location.pathname.startsWith('/employee-training') 
+    ? '/employee-training' 
+    : '/hr/training-library';
 
   return (
     <div className="space-y-6 px-1 pb-10">
       <button 
-        onClick={() => navigate('/hr/training-library')} 
+        onClick={() => navigate(backPath)} 
         className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-sm transition-colors group"
       >
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        Back to Library
+        Back to {location.pathname.startsWith('/employee-training') ? 'Training' : 'Library'}
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

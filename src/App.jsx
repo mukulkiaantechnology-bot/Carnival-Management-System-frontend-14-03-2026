@@ -26,6 +26,10 @@ import Contracts from './pages/modules/Contracts';
 import Calendar from './pages/modules/Calendar';
 import Reports from './pages/modules/Reports';
 import Settings from './pages/modules/Settings';
+import MyTasks from './pages/modules/MyTasks';
+import EmployeeTimeClock from './pages/dashboards/employee/EmployeeTimeClock';
+import EmployeeTasks from './pages/dashboards/employee/EmployeeTasks';
+import EmployeeTrainingPersonal from './pages/dashboards/employee/EmployeeTraining';
 
 // Specialized Modules (from Remote)
 import PlaceholderPage from './pages/modules/PlaceholderPage';
@@ -130,7 +134,11 @@ export default function App() {
           {/* Employee Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
             <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
-            <Route path="/time-clock-shared" element={<TimeClock />} />
+            <Route path="/employee-timeclock" element={<EmployeeTimeClock />} />
+            <Route path="/employee-tasks" element={<EmployeeTasks />} />
+            <Route path="/employee-training" element={<EmployeeTrainingPersonal />} />
+            <Route path="/employee-training/module/:id" element={<TrainingDetail />} />
+            <Route path="/employee-training/catalog" element={<TrainingLibrary />} />
           </Route>
 
           {/* Catch-all */}
