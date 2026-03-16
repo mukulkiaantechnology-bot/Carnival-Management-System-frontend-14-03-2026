@@ -35,129 +35,97 @@ export default function MaintenanceReports() {
   };
 
   return (
-    <div className="space-y-6 max-w-[100vw] overflow-hidden px-1">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-6 overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
         <h1 className="text-xl sm:text-2xl font-bold text-slate-800">Maintenance Reports</h1>
-        <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <Button 
             variant="outline" 
             onClick={exportToCSV}
-            className="flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-50 text-xs sm:text-sm py-2.5 px-3 w-full sm:w-auto shadow-sm"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-50 text-xs sm:text-sm py-2 px-3 shadow-sm"
           >
-            <Download size={16} className="sm:w-[18px]" />
-            Export CSV
+            <Download size={16} />
+            CSV
           </Button>
           <Button 
             onClick={exportToPDF}
-            className="bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 text-xs sm:text-sm py-2.5 px-3 w-full sm:w-auto shadow-md shadow-blue-500/20"
+            className="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-2 text-xs sm:text-sm py-2 px-3 shadow-md shadow-blue-500/20"
           >
-            <Download size={16} className="sm:w-[18px]" />
-            Export PDF
+            <Download size={16} />
+            PDF
           </Button>
         </div>
       </div>
 
-      <Card className="p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Calendar size={14} className="text-blue-500 sm:w-4 sm:h-4" />
-              Date Range
-            </label>
-            <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm text-slate-600 transition-all cursor-pointer">
-              <option>Last 7 Days</option>
-              <option>Last 30 Days</option>
-              <option>Last 90 Days</option>
-            </select>
+      <div className="px-1">
+        <Card className="p-4 rounded-xl shadow-sm border border-slate-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-700 flex items-center gap-2">
+                <Calendar size={14} className="text-blue-500" />
+                Date Range
+              </label>
+              <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm transition-all">
+                <option>Last 7 Days</option>
+                <option>Last 30 Days</option>
+              </select>
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-slate-700 flex items-center gap-2">
+                <Wrench size={14} className="text-blue-500" />
+                Equipment
+              </label>
+              <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm transition-all">
+                <option>All Equipment</option>
+              </select>
+            </div>
+            <div className="space-y-1.5 sm:col-span-2 md:col-span-1">
+              <label className="text-xs font-semibold text-slate-700 flex items-center gap-2">
+                <CheckCircle size={14} className="text-blue-500" />
+                Status
+              </label>
+              <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm transition-all">
+                <option>All Status</option>
+              </select>
+            </div>
           </div>
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <Wrench size={14} className="text-blue-500 sm:w-4 sm:h-4" />
-              Equipment
-            </label>
-            <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm text-slate-600 transition-all cursor-pointer">
-              <option>All Equipment</option>
-              <option>Ferris Wheel</option>
-              <option>Roller Coaster</option>
-              <option>Bumper Cars</option>
-              <option>Carousel</option>
-              <option>Tilt-A-Whirl</option>
-            </select>
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-xs sm:text-sm font-semibold text-slate-700 flex items-center gap-2">
-              <CheckCircle size={14} className="text-blue-500 sm:w-4 sm:h-4" />
-              Status
-            </label>
-            <select className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-sm text-slate-600 transition-all cursor-pointer">
-              <option>All Status</option>
-              <option>Operational</option>
-              <option>Under Maintenance</option>
-              <option>Critical</option>
-            </select>
-          </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
 
-      <Card className="rounded-xl shadow-sm border border-slate-200 overflow-hidden print:border-0 print:shadow-none">
-        <div className="overflow-x-auto scrollbar-hide sm:scrollbar-default">
-          <table className="w-full text-left border-collapse min-w-[600px] sm:min-w-[700px]">
-            <thead className="bg-slate-50 border-b border-slate-200">
-              <tr>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">ID</th>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">Equipment</th>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider text-center">Repairs</th>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">Last Maint.</th>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">Downtime</th>
-                <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-wider">Technician</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-xs sm:text-sm">
-              {reports.map((report) => (
-                <tr key={report.id} className="hover:bg-slate-50/50 transition-colors group">
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 font-semibold text-blue-600 whitespace-nowrap">{report.id}</td>
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-800 font-medium whitespace-nowrap">{report.equipment}</td>
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 text-center">{report.totalRepairs}</td>
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 whitespace-nowrap">{report.lastMaintenance}</td>
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 whitespace-nowrap">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-800">
-                      {report.totalDowntime}
-                    </span>
-                  </td>
-                  <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 font-medium whitespace-nowrap">{report.technician}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media print {
-          nav, aside, header, button, .no-print {
-            display: none !important;
-          }
-          main {
-            padding: 0 !important;
-            margin: 0 !important;
-          }
-          .flex-1 {
-            padding-left: 0 !important;
-          }
-          .rounded-xl {
-            border-radius: 0 !important;
-            border: none !important;
-            box-shadow: none !important;
-          }
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}} />
+      <div className="px-1">
+        <Card className="rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+            <div className="inline-block min-w-full align-middle">
+              <table className="min-w-full divide-y divide-slate-200 table-fixed sm:table-auto">
+                <thead className="bg-slate-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase w-24">ID</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase w-40">Equipment</th>
+                    <th className="hidden sm:table-cell px-4 py-3 text-center text-[10px] font-bold text-slate-500 uppercase w-20">Repairs</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase w-32">Last Maint.</th>
+                    <th className="hidden md:table-cell px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase w-28">Downtime</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase w-36">Technician</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-slate-100">
+                  {reports.map((report) => (
+                    <tr key={report.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-4 py-3 font-bold text-blue-600 text-[11px] sm:text-sm">{report.id}</td>
+                      <td className="px-4 py-3 text-slate-800 font-medium truncate text-[11px] sm:text-sm">{report.equipment}</td>
+                      <td className="hidden sm:table-cell px-4 py-3 text-slate-600 text-center text-[11px] sm:text-sm">{report.totalRepairs}</td>
+                      <td className="px-4 py-3 text-slate-600 whitespace-nowrap text-[11px] sm:text-sm">{report.lastMaintenance}</td>
+                      <td className="hidden md:table-cell px-4 py-3 text-slate-600 text-[11px] sm:text-sm">
+                        <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-800">{report.totalDowntime}</span>
+                      </td>
+                      <td className="px-4 py-3 text-slate-600 font-medium truncate text-[11px] sm:text-sm">{report.technician}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -10,19 +10,19 @@ const STATS = [
 
 export default function AdminDashboard() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Admin Dashboard</h1>
+    <div className="space-y-6 overflow-x-hidden">
+      <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight px-1">Admin Dashboard</h1>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-1">
         {STATS.map((stat) => (
-          <Card key={stat.label}>
-            <CardContent className="p-6 flex items-center space-x-4">
-              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
+          <Card key={stat.label} className="border-none shadow-sm">
+            <CardContent className="p-4 sm:p-6 flex items-center space-x-4">
+              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} flex-shrink-0`}>
                 <stat.icon size={24} />
               </div>
-              <div>
-                <p className="text-sm font-medium text-slate-500">{stat.label}</p>
-                <p className="text-2xl font-semibold text-slate-800">{stat.value}</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm font-medium text-slate-500 truncate">{stat.label}</p>
+                <p className="text-lg sm:text-2xl font-bold text-slate-800">{stat.value}</p>
               </div>
             </CardContent>
           </Card>

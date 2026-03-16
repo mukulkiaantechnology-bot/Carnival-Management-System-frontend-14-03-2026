@@ -80,72 +80,80 @@ export default function WorkOrders() {
       </Card>
 
       {/* Desktop Table (Visible on MD+) */}
-      <Card className="hidden md:block border-none shadow-sm overflow-hidden min-h-[300px]">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead className="bg-slate-50/50 border-b border-slate-100">
-              <tr>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">ID</th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Equipment</th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Issue</th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Technician</th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-center">Status</th>
-                <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-100 text-sm">
-              {workOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-slate-50/50 transition-colors group text-slate-600">
-                  <td className="px-6 py-4 font-bold text-blue-600">{order.id}</td>
-                  <td className="px-6 py-4 text-slate-700 font-medium">{order.equipment}</td>
-                  <td className="px-6 py-4 max-w-xs truncate">{order.issue}</td>
-                  <td className="px-6 py-4">{order.technician}</td>
-                  <td className="px-6 py-4 text-center">
-                    <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                      order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
-                      order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                      'bg-amber-100 text-amber-700'
-                    }`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <button className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 group-hover:text-slate-600 transition-colors">
-                      <MoreVertical size={18} />
-                    </button>
-                  </td>
+      <Card className="hidden md:block border-none shadow-sm overflow-hidden">
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+          <div className="inline-block min-w-full align-middle">
+            <table className="min-w-full divide-y divide-slate-100 table-fixed sm:table-auto">
+              <thead className="bg-slate-50/50">
+                <tr>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-28">ID</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-44">Equipment</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-64 sm:w-auto">Issue</th>
+                  <th className="px-6 py-4 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider w-40">Technician</th>
+                  <th className="px-6 py-4 text-center text-xs font-semibold text-slate-500 uppercase tracking-wider w-32">Status</th>
+                  <th className="px-6 py-4 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider w-20">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-white divide-y divide-slate-100 text-sm">
+                {workOrders.map((order) => (
+                  <tr key={order.id} className="hover:bg-slate-50/50 transition-colors group text-slate-600">
+                    <td className="px-6 py-4 font-bold text-blue-600 whitespace-nowrap">{order.id}</td>
+                    <td className="px-6 py-4 text-slate-700 font-medium whitespace-nowrap">{order.equipment}</td>
+                    <td className="px-6 py-4 truncate">{order.issue}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{order.technician}</td>
+                    <td className="px-6 py-4 text-center">
+                      <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                        order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
+                        order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
+                        'bg-amber-100 text-amber-700'
+                      }`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <button className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 group-hover:text-slate-600 transition-colors">
+                        <MoreVertical size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </Card>
 
       {/* Mobile Card List (Visible below MD) */}
-      <div className="md:hidden space-y-3">
+      <div className="md:hidden grid grid-cols-1 gap-4">
         {workOrders.map((order) => (
-          <Card key={order.id} className="p-4 border-none shadow-sm space-y-3 bg-white">
-            <div className="flex items-center justify-between border-b border-slate-50 pb-2">
+          <Card key={order.id} className="p-4 border-none shadow-sm space-y-4 bg-white/90 backdrop-blur-sm">
+            <div className="flex items-center justify-between border-b border-slate-50 pb-3">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-tight">{order.id}</span>
-              <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
+              <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                 order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
-                'bg-blue-100 text-blue-700'
+                order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
+                'bg-amber-100 text-amber-700'
               }`}>
                 {order.status}
               </span>
             </div>
-            <div>
+            <div className="space-y-1">
               <h4 className="font-bold text-slate-800 text-sm">{order.equipment}</h4>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-2">{order.issue}</p>
+              <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">{order.issue}</p>
             </div>
-            <div className="flex items-center justify-between pt-2">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center text-[10px] font-bold text-blue-600 uppercase">
+            <div className="flex items-center justify-between pt-2 border-t border-slate-50/50">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[11px] font-bold text-blue-600 uppercase">
                   {order.technician.charAt(0)}
                 </div>
-                <span className="text-xs text-slate-600 font-medium">{order.technician}</span>
+                <div className="flex flex-col">
+                  <span className="text-xs text-slate-700 font-bold">{order.technician}</span>
+                  <span className="text-[10px] text-slate-400 font-medium">{order.createdAt.split(' ')[0]}</span>
+                </div>
               </div>
-              <span className="text-[10px] text-slate-400">{order.createdAt.split(' ')[0]}</span>
+              <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors">
+                <MoreVertical size={18} />
+              </button>
             </div>
           </Card>
         ))}

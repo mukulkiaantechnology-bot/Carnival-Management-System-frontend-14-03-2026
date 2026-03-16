@@ -38,78 +38,66 @@ export default function MaintenanceDashboard() {
   }, []);
 
   return (
-    <div className="space-y-6 max-w-[100vw] overflow-hidden px-1 sm:px-2">
-      <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Maintenance Dashboard</h1>
+    <div className="space-y-6 overflow-x-hidden">
+      <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight px-1">
+        Maintenance Dashboard
+      </h1>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-1">
         {stats.map((stat) => (
-          <Card key={stat.label} className="border-none shadow-sm">
-            <CardContent className="p-3 sm:p-6 flex flex-col xs:flex-row items-center xs:space-x-4 text-center xs:text-left">
-              <div className={`p-2 sm:p-3 rounded-xl ${stat.bg} ${stat.color} flex-shrink-0 mb-2 xs:mb-0`}>
-                <stat.icon size={18} className="sm:w-6 sm:h-6" />
+          <Card key={stat.label} className="border-none shadow-sm h-full">
+            <CardContent className="p-4 sm:p-6 flex items-center space-x-4">
+              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} flex-shrink-0`}>
+                <stat.icon size={20} className="sm:w-6 sm:h-6" />
               </div>
               <div className="min-w-0">
-                <p className="text-[10px] sm:text-xs font-medium text-slate-500 truncate mb-0.5">{stat.label}</p>
-                <p className="text-base sm:text-2xl font-bold text-slate-800">{stat.value}</p>
+                <p className="text-xs font-medium text-slate-500 truncate mb-0.5">{stat.label}</p>
+                <p className="text-lg sm:text-2xl font-bold text-slate-800">{stat.value}</p>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-base sm:text-lg font-semibold text-slate-800 px-1">Recent Work Orders</h2>
-        <Card className="border-none shadow-sm overflow-hidden min-h-[200px]">
-          <div className="overflow-x-auto scrollbar-hide sm:scrollbar-default">
-            <table className="w-full text-left border-collapse min-w-[550px] sm:min-w-[700px]">
-              <thead className="bg-slate-50 border-b border-slate-100">
-                <tr>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">ID</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Equipment</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Issue</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Technician</th>
-                  <th className="px-4 sm:px-6 py-3 sm:py-4 text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 text-[11px] sm:text-sm">
-                {recentOrders.map((order) => (
-                  <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 font-bold text-blue-600 whitespace-nowrap">{order.id}</td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-700 whitespace-nowrap font-medium">{order.equipment}</td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 whitespace-nowrap">{order.issue}</td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 text-slate-600 whitespace-nowrap">{order.technician}</td>
-                    <td className="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] sm:text-xs font-bold uppercase tracking-wider ${
-                        order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
-                        order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                        'bg-amber-100 text-amber-700'
-                      }`}>
-                        {order.status}
-                      </span>
-                    </td>
+      <div className="space-y-4 px-1">
+        <h2 className="text-base sm:text-lg font-semibold text-slate-800">Recent Work Orders</h2>
+        <Card className="border-none shadow-sm overflow-hidden">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+            <div className="inline-block min-w-full align-middle">
+              <table className="min-w-full divide-y divide-slate-100 table-fixed sm:table-auto">
+                <thead className="bg-slate-50">
+                  <tr>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-24">ID</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-40">Equipment</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-48 sm:w-auto">Issue</th>
+                    <th className="hidden sm:table-cell px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider">Technician</th>
+                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-28">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-slate-100">
+                  {recentOrders.map((order) => (
+                    <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
+                      <td className="px-4 py-3 font-bold text-blue-600 whitespace-nowrap text-[11px] sm:text-sm">{order.id}</td>
+                      <td className="px-4 py-3 text-slate-700 whitespace-nowrap font-medium text-[11px] sm:text-sm">{order.equipment}</td>
+                      <td className="px-4 py-3 text-slate-600 truncate text-[11px] sm:text-sm">{order.issue}</td>
+                      <td className="hidden sm:table-cell px-4 py-3 text-slate-600 whitespace-nowrap text-[11px] sm:text-sm">{order.technician}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
+                          order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
+                          order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
+                          'bg-amber-100 text-amber-700'
+                        }`}>
+                          {order.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </Card>
       </div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 400px) {
-          .xs\\:flex-row { flex-direction: row !important; }
-          .xs\\:text-left { text-align: left !important; }
-          .xs\\:mb-0 { margin-bottom: 0 !important; }
-          .xs\\:space-x-4 > :not([hidden]) ~ :not([hidden]) { margin-left: 1rem !important; }
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}} />
     </div>
   );
 }

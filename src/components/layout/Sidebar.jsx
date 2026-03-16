@@ -4,6 +4,7 @@ import {
   BarChart, Settings, X, Store, Scan, HandCoins, ClipboardList, FileBarChart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { NavLink } from 'react-router-dom';
 
 // Default navigation
 const NAV_ITEMS = [

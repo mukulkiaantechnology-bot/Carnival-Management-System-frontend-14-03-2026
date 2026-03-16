@@ -31,10 +31,10 @@ const STATUS_CONFIG = {
 
 export default function OperationsDashboard() {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-800">Operations Dashboard</h1>
-        <p className="text-sm text-slate-500">Welcome back, Operations Manager</p>
+    <div className="space-y-6 overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-800">Operations Dashboard</h1>
+        <p className="text-xs sm:text-sm text-slate-500">Welcome back, Operations Manager</p>
       </div>
 
       {/* Top Statistics Cards */}
@@ -56,43 +56,45 @@ export default function OperationsDashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Inspections Table */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 overflow-hidden border-none shadow-sm">
           <CardHeader title="Recent Inspections" subtitle="Latest safety check-ups" />
           <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100">
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Inspection Name</th>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Ride</th>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Inspector</th>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Status</th>
-                    <th className="text-left px-5 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Date</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {RECENT_INSPECTIONS.map((row, idx) => {
-                    const cfg = STATUS_CONFIG[row.status];
-                    return (
-                      <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                        <td className="px-5 py-4 font-medium text-slate-800">{row.name}</td>
-                        <td className="px-5 py-4 text-slate-600">{row.ride}</td>
-                        <td className="px-5 py-4 text-slate-600">{row.inspector}</td>
-                        <td className="px-5 py-4">
-                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border ${cfg.className}`}>
-                            <cfg.icon size={11} />
-                            {cfg.label}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 text-slate-500">{row.date}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+            <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+              <div className="inline-block min-w-full align-middle">
+                <table className="min-w-full divide-y divide-slate-100 table-fixed sm:table-auto">
+                  <thead>
+                    <tr className="bg-slate-50">
+                      <th className="text-left px-5 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-48">Inspection Name</th>
+                      <th className="text-left px-5 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-36">Ride</th>
+                      <th className="hidden sm:table-cell text-left px-5 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-36">Inspector</th>
+                      <th className="text-left px-5 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-28">Status</th>
+                      <th className="hidden md:table-cell text-left px-5 py-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider w-28">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-slate-100">
+                    {RECENT_INSPECTIONS.map((row, idx) => {
+                      const cfg = STATUS_CONFIG[row.status];
+                      return (
+                        <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
+                          <td className="px-5 py-4 font-bold text-slate-800 text-[11px] sm:text-sm truncate">{row.name}</td>
+                          <td className="px-5 py-4 text-slate-600 text-[11px] sm:text-sm truncate">{row.ride}</td>
+                          <td className="hidden sm:table-cell px-5 py-4 text-slate-600 text-[11px] sm:text-sm">{row.inspector}</td>
+                          <td className="px-5 py-4">
+                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border ${cfg.className}`}>
+                              <cfg.icon size={10} />
+                              {cfg.label}
+                            </span>
+                          </td>
+                          <td className="hidden md:table-cell px-5 py-4 text-slate-500 text-[11px] sm:text-sm">{row.date}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div className="px-5 py-3 border-t border-slate-100">
-              <Link to="/operations/inspections" className="text-blue-600 hover:text-blue-800 text-xs font-semibold flex items-center gap-1 transition-colors">
+            <div className="px-5 py-3 border-t border-slate-50">
+              <Link to="/operations/inspections" className="text-blue-600 hover:text-blue-800 text-xs font-bold flex items-center gap-1 transition-colors">
                 View all inspections <ArrowRight size={12} />
               </Link>
             </div>
