@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
 import { Clock, User, LogIn, LogOut } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
-const MOCK_LOGS = [
+// Initial mock data if no logs exist
+const INITIAL_MOCK_LOGS = [
   { id: 1, date: '2026-03-14', employee: 'John Doe', clockIn: '08:00 AM', clockOut: '04:30 PM', totalHours: '8.5' },
   { id: 2, date: '2026-03-14', employee: 'Jane Smith', clockIn: '09:15 AM', clockOut: '05:45 PM', totalHours: '8.5' },
   { id: 3, date: '2026-03-13', employee: 'Mike Johnson', clockIn: '08:30 AM', clockOut: '05:00 PM', totalHours: '8.5' },
@@ -11,6 +13,58 @@ const MOCK_LOGS = [
 ];
 
 export default function TimeClock() {
+  const [logs, setLogs] = useState(() => {
+    const savedLogs = localStorage.getItem('timeClockLogs');
+    return savedLogs ? JSON.parse(savedLogs) : INITIAL_MOCK_LOGS;
+  });
+
+  const [isClockedIn, setIsClockedIn] = useState(() => {
+    return localStorage.getItem('isClockedIn') === 'true';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('timeClockLogs', JSON.stringify(logs));
+    localStorage.setItem('isClockedIn', isClockedIn.toString());
+  }, [logs, isClockedIn]);
+
+  const handleClockIn = () => {
+    const now = new Date();
+    const newLog = {
+      id: Date.now(),
+      date: now.toISOString().split('T')[0],
+      employee: 'Current User', // In a real app, get from AuthContext
+      clockIn: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      clockOut: '--:--',
+      totalHours: '0.0',
+    };
+    setLogs([newLog, ...logs]);
+    setIsClockedIn(true);
+  };
+
+  const handleClockOut = () => {
+    const now = new Date();
+    const clockOutTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    setLogs(prevLogs => {
+      const updatedLogs = [...prevLogs];
+      if (updatedLogs.length > 0) {
+        const latestLog = { ...updatedLogs[0] };
+        latestLog.clockOut = clockOutTime;
+        
+        // Calculate total hours (simplified)
+        const inTime = new Date(`${latestLog.date} ${latestLog.clockIn}`);
+        const outTime = now;
+        const diffMs = outTime - inTime;
+        const diffHrs = (diffMs / (1000 * 60 * 60)).toFixed(1);
+        latestLog.totalHours = diffHrs > 0 ? diffHrs : '0.1';
+        
+        updatedLogs[0] = latestLog;
+      }
+      return updatedLogs;
+    });
+    setIsClockedIn(false);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -19,11 +73,21 @@ export default function TimeClock() {
           <p className="text-slate-500 text-sm">Manage employee attendance and shifts.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="primary" className="flex items-center gap-2">
+          <Button 
+            variant="primary" 
+            className={`flex items-center gap-2 py-2.5 sm:py-3 px-6 sm:px-8 ${isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={handleClockIn}
+            disabled={isClockedIn}
+          >
             <LogIn size={18} />
             Clock In
           </Button>
-          <Button variant="secondary" className="flex items-center gap-2">
+          <Button 
+            variant="secondary" 
+            className={`flex items-center gap-2 py-2.5 sm:py-3 px-6 sm:px-8 ${!isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={handleClockOut}
+            disabled={!isClockedIn}
+          >
             <LogOut size={18} />
             Clock Out
           </Button>
@@ -48,7 +112,7 @@ export default function TimeClock() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {MOCK_LOGS.map((log) => (
+                {logs.map((log) => (
                   <tr key={log.id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-6 py-4 text-sm text-slate-600">{log.date}</td>
                     <td className="px-6 py-4 text-sm font-medium text-slate-800">{log.employee}</td>

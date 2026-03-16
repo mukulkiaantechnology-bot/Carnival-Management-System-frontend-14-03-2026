@@ -1,0 +1,956 @@
+.Quotation-quotation-page {
+    padding: 2rem;
+    background-color: #f8fafc;
+    min-height: 100vh;
+}
+
+.Quotation-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.Quotation-page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+}
+
+.Quotation-page-subtitle {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Process Tracker */
+.Quotation-process-tracker-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.Quotation-tracker-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.Quotation-tracker-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.Quotation-step-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f1f5f9;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.Quotation-status-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: white;
+    border-radius: 50%;
+    padding: 1px;
+}
+
+.Quotation-step-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+}
+
+/* Tracker States */
+.Quotation-tracker-step.Quotation-completed .Quotation-step-icon-wrapper {
+    background: #ecfdf5;
+    color: #8ce043;
+    border-color: #8ce043;
+}
+
+.Quotation-tracker-step.Quotation-completed .Quotation-step-label {
+    color: #8ce043;
+}
+
+.Quotation-tracker-step.Quotation-completed .Quotation-status-badge {
+    color: #8ce043;
+}
+
+.Quotation-tracker-step.Quotation-active .Quotation-step-icon-wrapper {
+    background: #f0fdf4;
+    color: #8ce043;
+    border-color: #8ce043;
+    box-shadow: 0 0 0 4px rgba(140, 224, 67, 0.1);
+}
+
+.Quotation-tracker-step.Quotation-active .Quotation-step-label {
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.Quotation-tracker-step.Quotation-active .Quotation-status-badge {
+    color: #8ce043;
+}
+
+.Quotation-tracker-divider {
+    flex: 1;
+    height: 2px;
+    background: #e2e8f0;
+    margin: 0 1rem;
+    margin-top: -24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e2e8f0;
+}
+
+.Quotation-tracker-divider.Quotation-active {
+    background: #8ce043;
+    color: #8ce043;
+}
+
+/* Table Styles from Original */
+.Quotation-table-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.Quotation-table-container {
+    overflow-x: auto;
+}
+
+.Quotation-quotation-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.Quotation-quotation-table th {
+    text-align: left;
+    padding: 1rem;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.Quotation-quotation-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    color: #1e293b;
+    font-size: 0.9rem;
+}
+
+.Quotation-quotation-status-pill {
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    min-width: 100px;
+}
+
+.Quotation-quotation-status-pill.active,
+.Quotation-quotation-status-pill.accepted,
+.Quotation-quotation-status-pill.completed {
+    background-color: #10b981;
+}
+
+.Quotation-quotation-status-pill.pending {
+    background-color: #f59e0b;
+}
+
+.Quotation-quotation-status-pill.draft {
+    background-color: #3b82f6;
+}
+
+.Quotation-quotation-status-pill.sent {
+    background-color: #06b6d4;
+}
+
+.Quotation-quotation-status-pill.overdue,
+.Quotation-quotation-status-pill.cancelled {
+    background-color: #ef4444;
+}
+
+
+.Quotation-discount-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: right;
+    color: #1e293b;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+
+.Quotation-discount-input:focus {
+    outline: none;
+    border-color: #8ce043;
+    box-shadow: 0 0 0 2px rgba(140, 224, 67, 0.1);
+}
+
+.Quotation-btn-add {
+    background: #8ce043;
+    color: #1a4208;
+    border: none;
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(140, 224, 67, 0.2);
+}
+
+.Quotation-btn-add:hover {
+    background: #7ccb3a;
+}
+
+/* 
+   PREMIUM MODAL STYLES 
+   Re-implementing the "Paper" look
+*/
+
+.Quotation-quotation-action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Quotation-quotation-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.Quotation-quotation-action-btn.Quotation-view {
+    background-color: #f59e0b;
+}
+
+.Quotation-quotation-action-btn.Quotation-view:hover {
+    background-color: #d97706;
+}
+
+.Quotation-quotation-action-btn.Quotation-edit {
+    background-color: #22d3ee;
+}
+
+.Quotation-quotation-action-btn.Quotation-edit:hover {
+    background-color: #06b6d4;
+}
+
+.Quotation-quotation-action-btn.Quotation-delete {
+    background-color: #f43f5e;
+}
+
+.Quotation-quotation-action-btn.Quotation-delete:hover {
+    background-color: #e11d48;
+}
+
+.Quotation-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.Quotation-quotation-form-modal {
+    background: white;
+    width: 90vw;
+    max-width: 1100px;
+    height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.Quotation-modal-header-simple {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+}
+
+.Quotation-close-btn-simple {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.Quotation-close-btn-simple:hover {
+    background: #f1f5f9;
+    color: #ef4444;
+}
+
+.Quotation-modal-body-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    background: #fff;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+/* Form Sections */
+.Quotation-form-section-grid {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.Quotation-company-section {
+    flex: 1;
+}
+
+.Quotation-meta-section {
+    flex: 0 0 320px;
+}
+
+.Quotation-logo-upload-box {
+    width: 200px;
+    height: 80px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    background: #f8fafc;
+}
+
+.Quotation-company-logo-text {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #1e293b;
+    letter-spacing: -1px;
+}
+
+.Quotation-full-width-input {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.Quotation-full-width-input.Quotation-user-editable:focus {
+    border-color: #8ce043;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(140, 224, 67, 0.1);
+}
+
+.Quotation-meta-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.Quotation-meta-row label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    width: 120px;
+}
+
+.Quotation-meta-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: right;
+}
+
+.Quotation-meta-input.Quotation-disabled {
+    background: #f8fafc;
+    color: #94a3b8;
+}
+
+.Quotation-status-indicator {
+    text-align: right;
+    color: #8ce043;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #8ce043;
+    display: inline-block;
+    float: right;
+    padding-bottom: 2px;
+}
+
+.Quotation-divider {
+    border: none;
+    height: 1px;
+    background: #e2e8f0;
+    margin: 2rem 0;
+}
+
+/* Customer Section */
+.Quotation-customer-section {
+    margin-bottom: 2rem;
+}
+
+.Quotation-form-label-sm {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.Quotation-form-select-large {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background-color: #f8fafc;
+}
+
+.Quotation-customer-details-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.Quotation-detail-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Items Table */
+.Quotation-items-section-new {
+    margin-bottom: 2rem;
+}
+
+.Quotation-btn-add-row {
+    background: #8ce043;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.Quotation-new-items-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.Quotation-new-items-table th {
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.Quotation-new-items-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+}
+
+.Quotation-search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.Quotation-search-input-wrapper input {
+    width: 100%;
+    padding: 0.5rem;
+    padding-right: 2rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.Quotation-search-input-wrapper svg {
+    position: absolute;
+    right: 0.75rem;
+    color: #94a3b8;
+}
+
+table input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.Quotation-amount-input.Quotation-disabled {
+    background: #f1f5f9;
+    font-weight: 700;
+    color: #475569;
+}
+
+/* Totals */
+.Quotation-totals-layout {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.Quotation-totals-spacer {
+    flex: 1;
+}
+
+.Quotation-totals-box {
+    width: 320px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.Quotation-t-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+.Quotation-t-row.Quotation-total {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #1e293b;
+    border-bottom: none;
+    font-size: 1.1rem;
+}
+
+.Quotation-terms-section {
+    margin-top: 2rem;
+}
+
+/* Footer Grid */
+.Quotation-form-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.Quotation-section-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.5rem;
+}
+
+.Quotation-bank-details-box {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.Quotation-bank-input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.9rem;
+    background: #fff;
+}
+
+.Quotation-bank-input:last-child {
+    border-bottom: none;
+}
+
+.Quotation-notes-area,
+.Quotation-terms-area {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.Quotation-notes-area {
+    height: 160px;
+}
+
+.Quotation-terms-area {
+    height: 100px;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.Quotation-btn-upload-small {
+    background: white;
+    border: 1px solid #e2e8f0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.Quotation-thank-you-note {
+    text-align: center;
+    margin-top: 3rem;
+    color: #64748b;
+}
+
+/* Modal Footer */
+.Quotation-modal-footer-simple {
+    padding: 1.25rem 2rem;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: white;
+}
+
+.Quotation-btn-plain {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.Quotation-btn-primary-green {
+    background: #8ce043;
+    color: #1a4208;
+    border: none;
+    padding: 0.6rem 2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(140, 224, 67, 0.2);
+}
+
+.Quotation-btn-primary-green:hover {
+    background: #7ccb3a;
+}
+
+.Quotation-btn-delete-row {
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Delete Confirmation Modal - Match User Design */
+.Quotation-delete-confirmation-box {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 8px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    font-family: inherit;
+}
+
+.Quotation-delete-modal-header {
+    background: #ffe4e6;
+    /* Light pink background */
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fecdd3;
+    /* Slightly darker pink border */
+}
+
+.Quotation-delete-modal-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #3f2e18;
+    /* Dark brownish/red text */
+    margin: 0;
+}
+
+.Quotation-delete-close-btn {
+    background: transparent;
+    border: none;
+    color: #881337;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Quotation-delete-modal-body {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: #4b5563;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.Quotation-delete-modal-footer {
+    padding: 0 1.5rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.Quotation-btn-cancel {
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.Quotation-btn-delete-confirm {
+    background: #ef4444;
+    /* Red */
+    border: none;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.Quotation-btn-delete-confirm:hover {
+    background: #dc2626;
+}
+
+/* Attachments List */
+.Quotation-attachment-list {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.Quotation-attachment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    font-size: 0.85rem;
+}
+
+.Quotation-attachment-name {
+    color: #475569;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.Quotation-btn-remove-file {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+
+.Quotation-btn-remove-file:hover {
+    color: #dc2626;
+}
+
+/* ============================
+   RESPONSIVE STYLES
+   ============================ */
+
+/* Tablet & Smaller (Max-width: 991px) */
+@media (max-width: 991.98px) {
+    .Quotation-quotation-page {
+        padding: 1rem;
+    }
+
+    .Quotation-form-section-grid {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .Quotation-meta-section {
+        flex: auto;
+        width: 100%;
+    }
+
+    .Quotation-form-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile (Max-width: 640px) */
+@media (max-width: 640.98px) {
+    .Quotation-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .Quotation-btn-add {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .Quotation-tracker-wrapper {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .Quotation-tracker-divider {
+        display: none;
+    }
+
+    /* Modal Adjustments */
+    .Quotation-quotation-form-modal {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        max-width: 100%;
+    }
+
+    .Quotation-modal-header-simple {
+        padding: 1rem;
+    }
+
+    .Quotation-modal-body-scrollable {
+        padding: 1rem;
+    }
+
+    .Quotation-company-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Quotation-logo-upload-box {
+        margin: 0 auto 1rem auto;
+    }
+
+    .Quotation-meta-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .Quotation-meta-row label {
+        width: 100%;
+    }
+
+    .Quotation-customer-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Items Table Responsive */
+    .Quotation-table-responsive {
+        overflow-x: auto;
+    }
+
+    .Quotation-new-items-table {
+        min-width: 600px;
+        /* Ensure table doesn't squash */
+    }
+
+    /* Totals Layout */
+    .Quotation-totals-layout {
+        flex-direction: column;
+    }
+
+    .Quotation-totals-box {
+        width: 100%;
+    }
+
+    .Quotation-modal-footer-simple {
+        padding: 1rem;
+        flex-direction: column-reverse;
+    }
+
+    .Quotation-btn-plain,
+    .Quotation-btn-primary-green {
+        width: 100%;
+        justify-content: center;
+    }
+}

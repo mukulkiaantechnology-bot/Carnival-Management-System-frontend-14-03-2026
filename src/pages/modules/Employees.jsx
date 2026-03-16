@@ -3,7 +3,7 @@ import { useNavigate, Routes, Route, useParams } from 'react-router-dom';
 import {
   Users, UserPlus, Search, Filter, Mail, Phone,
   MapPin, Eye, Pencil, Trash2, X, Check, AlertCircle,
-  Building2, UserCheck, GraduationCap, ArrowLeft
+  Building2, UserCheck, GraduationCap, ArrowLeft, EyeOff, Lock
 } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -18,8 +18,10 @@ const INITIAL_EMPLOYEES = [
 
 function EmployeeForm({ employee, onSave, onCancel, title }) {
   const [formData, setFormData] = useState(employee || {
-    name: '', email: '', phone: '', role: 'Employee', department: 'Operations', status: 'Active', joined: new Date().toISOString().split('T')[0]
+    name: '', email: '', phone: '', role: 'Employee', department: 'Operations', status: 'Active', joined: new Date().toISOString().split('T')[0],
+    password: ''
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const roles = ['Employee', 'Operator', 'Technician', 'Manager', 'Lead', 'Admin'];
   const departments = ['Operations', 'Maintenance', 'Security', 'Ticketing', 'Finance', 'HR', 'Guest Services'];
@@ -101,10 +103,31 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
               onChange={(e) => setFormData({ ...formData, joined: e.target.value })}
             />
           </div>
+          <div className="space-y-1.5">
+            <label className="text-xs font-bold text-slate-500 uppercase">Account Password</label>
+            <div className="relative group">
+              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+              <input
+                required={!employee}
+                type={showPassword ? 'text' : 'password'}
+                placeholder={employee ? 'Leave blank to keep current' : '••••••••'}
+                className="w-full pl-12 pr-12 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                value={formData.password}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
+          </div>
         </div>
         <div className="flex gap-3 pt-6">
-          <Button variant="secondary" className="flex-1 font-bold" type="button" onClick={onCancel}>Cancel</Button>
-          <Button variant="primary" className="flex-1 font-bold shadow-lg shadow-blue-500/20" type="submit">Save Employee</Button>
+          <Button variant="secondary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl" type="button" onClick={onCancel}>Cancel</Button>
+          <Button variant="primary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl shadow-lg shadow-blue-500/20" type="submit">Save Employee</Button>
         </div>
       </form>
     </Card>
@@ -275,7 +298,7 @@ export default function Employees() {
                 <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Employee Directory</h1>
                 <p className="text-slate-500 text-sm">Centralized management for carnival personnel.</p>
               </div>
-              <Button variant="primary" className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20" onClick={() => navigate(`${basePath}/add`)}>
+              <Button variant="primary" className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20 py-2.5 sm:py-3 px-6 sm:px-8" onClick={() => navigate(`${basePath}/add`)}>
                 <UserPlus size={18} />
                 Add Employee
               </Button>
@@ -330,7 +353,8 @@ export default function Employees() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
+              {/* Desktop View */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
                     <tr className="bg-slate-50/50">
@@ -393,6 +417,70 @@ export default function Employees() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile View */}
+              <div className="md:hidden divide-y divide-slate-50">
+                {filteredEmployees.map((emp) => (
+                  <div key={emp.id} className="p-4 space-y-4 active:bg-slate-50 transition-colors">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-bold text-blue-600 text-base shadow-sm">
+                          {emp.name[0]}
+                        </div>
+                        <div>
+                          <p className="text-base font-bold text-slate-800">{emp.name}</p>
+                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{emp.role}</p>
+                        </div>
+                      </div>
+                      <span className={`px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${
+                        emp.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                      }`}>
+                        {emp.status}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 pt-2">
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Department</p>
+                        <p className="text-xs font-bold text-slate-700">{emp.department}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Email</p>
+                        <p className="text-[10px] font-bold text-slate-500 truncate">{emp.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-2">
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => navigate(`${basePath}/${emp.id}`)}
+                        className="flex-1 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest border-slate-100 hover:bg-slate-50"
+                      >
+                        Details
+                      </Button>
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
+                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-amber-50 hover:text-amber-600"
+                      >
+                        <Pencil size={16} />
+                      </Button>
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => setDeleteConfirmId(emp.id)}
+                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-rose-50 hover:text-rose-600"
+                      >
+                        <Trash2 size={16} />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+                {filteredEmployees.length === 0 && (
+                  <div className="p-12 text-center">
+                    <p className="text-sm font-bold text-slate-400">No employees found matching your criteria.</p>
+                  </div>
+                )}
               </div>
             </Card>
           </div>

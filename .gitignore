@@ -1,0 +1,8 @@
+node_modules
+dist
+.vscode
+.env
+.DS_Store
+*.local
+ZirakBook-Backup-Latest-New
+ZirakBook-Backup-Latest-New.zip

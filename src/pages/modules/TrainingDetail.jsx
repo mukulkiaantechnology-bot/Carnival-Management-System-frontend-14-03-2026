@@ -1,25 +1,32 @@
 import React from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
-import { ArrowLeft, Play, Download, Clock, BookOpen, FileText, Video, GraduationCap } from 'lucide-react';
+import { 
+  ArrowLeft, Play, Download, Clock, BookOpen, FileText, Video, GraduationCap 
+} from 'lucide-react';
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
-
-const MOCK_TRAINING_MODULES = [
-  { id: 1, title: 'Safety Protocol 101', type: 'Video', duration: '45 mins', description: 'Essential safety procedures for ride operators and staff.' },
-  { id: 2, title: 'Customer Service Excellence', type: 'Video', duration: '30 mins', description: 'How to handle diverse guest interactions professionally.' },
-  { id: 3, title: 'Emergency Response Training', type: 'Course', duration: '2 hours', description: 'Critical steps in case of medical or technical emergencies.' },
-  { id: 4, title: 'Ticket System Operation', type: 'PDF', duration: '20 mins', description: 'User guide for the digital ticketing and entry systems.' },
-];
+import { useTraining } from '../../context/TrainingContext';
 
 export default function TrainingDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const module = MOCK_TRAINING_MODULES.find(m => m.id === parseInt(id)) || MOCK_TRAINING_MODULES[0];
+  const { trainings } = useTraining();
+  
+  const module = trainings.find(m => m.id === parseInt(id)) || trainings[0];
 
   const backPath = location.pathname.startsWith('/employee-training') 
     ? '/employee-training' 
     : '/hr/training-library';
+
+  if (!module) {
+    return (
+      <div className="p-10 text-center">
+        <h2 className="text-xl font-bold text-slate-800">Module not found</h2>
+        <Button onClick={() => navigate(backPath)} className="mt-4">Back</Button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6 px-1 pb-10">
@@ -48,7 +55,7 @@ export default function TrainingDetail() {
             <CardHeader title="Description" />
             <CardContent className="p-6">
               <p className="text-slate-600 leading-relaxed">
-                {module.description}
+                {module.description || "Essential training for maintaining carnival standards and safety."}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button variant="outline" className="flex items-center gap-2 font-bold border-slate-200">

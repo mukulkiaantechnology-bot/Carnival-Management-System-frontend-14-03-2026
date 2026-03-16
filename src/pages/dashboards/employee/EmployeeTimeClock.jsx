@@ -125,7 +125,7 @@ export default function EmployeeTimeClock() {
               {shiftStatus === 'Clocked Out' ? (
                 <Button 
                   variant="primary" 
-                  className="col-span-2 py-4 rounded-2xl font-bold shadow-lg shadow-blue-100 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                  className="col-span-2 py-3 sm:py-4 rounded-2xl font-bold shadow-lg shadow-blue-100 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all"
                   onClick={handleClockIn}
                 >
                   <LogIn size={20} />
@@ -136,7 +136,7 @@ export default function EmployeeTimeClock() {
                   {shiftStatus === 'On Break' ? (
                     <Button 
                       variant="primary" 
-                      className="py-4 hover:scale-[1.02] active:scale-[0.98] transition-all rounded-2xl font-bold flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-100"
+                      className="py-3 sm:py-4 hover:scale-[1.02] active:scale-[0.98] transition-all rounded-2xl font-bold flex items-center justify-center gap-2 bg-blue-600 text-white shadow-lg shadow-blue-100"
                       onClick={handleBreakEnd}
                     >
                       <PlayCircle size={20} />
@@ -145,7 +145,7 @@ export default function EmployeeTimeClock() {
                   ) : (
                     <Button 
                       variant="secondary" 
-                      className="py-4 rounded-2xl font-bold flex items-center justify-center gap-2 border-amber-100 bg-amber-50 text-amber-600 hover:bg-amber-100 transition-all"
+                      className="py-3 sm:py-4 rounded-2xl font-bold flex items-center justify-center gap-2 border-amber-100 bg-amber-50 text-amber-600 hover:bg-amber-100 transition-all"
                       onClick={handleBreakStart}
                     >
                       <Coffee size={20} />
@@ -154,7 +154,7 @@ export default function EmployeeTimeClock() {
                   )}
                   <Button 
                     variant="secondary" 
-                    className="py-4 rounded-2xl font-bold flex items-center justify-center gap-2 border-rose-100 bg-rose-50 text-rose-600 hover:bg-rose-100 transition-all font-bold"
+                    className="py-3 sm:py-4 rounded-2xl font-bold flex items-center justify-center gap-2 border-rose-100 bg-rose-50 text-rose-600 hover:bg-rose-100 transition-all"
                     onClick={handleClockOut}
                   >
                     <LogOut size={20} />

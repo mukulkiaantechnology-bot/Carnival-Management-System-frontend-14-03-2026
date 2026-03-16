@@ -225,12 +225,12 @@ export default function WorkOrders() {
                 <Button 
                   type="button" 
                   variant="outline" 
-                  className="flex-1"
+                  className="flex-1 h-10 sm:h-12 text-xs sm:text-sm"
                   onClick={() => setIsModalOpen(false)}
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className="flex-1 bg-blue-600 text-white hover:bg-blue-700">
+                <Button type="submit" className="flex-1 bg-blue-600 text-white hover:bg-blue-700 h-10 sm:h-12 text-xs sm:text-sm shadow-md shadow-blue-500/20 font-bold">
                   Save Work Order
                 </Button>
               </div>

@@ -1,17 +1,12 @@
-import { useNavigate, useLocation, Routes, Route } from 'react-router-dom';
+import { useNavigate, Routes, Route } from 'react-router-dom';
 import { 
-  GraduationCap, Video, BookOpen, CheckCircle, Users, Eye, Pencil, 
-  Trash2, ArrowRight, FileText, Clock, ArrowLeft, Upload 
+  GraduationCap, Video, BookOpen, Users, Eye, Pencil, 
+  Trash2, FileText, Clock, ArrowLeft, Upload 
 } from 'lucide-react';
-import { Card, CardContent, CardHeader } from '../../components/ui/Card';
+import { Card, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
-const MOCK_TRAINING_MODULES = [
-  { id: 1, title: 'Safety Protocol 101', type: 'Video', duration: '45 mins', assigned: 120, completion: '95%', status: 'Active' },
-  { id: 2, title: 'Customer Service Excellence', type: 'Video', duration: '30 mins', assigned: 45, completion: '80%', status: 'Active' },
-  { id: 3, title: 'Emergency Response Training', type: 'Course', duration: '2 hours', assigned: 120, completion: '60%', status: 'Active' },
-  { id: 4, title: 'Ticket System Operation', type: 'PDF', duration: '20 mins', assigned: 15, completion: '100%', status: 'Active' },
-];
+import { useTraining } from '../../context/TrainingContext';
 
 const MOCK_EMPLOYEE_TRAINING = [
   { id: 101, name: 'John Doe', department: 'Operations', assignedTraining: 'Safety Protocol 101', progress: '95%', status: 'Active' },
@@ -79,7 +74,9 @@ function TrainingUploadForm({ onBack }) {
 }
 
 function TrainingLibrary({ onUpload }) {
+  const { trainings, deleteTraining } = useTraining();
   const navigate = useNavigate();
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -90,11 +87,7 @@ function TrainingLibrary({ onUpload }) {
         <Button 
           variant="primary" 
           className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onUpload();
-          }}
+          onClick={onUpload}
         >
           <Video size={18} />
           Upload Training Video
@@ -114,7 +107,7 @@ function TrainingLibrary({ onUpload }) {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
-              {MOCK_TRAINING_MODULES.map((module) => (
+              {trainings.map((module) => (
                 <tr key={module.id} className="hover:bg-slate-50/30 transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
@@ -137,13 +130,13 @@ function TrainingLibrary({ onUpload }) {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all">
+                      <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" onClick={() => navigate(`/hr/training/${module.id}`)}>
                         <Eye size={16} />
                       </button>
                       <button className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
                         <Pencil size={16} />
                       </button>
-                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all">
+                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" onClick={() => deleteTraining(module.id)}>
                         <Trash2 size={16} />
                       </button>
                     </div>
@@ -245,7 +238,6 @@ export default function Training() {
         <Route path="/training-library" element={<TrainingLibrary onUpload={() => navigate('/hr/training/add')} />} />
         <Route path="/employee-training" element={<EmployeeTraining />} />
         <Route path="/training/add" element={<TrainingUploadForm onBack={() => navigate('/hr/training-library')} />} />
-        {/* Redirect for any sub-path not matched, although App.jsx handles the main ones */}
         <Route path="*" element={<TrainingLibrary onUpload={() => navigate('/hr/training/add')} />} />
       </Routes>
     </div>
