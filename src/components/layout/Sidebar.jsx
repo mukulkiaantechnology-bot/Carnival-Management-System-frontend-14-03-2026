@@ -102,22 +102,22 @@ export function Sidebar({ isOpen, toggleSidebar }) {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex flex-col border-b border-slate-200 sticky top-0 bg-white z-10 pt-6 pb-4 px-6">
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between w-full">
-              <div className="h-10 w-32 overflow-hidden flex items-center justify-start">
-                <img src={logo} alt="Logo" className="h-full w-auto object-contain object-left scale-150 origin-left" />
+        <div className="flex flex-col border-b border-slate-200 sticky top-0 bg-white z-10 pt-6 pb-6 px-6">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="h-10 w-10 overflow-hidden flex items-center justify-center bg-slate-50 rounded-xl shrink-0">
+                <img src={logo} alt="Logo" className="h-24 w-auto object-contain scale-150" />
               </div>
-              <button
-                onClick={toggleSidebar}
-                className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md"
-              >
-                <X size={20} />
-              </button>
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm font-black text-blue-600 tracking-[1.5px] uppercase truncate">Showmensinfo</span>
+              </div>
             </div>
-            <div className="flex flex-col">
-              <span className="text-sm font-black text-blue-600 tracking-[3px] uppercase">Showmensinfo</span>
-            </div>
+            <button
+              onClick={toggleSidebar}
+              className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md shrink-0"
+            >
+              <X size={20} />
+            </button>
           </div>
         </div>
 
