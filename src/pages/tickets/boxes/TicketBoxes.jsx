@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { 
-  Store, 
-  Plus, 
-  MapPin, 
-  User, 
-  Eye, 
-  Pencil, 
+import {
+  Store,
+  Plus,
+  MapPin,
+  User,
+  Eye,
+  Pencil,
   X,
   Circle,
   ArrowRight,
@@ -62,7 +62,7 @@ export default function TicketBoxes() {
           </h1>
           <p className="text-sm text-slate-500 mt-1 font-medium">Control and monitor all ticket boxes.</p>
         </div>
-        <button 
+        <button
           onClick={() => setShowModal(true)}
           className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl transition-all font-black shadow-xl shadow-blue-100 active:scale-95 text-xs uppercase tracking-widest"
         >
@@ -71,13 +71,13 @@ export default function TicketBoxes() {
       </div>
 
       <Card>
-        <CardHeader 
-          title="Active Counters Registry" 
-          subtitle="Directory of all ticketing points" 
+        <CardHeader
+          title="Active Counters Registry"
+          subtitle="Directory of all ticketing points"
           action={
-             <button className="p-2.5 bg-slate-100 text-slate-400 hover:text-blue-600 rounded-xl transition-all">
-               <Download size={20} />
-             </button>
+            <button className="p-2.5 bg-slate-100 text-slate-400 hover:text-blue-600 rounded-xl transition-all">
+              <Download size={20} />
+            </button>
           }
         />
         <CardContent className="p-0">
@@ -97,16 +97,15 @@ export default function TicketBoxes() {
                   <tr key={box.id} className="hover:bg-slate-50/30 transition-all group">
                     <td className="px-6 py-5 font-mono text-[10px] font-black text-slate-400 uppercase">{box.id}</td>
                     <td className="px-6 py-5">
-                       <p className="text-slate-800 tracking-tight">{box.name}</p>
-                       <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">{box.location}</p>
+                      <p className="text-slate-800 tracking-tight">{box.name}</p>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">{box.location}</p>
                     </td>
                     <td className="px-6 py-5 text-slate-700">{box.staff}</td>
                     <td className="px-4 py-5 text-center">
-                      <button 
+                      <button
                         onClick={() => toggleStatus(box.id)}
-                        className={`inline-flex items-center gap-2 px-3 py-1 ring-1 ring-inset rounded-full text-[9px] font-black uppercase transition-all ${
-                        box.status === 'Open' ? 'bg-emerald-50 text-emerald-700 ring-emerald-200' : 'bg-slate-50 text-slate-400 ring-slate-200'
-                      }`}>
+                        className={`inline-flex items-center gap-2 px-3 py-1 ring-1 ring-inset rounded-full text-[9px] font-black uppercase transition-all ${box.status === 'Open' ? 'bg-emerald-50 text-emerald-700 ring-emerald-200' : 'bg-slate-50 text-slate-400 ring-slate-200'
+                          }`}>
                         <Circle size={8} fill="currentColor" className={box.status === 'Open' ? 'animate-pulse' : ''} />
                         {box.status}
                       </button>
@@ -134,24 +133,23 @@ export default function TicketBoxes() {
                 <div className="p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg shadow-blue-50">
                   <Store size={24} />
                 </div>
-                <div className={`text-[10px] font-black uppercase tracking-[2px] px-3 py-1.5 rounded-full ${
-                  box.status === 'Open' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'
-                }`}>
+                <div className={`text-[10px] font-black uppercase tracking-[2px] px-3 py-1.5 rounded-full ${box.status === 'Open' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'
+                  }`}>
                   {box.status}
                 </div>
               </div>
-              
+
               <h3 className="font-black text-slate-800 text-lg group-hover:text-blue-600 transition-colors uppercase">{box.name}</h3>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">{box.location}</p>
 
               <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
-                 <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Total Sales</p>
-                    <p className="text-2xl font-black text-slate-800 tracking-tighter">{box.sales}</p>
-                 </div>
-                 <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-200 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg shadow-blue-50">
-                    <ArrowRight size={24} />
-                 </div>
+                <div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Total Sales</p>
+                  <p className="text-2xl font-bold text-slate-800 tracking-tighter">{box.sales}</p>
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-200 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg shadow-blue-50">
+                  <ArrowRight size={24} />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -168,33 +166,33 @@ export default function TicketBoxes() {
                 <X size={28} />
               </button>
             </div>
-            
+
             <div className="space-y-6">
               <div>
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-[3px] ml-2 block mb-2">Display Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={newBox.name}
-                  onChange={(e) => setNewBox({...newBox, name: e.target.value})}
-                  className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl text-base font-black text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all" 
-                  placeholder="SOUTH GATE BOX" 
+                  onChange={(e) => setNewBox({ ...newBox, name: e.target.value })}
+                  className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl text-base font-black text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all"
+                  placeholder="SOUTH GATE BOX"
                 />
               </div>
               <div>
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-[3px] ml-2 block mb-2">Location</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={newBox.location}
-                  onChange={(e) => setNewBox({...newBox, location: e.target.value})}
-                  className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all" 
-                  placeholder="ZONE A" 
+                  onChange={(e) => setNewBox({ ...newBox, location: e.target.value })}
+                  className="w-full h-16 px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold text-slate-800 focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:bg-white transition-all"
+                  placeholder="ZONE A"
                 />
               </div>
               <div className="pt-8 flex gap-4">
                 <button onClick={() => setShowModal(false)} className="flex-1 h-16 bg-slate-50 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-[3px] hover:bg-slate-100 transition-all">
                   Cancel
                 </button>
-                <button 
+                <button
                   onClick={handleAddBox}
                   className="flex-1 h-16 bg-blue-600 text-white rounded-2xl text-xs font-black uppercase tracking-[3px] hover:bg-blue-700 transition-all shadow-2xl shadow-blue-200 active:scale-95 disabled:opacity-50"
                   disabled={!newBox.name || !newBox.location}

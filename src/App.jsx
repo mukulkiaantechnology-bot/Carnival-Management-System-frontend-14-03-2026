@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
+import { TrainingProvider } from './context/TrainingContext';
 import { ProtectedRoute } from './app/routes/ProtectedRoute';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 
@@ -17,6 +18,11 @@ import Maintenance from './pages/modules/Maintenance';
 import Financial from './pages/modules/Financial';
 import TicketSales from './pages/modules/TicketSales';
 import Training from './pages/modules/Training';
+import TrainingLibrary from './pages/modules/TrainingLibrary';
+import EmployeeTraining from './pages/modules/EmployeeTraining';
+import AddTraining from './pages/modules/AddTraining';
+import TrainingDetail from './pages/modules/TrainingDetail';
+import TrainingProgressDetail from './pages/modules/TrainingProgressDetail';
 import Contracts from './pages/modules/Contracts';
 import Calendar from './pages/modules/Calendar';
 import Reports from './pages/modules/Reports';
@@ -60,72 +66,84 @@ function RootRedirect() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        
-        <Route element={<DashboardLayout />}>
-          <Route path="/" element={<RootRedirect />} />
+    <TrainingProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
           
-          {/* Admin Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-            <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/employees/*" element={<Employees />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/contracts/*" element={<Contracts />} />
-            <Route path="/financial" element={<Financial />} />
-            <Route path="/time-clock" element={<TimeClock />} />
-            <Route path="/inspections/*" element={<Inspections />} />
-            <Route path="/maintenance/*" element={<Maintenance />} />
-            <Route path="/calendar/*" element={<Calendar />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/tickets/*" element={<TicketSales />} />
-            <Route path="/training/*" element={<Training />} />
-          </Route>
+          <Route element={<DashboardLayout />}>
+            <Route path="/" element={<RootRedirect />} />
+            
+            {/* Admin Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path="/employees/*" element={<Employees />} />
+              <Route path="/contracts/*" element={<Contracts />} />
+              <Route path="/financial" element={<Financial />} />
+              <Route path="/time-clock" element={<TimeClock />} />
+              <Route path="/inspections/*" element={<Inspections />} />
+              <Route path="/maintenance/*" element={<Maintenance />} />
+              <Route path="/calendar/*" element={<Calendar />} />
+              <Route path="/reports" element={<Reports />} />
+              <Route path="/tickets/*" element={<TicketSales />} />
+              <Route path="/training/*" element={<Training />} />
+            </Route>
 
-          {/* Operations & Operations Manager Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager']} />}>
-             <Route path="/operations-dashboard" element={<OpsManagerDashboard />} />
-             <Route path="/operations/dashboard" element={<OpsManagerDashboard />} />
-             <Route path="/operations/inspections" element={<Inspections />} />
-             <Route path="/operations/events" element={<Events />} />
-             <Route path="/operations/employees" element={<EmployeesView />} />
-             <Route path="/operations/reports" element={<OperationsReports />} />
-          </Route>
+            {/* Shared Settings Route (All Roles) */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager', 'maintenance', 'maintenance_manager', 'ticket', 'ticket_manager', 'hr', 'employee']} />}>
+              <Route path="/settings" element={<Settings />} />
+            </Route>
 
-          {/* Maintenance Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance', 'maintenance_manager']} />}>
-            <Route path="/maintenance/dashboard" element={<MaintenanceDashboard />} />
-            <Route path="/maintenance-dashboard" element={<Navigate to="/maintenance/dashboard" replace />} />
-            <Route path="/maintenance/work-orders" element={<WorkOrders />} />
-            <Route path="/maintenance/reports" element={<MaintenanceReports />} />
-            <Route path="/maintenance/special/*" element={<PlaceholderPage title="Maintenance Module" />} />
-          </Route>
+            {/* Operations & Operations Manager Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager']} />}>
+               <Route path="/operations-dashboard" element={<OpsManagerDashboard />} />
+               <Route path="/operations/dashboard" element={<OpsManagerDashboard />} />
+               <Route path="/operations/inspections" element={<Inspections />} />
+               <Route path="/operations/events" element={<Events />} />
+               <Route path="/operations/employees" element={<EmployeesView />} />
+               <Route path="/operations/reports" element={<OperationsReports />} />
+            </Route>
 
-          {/* Ticket & Ticket Manager Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket', 'ticket_manager']} />}>
-            <Route path="/tickets/dashboard" element={<TicketManagerDashboard />} />
-            <Route path="/tickets/boxes" element={<TicketBoxes />} />
-            <Route path="/tickets/tracking" element={<TicketTracking />} />
-            <Route path="/tickets/settlement" element={<Settlement />} />
-          </Route>
+            {/* Maintenance Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance', 'maintenance_manager']} />}>
+              <Route path="/maintenance/dashboard" element={<MaintenanceDashboard />} />
+              <Route path="/maintenance-dashboard" element={<Navigate to="/maintenance/dashboard" replace />} />
+              <Route path="/maintenance/work-orders" element={<WorkOrders />} />
+              <Route path="/maintenance/reports" element={<MaintenanceReports />} />
+              <Route path="/maintenance/special/*" element={<PlaceholderPage title="Maintenance Module" />} />
+            </Route>
 
-          {/* HR Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'hr']} />}>
-            <Route path="/hr-dashboard" element={<HRDashboard />} />
-            <Route path="/training/all/*" element={<Training />} />
-          </Route>
+            {/* Ticket & Ticket Manager Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket', 'ticket_manager']} />}>
+              <Route path="/tickets/dashboard" element={<TicketManagerDashboard />} />
+              <Route path="/tickets/boxes" element={<TicketBoxes />} />
+              <Route path="/tickets/tracking" element={<TicketTracking />} />
+              <Route path="/tickets/settlement" element={<Settlement />} />
+            </Route>
 
-          {/* Employee Routes */}
-          <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
-            <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
-            <Route path="/time-clock-shared" element={<TimeClock />} />
-          </Route>
+            {/* HR Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'hr']} />}>
+              <Route path="/hr-dashboard" element={<HRDashboard />} />
+              <Route path="/hr/employees/*" element={<Employees />} />
+              <Route path="/hr/training-library" element={<TrainingLibrary />} />
+              <Route path="/hr/employee-training" element={<EmployeeTraining />} />
+              <Route path="/hr/training/add" element={<AddTraining />} />
+              <Route path="/hr/training/:id" element={<TrainingDetail />} />
+              <Route path="/hr/training-progress/:id" element={<TrainingProgressDetail />} />
+              <Route path="/training/all/*" element={<Training />} />
+            </Route>
 
-          {/* Catch-all */}
-          <Route path="*" element={<RootRedirect />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            {/* Employee Routes */}
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
+              <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+              <Route path="/time-clock-shared" element={<TimeClock />} />
+            </Route>
+
+            {/* Catch-all */}
+            <Route path="*" element={<RootRedirect />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </TrainingProvider>
   );
 }

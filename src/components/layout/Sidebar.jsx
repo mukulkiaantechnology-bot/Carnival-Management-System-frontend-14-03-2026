@@ -22,10 +22,19 @@ const ADMIN_NAV_ITEMS = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
+const hrNavItems = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/hr-dashboard' },
+  { name: 'Employees', icon: Users, path: '/hr/employees' },
+  { name: 'Training Library', icon: GraduationCap, path: '/hr/training-library' },
+  { name: 'Employee Training', icon: ClipboardCheck, path: '/hr/employee-training' },
+  { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
 const maintenanceMenu = [
   { name: "Dashboard", path: "/maintenance/dashboard", icon: LayoutDashboard },
   { name: "Work Orders", path: "/maintenance/work-orders", icon: ClipboardList },
-  { name: "Maintenance Reports", path: "/maintenance/reports", icon: FileBarChart }
+  { name: "Maintenance Reports", path: "/maintenance/reports", icon: FileBarChart },
+  { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
 import logo from '../../assets/logo.png';
@@ -41,6 +50,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
     { name: 'Events',      icon: Calendar,        path: '/operations/events' },
     { name: 'Employees',   icon: Users,           path: '/operations/employees' },
     { name: 'Reports',     icon: BarChart,        path: '/operations/reports' },
+    { name: 'Settings',    icon: Settings,        path: '/settings' },
   ];
 
   // Ticket roles navigation (Remote)
@@ -49,20 +59,31 @@ export function Sidebar({ isOpen, toggleSidebar }) {
     { name: 'Ticket Boxes',    icon: Store,           path: '/tickets/boxes' },
     { name: 'Ticket Tracking', icon: Scan,            path: '/tickets/tracking' },
     { name: 'Settlement',      icon: HandCoins,       path: '/tickets/settlement' },
+    { name: 'Settings',        icon: Settings,        path: '/settings' },
   ];
 
   let menuItems = ADMIN_NAV_ITEMS;
   let sectionTitle = 'Navigation';
 
-  if (role === 'operations' || role === 'operations_manager') {
+  if (role === 'hr' || role === 'hr_manager') {
+    menuItems = hrNavItems;
+    sectionTitle = 'HR Hub';
+  } else if (role === 'operations' || role === 'operations_manager') {
     menuItems = opsNavItems;
     sectionTitle = 'Operations Hub';
   } else if (role === 'ticket' || role === 'ticket_manager') {
     menuItems = ticketNavItems;
     sectionTitle = 'Ticketing Hub';
-  } else if (role === 'maintenance_manager') {
+  } else if (role === 'maintenance_manager' || role === 'maintenance') {
     menuItems = maintenanceMenu;
     sectionTitle = 'Maintenance Hub';
+  } else if (role === 'employee') {
+    menuItems = [
+      { name: 'Dashboard', icon: LayoutDashboard, path: '/employee-dashboard' },
+      { name: 'Time Clock', icon: Clock, path: '/time-clock-shared' },
+      { name: 'Settings', icon: Settings, path: '/settings' },
+    ];
+    sectionTitle = 'Employee Portal';
   }
 
   return (

@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import { Settings as SettingsIcon, Building, ShieldCheck, Monitor, Save, Globe, Mail, Phone, Lock, X, Plus, Edit2, Trash2, Key, Bell, Languages, Clock, IndianRupee, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Settings as SettingsIcon, Building, ShieldCheck, Monitor, Save, Globe, Mail, Phone, Lock, X, Plus, Edit2, Trash2, Key, Bell, Languages, Clock, IndianRupee, CheckCircle2, User, Camera } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { useAuth } from '../../context/AuthContext';
 
 // Local Components
 function Toggle({ label, subtitle, enabled, onToggle }) {
@@ -22,14 +24,30 @@ function Toggle({ label, subtitle, enabled, onToggle }) {
 }
 
 export default function Settings() {
-  const [activeTab, setActiveTab] = useState('company');
+  const { user } = useAuth();
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState('profile');
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState(null);
 
-  const tabs = [
-    { id: 'company', label: 'Company Information', icon: Building, color: 'blue' },
+  const tabs = useMemo(() => [
+    { id: 'profile', label: 'My Profile', icon: User, color: 'emerald' },
+    { id: 'company', label: 'Company Information', icon: Building, color: 'blue', adminOnly: true },
     { id: 'security', label: 'Security', icon: Lock, color: 'red' },
-  ];
+  ].filter(tab => !tab.adminOnly || user?.role === 'admin'), [user?.role]);
+
+  // Handle tab switching from URL and Access Control
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tabId = params.get('tab');
+    const availableTabs = tabs.map(t => t.id);
+    
+    if (tabId && availableTabs.includes(tabId)) {
+      setActiveTab(tabId);
+    } else if (!availableTabs.includes(activeTab)) {
+      setActiveTab(availableTabs[0]);
+    }
+  }, [location.search, tabs, activeTab]);
 
   const handleSave = () => {
     setSaving(true);
@@ -94,7 +112,55 @@ export default function Settings() {
 
         <section className="lg:col-span-3">
           <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-            {activeTab === 'company' && (
+            {activeTab === 'profile' && (
+              <Card className="border-slate-100 shadow-sm">
+                <CardHeader title="My Profile" subtitle="Manage your personal information and preferences." />
+                <CardContent className="space-y-8">
+                  <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-50">
+                    <div className="relative group">
+                      <div className="w-24 h-24 rounded-3xl bg-emerald-50 flex items-center justify-center text-emerald-600 border-2 border-emerald-100 overflow-hidden">
+                        <User size={40} />
+                      </div>
+                      <button className="absolute -bottom-2 -right-2 p-2 bg-white rounded-xl shadow-lg border border-slate-100 text-slate-600 hover:text-emerald-600 transition-colors">
+                        <Camera size={16} />
+                      </button>
+                    </div>
+                    <div className="text-center sm:text-left space-y-1">
+                      <h3 className="text-lg font-bold text-slate-800">{user?.email?.split('@')[0]}</h3>
+                      <p className="text-sm font-bold text-emerald-600 uppercase tracking-widest">{user?.role?.replace('_', ' ')}</p>
+                      <p className="text-xs text-slate-400 font-medium">Last Login: Just now</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Full Name</label>
+                      <input type="text" defaultValue={user?.email?.split('@')[0]} className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Email Address</label>
+                      <input type="email" defaultValue={user?.email} className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Phone Number</label>
+                      <input type="tel" placeholder="+1 (555) 000-0000" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Timezone</label>
+                      <select className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all appearance-none cursor-pointer">
+                        <option>Pacific Time (PT)</option>
+                        <option>Mountain Time (MT)</option>
+                        <option>Central Time (CT)</option>
+                        <option>Eastern Time (ET)</option>
+                        <option>Greenwich Mean Time (GMT)</option>
+                      </select>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {activeTab === 'company' && user?.role === 'admin' && (
               <Card className="border-slate-100 shadow-sm">
                 <CardHeader title="Company Information" subtitle="Public details about your carnival business." />
                 <CardContent className="space-y-6">

@@ -1,11 +1,11 @@
 import React from 'react';
-import { 
-  Ticket, 
-  Store, 
-  HandCoins, 
-  TrendingUp, 
-  CreditCard, 
-  Clock, 
+import {
+  Ticket,
+  Store,
+  HandCoins,
+  TrendingUp,
+  CreditCard,
+  Clock,
   ArrowRight,
   Search,
   Bell,
@@ -44,7 +44,7 @@ export default function TicketDashboard() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-800 tracking-tight">Ticket Dashboard</h1>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Ticket Dashboard</h1>
           <p className="text-sm text-slate-500 mt-1 font-medium">Real-time ticketing overview and sales tracking.</p>
         </div>
         <div className="flex items-center gap-3">
@@ -60,8 +60,8 @@ export default function TicketDashboard() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {STATS.map((stat) => (
-          <Card 
-            key={stat.label} 
+          <Card
+            key={stat.label}
             className={`border-l-4 ${stat.border} hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group`}
             onClick={() => navigate(stat.path)}
           >
@@ -80,16 +80,16 @@ export default function TicketDashboard() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <Card className="xl:col-span-2">
-          <CardHeader 
-            title="Sales Performance" 
-            subtitle="Breakdown by location (Today)" 
+          <CardHeader
+            title="Sales Performance"
+            subtitle="Breakdown by location (Today)"
             action={
-               <button 
-                onClick={() => navigate('/tickets/boxes')} 
+              <button
+                onClick={() => navigate('/tickets/boxes')}
                 className="group flex items-center gap-2 text-xs font-black text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-xl transition-all uppercase tracking-widest"
-               >
-                 Boxes <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-               </button>
+              >
+                Boxes <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              </button>
             }
           />
           <CardContent className="p-0">
@@ -125,50 +125,50 @@ export default function TicketDashboard() {
         </Card>
 
         <div className="space-y-6">
-            <button 
-              onClick={() => navigate('/tickets/settlement')}
-              className="w-full p-5 bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white rounded-[2rem] shadow-xl shadow-emerald-200 transition-all flex items-center justify-between group active:scale-95"
-            >
-               <div className="flex items-center gap-4">
-                  <div className="p-3 bg-white/20 rounded-2xl group-hover:bg-white group-hover:text-emerald-700 transition-all">
-                    <HandCoins size={24} />
-                  </div>
-                  <div className="text-left">
-                    <p className="text-base font-black tracking-tight leading-none uppercase tracking-[1px]">Settlement</p>
-                    <p className="text-[10px] opacity-80 mt-1 font-bold">Close revenue today</p>
-                  </div>
-               </div>
-               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+          <button
+            onClick={() => navigate('/tickets/settlement')}
+            className="w-full p-5 bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white rounded-[2rem] shadow-xl shadow-emerald-200 transition-all flex items-center justify-between group active:scale-95"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-white/20 rounded-2xl group-hover:bg-white group-hover:text-emerald-700 transition-all">
+                <HandCoins size={24} />
+              </div>
+              <div className="text-left">
+                <p className="text-base font-black tracking-tight leading-none uppercase tracking-[1px]">Settlement</p>
+                <p className="text-[10px] opacity-80 mt-1 font-bold">Close revenue today</p>
+              </div>
+            </div>
+            <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          </button>
 
-            <Card className="rounded-[2rem] bg-slate-50/50">
-              <CardHeader title="System Status" subtitle="Real-time monitoring" />
-              <CardContent className="p-6 pt-0 space-y-5">
-                 <div className="flex gap-4 items-center" onClick={() => navigate('/tickets/tracking')}>
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ring-4 ring-emerald-500/20" />
-                    <div className="flex-1">
-                       <p className="text-xs font-black text-slate-800 uppercase tracking-tight">Counters Online</p>
-                       <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">8 Active Hubs</p>
-                    </div>
-                 </div>
-                 <button 
-                  onClick={() => navigate('/tickets/tracking')}
-                  className="w-full py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-black uppercase tracking-[3px] text-slate-500 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
-                 >
-                   Open Log
-                 </button>
-              </CardContent>
-            </Card>
+          <Card className="rounded-[2rem] bg-slate-50/50">
+            <CardHeader title="System Status" subtitle="Real-time monitoring" />
+            <CardContent className="p-6 pt-0 space-y-5">
+              <div className="flex gap-4 items-center" onClick={() => navigate('/tickets/tracking')}>
+                <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ring-4 ring-emerald-500/20" />
+                <div className="flex-1">
+                  <p className="text-xs font-black text-slate-800 uppercase tracking-tight">Counters Online</p>
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">8 Active Hubs</p>
+                </div>
+              </div>
+              <button
+                onClick={() => navigate('/tickets/tracking')}
+                className="w-full py-3 bg-white border border-slate-200 rounded-2xl text-[10px] font-black uppercase tracking-[3px] text-slate-500 hover:bg-blue-600 hover:text-white transition-all shadow-sm"
+              >
+                Open Log
+              </button>
+            </CardContent>
+          </Card>
         </div>
       </div>
 
       <Card>
-        <CardHeader 
-          title="Recent Transactions" 
-          subtitle="Real-time log of tickets sold" 
+        <CardHeader
+          title="Recent Transactions"
+          subtitle="Real-time log of tickets sold"
           action={
             <button onClick={() => navigate('/tickets/tracking')} className="p-2.5 bg-slate-50 border border-slate-100 rounded-xl hover:bg-blue-50 transition-all shadow-sm">
-               <Search size={18} />
+              <Search size={18} />
             </button>
           }
         />
@@ -204,7 +204,7 @@ export default function TicketDashboard() {
             </table>
           </div>
           <div className="px-6 py-6 border-t border-slate-50 flex justify-center sm:justify-end">
-            <button 
+            <button
               onClick={() => navigate('/tickets/tracking')}
               className="group flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-[3px] hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95"
             >

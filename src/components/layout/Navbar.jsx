@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { Menu, Bell, UserCircle, CheckCircle2, AlertCircle, Info } from 'lucide-react';
+import { Menu, Bell, UserCircle, LogOut, User, Settings, ChevronDown, CheckCircle2, AlertCircle, Info } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-// import logo from '../../assets/logo.png';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MOCK_NOTIFICATIONS = [
   { id: 1, text: 'New employee "Sarah Wilson" added', time: '5m ago', type: 'info', icon: Info },
@@ -11,19 +11,38 @@ const MOCK_NOTIFICATIONS = [
 
 export function Navbar({ toggleSidebar }) {
   const { user, logout } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [showNotifications, setShowNotifications] = useState(false);
-  const dropdownRef = useRef(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const notificationRef = useRef(null);
+  const profileRef = useRef(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (notificationRef.current && !notificationRef.current.contains(event.target)) {
         setShowNotifications(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const getPageTitle = (path) => {
+    if (path === '/' || path === '/hr-dashboard' || path.includes('dashboard')) return 'Portal Overview';
+    if (path.includes('/hr/employees')) return 'Employee Directory';
+    if (path.includes('/hr/training-library')) return 'Training Library';
+    if (path.includes('/hr/employee-training')) return 'Employee Training Tracking';
+    if (path.includes('/hr/training/add')) return 'Upload Training Module';
+    if (path.match(/\/hr\/training\/\d+/)) return 'Training Details';
+    if (path.match(/\/hr\/training-progress\/\d+/)) return 'Employee Training Progress';
+    if (path === '/settings') return 'System Settings';
+    return 'Portal Overview';
+  };
 
   return (
     <header className="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-20">
@@ -37,22 +56,24 @@ export function Navbar({ toggleSidebar }) {
             <Menu size={24} />
           </button>
           
-          <div className="hidden lg:flex items-center gap-3">
-            {/* <div className="h-8 w-8 overflow-hidden rounded-lg border border-slate-100 shadow-sm flex items-center justify-center bg-slate-50">
-              <img src={logo} alt="Logo" className="h-full w-full object-contain p-0.5" />
-            </div>
-            {!['maintenance_manager', 'maintenance'].includes(user?.role) && (
+          <div className="hidden lg:flex items-center gap-4">
+            {!['maintenance_manager', 'maintenance'].includes(user?.role) && 
+             !['Portal Overview', 'System Settings'].includes(getPageTitle(location.pathname)) && (
               <h2 className="text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-500 bg-clip-text text-transparent">
-                Portal Overview
+                {getPageTitle(location.pathname)}
               </h2>
-            )} */}
+            )}
           </div>
         </div>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
-          <div className="relative" ref={dropdownRef}>
+          {/* Notifications */}
+          <div className="relative" ref={notificationRef}>
             <button 
-              onClick={() => setShowNotifications(!showNotifications)}
+              onClick={() => {
+                setShowNotifications(!showNotifications);
+                setIsProfileOpen(false);
+              }}
               className={`p-2 rounded-full transition-all duration-200 ${
                 showNotifications ? 'bg-blue-50 text-blue-600' : 'text-slate-400 hover:text-slate-500 hover:bg-slate-50'
               } relative`}
@@ -61,7 +82,6 @@ export function Navbar({ toggleSidebar }) {
               <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span>
             </button>
 
-            {/* Notification Dropdown */}
             {showNotifications && (
               <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
@@ -95,20 +115,74 @@ export function Navbar({ toggleSidebar }) {
             )}
           </div>
           
-          <div className="flex items-center space-x-2 sm:space-x-3 border-l border-slate-200 pl-2 sm:pl-4">
-            <div className="text-right hidden sm:block max-w-[150px]">
-              <p className="text-sm font-bold text-slate-800 truncate" title={user?.email}>{user?.email}</p>
-              <p className="text-[10px] font-bold text-slate-400 capitalize bg-slate-100 px-2 rounded-md inline-block tracking-wider">
-                {user?.role?.replace('_', ' ')}
-              </p>
-            </div>
+          {/* Profile Dropdown */}
+          <div className="relative" ref={profileRef}>
             <button 
-              onClick={logout} 
-              title="Logout" 
-              className="flex items-center p-1 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all duration-200"
+              onClick={() => {
+                setIsProfileOpen(!isProfileOpen);
+                setShowNotifications(false);
+              }}
+              className="flex items-center space-x-1 sm:space-x-3 border-l border-slate-200 pl-2 sm:pl-4 py-1 group"
             >
-              <UserCircle size={32} />
+              <div className="text-right hidden md:block max-w-[150px]">
+                <p className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors truncate">
+                  {user?.email?.split('@')[0]}
+                </p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                  {user?.role?.replace('_', ' ')}
+                </p>
+              </div>
+              <div className="relative">
+                <UserCircle size={28} className="sm:w-8 sm:h-8 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                <div className="absolute -bottom-0.5 -right-0.5 bg-green-500 w-2.5 h-2.5 rounded-full border-2 border-white"></div>
+              </div>
+              <ChevronDown size={14} className={`text-slate-400 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
             </button>
+
+            {isProfileOpen && (
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="px-4 py-3 border-b border-slate-50">
+                  <p className="text-sm font-bold text-slate-900 truncate">{user?.email}</p>
+                  <p className="text-xs font-medium text-slate-500 capitalize mt-0.5">{user?.role?.replace('_', ' ')}</p>
+                </div>
+                
+                <div className="p-2">
+                  <button 
+                    onClick={() => {
+                      navigate('/settings?tab=profile');
+                      setIsProfileOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-blue-600 rounded-xl transition-all"
+                  >
+                    <User size={18} />
+                    My Profile
+                  </button>
+                  <button 
+                    onClick={() => {
+                      navigate('/settings?tab=security');
+                      setIsProfileOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-blue-600 rounded-xl transition-all"
+                  >
+                    <Settings size={18} />
+                    Account Settings
+                  </button>
+                </div>
+
+                <div className="p-2 border-t border-slate-50">
+                  <button 
+                    onClick={() => {
+                      logout();
+                      setIsProfileOpen(false);
+                    }}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                  >
+                    <LogOut size={18} />
+                    Log Out
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
