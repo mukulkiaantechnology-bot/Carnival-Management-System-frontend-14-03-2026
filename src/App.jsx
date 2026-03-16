@@ -8,13 +8,30 @@ import AdminDashboard from './pages/dashboards/admin/AdminDashboard';
 import MaintenanceDashboard from './pages/dashboards/maintenance/MaintenanceDashboard';
 import EmployeeDashboard from './pages/dashboards/employee/EmployeeDashboard';
 import HRDashboard from './pages/dashboards/hr/HRDashboard';
+
+// Shared/Admin Modules
+import Employees from './pages/modules/Employees';
+import TimeClock from './pages/modules/TimeClock';
+import Inspections from './pages/modules/Inspections';
+import Maintenance from './pages/modules/Maintenance';
+import Financial from './pages/modules/Financial';
+import TicketSales from './pages/modules/TicketSales';
+import Training from './pages/modules/Training';
+import TrainingLibrary from './pages/modules/TrainingLibrary';
+import EmployeeTraining from './pages/modules/EmployeeTraining';
+import AddTraining from './pages/modules/AddTraining';
+import Contracts from './pages/modules/Contracts';
+import Calendar from './pages/modules/Calendar';
+import Reports from './pages/modules/Reports';
+import Settings from './pages/modules/Settings';
+
+// Specialized Modules (from Remote)
 import PlaceholderPage from './pages/modules/PlaceholderPage';
 import WorkOrders from './pages/modules/maintenance/WorkOrders';
 import MaintenanceReports from './pages/modules/maintenance/MaintenanceReports';
 
 // Operations Manager Module
 import OpsManagerDashboard from './pages/operations/dashboard/OperationsDashboard';
-import Inspections from './pages/operations/inspections/Inspections';
 import Events from './pages/operations/events/Events';
 import EmployeesView from './pages/operations/employees/EmployeesView';
 import OperationsReports from './pages/operations/reports/OperationsReports';
@@ -56,9 +73,17 @@ export default function App() {
           {/* Admin Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
-            <Route path="/employees/*" element={<PlaceholderPage title="Employees Module" />} />
-            <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
-            <Route path="/contracts/*" element={<PlaceholderPage title="Contracts Module" />} />
+            <Route path="/employees/*" element={<Employees />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/contracts/*" element={<Contracts />} />
+            <Route path="/financial" element={<Financial />} />
+            <Route path="/time-clock" element={<TimeClock />} />
+            <Route path="/inspections/*" element={<Inspections />} />
+            <Route path="/maintenance/*" element={<Maintenance />} />
+            <Route path="/calendar/*" element={<Calendar />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/tickets/*" element={<TicketSales />} />
+            <Route path="/training/*" element={<Training />} />
           </Route>
 
           {/* Operations & Operations Manager Routes */}
@@ -77,7 +102,7 @@ export default function App() {
             <Route path="/maintenance-dashboard" element={<Navigate to="/maintenance/dashboard" replace />} />
             <Route path="/maintenance/work-orders" element={<WorkOrders />} />
             <Route path="/maintenance/reports" element={<MaintenanceReports />} />
-            <Route path="/maintenance/*" element={<PlaceholderPage title="Maintenance Module" />} />
+            <Route path="/maintenance/special/*" element={<PlaceholderPage title="Maintenance Module" />} />
           </Route>
 
           {/* Ticket & Ticket Manager Routes */}
@@ -91,10 +116,20 @@ export default function App() {
           {/* HR Routes */}
           <Route element={<ProtectedRoute allowedRoles={['admin', 'hr']} />}>
             <Route path="/hr-dashboard" element={<HRDashboard />} />
+            <Route path="/hr/employees/*" element={<Employees />} />
+            <Route path="/hr/training-library" element={<TrainingLibrary />} />
+            <Route path="/hr/employee-training" element={<EmployeeTraining />} />
+            <Route path="/hr/training/add" element={<AddTraining />} />
+            <Route path="/hr/training/:id" element={<Training />} />
+            <Route path="/hr/training/stats/:id" element={<Training />} />
+            <Route path="/hr/training-progress/:id" element={<Training />} />
+            <Route path="/training/all/*" element={<Training />} />
           </Route>
 
-          <Route element={<ProtectedRoute allowedRoles={['employee']} />}>
+          {/* Employee Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
             <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+            <Route path="/time-clock-shared" element={<TimeClock />} />
           </Route>
 
           {/* Catch-all */}

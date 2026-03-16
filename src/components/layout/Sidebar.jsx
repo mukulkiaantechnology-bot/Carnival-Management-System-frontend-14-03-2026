@@ -1,25 +1,32 @@
+import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Users, Clock, ClipboardCheck, Wrench,
   DollarSign, Ticket, GraduationCap, FileText, Calendar,
   BarChart, Settings, X, Store, Scan, HandCoins, ClipboardList, FileBarChart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
-import { NavLink } from 'react-router-dom';
 
-// Default navigation
-const NAV_ITEMS = [
-  { name: 'Dashboard',    icon: LayoutDashboard, path: '/' },
-  { name: 'Employees',    icon: Users,            path: '/employees' },
-  { name: 'Time Clock',   icon: Clock,            path: '/timeclock' },
-  { name: 'Inspections',  icon: ClipboardCheck,   path: '/inspections' },
-  { name: 'Maintenance',  icon: Wrench,           path: '/maintenance' },
-  { name: 'Financial',    icon: DollarSign,       path: '/financial' },
-  { name: 'Ticket Sales', icon: Ticket,           path: '/tickets' },
-  { name: 'Training',     icon: GraduationCap,    path: '/training' },
-  { name: 'Contracts',    icon: FileText,         path: '/contracts' },
-  { name: 'Calendar',     icon: Calendar,         path: '/events' },
-  { name: 'Reports',      icon: BarChart,         path: '/reports' },
-  { name: 'Settings',     icon: Settings,         path: '/settings' },
+// Default Admin navigation (Local Refined)
+const ADMIN_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
+  { name: 'Employees', icon: Users, path: '/employees' },
+  { name: 'Time Clock', icon: Clock, path: '/time-clock' },
+  { name: 'Inspections', icon: ClipboardCheck, path: '/inspections' },
+  { name: 'Maintenance', icon: Wrench, path: '/maintenance' },
+  { name: 'Financial', icon: DollarSign, path: '/financial' },
+  { name: 'Ticket Sales', icon: Ticket, path: '/tickets' },
+  { name: 'Training', icon: GraduationCap, path: '/training' },
+  { name: 'Contracts', icon: FileText, path: '/contracts' },
+  { name: 'Calendar', icon: Calendar, path: '/calendar' },
+  { name: 'Reports', icon: BarChart, path: '/reports' },
+  { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
+const hrNavItems = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/hr-dashboard' },
+  { name: 'Employees', icon: Users, path: '/hr/employees' },
+  { name: 'Training Library', icon: GraduationCap, path: '/hr/training-library' },
+  { name: 'Employee Training', icon: ClipboardCheck, path: '/hr/employee-training' },
 ];
 
 const maintenanceMenu = [
@@ -32,7 +39,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
   const { user } = useAuth();
   const role = user?.role;
   
-  // Operations roles navigation
+  // Operations roles navigation (Remote)
   const opsNavItems = [
     { name: 'Dashboard',   icon: LayoutDashboard, path: '/operations/dashboard' },
     { name: 'Inspections', icon: ClipboardCheck,  path: '/operations/inspections' },
@@ -41,7 +48,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
     { name: 'Reports',     icon: BarChart,        path: '/operations/reports' },
   ];
 
-  // Ticket roles navigation
+  // Ticket roles navigation (Remote)
   const ticketNavItems = [
     { name: 'Dashboard',       icon: LayoutDashboard, path: '/tickets/dashboard' },
     { name: 'Ticket Boxes',    icon: Store,           path: '/tickets/boxes' },
@@ -49,10 +56,13 @@ export function Sidebar({ isOpen, toggleSidebar }) {
     { name: 'Settlement',      icon: HandCoins,       path: '/tickets/settlement' },
   ];
 
-  let menuItems = NAV_ITEMS;
+  let menuItems = ADMIN_NAV_ITEMS;
   let sectionTitle = 'Navigation';
 
-  if (role === 'operations' || role === 'operations_manager') {
+  if (role === 'hr' || role === 'hr_manager') {
+    menuItems = hrNavItems;
+    sectionTitle = 'HR Hub';
+  } else if (role === 'operations' || role === 'operations_manager') {
     menuItems = opsNavItems;
     sectionTitle = 'Operations Hub';
   } else if (role === 'ticket' || role === 'ticket_manager') {
@@ -65,6 +75,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
 
   return (
     <>
+      {/* Mobile overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-slate-800/50 z-20 lg:hidden transition-opacity"
@@ -72,6 +83,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
         />
       )}
 
+      {/* Sidebar container */}
       <aside
         className={`fixed top-0 left-0 z-30 h-screen w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
