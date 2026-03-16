@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/Button';
 import { Card, CardContent } from '../../components/ui/Card';
-import { FerrisWheel } from 'lucide-react';
+import logo from '../../assets/logo.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -32,12 +32,13 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <div className="mx-auto h-12 w-12 bg-blue-600 rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
-            <FerrisWheel className="text-white h-8 w-8" />
+        <div className="text-center mb-8 flex flex-col items-center">
+          <div className="w-full h-24 mb-6 flex items-center justify-center">
+            <img src={logo} alt="Logo" className="h-full w-auto object-contain scale-[1.3]" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">CarnivalMS</h1>
-          <p className="mt-2 text-slate-500">Sign in to your account</p>
+          <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase">Showmensinfo</h1>
+          <p className="mt-1 text-[12px] font-black text-blue-600 uppercase tracking-[6px]">System Portal</p>
+          <p className="mt-6 text-slate-500 text-sm font-medium border-t border-slate-200 pt-6 w-full">Sign in to your account</p>
         </div>
 
         <Card className="shadow-xl shadow-slate-200/50">

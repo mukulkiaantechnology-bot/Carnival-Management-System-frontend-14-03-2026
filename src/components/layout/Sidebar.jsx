@@ -28,6 +28,8 @@ const maintenanceMenu = [
   { name: "Maintenance Reports", path: "/maintenance/reports", icon: FileBarChart }
 ];
 
+import logo from '../../assets/logo.png';
+
 export function Sidebar({ isOpen, toggleSidebar }) {
   const { user } = useAuth();
   const role = user?.role;
@@ -79,21 +81,28 @@ export function Sidebar({ isOpen, toggleSidebar }) {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200 sticky top-0 bg-white z-10">
-          <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            CarnivalMS
-          </span>
-          <button
-            onClick={toggleSidebar}
-            className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md"
-          >
-            <X size={20} />
-          </button>
+        <div className="flex flex-col border-b border-slate-200 sticky top-0 bg-white z-10 pt-6 pb-4 px-6">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between w-full">
+              <div className="h-10 w-32 overflow-hidden flex items-center justify-start">
+                <img src={logo} alt="Logo" className="h-full w-auto object-contain object-left scale-150 origin-left" />
+              </div>
+              <button
+                onClick={toggleSidebar}
+                className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm font-black text-blue-600 tracking-[3px] uppercase">Showmensinfo</span>
+            </div>
+          </div>
         </div>
 
         <div className="p-4">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-[2px] mb-6 px-3">
-             {sectionTitle}
+             {/* {sectionTitle} */}
           </p>
           <nav className="space-y-1">
             {menuItems.map((item) => (
