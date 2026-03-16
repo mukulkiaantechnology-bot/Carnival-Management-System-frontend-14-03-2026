@@ -36,8 +36,8 @@ export default function Login() {
           <div className="w-full h-24 mb-6 flex items-center justify-center">
             <img src={logo} alt="Logo" className="h-full w-auto object-contain scale-[1.3]" />
           </div>
-          <h1 className="text-4xl font-black text-slate-800 tracking-tight uppercase">Showmensinfo</h1>
-          <p className="mt-1 text-[12px] font-black text-blue-600 uppercase tracking-[6px]">System Portal</p>
+          <h1 className="text-4xl font-black text-brand-maroon-dark tracking-tight uppercase">Showmensinfo</h1>
+          <p className="mt-1 text-[12px] font-black text-white bg-brand-red px-6 py-1 rounded-full uppercase tracking-[6px] shadow-lg shadow-brand-red/20">System Portal</p>
           <p className="mt-6 text-slate-500 text-sm font-medium border-t border-slate-200 pt-6 w-full">Sign in to your account</p>
         </div>
 
@@ -51,10 +51,10 @@ export default function Login() {
               )}
               
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700 block">Email Address</label>
+                <label className="text-xs font-black text-brand-maroon-dark uppercase tracking-widest block">Email Address</label>
                 <input 
                   type="email" 
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-brand-gold/30 focus:bg-white outline-none transition-all font-bold"
                   placeholder="admin@demo.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -62,17 +62,17 @@ export default function Login() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-700 block">Password</label>
+                <label className="text-xs font-black text-brand-maroon-dark uppercase tracking-widest block">Password</label>
                 <input 
                   type="password" 
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                  className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-4 focus:ring-brand-gold/30 focus:bg-white outline-none transition-all font-bold"
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
 
-              <Button type="submit" className="w-full py-2.5 text-base shadow-md shadow-blue-500/20">
+              <Button type="submit" variant="primary" className="w-full h-16 text-xs font-black uppercase tracking-[3px] shadow-2xl shadow-brand-gold/30 rounded-2xl">
                 Sign In
               </Button>
             </form>

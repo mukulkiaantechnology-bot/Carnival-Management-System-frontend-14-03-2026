@@ -102,18 +102,18 @@ export function Sidebar({ isOpen, toggleSidebar }) {
 
       {/* Sidebar container */}
       <aside
-        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${
+        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-brand-navy border-r border-brand-navy transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto shadow-2xl ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="flex flex-col border-b border-slate-200 sticky top-0 bg-white z-10 pt-6 pb-6 px-6">
+        <div className="flex flex-col border-b border-white/10 sticky top-0 bg-brand-navy z-10 pt-6 pb-6 px-6">
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="h-10 w-10 overflow-hidden flex items-center justify-center bg-slate-50 rounded-xl shrink-0">
+              <div className="h-10 w-10 overflow-hidden flex items-center justify-center bg-white rounded-xl shrink-0 shadow-lg shadow-black/20">
                 <img src={logo} alt="Logo" className="h-24 w-auto object-contain scale-150" />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-sm font-black text-blue-600 tracking-[1.5px] uppercase truncate">Showmensinfo</span>
+                <span className="text-sm font-black text-white tracking-[1.5px] uppercase truncate">Showmensinfo</span>
               </div>
             </div>
             <button
@@ -126,8 +126,8 @@ export function Sidebar({ isOpen, toggleSidebar }) {
         </div>
 
         <div className="p-4">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-[2px] mb-6 px-3">
-             {/* {sectionTitle} */}
+          <p className="text-[10px] font-black text-white/40 uppercase tracking-[3px] mb-6 px-3">
+             MANAGEMENT
           </p>
           <nav className="space-y-1">
             {menuItems.map((item) => (
@@ -138,8 +138,8 @@ export function Sidebar({ isOpen, toggleSidebar }) {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${
                     isActive
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'
+                      ? 'bg-brand-red text-white shadow-[0_10px_20px_-5px_rgba(181,18,27,0.4)]'
+                      : 'text-white/70 hover:bg-brand-gold hover:text-brand-navy'
                   }`
                 }
               >

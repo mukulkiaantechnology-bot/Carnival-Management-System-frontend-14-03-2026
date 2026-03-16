@@ -1,16 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
+  --color-brand-red: #B5121B;
+  --color-brand-gold: #F5C542;
+  --color-brand-gold-dark: #D4A017;
+  --color-brand-orange: #F36B21;
+  --color-brand-navy: #0F1A2B;
+  --color-brand-cream: #F8F6F0;
+  --color-brand-maroon-dark: #8E0F16;
+  --color-brand-dark: #1A1A1A;
+  
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-500: #B5121B;
+  --color-primary-600: #8E0F16;
+  --color-primary-700: #700c11;
 }
 
 @layer base {
   html, body {
-    @apply bg-slate-50 text-slate-900;
+    @apply bg-brand-cream text-brand-dark;
     overflow-x: hidden;
     width: 100%;
     position: relative;

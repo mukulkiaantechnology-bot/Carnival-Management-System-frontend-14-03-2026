@@ -14,10 +14,10 @@ import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 
 const STATS = [
-  { label: 'Total Employees', value: '142', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50', path: '/employees', trend: '+5%' },
-  { label: 'Open Inspections', value: '8', icon: ClipboardCheck, color: 'text-orange-600', bg: 'bg-orange-50', path: '/inspections', trend: '+5%' },
-  { label: 'Maintenance Alerts', value: '3', icon: Wrench, color: 'text-rose-600', bg: 'bg-rose-50', path: '/maintenance', trend: '+5%' },
-  { label: 'Weekly Sales', value: '$42,500', icon: DollarSign, color: 'text-emerald-600', bg: 'bg-emerald-50', path: '/financial', trend: '+5%' },
+  { label: 'Total Employees', value: '142', icon: Users, color: 'text-brand-red', bg: 'bg-brand-red/5', path: '/employees', trend: '+5%' },
+  { label: 'Open Inspections', value: '8', icon: ClipboardCheck, color: 'text-brand-orange', bg: 'bg-brand-orange/5', path: '/inspections', trend: '+5%' },
+  { label: 'Maintenance Alerts', value: '3', icon: Wrench, color: 'text-brand-maroon', bg: 'bg-brand-maroon/5', path: '/maintenance', trend: '+5%' },
+  { label: 'Weekly Sales', value: '$42,500', icon: DollarSign, color: 'text-brand-gold', bg: 'bg-brand-gold/5', path: '/financial', trend: '+5%' },
 ];
 
 const RECENT_ACTIVITIES = [
@@ -125,15 +125,15 @@ export default function AdminDashboard() {
             </div>
 
             <div className="flex-1 overflow-y-auto bg-slate-50/30 p-10 space-y-10">
-              <div className="h-80 bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-50 flex flex-col items-center justify-center text-center p-12 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-indigo-500/10 opacity-0 group-hover:opacity-100 duration-700 transition-opacity" />
+              <div className="h-80 bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-brand-gold/20 flex flex-col items-center justify-center text-center p-12 relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-red/10 to-brand-gold/10 opacity-0 group-hover:opacity-100 duration-700 transition-opacity" />
                 <div className="relative z-10">
-                  <Zap size={48} className="text-blue-600 mb-6 mx-auto animate-bounce duration-[2000ms]" />
-                  <h2 className="text-4xl font-black text-slate-900 tracking-tight leading-none mb-4 uppercase italic">Summer Carnival 2026</h2>
+                  <Zap size={48} className="text-brand-orange mb-6 mx-auto animate-bounce duration-[2000ms]" />
+                  <h2 className="text-4xl font-black text-brand-maroon-dark tracking-tight leading-none mb-4 uppercase italic">Summer Carnival 2026</h2>
                   <p className="text-slate-500 max-w-lg font-bold text-lg leading-relaxed">The pinnacle of excitement is here. Secure your digital pass to the season's premier event.</p>
                   <div className="mt-10 flex gap-4 justify-center">
-                    <Button variant="primary" className="font-black py-5 px-12 rounded-2xl shadow-2xl shadow-blue-500/30 uppercase tracking-widest text-[10px]">Access Passes Now</Button>
-                    <Button variant="secondary" className="font-black py-5 px-12 rounded-2xl bg-white border-none uppercase tracking-widest text-[10px]">Learn More</Button>
+                    <Button variant="primary" className="font-black py-5 px-12 rounded-2xl shadow-2xl shadow-brand-gold/30 uppercase tracking-widest text-[10px]">Access Passes Now</Button>
+                    <Button variant="secondary" className="font-black py-5 px-12 rounded-2xl uppercase tracking-widest text-[10px]">Learn More</Button>
                   </div>
                 </div>
               </div>
@@ -177,8 +177,8 @@ export default function AdminDashboard() {
         </div>
         <div className="flex items-center gap-4">
           <Button
-            variant="secondary"
-            className={`flex items-center gap-3 font-black h-11 px-6 sm:h-14 sm:px-8 rounded-2xl shadow-lg border-none bg-white hover:bg-slate-50 transition-all ${isRefreshing ? 'opacity-50' : ''}`}
+            variant="outline"
+            className={`flex items-center gap-3 font-black h-11 px-6 sm:h-14 sm:px-8 rounded-2xl shadow-lg border-none bg-white hover:bg-brand-cream transition-all ${isRefreshing ? 'opacity-50' : ''}`}
             onClick={handleRefresh}
             disabled={isRefreshing}
           >
@@ -278,12 +278,12 @@ export default function AdminDashboard() {
                 <AreaChart data={CHART_DATA} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#2563eb" stopOpacity={0.15} />
-                      <stop offset="95%" stopColor="#2563eb" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#B5121B" stopOpacity={0.15} />
+                      <stop offset="95%" stopColor="#B5121B" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="colorTarget" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#94a3b8" stopOpacity={0.05} />
-                      <stop offset="95%" stopColor="#94a3b8" stopOpacity={0} />
+                      <stop offset="5%" stopColor="#F5C542" stopOpacity={0.1} />
+                      <stop offset="95%" stopColor="#F5C542" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="8 8" vertical={false} stroke="#f1f5f9" />
@@ -295,11 +295,11 @@ export default function AdminDashboard() {
                     dy={15}
                   />
                   <YAxis hide domain={[0, 10000]} />
-                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#2563eb', strokeWidth: 1, strokeDasharray: '4 4' }} />
+                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#B5121B', strokeWidth: 1, strokeDasharray: '4 4' }} />
                   <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#2563eb"
+                    stroke="#B5121B"
                     strokeWidth={4}
                     fillOpacity={1}
                     fill="url(#colorRev)"
@@ -308,7 +308,7 @@ export default function AdminDashboard() {
                   <Area
                     type="monotone"
                     dataKey="target"
-                    stroke="#94a3b8"
+                    stroke="#F5C542"
                     strokeWidth={2}
                     strokeDasharray="10 10"
                     fillOpacity={1}

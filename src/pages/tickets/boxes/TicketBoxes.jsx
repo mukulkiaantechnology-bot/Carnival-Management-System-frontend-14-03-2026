@@ -66,7 +66,7 @@ export default function TicketBoxes() {
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl transition-all font-black shadow-xl shadow-blue-100 active:scale-95 text-xs uppercase tracking-widest"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3 sm:py-4 bg-brand-red hover:bg-brand-maroon-dark text-white rounded-2xl transition-all font-black shadow-xl shadow-brand-red/20 active:scale-95 text-xs uppercase tracking-widest"
         >
           <Plus size={20} /> Add Box
         </button>
@@ -142,7 +142,7 @@ export default function TicketBoxes() {
                   </button>
                 </div>
                 
-                <h3 className="font-black text-slate-800 text-lg tracking-tight mb-1 group-hover:text-blue-600 transition-colors">{box.name}</h3>
+                <h3 className="font-black text-brand-red text-lg tracking-tight mb-1 group-hover:text-brand-orange transition-colors">{box.name}</h3>
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">{box.location}</p>
                 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-50">
@@ -176,7 +176,7 @@ export default function TicketBoxes() {
                 </div>
               </div>
 
-              <h3 className="font-black text-slate-800 text-lg group-hover:text-blue-600 transition-colors uppercase truncate">{box.name}</h3>
+              <h3 className="font-black text-brand-red text-lg group-hover:text-brand-orange transition-colors uppercase truncate">{box.name}</h3>
               <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2">{box.location}</p>
 
               <div className="mt-8 pt-8 border-t border-slate-50 flex items-center justify-between">
@@ -186,7 +186,7 @@ export default function TicketBoxes() {
                 </div>
                 <button 
                   onClick={() => navigate(`/tickets/boxes/${box.id}`)}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-50 flex items-center justify-center text-slate-200 hover:bg-blue-600 hover:text-white transition-all shadow-lg hover:shadow-blue-500/20 active:scale-90 cursor-pointer border-none"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-cream flex items-center justify-center text-brand-red hover:bg-brand-red hover:text-white transition-all shadow-lg hover:shadow-brand-red/20 active:scale-90 cursor-pointer border-none"
                 >
                   <ArrowRight size={24} />
                 </button>
