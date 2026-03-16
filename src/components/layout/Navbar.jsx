@@ -1,11 +1,24 @@
 import { useState, useRef, useEffect } from 'react';
 import { Menu, Bell, UserCircle, LogOut, User, Settings, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useLocation } from 'react-router-dom';
 
 export function Navbar({ toggleSidebar }) {
   const { user, logout } = useAuth();
+  const location = useLocation();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
+
+  const getPageTitle = (path) => {
+    if (path === '/' || path === '/hr-dashboard' || path.includes('dashboard')) return 'Dashboard Overview';
+    if (path.includes('/hr/employees')) return 'Employee Directory';
+    if (path.includes('/hr/training-library')) return 'Training Library';
+    if (path.includes('/hr/employee-training')) return 'Employee Training Tracking';
+    if (path.includes('/hr/training/add')) return 'Upload Training Module';
+    if (path.match(/\/hr\/training\/\d+/)) return 'Training Details';
+    if (path.match(/\/hr\/training-progress\/\d+/)) return 'Employee Training Progress';
+    return 'Dashboard Overview';
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {

@@ -20,6 +20,8 @@ import Training from './pages/modules/Training';
 import TrainingLibrary from './pages/modules/TrainingLibrary';
 import EmployeeTraining from './pages/modules/EmployeeTraining';
 import AddTraining from './pages/modules/AddTraining';
+import TrainingDetail from './pages/modules/TrainingDetail';
+import TrainingProgressDetail from './pages/modules/TrainingProgressDetail';
 import Contracts from './pages/modules/Contracts';
 import Calendar from './pages/modules/Calendar';
 import Reports from './pages/modules/Reports';
@@ -120,9 +122,8 @@ export default function App() {
             <Route path="/hr/training-library" element={<TrainingLibrary />} />
             <Route path="/hr/employee-training" element={<EmployeeTraining />} />
             <Route path="/hr/training/add" element={<AddTraining />} />
-            <Route path="/hr/training/:id" element={<Training />} />
-            <Route path="/hr/training/stats/:id" element={<Training />} />
-            <Route path="/hr/training-progress/:id" element={<Training />} />
+            <Route path="/hr/training/:id" element={<TrainingDetail />} />
+            <Route path="/hr/training-progress/:id" element={<TrainingProgressDetail />} />
             <Route path="/training/all/*" element={<Training />} />
           </Route>
 

@@ -42,13 +42,26 @@ export default function AddTraining() {
 
           <div className="space-y-1.5">
             <label className="text-xs font-bold text-slate-500 uppercase">Upload Video</label>
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-100 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer group">
+            <div 
+              onClick={() => document.getElementById('video-upload').click()}
+              className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-100 border-dashed rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer group"
+            >
               <div className="space-y-1 text-center">
                 <Upload className="mx-auto h-10 w-10 text-slate-400 group-hover:text-blue-500 transition-colors" />
                 <div className="flex text-sm text-slate-600">
                   <label className="relative cursor-pointer rounded-md font-bold text-blue-600 hover:text-blue-500">
                     <span>Upload a file</span>
-                    <input type="file" className="sr-only" accept="video/*" />
+                    <input 
+                      id="video-upload"
+                      type="file" 
+                      className="sr-only" 
+                      accept="video/*" 
+                      onChange={(e) => {
+                        if (e.target.files?.[0]) {
+                          alert(`Selected: ${e.target.files[0].name}`);
+                        }
+                      }}
+                    />
                   </label>
                   <p className="pl-1">or drag and drop</p>
                 </div>
