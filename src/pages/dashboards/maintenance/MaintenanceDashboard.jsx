@@ -12,10 +12,10 @@ const INITIAL_WORK_ORDERS = [
 
 export default function MaintenanceDashboard() {
   const [stats, setStats] = useState([
-    { label: 'Equipment Status', value: '98%', icon: Wrench, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: 'Active Work Orders', value: '0', icon: ClipboardCheck, color: 'text-amber-600', bg: 'bg-amber-50' },
-    { label: 'Critical Alerts', value: '0', icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
-    { label: 'Completed Repairs', value: '0', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { label: 'Equipment Status', value: '98%', icon: Wrench, color: 'text-brand-orange', bg: 'bg-brand-orange/10' },
+    { label: 'Active Work Orders', value: '0', icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10' },
+    { label: 'Critical Alerts', value: '0', icon: AlertTriangle, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
+    { label: 'Completed Repairs', value: '0', icon: CheckCircle, color: 'text-brand-text', bg: 'bg-brand-light' },
   ]);
   const [recentOrders, setRecentOrders] = useState([]);
 
@@ -30,29 +30,29 @@ export default function MaintenanceDashboard() {
     const completedCount = orders.filter(o => o.status === 'Completed').length;
 
     setStats([
-      { label: 'Equipment Status', value: '98%', icon: Wrench, color: 'text-blue-600', bg: 'bg-blue-50' },
-      { label: 'Active Work Orders', value: activeCount.toString(), icon: ClipboardCheck, color: 'text-amber-600', bg: 'bg-amber-50' },
-      { label: 'Critical Alerts', value: criticalCount.toString(), icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-50' },
-      { label: 'Completed Repairs', value: completedCount.toString(), icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+      { label: 'Equipment Status', value: '98%', icon: Wrench, color: 'text-brand-orange', bg: 'bg-brand-orange/10' },
+      { label: 'Active Work Orders', value: activeCount.toString(), icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10' },
+      { label: 'Critical Alerts', value: criticalCount.toString(), icon: AlertTriangle, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
+      { label: 'Completed Repairs', value: completedCount.toString(), icon: CheckCircle, color: 'text-brand-text', bg: 'bg-brand-light' },
     ]);
   }, []);
 
   return (
     <div className="space-y-6 overflow-x-hidden">
-      <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight px-1">
+      <h1 className="text-xl sm:text-2xl font-black text-brand-red tracking-tight px-1 uppercase italic leading-none">
         Maintenance Dashboard
       </h1>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-1">
         {stats.map((stat) => (
-          <Card key={stat.label} className="border-none shadow-sm h-full">
-            <CardContent className="p-4 sm:p-6 flex items-center space-x-4">
-              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color} flex-shrink-0`}>
-                <stat.icon size={20} className="sm:w-6 sm:h-6" />
+          <Card key={stat.label} className="border-brand-gold/10 shadow-xl shadow-brand-gold/5 h-full">
+            <CardContent className="p-4 sm:p-8 flex items-center space-x-6">
+              <div className={`p-5 rounded-2xl ${stat.bg} ${stat.color} flex-shrink-0 shadow-inner`}>
+                <stat.icon size={20} className="sm:w-8 sm:h-8" />
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-medium text-slate-500 truncate mb-0.5">{stat.label}</p>
-                <p className="text-lg sm:text-2xl font-bold text-slate-800">{stat.value}</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest truncate mb-1.5 leading-none">{stat.label}</p>
+                <p className="text-lg sm:text-3xl font-black text-brand-text leading-none italic tracking-tight">{stat.value}</p>
               </div>
             </CardContent>
           </Card>
@@ -60,39 +60,39 @@ export default function MaintenanceDashboard() {
       </div>
 
       <div className="space-y-4 px-1">
-        <h2 className="text-base sm:text-lg font-semibold text-slate-800">Recent Work Orders</h2>
-        <Card className="border-none shadow-sm overflow-hidden">
-          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-slate-200">
+        <h2 className="text-base sm:text-lg font-black text-brand-red uppercase italic tracking-tight">Recent Work Orders</h2>
+        <Card className="border-brand-gold/20 shadow-xl shadow-brand-gold/5 overflow-hidden">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-brand-gold/20">
             <div className="inline-block min-w-full align-middle">
-              <table className="min-w-full divide-y divide-slate-100 table-fixed sm:table-auto">
-                <thead className="bg-slate-50">
+              <table className="min-w-full divide-y divide-brand-gold/10 table-fixed sm:table-auto">
+                <thead className="bg-brand-light">
                   <tr>
-                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-24">ID</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-40">Equipment</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-48 sm:w-auto">Issue</th>
-                    <th className="hidden sm:table-cell px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider">Technician</th>
-                    <th className="px-4 py-3 text-left text-[10px] font-bold text-slate-500 uppercase tracking-wider w-28">Status</th>
+                    <th className="px-6 py-5 text-left text-[10px] font-black text-brand-red uppercase tracking-widest w-24">Protocol ID</th>
+                    <th className="px-6 py-5 text-left text-[10px] font-black text-brand-red uppercase tracking-widest w-40">Equipment Asset</th>
+                    <th className="px-6 py-5 text-left text-[10px] font-black text-brand-red uppercase tracking-widest w-48 sm:w-auto">Execution Lead</th>
+                    <th className="hidden sm:table-cell px-6 py-5 text-left text-[10px] font-black text-brand-red uppercase tracking-widest">Technician</th>
+                    <th className="px-6 py-5 text-left text-[10px] font-black text-brand-red uppercase tracking-widest w-28 text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-slate-100">
-                  {recentOrders.map((order) => (
-                    <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
-                      <td className="px-4 py-3 font-bold text-blue-600 whitespace-nowrap text-[11px] sm:text-sm">{order.id}</td>
-                      <td className="px-4 py-3 text-slate-700 whitespace-nowrap font-medium text-[11px] sm:text-sm">{order.equipment}</td>
-                      <td className="px-4 py-3 text-slate-600 truncate text-[11px] sm:text-sm">{order.issue}</td>
-                      <td className="hidden sm:table-cell px-4 py-3 text-slate-600 whitespace-nowrap text-[11px] sm:text-sm">{order.technician}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span className={`inline-flex px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
-                          order.status === 'Completed' ? 'bg-emerald-100 text-emerald-700' :
-                          order.status === 'In Progress' ? 'bg-blue-100 text-blue-700' :
-                          'bg-amber-100 text-amber-700'
-                        }`}>
-                          {order.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                  <tbody className="bg-white divide-y divide-brand-gold/5">
+                    {recentOrders.map((order) => (
+                      <tr key={order.id} className="hover:bg-brand-light/50 transition-colors group">
+                        <td className="px-6 py-5 font-black text-brand-red uppercase italic tracking-tighter text-[11px] sm:text-xs">{order.id}</td>
+                        <td className="px-6 py-5 text-brand-text whitespace-nowrap font-black uppercase tracking-tight text-[11px] sm:text-xs italic">{order.equipment}</td>
+                        <td className="px-6 py-5 text-slate-600 truncate text-[11px] sm:text-xs font-bold">{order.issue}</td>
+                        <td className="hidden sm:table-cell px-6 py-5 text-slate-500 whitespace-nowrap text-[11px] sm:text-xs font-black uppercase tracking-widest">{order.technician}</td>
+                        <td className="px-6 py-5 whitespace-nowrap text-center">
+                          <span className={`inline-flex px-3 py-1 rounded-xl text-[9px] font-black uppercase tracking-widest border shadow-inner ${
+                            order.status === 'Completed' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                            order.status === 'In Progress' ? 'bg-brand-orange/10 text-brand-orange border-brand-orange/20' :
+                            'bg-brand-gold/10 text-brand-gold border-brand-gold/20'
+                          }`}>
+                            {order.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
               </table>
             </div>
           </div>

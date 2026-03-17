@@ -27,44 +27,44 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
   const departments = ['Operations', 'Maintenance', 'Security', 'Ticketing', 'Finance', 'HR', 'Guest Services'];
 
   return (
-    <Card className="max-w-2xl mx-auto border-none shadow-md">
+    <Card className="max-w-2xl mx-auto border border-brand-gold/20 shadow-xl shadow-brand-gold/5 bg-white">
       <CardHeader title={title} subtitle="Please fill in all employee details." />
       <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Full Name</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
             <input
               required
               type="text"
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Email Address</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
             <input
               required
               type="email"
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Phone Number</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Phone Number</label>
             <input
               required
               type="tel"
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Role</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Role</label>
             <select
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             >
@@ -72,9 +72,9 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Department</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Department</label>
             <select
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.department}
               onChange={(e) => setFormData({ ...formData, department: e.target.value })}
             >
@@ -82,9 +82,9 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Status</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Status</label>
             <select
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value })}
             >
@@ -94,31 +94,31 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
             </select>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Joining Date</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Joining Date</label>
             <input
               required
               type="date"
-              className="w-full px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.joined}
               onChange={(e) => setFormData({ ...formData, joined: e.target.value })}
             />
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs font-bold text-slate-500 uppercase">Account Password</label>
+            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Account Password</label>
             <div className="relative group">
-              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+              <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-red transition-colors" />
               <input
                 required={!employee}
                 type={showPassword ? 'text' : 'password'}
                 placeholder={employee ? 'Leave blank to keep current' : '••••••••'}
-                className="w-full pl-12 pr-12 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                className="w-full pl-12 pr-12 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-500 transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-red transition-colors"
               >
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
@@ -138,25 +138,25 @@ function EmployeeView({ employee, onBack }) {
   if (!employee) return null;
   return (
     <div className="space-y-6">
-      <button onClick={onBack} className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-sm transition-colors group">
+      <button onClick={onBack} className="flex items-center gap-2 text-slate-400 hover:text-brand-red font-black text-[10px] uppercase tracking-widest transition-colors group">
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
         Back to Directory
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-1 border-none shadow-md overflow-hidden">
-          <div className="h-24 bg-gradient-to-r from-blue-600 to-indigo-600" />
+        <Card className="lg:col-span-1 border border-brand-gold/20 shadow-xl shadow-brand-gold/5 overflow-hidden bg-white">
+          <div className="h-24 bg-gradient-to-r from-brand-red to-brand-red-dark" />
           <div className="px-6 pb-6 -mt-12 text-center">
             <div className="w-24 h-24 mx-auto rounded-full bg-white p-1 shadow-lg">
-              <div className="w-full h-full rounded-full bg-slate-100 flex items-center justify-center text-3xl font-bold text-blue-600">
+              <div className="w-full h-full rounded-full bg-brand-light flex items-center justify-center text-3xl font-black text-brand-red border border-brand-gold/10">
                 {employee.name[0]}
               </div>
             </div>
-            <h2 className="mt-4 text-2xl font-bold text-slate-800">{employee.name}</h2>
-            <p className="text-blue-600 font-bold text-sm">{employee.role}</p>
+            <h2 className="mt-4 text-2xl font-black text-brand-red tracking-tight uppercase italic">{employee.name}</h2>
+            <p className="text-brand-orange font-black text-[10px] uppercase tracking-widest leading-none mt-1">{employee.role}</p>
             <div className="mt-6 flex justify-center">
-              <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                employee.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+              <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                employee.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-brand-red/10 text-brand-red'
               }`}>
                 {employee.status}
               </span>
@@ -164,48 +164,48 @@ function EmployeeView({ employee, onBack }) {
           </div>
         </Card>
 
-        <Card className="lg:col-span-2 border-none shadow-md">
+        <Card className="lg:col-span-2 border border-brand-gold/20 shadow-xl shadow-brand-gold/5 bg-white">
           <CardHeader title="Employee Details" subtitle="Full recruitment and role information." />
           <CardContent className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="space-y-6">
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Contact Info</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Contact Info</p>
                   <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-slate-600">
-                      <div className="p-2 bg-slate-50 rounded-lg"><Mail size={16} /></div>
-                      <span className="text-sm font-medium">{employee.email}</span>
+                    <div className="flex items-center gap-3 text-brand-text">
+                      <div className="p-2 bg-brand-light rounded-lg text-brand-red"><Mail size={16} /></div>
+                      <span className="text-xs font-black">{employee.email}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-slate-600">
-                      <div className="p-2 bg-slate-50 rounded-lg"><Phone size={16} /></div>
-                      <span className="text-sm font-medium">{employee.phone}</span>
+                    <div className="flex items-center gap-3 text-brand-text">
+                      <div className="p-2 bg-brand-light rounded-lg text-brand-red"><Phone size={16} /></div>
+                      <span className="text-xs font-black">{employee.phone}</span>
                     </div>
                   </div>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Placement</p>
-                  <div className="flex items-center gap-3 text-slate-600">
-                    <div className="p-2 bg-slate-50 rounded-lg"><Building2 size={16} /></div>
-                    <span className="text-sm font-medium">{employee.department} Department</span>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Placement</p>
+                  <div className="flex items-center gap-3 text-brand-text">
+                    <div className="p-2 bg-brand-light rounded-lg text-brand-red"><Building2 size={16} /></div>
+                    <span className="text-xs font-black uppercase italic tracking-tight">{employee.department} Department</span>
                   </div>
                 </div>
               </div>
               <div className="space-y-6">
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Employment</p>
-                  <div className="flex items-center gap-3 text-slate-600">
-                    <div className="p-2 bg-slate-50 rounded-lg"><AlertCircle size={16} /></div>
-                    <span className="text-sm font-medium italic">Joined on {employee.joined}</span>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Employment</p>
+                  <div className="flex items-center gap-3 text-brand-text">
+                    <div className="p-2 bg-brand-light rounded-lg text-brand-red"><AlertCircle size={16} /></div>
+                    <span className="text-xs font-black italic tracking-tight">Joined on {employee.joined}</span>
                   </div>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Development</p>
-                  <div className="flex items-center gap-3 text-slate-600">
-                    <div className="p-2 bg-slate-50 rounded-lg"><GraduationCap size={16} /></div>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Development</p>
+                  <div className="flex items-center gap-3 text-brand-text">
+                    <div className="p-2 bg-brand-light rounded-lg text-brand-gold"><GraduationCap size={16} /></div>
                     <div className="flex flex-col">
-                      <span className="text-sm font-bold text-slate-800">Training Status</span>
-                      <span className={`text-[10px] font-bold uppercase ${
-                        employee.trainingStatus === 'Completed' ? 'text-emerald-600' : 'text-amber-600'
+                      <span className="text-xs font-black text-brand-text uppercase italic tracking-tighter">Training Status</span>
+                      <span className={`text-[9px] font-black uppercase tracking-[0.2em] ${
+                        employee.trainingStatus === 'Completed' ? 'text-emerald-600' : 'text-brand-orange'
                       }`}>{employee.trainingStatus}</span>
                     </div>
                   </div>
@@ -250,10 +250,10 @@ export default function Employees() {
 
   const directoryStats = useMemo(() => {
     return [
-      { label: 'Total Staff', value: employees.length, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+      { label: 'Total Staff', value: employees.length, icon: Users, color: 'text-brand-red', bg: 'bg-brand-light' },
       { label: 'Active Now', value: employees.filter(e => e.status === 'Active').length, icon: UserCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-      { label: 'Training Pending', value: employees.filter(e => e.trainingStatus !== 'Completed').length, icon: GraduationCap, color: 'text-amber-600', bg: 'bg-amber-50' },
-      { label: 'Departments', value: new Set(employees.map(e => e.department)).size, icon: Building2, color: 'text-indigo-600', bg: 'bg-indigo-50' },
+      { label: 'Training Pending', value: employees.filter(e => e.trainingStatus !== 'Completed').length, icon: GraduationCap, color: 'text-brand-orange', bg: 'bg-brand-orange/10' },
+      { label: 'Departments', value: new Set(employees.map(e => e.department)).size, icon: Building2, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
     ];
   }, [employees]);
 
@@ -295,10 +295,10 @@ export default function Employees() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Employee Directory</h1>
-                <p className="text-slate-500 text-sm">Centralized management for carnival personnel.</p>
+                <h1 className="text-xl sm:text-2xl font-black text-brand-red tracking-tight uppercase italic">Employee Directory</h1>
+                <p className="text-slate-500 text-sm font-bold">Centralized management for carnival personnel.</p>
               </div>
-              <Button variant="primary" className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20" onClick={() => navigate(`${basePath}/add`)}>
+              <Button variant="primary" className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-brand-gold/20" onClick={() => navigate(`${basePath}/add`)}>
                 <UserPlus size={18} />
                 Add Employee
               </Button>
@@ -306,13 +306,13 @@ export default function Employees() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {directoryStats.map((stat) => (
-                <Card key={stat.label} className="border-none shadow-sm hover:translate-y-[-2px] transition-all duration-300">
+                <Card key={stat.label} className="border border-brand-gold/20 shadow-sm hover:translate-y-[-2px] transition-all duration-300 bg-white">
                   <CardContent className="p-6 flex items-center justify-between">
                     <div>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                      <p className="text-3xl font-bold text-slate-800 mt-1">{stat.value}</p>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5">{stat.label}</p>
+                      <p className="text-3xl font-black text-brand-text mt-1">{stat.value}</p>
                     </div>
-                    <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color}`}>
+                    <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} shadow-inner`}>
                       <stat.icon size={28} />
                     </div>
                   </CardContent>
@@ -320,30 +320,30 @@ export default function Employees() {
               ))}
             </div>
 
-            <Card className="border-none shadow-sm overflow-hidden">
-              <div className="p-4 bg-white border-b border-slate-50 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <Card className="border border-brand-gold/20 shadow-sm overflow-hidden bg-white">
+              <div className="p-4 bg-white border-b border-brand-gold/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="relative flex-1 max-w-sm">
-                  <Search size={16} className="absolute left-3 top-2.5 text-slate-400" />
+                  <Search size={16} className="absolute left-3 top-2.5 text-brand-red opacity-40" />
                   <input
                     type="text"
-                    placeholder="Search by name, role or email..."
-                    className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition-all"
+                    placeholder="Search characters by name, role..."
+                    className="w-full pl-10 pr-4 py-2 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none text-sm transition-all font-bold text-brand-text shadow-inner"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="relative group">
-                    <Button variant="secondary" className="flex items-center gap-2 h-10 px-4 text-xs font-bold border-none shadow-sm capitalize">
+                    <Button variant="secondary" className="flex items-center gap-2 h-10 px-4 text-xs font-black border-none shadow-sm capitalize">
                       <Filter size={14} />
                       {statusFilter}
                     </Button>
-                    <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-slate-100 rounded-xl shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all z-20 overflow-hidden">
+                    <div className="absolute right-0 top-full mt-2 w-40 bg-white border border-brand-gold/10 rounded-xl shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all z-20 overflow-hidden">
                       {['All', 'Active', 'On Leave', 'Inactive'].map(status => (
                         <button
                           key={status}
                           onClick={() => setStatusFilter(status)}
-                          className="w-full text-left px-4 py-3 text-xs font-bold text-slate-600 hover:bg-slate-50 border-b last:border-0 border-slate-50 transition-colors"
+                          className="w-full text-left px-4 py-3 text-[10px] font-black text-brand-text uppercase tracking-widest hover:bg-brand-light hover:text-brand-red border-b last:border-0 border-brand-gold/10 transition-colors"
                         >
                           {status}
                         </button>
@@ -356,36 +356,36 @@ export default function Employees() {
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
-                    <tr className="bg-slate-50/50">
-                      <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Employee</th>
-                      <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Department</th>
-                      <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Status</th>
-                      <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Actions</th>
+                    <tr className="bg-brand-light">
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Employee</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Department</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Status</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-50">
                     {filteredEmployees.map((emp) => (
-                      <tr key={emp.id} className="hover:bg-slate-50/30 transition-colors group">
+                      <tr key={emp.id} className="hover:bg-brand-light transition-colors group">
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-blue-600 text-sm">
+                            <div className="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center font-black text-brand-red text-sm border border-brand-gold/10">
                               {emp.name[0]}
                             </div>
                             <div>
-                              <p className="text-sm font-bold text-slate-800">{emp.name}</p>
-                              <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tight">{emp.role}</p>
+                              <p className="text-sm font-black text-brand-text uppercase italic">{emp.name}</p>
+                              <p className="text-[10px] text-brand-orange font-black uppercase tracking-tight">{emp.role}</p>
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-col">
-                            <span className="text-xs font-bold text-slate-700">{emp.department}</span>
-                            <span className="text-[10px] text-slate-400">{emp.email}</span>
+                            <span className="text-xs font-black text-brand-text">{emp.department}</span>
+                            <span className="text-[10px] text-slate-400 font-bold">{emp.email}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${
-                            emp.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'
+                          <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
+                            emp.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-brand-red/10 text-brand-red'
                           }`}>
                             {emp.status}
                           </span>
@@ -394,7 +394,7 @@ export default function Employees() {
                           <div className="flex items-center justify-center gap-2">
                             <button 
                               onClick={() => navigate(`${basePath}/${emp.id}`)}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                              className="p-2 text-slate-400 hover:text-brand-red hover:bg-brand-light rounded-lg transition-all"
                             >
                               <Eye size={16} />
                             </button>

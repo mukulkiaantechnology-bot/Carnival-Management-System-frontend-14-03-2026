@@ -3,6 +3,7 @@ import { useAuth } from './context/AuthContext';
 import { TrainingProvider } from './context/TrainingContext';
 import { ProtectedRoute } from './app/routes/ProtectedRoute';
 import { DashboardLayout } from './components/layout/DashboardLayout';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 import Login from './pages/auth/Login';
 import AdminDashboard from './pages/dashboards/admin/AdminDashboard';
@@ -45,9 +46,19 @@ import TicketBoxes from './pages/tickets/boxes/TicketBoxes';
 import TicketTracking from './pages/tickets/tracking/TicketTracking';
 import Settlement from './pages/tickets/settlement/Settlement';
 
+// SaaS Platform Layer
+import LandingPage from './platform/landing/LandingPage';
+import Signup from './platform/landing/Signup';
+import PlatformAdminLayout from './platform/admin/PlatformAdminLayout';
+import PlatformDashboard from './platform/admin/PlatformDashboard';
+import Requests from './platform/admin/Requests';
+import Companies from './platform/admin/Companies';
+import Plans from './platform/admin/Plans';
+import PlatformSettings from './platform/admin/Settings';
+
 function RootRedirect() {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/" replace />;
   
   const dashboardRoutes = {
     admin: '/admin-dashboard',
@@ -59,20 +70,35 @@ function RootRedirect() {
     ticket_manager: '/tickets/dashboard',
     hr: '/hr-dashboard',
     employee: '/employee-dashboard',
+    super_admin: '/platform-admin',
   };
   
-  return <Navigate to={dashboardRoutes[user.role] || '/login'} replace />;
+  return <Navigate to={dashboardRoutes[user.role] || '/'} replace />;
 }
 
 export default function App() {
   return (
     <TrainingProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
+          {/* Public SaaS Routes */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           
+          {/* Platform Admin Routes */}
+          <Route path="/platform-admin" element={<PlatformAdminLayout />}>
+             <Route index element={<PlatformDashboard />} />
+             <Route path="requests" element={<Requests />} />
+             <Route path="companies" element={<Companies />} />
+             <Route path="plans" element={<Plans />} />
+             <Route path="settings" element={<PlatformSettings />} />
+          </Route>
+
+          {/* Company Dashboard Routes */}
           <Route element={<DashboardLayout />}>
-            <Route path="/" element={<RootRedirect />} />
+            <Route path="/dashboard-home" element={<RootRedirect />} />
             
             {/* Admin Routes */}
             <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
@@ -138,10 +164,10 @@ export default function App() {
               <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
               <Route path="/time-clock-shared" element={<TimeClock />} />
             </Route>
-
-            {/* Catch-all */}
-            <Route path="*" element={<RootRedirect />} />
           </Route>
+
+          {/* Catch-all */}
+          <Route path="*" element={<RootRedirect />} />
         </Routes>
       </BrowserRouter>
     </TrainingProvider>

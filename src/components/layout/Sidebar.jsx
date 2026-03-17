@@ -8,7 +8,7 @@ import { useAuth } from '../../context/AuthContext';
 
 // Default Admin navigation (Local Refined)
 const ADMIN_NAV_ITEMS = [
-  { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/admin-dashboard' },
   { name: 'Employees', icon: Users, path: '/employees' },
   { name: 'Time Clock', icon: Clock, path: '/time-clock' },
   { name: 'Inspections', icon: ClipboardCheck, path: '/inspections' },
@@ -42,24 +42,24 @@ import logo from '../../assets/logo.png';
 export function Sidebar({ isOpen, toggleSidebar }) {
   const { user } = useAuth();
   const role = user?.role;
-  
+
   // Operations roles navigation (Remote)
   const opsNavItems = [
-    { name: 'Dashboard',   icon: LayoutDashboard, path: '/operations/dashboard' },
-    { name: 'Inspections', icon: ClipboardCheck,  path: '/operations/inspections' },
-    { name: 'Events',      icon: Calendar,        path: '/operations/events' },
-    { name: 'Employees',   icon: Users,           path: '/operations/employees' },
-    { name: 'Reports',     icon: BarChart,        path: '/operations/reports' },
-    { name: 'Settings',    icon: Settings,        path: '/settings' },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/operations/dashboard' },
+    { name: 'Inspections', icon: ClipboardCheck, path: '/operations/inspections' },
+    { name: 'Events', icon: Calendar, path: '/operations/events' },
+    { name: 'Employees', icon: Users, path: '/operations/employees' },
+    { name: 'Reports', icon: BarChart, path: '/operations/reports' },
+    { name: 'Settings', icon: Settings, path: '/settings' },
   ];
 
   // Ticket roles navigation (Remote)
   const ticketNavItems = [
-    { name: 'Dashboard',       icon: LayoutDashboard, path: '/tickets/dashboard' },
-    { name: 'Ticket Boxes',    icon: Store,           path: '/tickets/boxes' },
-    { name: 'Ticket Tracking', icon: Scan,            path: '/tickets/tracking' },
-    { name: 'Settlement',      icon: HandCoins,       path: '/tickets/settlement' },
-    { name: 'Settings',        icon: Settings,        path: '/settings' },
+    { name: 'Dashboard', icon: LayoutDashboard, path: '/tickets/dashboard' },
+    { name: 'Ticket Boxes', icon: Store, path: '/tickets/boxes' },
+    { name: 'Ticket Tracking', icon: Scan, path: '/tickets/tracking' },
+    { name: 'Settlement', icon: HandCoins, path: '/tickets/settlement' },
+    { name: 'Settings', icon: Settings, path: '/settings' },
   ];
 
   let menuItems = ADMIN_NAV_ITEMS;
@@ -98,32 +98,27 @@ export function Sidebar({ isOpen, toggleSidebar }) {
 
       {/* Sidebar container */}
       <aside
-        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-white border-r border-slate-200 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-brand-dark border-r border-brand-gold/10 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
-        <div className="flex flex-col border-b border-slate-200 sticky top-0 bg-white z-10 pt-6 pb-6 px-6">
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <div className="h-10 w-10 overflow-hidden flex items-center justify-center bg-slate-50 rounded-xl shrink-0">
-                <img src={logo} alt="Logo" className="h-24 w-auto object-contain scale-150" />
-              </div>
-              <div className="flex flex-col min-w-0">
-                <span className="text-sm font-black text-blue-600 tracking-[1.5px] uppercase truncate">Showmensinfo</span>
-              </div>
-            </div>
-            <button
-              onClick={toggleSidebar}
-              className="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-md shrink-0"
-            >
-              <X size={20} />
-            </button>
+        <div className="h-20 flex items-center border-b border-brand-gold/10 sticky top-0 bg-brand-dark z-10 px-4 gap-4">
+          <div className="h-16 w-24 shrink-0 overflow-hidden flex items-center justify-center rounded-xl bg-white/5">
+            <img src={logo} alt="Showmensinfo" className="h-full w-auto object-contain scale-125" />
           </div>
+          <span className="text-sm font-black text-white tracking-tight uppercase truncate flex-1 ml-[-12px]">
+            Showmens<span className="text-brand-gold">info</span>
+          </span>
+          <button
+            onClick={toggleSidebar}
+            className="lg:hidden p-2 text-white/60 hover:bg-white/10 rounded-md shrink-0"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         <div className="p-4">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-[2px] mb-6 px-3">
-             {/* {sectionTitle} */}
+          <p className="text-xs font-bold text-white/30 uppercase tracking-[2px] mb-6 px-3">
+            {/* {sectionTitle} */}
           </p>
           <nav className="space-y-1">
             {menuItems.map((item) => (
@@ -132,10 +127,9 @@ export function Sidebar({ isOpen, toggleSidebar }) {
                 to={item.path}
                 onClick={() => isOpen && toggleSidebar()}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${
-                    isActive
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-100'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-blue-600'
+                  `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${isActive
+                    ? 'bg-brand-red text-white shadow-lg shadow-brand-red/40'
+                    : 'text-white/70 hover:bg-brand-gold hover:text-brand-dark'
                   }`
                 }
               >
