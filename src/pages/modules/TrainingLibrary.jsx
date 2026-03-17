@@ -23,10 +23,8 @@ export default function TrainingLibrary() {
   };
 
   const handleDelete = (id, title) => {
-    if (window.confirm(`Are you sure you want to delete "${title}"?`)) {
-      deleteTraining(id);
-      showNotification(`"${title}" has been removed from the library.`);
-    }
+    deleteTraining(id);
+    showNotification(`"${title}" has been removed from the library.`);
   };
 
   const filteredTrainings = trainings.filter(t =>
@@ -142,9 +140,9 @@ export default function TrainingLibrary() {
                     </td>
                   )}
                   <td className="px-8 py-5 text-right">
-                    <div className="flex items-center justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0 translate-x-4">
+                    <div className="flex items-center justify-end gap-2 text-slate-400">
                       <button
-                        className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
+                        className="p-2.5 hover:text-blue-600 bg-slate-50 hover:bg-blue-50 rounded-xl transition-all shadow-sm border border-slate-100"
                         onClick={() => navigate(isEmployeeView ? `/employee-training/module/${module.id}` : `/hr/training/${module.id}`)}
                         title="View Details"
                       >
@@ -153,14 +151,14 @@ export default function TrainingLibrary() {
                       {!isEmployeeView && (
                         <>
                           <button
-                            className="p-2.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
+                            className="p-2.5 hover:text-brand-orange bg-slate-50 hover:bg-brand-orange/10 rounded-xl transition-all shadow-sm border border-slate-100"
                             onClick={() => showNotification("Edit functionality is coming soon.")}
                             title="Edit Module"
                           >
                             <Pencil size={18} />
                           </button>
                           <button
-                            className="p-2.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
+                            className="p-2.5 hover:text-brand-red bg-slate-50 hover:bg-brand-red/10 rounded-xl transition-all shadow-sm border border-slate-100"
                             onClick={() => handleDelete(module.id, module.title)}
                             title="Delete Module"
                           >

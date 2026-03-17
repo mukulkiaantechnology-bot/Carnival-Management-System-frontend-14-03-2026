@@ -155,13 +155,9 @@ export default function EmployeeTraining() {
                 )}
 
                 <Button 
-                  variant={module.status === 'Completed' ? 'secondary' : 'primary'}
+                  variant={module.status === 'Completed' ? 'success' : 'primary'}
                   onClick={() => navigate(`/employee-training/module/${module.id}`)}
-                  className={`w-full py-4 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center justify-center gap-2 transition-all ${
-                    module.status === 'Completed' 
-                      ? 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border-emerald-100' 
-                      : 'shadow-lg shadow-blue-100 hover:shadow-blue-200'
-                  }`}
+                  className="w-full py-4 rounded-2xl flex items-center justify-center gap-2"
                 >
                   {module.status === 'Completed' ? (
                     <>

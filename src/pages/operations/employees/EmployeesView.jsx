@@ -14,8 +14,8 @@ const EMPLOYEES = [
 ];
 
 const STATUS_BADGE = {
-  active: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200',
-  on_leave: 'bg-amber-50 text-amber-700 ring-1 ring-amber-200',
+  active: 'bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100',
+  on_leave: 'bg-brand-orange/10 text-brand-orange ring-1 ring-brand-orange/20',
   inactive: 'bg-slate-100 text-slate-500 ring-1 ring-slate-200',
 };
 
@@ -32,22 +32,22 @@ export default function EmployeesView() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <Users className="text-teal-500" size={24} /> Employees
+          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic flex items-center gap-2">
+            <Users className="text-brand-gold" size={24} /> Employees
           </h1>
-          <p className="text-sm text-slate-500">View-only workforce directory.</p>
+          <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">View-only workforce directory.</p>
         </div>
-        <div className="px-3 py-1.5 rounded-full bg-slate-100 text-slate-500 text-xs font-bold border border-slate-200 flex items-center gap-1.5 uppercase tracking-wide">
-          <Info size={14} /> Directory Only
+        <div className="px-4 py-2 rounded-xl bg-white border border-slate-100 text-slate-400 text-[10px] font-black shadow-sm flex items-center gap-2 uppercase tracking-widest">
+          <Info size={14} className="text-brand-gold" /> Directory Only
         </div>
       </div>
 
       <div className="relative max-w-md">
-        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-red opacity-40" />
         <input
           type="text" value={search} onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name, role, or event..."
-          className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-400/40 outline-none bg-white transition-shadow"
+          className="w-full pl-9 pr-4 py-2.5 text-sm border border-slate-200 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none bg-white transition-all shadow-inner font-bold text-brand-text"
         />
         {search && <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><X size={14} /></button>}
       </div>
@@ -71,7 +71,7 @@ export default function EmployeesView() {
                   <tr key={emp.id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xs">
+                        <div className="w-10 h-10 rounded-2xl bg-brand-red/10 text-brand-red flex items-center justify-center font-black text-xs border border-brand-gold/10 shadow-sm">
                           {emp.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
@@ -85,11 +85,11 @@ export default function EmployeesView() {
                         <Briefcase size={10} /> {emp.role}
                       </span>
                     </td>
-                    <td className="px-5 py-4 font-medium flex items-center gap-1.5"><Phone size={12} className="text-slate-400" /> {emp.phone}</td>
+                    <td className="px-5 py-4 font-medium flex items-center gap-1.5"><Phone size={12} className="text-slate-400" /> <span className="text-slate-500 font-bold">{emp.phone}</span></td>
                     <td className="px-5 py-4">
                       {emp.assignedEvent === '—' ?
                         <span className="text-slate-300 italic text-xs">Not assigned</span> :
-                        <span className="flex items-center gap-1.5 text-slate-600 text-xs font-medium"><Calendar size={12} className="text-teal-400" /> {emp.assignedEvent}</span>
+                        <span className="flex items-center gap-1.5 text-brand-text text-xs font-black uppercase italic italic tracking-tight"><Calendar size={12} className="text-brand-gold" /> {emp.assignedEvent}</span>
                       }
                     </td>
                     <td className="px-5 py-4">

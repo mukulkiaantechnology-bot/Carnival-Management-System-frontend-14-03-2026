@@ -118,27 +118,27 @@ export default function EmployeeDashboard() {
 
         {/* Training Reminder & Shift Info */}
         <div className="space-y-8">
-          <Card className="border-none shadow-2xl shadow-brand-red/20 rounded-[2.5rem] overflow-hidden bg-brand-red text-white">
+          <Card className="border-none shadow-2xl shadow-slate-200/40 rounded-[2.5rem] overflow-hidden bg-white">
             <div className="p-8 pb-4">
-              <h3 className="text-xl font-black tracking-tight uppercase italic text-white flex items-center gap-3">
+              <h3 className="text-xl font-black tracking-tight uppercase italic text-brand-red flex items-center gap-3">
                 <GraduationCap size={24} className="text-brand-gold" />
                 Training Alert
               </h3>
-              <p className="text-white/60 text-xs font-bold mt-1 uppercase tracking-widest">Incomplete required module</p>
+              <p className="text-slate-400 text-[10px] font-black mt-1 uppercase tracking-widest">Incomplete required module</p>
             </div>
             <CardContent className="p-8 pt-0">
-              <div className="flex items-center gap-4 bg-white/10 p-5 rounded-2xl border border-white/10 mb-6 group cursor-pointer hover:bg-white/20 transition-all">
-                <div className="p-3 bg-brand-gold rounded-xl shadow-lg shadow-black/20 group-hover:rotate-6 transition-all">
+              <div className="flex items-center gap-4 bg-brand-light/50 p-5 rounded-2xl border border-brand-gold/5 mb-6 group cursor-pointer hover:bg-brand-light transition-all">
+                <div className="p-3 bg-brand-gold rounded-xl shadow-lg shadow-brand-gold/20 group-hover:rotate-6 transition-all">
                   <PlayCircle size={24} className="text-brand-dark" />
                 </div>
                 <div>
-                  <p className="text-sm font-black uppercase tracking-tight">Safety Training v2.4</p>
-                  <p className="text-[10px] text-white/60 font-black uppercase tracking-widest mt-0.5">EST: 15 MINS</p>
+                  <p className="text-sm font-black uppercase tracking-tight text-brand-text">Safety Training v2.4</p>
+                  <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest mt-0.5">EST: 15 MINS</p>
                 </div>
               </div>
               <Button 
                 variant="secondary" 
-                className="w-full py-5 bg-white text-brand-red hover:bg-brand-light border-none font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-black/20 active:scale-95 transition-all"
+                className="w-full py-5 font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-red/20 active:scale-95 transition-all"
                 onClick={() => navigate('/employee-training')}
               >
                 Launch Course

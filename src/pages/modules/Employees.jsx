@@ -156,7 +156,7 @@ function EmployeeView({ employee, onBack }) {
             <p className="text-brand-orange font-black text-[10px] uppercase tracking-widest leading-none mt-1">{employee.role}</p>
             <div className="mt-6 flex justify-center">
               <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
-                employee.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-brand-red/10 text-brand-red'
+                employee.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-brand-red/10 text-brand-red'
               }`}>
                 {employee.status}
               </span>
@@ -250,7 +250,7 @@ export default function Employees() {
 
   const directoryStats = useMemo(() => {
     return [
-      { label: 'Total Staff', value: employees.length, icon: Users, color: 'text-brand-red', bg: 'bg-brand-light' },
+      { label: 'Total Staff', value: employees.length, icon: Users, color: 'text-brand-red', bg: 'bg-brand-red/10' },
       { label: 'Active Now', value: employees.filter(e => e.status === 'Active').length, icon: UserCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },
       { label: 'Training Pending', value: employees.filter(e => e.trainingStatus !== 'Completed').length, icon: GraduationCap, color: 'text-brand-orange', bg: 'bg-brand-orange/10' },
       { label: 'Departments', value: new Set(employees.map(e => e.department)).size, icon: Building2, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
@@ -386,7 +386,7 @@ export default function Employees() {
                         </td>
                         <td className="px-6 py-4">
                           <span className={`px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider ${
-                            emp.status === 'Active' ? 'bg-emerald-50 text-emerald-700' : 'bg-brand-red/10 text-brand-red'
+                            emp.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-brand-red/10 text-brand-red'
                           }`}>
                             {emp.status}
                           </span>
@@ -430,7 +430,7 @@ export default function Employees() {
                   <div key={emp.id} className="p-4 space-y-4 active:bg-slate-50 transition-colors">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-bold text-blue-600 text-base shadow-sm">
+                        <div className="w-12 h-12 rounded-2xl bg-brand-red/10 flex items-center justify-center font-black text-brand-red text-base shadow-sm border border-brand-gold/10">
                           {emp.name[0]}
                         </div>
                         <div>
@@ -439,7 +439,7 @@ export default function Employees() {
                         </div>
                       </div>
                       <span className={`px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${
-                        emp.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                        emp.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-brand-orange/10 text-brand-orange'
                       }`}>
                         {emp.status}
                       </span>
