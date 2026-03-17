@@ -48,8 +48,8 @@ export default function MaintenanceDashboard() {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 sm:px-0">
         {stats.map((stat) => (
-          <Card key={stat.label} className="border-none shadow-xl shadow-slate-200/50 hover:-translate-y-1 transition-all rounded-[2rem]">
-            <CardContent className="p-6 flex items-center gap-4">
+          <Card key={stat.label} className="border-none shadow-xl shadow-slate-200/50 hover:-translate-y-1 transition-all rounded-[1.5rem] md:rounded-[2rem]">
+            <CardContent className="p-4 md:p-6 flex items-center gap-4">
               <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} flex-shrink-0 shadow-sm`}>
                 <stat.icon size={24} />
               </div>

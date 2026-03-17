@@ -85,7 +85,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-8 relative overflow-x-hidden px-1 pb-10">
+    <div className="space-y-4 md:space-y-8 relative overflow-x-hidden px-1 pb-10">
       {/* Premium Toast Notification */}
       {notification && (
         <div className="fixed top-24 right-8 z-[110] animate-in slide-in-from-right duration-300">
@@ -197,14 +197,14 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
         {STATS.map((stat) => (
           <Card
             key={stat.label}
             className="group hover:scale-[1.03] active:scale-[0.98] transition-all duration-500 cursor-pointer border-none shadow-2xl shadow-slate-200/40 rounded-[2.2rem] overflow-hidden"
             onClick={() => navigate(stat.path)}
           >
-            <CardContent className="p-8 flex items-center space-x-6 relative">
+            <CardContent className="p-5 md:p-8 flex items-center space-x-6 relative">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-slate-50 rounded-full blur-3xl group-hover:bg-blue-50 transition-colors" />
               <div className={`p-5 rounded-[1.5rem] ${stat.bg} ${stat.color} group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 shadow-inner relative z-10`}>
                 <stat.icon size={32} strokeWidth={2.5} />
@@ -212,8 +212,8 @@ export default function AdminDashboard() {
               <div className="flex-1 relative z-10">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">{stat.label}</p>
                 <div className="flex items-end gap-3">
-                  <p className="text-3xl font-black text-slate-800 leading-none">{stat.value}</p>
-                  <span className="text-[10px] font-black text-emerald-600 flex items-center gap-1 mb-1 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100">
+                  <p className="text-2xl md:text-3xl font-black text-slate-800 leading-none">{stat.value}</p>
+                  <span className="text-[10px] font-black text-emerald-600 flex items-center gap-1 mb-0.5 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-100">
                     <TrendingUp size={12} strokeWidth={3} /> {stat.trend}
                   </span>
                 </div>
@@ -223,7 +223,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8">
         {/* Recent Activities Feed */}
         <Card className="lg:col-span-2 flex flex-col border-none shadow-2xl shadow-slate-200/40 rounded-[2.5rem] overflow-hidden">
           <CardHeader
@@ -238,7 +238,7 @@ export default function AdminDashboard() {
                   className="px-8 py-5 flex gap-5 hover:bg-slate-50 transition-all group cursor-pointer"
                   onClick={() => navigate(activity.path)}
                 >
-                  <div className={`w-12 h-12 rounded-2xl ${activity.bgColor} ${activity.iconColor} flex items-center justify-center shrink-0 group-hover:rotate-6 group-hover:scale-110 transition-all shadow-sm`}>
+                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl ${activity.bgColor} ${activity.iconColor} flex items-center justify-center shrink-0 group-hover:rotate-6 group-hover:scale-110 transition-all shadow-sm`}>
                     <activity.icon size={20} strokeWidth={2.5} />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -272,8 +272,8 @@ export default function AdminDashboard() {
             title="Global Performance Hub"
             subtitle="High-fidelity revenue visualization for the current fiscal cycle."
           />
-          <CardContent className="flex-1 flex flex-col p-8 pt-4">
-            <div className="h-[320px] w-full pt-8 relative">
+          <CardContent className="flex-1 flex flex-col p-4 md:p-8 pt-2 md:pt-4">
+            <div className="h-[240px] md:h-[320px] w-full pt-4 md:pt-8 relative">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={CHART_DATA} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
@@ -320,16 +320,16 @@ export default function AdminDashboard() {
             </div>
 
             {/* Stats Footer Overhaul */}
-            <div className="mt-auto px-4 py-8 bg-slate-50/50 rounded-[2rem] border border-slate-50 flex flex-wrap items-center justify-between gap-8 translate-y-4">
-              <div className="flex items-center gap-12">
+            <div className="mt-auto px-4 md:px-6 py-4 md:py-8 bg-slate-50/50 rounded-[1.5rem] md:rounded-[2rem] border border-slate-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 md:gap-8 translate-y-2">
+              <div className="flex items-center gap-6 md:gap-12">
                 <div className="space-y-1">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Matrix Goal</p>
-                  <p className="text-2xl font-bold text-slate-800 tracking-tighter">$50,000</p>
+                  <p className="text-xl md:text-2xl font-bold text-slate-800 tracking-tighter">$50,000</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Operational Yield</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Yield</p>
                   <div className="flex items-center gap-3">
-                    <p className="text-2xl font-bold text-slate-800 tracking-tighter">$42,500</p>
+                    <p className="text-xl md:text-2xl font-bold text-slate-800 tracking-tighter">$42,500</p>
                     <div className="px-2.5 py-1 bg-emerald-500/10 text-emerald-600 rounded-xl text-[10px] font-black flex items-center gap-1 border border-emerald-500/20 shadow-sm">
                       <TrendingUp size={12} strokeWidth={3} /> 12.5%
                     </div>
@@ -338,7 +338,7 @@ export default function AdminDashboard() {
               </div>
               <button
                 onClick={handleDownload}
-                className="group px-8 py-4 text-xs font-black uppercase tracking-widest text-white bg-slate-900 hover:bg-blue-600 rounded-[1.2rem] transition-all duration-300 flex items-center gap-3 shadow-2xl shadow-slate-900/20 active:scale-95 overflow-hidden relative"
+                className="group w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 text-[10px] md:text-xs font-black uppercase tracking-widest text-white bg-slate-900 hover:bg-blue-600 rounded-[1rem] md:rounded-[1.2rem] transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl shadow-slate-900/20 active:scale-95 overflow-hidden relative"
               >
                 <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
                 <Download size={18} className="relative z-10 group-hover:-translate-y-0.5 transition-transform" />

@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
 import { TrainingProvider } from './context/TrainingContext';
+import { InspectionProvider } from './context/InspectionContext';
+import { MaintenanceProvider } from './context/MaintenanceContext';
 import { ProtectedRoute } from './app/routes/ProtectedRoute';
 import { DashboardLayout } from './components/layout/DashboardLayout';
 
@@ -15,6 +17,7 @@ import Employees from './pages/modules/Employees';
 import TimeClock from './pages/modules/TimeClock';
 import Inspections from './pages/modules/Inspections';
 import Maintenance from './pages/modules/Maintenance';
+import WorkOrderDetail from './pages/modules/WorkOrderDetail';
 import Financial from './pages/modules/Financial';
 import TicketSales from './pages/modules/TicketSales';
 import Training from './pages/modules/Training';
@@ -22,6 +25,7 @@ import TrainingLibrary from './pages/modules/TrainingLibrary';
 import EmployeeTraining from './pages/modules/EmployeeTraining';
 import AddTraining from './pages/modules/AddTraining';
 import TrainingDetail from './pages/modules/TrainingDetail';
+import InspectionDetail from './pages/modules/InspectionDetail';
 import TrainingProgressDetail from './pages/modules/TrainingProgressDetail';
 import Contracts from './pages/modules/Contracts';
 import Calendar from './pages/modules/Calendar';
@@ -72,42 +76,52 @@ function RootRedirect() {
 export default function App() {
   return (
     <TrainingProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          
-          <Route element={<DashboardLayout />}>
-            <Route path="/" element={<RootRedirect />} />
+      <InspectionProvider>
+        <MaintenanceProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
             
-            {/* Admin Routes */}
-            <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              <Route path="/employees/*" element={<Employees />} />
-              <Route path="/contracts/*" element={<Contracts />} />
-              <Route path="/financial" element={<Financial />} />
-              <Route path="/time-clock" element={<TimeClock />} />
-              <Route path="/inspections/*" element={<Inspections />} />
-              <Route path="/maintenance/*" element={<Maintenance />} />
-              <Route path="/calendar/*" element={<Calendar />} />
-              <Route path="/reports" element={<Reports />} />
-              <Route path="/tickets/*" element={<TicketSales />} />
-              <Route path="/training/*" element={<Training />} />
-            </Route>
+            <Route element={<DashboardLayout />}>
+              <Route path="/" element={<RootRedirect />} />
+              
+              {/* Admin Routes */}
+              <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                <Route path="/admin-dashboard" element={<AdminDashboard />} />
+                <Route path="/employees/*" element={<Employees />} />
+                <Route path="/contracts/*" element={<Contracts />} />
+                <Route path="/financial" element={<Financial />} />
+                <Route path="/time-clock" element={<TimeClock />} />
+                <Route path="/inspections" element={<Inspections />} />
+                <Route path="/inspections/:id" element={<InspectionDetail />} />
+                <Route path="/inspections/*" element={<Inspections />} />
+                <Route path="/maintenance" element={<Maintenance />} />
+                <Route path="/maintenance/:id" element={<WorkOrderDetail />} />
+                <Route path="/maintenance/*" element={<Maintenance />} />
+                <Route path="/calendar/*" element={<Calendar />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/tickets/*" element={<TicketSales />} />
+                <Route path="/training/*" element={<Training />} />
+              </Route>
 
-            {/* Shared Settings Route (All Roles) */}
-            <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager', 'maintenance', 'maintenance_manager', 'ticket', 'ticket_manager', 'hr', 'employee']} />}>
-              <Route path="/settings" element={<Settings />} />
-            </Route>
+              {/* Shared Settings Route (All Roles) */}
+              <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager', 'maintenance', 'maintenance_manager', 'ticket', 'ticket_manager', 'hr', 'employee']} />}>
+                <Route path="/settings" element={<Settings />} />
+              </Route>
 
-            {/* Operations & Operations Manager Routes */}
-            <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager']} />}>
-               <Route path="/operations-dashboard" element={<OpsManagerDashboard />} />
-               <Route path="/operations/dashboard" element={<OpsManagerDashboard />} />
-               <Route path="/operations/inspections" element={<Inspections />} />
-               <Route path="/operations/events" element={<Events />} />
-               <Route path="/operations/employees" element={<EmployeesView />} />
-               <Route path="/operations/reports" element={<OperationsReports />} />
-            </Route>
+              {/* Operations & Operations Manager Routes */}
+              <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager']} />}>
+                 <Route path="/operations-dashboard" element={<OpsManagerDashboard />} />
+                 <Route path="/operations/dashboard" element={<OpsManagerDashboard />} />
+                 <Route path="/operations-inspections" element={<Navigate to="/operations/inspections" replace />} />
+                 <Route path="/operations/inspections" element={<Inspections />} />
+                 <Route path="/operations/inspections/:id" element={<InspectionDetail />} />
+                 <Route path="/operations/maintenance" element={<Maintenance />} />
+                 <Route path="/operations/maintenance/:id" element={<WorkOrderDetail />} />
+                 <Route path="/operations/events" element={<Events />} />
+                 <Route path="/operations/employees" element={<EmployeesView />} />
+                 <Route path="/operations/reports" element={<OperationsReports />} />
+              </Route>
 
             {/* Maintenance Routes */}
             <Route element={<ProtectedRoute allowedRoles={['admin', 'maintenance', 'maintenance_manager']} />}>
@@ -156,6 +170,8 @@ export default function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </MaintenanceProvider>
+      </InspectionProvider>
     </TrainingProvider>
   );
 }

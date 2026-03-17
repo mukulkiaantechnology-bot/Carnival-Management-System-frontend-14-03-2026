@@ -67,10 +67,10 @@ export default function EmployeeDashboard() {
       </div>
       
       {/* Top Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {stats.map((stat) => (
           <Card key={stat.label} className="border-none shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="p-6 flex items-center space-x-4">
+            <CardContent className="p-4 md:p-6 flex items-center space-x-4">
               <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
                 <stat.icon size={24} />
               </div>
@@ -83,7 +83,7 @@ export default function EmployeeDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
         {/* Today's Tasks */}
         <Card className="lg:col-span-2 border-none shadow-sm">
           <CardHeader 
@@ -93,7 +93,7 @@ export default function EmployeeDashboard() {
           <CardContent className="p-0">
             <div className="divide-y divide-slate-50">
               {todayTasks.map((task) => (
-                <div key={task.id} className="flex items-center justify-between p-4 hover:bg-slate-50/50 transition-colors">
+                <div key={task.id} className="flex items-center justify-between p-3.5 md:p-4 hover:bg-slate-50/50 transition-colors">
                   <div className="flex items-center gap-3">
                     <div className={`p-1.5 rounded-full ${task.completed ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'}`}>
                       {task.completed ? <CheckCircle2 size={16} /> : <div className="w-4 h-4 border-2 border-slate-300 rounded-full" />}
