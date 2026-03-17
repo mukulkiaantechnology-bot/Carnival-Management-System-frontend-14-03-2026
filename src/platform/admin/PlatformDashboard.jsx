@@ -114,14 +114,6 @@ export default function PlatformDashboard() {
             <RefreshCcw size={20} className={isRefreshing ? 'animate-spin' : 'text-white'} />
             SYNC DATA
           </Button>
-          <Button
-            variant="primary"
-            className="flex items-center gap-3 font-black py-4 px-8 rounded-2xl shadow-2xl shadow-brand-gold/20 uppercase tracking-widest text-[10px]"
-            onClick={() => navigate('/platform-admin/companies')}
-          >
-            <Eye size={20} />
-            LIVE PREVIEW
-          </Button>
         </div>
       </div>
 

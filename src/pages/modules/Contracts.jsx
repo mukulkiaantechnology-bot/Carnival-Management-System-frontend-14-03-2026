@@ -16,10 +16,10 @@ const INITIAL_CONTRACTS = [
 ];
 
 const INITIAL_TEMPLATES = [
-  { id: 1, name: 'Sponsorship', icon: ShieldCheck, color: 'text-blue-500', bg: 'bg-blue-50' },
-  { id: 2, name: 'Vendor Lease', icon: Briefcase, color: 'text-emerald-500', bg: 'bg-emerald-50' },
-  { id: 3, name: 'Service Agreement', icon: FileCheck, color: 'text-purple-500', bg: 'bg-purple-50' },
-  { id: 4, name: 'Non-Disclosure', icon: ClipboardList, color: 'text-amber-500', bg: 'bg-amber-50' },
+  { id: 1, name: 'Sponsorship', icon: ShieldCheck, color: 'text-brand-red', bg: 'bg-brand-red/10' },
+  { id: 2, name: 'Vendor Lease', icon: Briefcase, color: 'text-brand-gold-dark', bg: 'bg-brand-gold/10' },
+  { id: 3, name: 'Service Agreement', icon: FileCheck, color: 'text-brand-orange-dark', bg: 'bg-brand-orange/10' },
+  { id: 4, name: 'Non-Disclosure', icon: ClipboardList, color: 'text-slate-600', bg: 'bg-slate-100' },
 ];
 
 // Local Modal Component with Premium Styling
@@ -134,22 +134,20 @@ export default function Contracts() {
               className="pl-12 pr-6 py-3.5 bg-white border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-sm font-bold w-72 shadow-sm"
             />
           </div>
-          <Button
-            variant="secondary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-lg text-[10px] sm:text-xs"
+          <button
+            className="flex-1 flex items-center justify-center gap-2 font-black bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-lg h-10 sm:h-12 px-6 rounded-2xl text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_template')}
           >
             <Plus size={18} strokeWidth={3} />
             Create Template
-          </Button>
-          <Button
-            variant="primary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-xl shadow-brand-gold/20 text-[10px] sm:text-xs"
+          </button>
+          <button
+            className="flex-1 flex items-center justify-center gap-2 font-black bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20 h-10 sm:h-12 px-6 rounded-2xl text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_contract')}
           >
             <FileSignature size={18} />
             Draft Contract
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -174,7 +172,7 @@ export default function Contracts() {
                 {filteredContracts.map((contract) => (
                   <tr key={contract.id} className="hover:bg-slate-50/40 transition-all group">
                     <td className="px-8 py-6 text-center">
-                      <span className="text-xs font-black text-blue-600 bg-blue-50/50 px-3 py-1.5 rounded-lg border border-blue-100 group-hover:scale-110 transition-transform inline-block lowercase italic">
+                      <span className="text-xs font-black text-brand-red bg-brand-red/5 px-3 py-1.5 rounded-lg border border-brand-red/10 group-hover:scale-110 transition-transform inline-block lowercase italic">
                         {contract.id}
                       </span>
                     </td>
@@ -186,8 +184,8 @@ export default function Contracts() {
                     </td>
                     <td className="px-8 py-6 text-center">
                       <span className={`inline-flex items-center px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${contract.status === 'Active' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' :
-                        contract.status === 'Pending' ? 'bg-amber-100 text-amber-700 border border-amber-200' :
-                          contract.status === 'Draft' ? 'bg-blue-100 text-blue-700 border border-blue-200' : 'bg-slate-100 text-slate-500 border border-slate-200'
+                        contract.status === 'Pending' ? 'bg-brand-red text-white border-brand-red/50 shadow-lg shadow-brand-red/20' :
+                          contract.status === 'Draft' ? 'bg-brand-gold/20 text-brand-gold-dark border border-brand-gold/20' : 'bg-slate-100 text-slate-500 border border-slate-200'
                         }`}>
                         {contract.status}
                       </span>
@@ -273,7 +271,7 @@ export default function Contracts() {
                     setNewContract({ ...newContract, type: t.name });
                     setActiveModal('create_contract');
                   }}
-                  className="p-6 rounded-[2rem] border-2 border-dashed border-slate-100 hover:border-blue-400 hover:bg-blue-50/50 transition-all cursor-pointer group relative overflow-hidden"
+                  className="p-6 rounded-[2rem] border-2 border-dashed border-slate-100 hover:border-brand-gold-dark hover:bg-brand-gold/5 transition-all cursor-pointer group relative overflow-hidden"
                 >
                   <div className={`w-14 h-14 ${t.bg} rounded-2xl flex items-center justify-center mb-4 ${t.color} group-hover:rotate-12 transition-transform shadow-sm`}>
                     <t.icon size={24} strokeWidth={2.5} />
@@ -305,7 +303,7 @@ export default function Contracts() {
             <input
               required
               type="text"
-              className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all font-bold text-slate-700 shadow-sm"
+              className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-brand-red/10 focus:border-brand-red/30 transition-all font-bold text-slate-700 shadow-sm"
               placeholder="e.g. Venue Hire Agreement 2026"
               value={newTemplate.name}
               onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
@@ -319,7 +317,7 @@ export default function Contracts() {
                   key={cat}
                   type="button"
                   onClick={() => setNewTemplate({ ...newTemplate, category: cat })}
-                  className={`py-3 px-4 rounded-xl text-xs font-black transition-all border ${newTemplate.category === cat ? 'bg-blue-600 text-white border-blue-600 shadow-lg shadow-blue-200' : 'bg-white text-slate-400 border-slate-100 hover:bg-slate-50'}`}
+                  className={`py-3 px-4 rounded-xl text-xs font-black transition-all border ${newTemplate.category === cat ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/20' : 'bg-white text-slate-400 border-slate-100 hover:bg-slate-50'}`}
                 >
                   {cat}
                 </button>
@@ -327,9 +325,12 @@ export default function Contracts() {
             </div>
           </div>
           <div className="pt-4">
-            <Button variant="primary" className="w-full h-11 sm:h-14 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-blue-500/20" type="submit">
+            <button 
+              className="w-full h-11 sm:h-14 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20" 
+              type="submit"
+            >
               Save Template
-            </Button>
+            </button>
           </div>
         </form>
       </Modal>
@@ -342,7 +343,7 @@ export default function Contracts() {
             <input
               required
               type="text"
-              className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-slate-700 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
+              className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-bold text-slate-700 focus:ring-4 focus:ring-brand-red/10 focus:border-brand-red/30 transition-all shadow-sm"
               placeholder="e.g. Grand Carnival 2026"
               value={newContract.event}
               onChange={(e) => setNewContract({ ...newContract, event: e.target.value })}
@@ -375,8 +376,19 @@ export default function Contracts() {
             </div>
           </div>
           <div className="pt-4 flex gap-4">
-            <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-[2] h-10 sm:h-12 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-brand-gold/20" type="submit">Publish Draft</Button>
+            <button 
+              type="button" 
+              className="flex-1 h-10 sm:h-12 font-black rounded-2xl text-[10px] bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all" 
+              onClick={() => setActiveModal(null)}
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="flex-[2] h-10 sm:h-12 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20"
+            >
+              Publish Draft
+            </button>
           </div>
         </form>
       </Modal>

@@ -1,9 +1,28 @@
 import { useState, useEffect } from 'react';
 import {
   Building2, Mail, BadgeCheck, XCircle, Search,
-  ArrowUpRight, MailQuestion, Check, X, Filter, Loader2
+  ArrowUpRight, MailQuestion, Check, X, Filter, Loader2,
+  Calendar, User, CreditCard, ShieldCheck
 } from 'lucide-react';
 import { Card } from '../../components/ui/Card';
+
+// Local Modal Component
+function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-md' }) {
+  if (!isOpen) return null;
+  return (
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className={`bg-white rounded-3xl shadow-2xl w-full ${maxWidth} animate-in zoom-in-95 duration-200 overflow-hidden border border-brand-gold/20`}>
+        <div className="p-6 sm:p-8 border-b border-brand-gold/10 flex items-center justify-between bg-brand-light/30">
+          <h2 className="text-xl font-black text-brand-red uppercase italic tracking-tight">{title}</h2>
+          <button onClick={onClose} className="text-slate-400 hover:text-brand-red p-2 hover:bg-brand-red/5 rounded-xl transition-all" title="Close">
+            <X size={20} />
+          </button>
+        </div>
+        <div className="p-6 sm:p-8 overflow-y-auto max-h-[85vh]">{children}</div>
+      </div>
+    </div>
+  );
+}
 
 const MOCK_REQUESTS = [
   { id: 'REQ-8821', companyName: 'Funland Parks', adminName: 'Michael Scott', email: 'michael@funland.com', status: 'Pending', plan: 'Enterprise', date: new Date().toISOString() },
@@ -15,6 +34,13 @@ export default function Requests() {
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState('All');
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openDetails = (req) => {
+    setSelectedRequest(req);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     let saved = JSON.parse(localStorage.getItem('platform_requests') || '[]');
@@ -160,7 +186,10 @@ export default function Requests() {
                           </button>
                         </div>
                       ) : (
-                        <button className="px-4 py-2 bg-brand-light text-[10px] font-black text-brand-red uppercase tracking-widest rounded-xl hover:bg-brand-red hover:text-white transition-all border border-brand-gold/10">
+                        <button 
+                          onClick={() => openDetails(req)}
+                          className="px-4 py-2 bg-brand-light text-[10px] font-black text-brand-red uppercase tracking-widest rounded-xl hover:bg-brand-red hover:text-white transition-all border border-brand-gold/10 shadow-sm active:scale-95"
+                        >
                           DETAILS
                         </button>
                       )}
@@ -184,6 +213,78 @@ export default function Requests() {
           </div>
         )}
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Request Insight"
+        maxWidth="max-w-xl"
+      >
+        {selectedRequest && (
+          <div className="space-y-8">
+            <div className="flex items-center gap-6 p-6 bg-brand-light/50 rounded-3xl border border-brand-gold/10">
+              <div className="w-16 h-16 rounded-2xl bg-white border border-brand-gold/20 flex items-center justify-center text-brand-red shadow-sm">
+                <Building2 size={32} />
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-brand-text uppercase italic leading-none mb-1">{selectedRequest.companyName}</h3>
+                <p className="text-[10px] font-black text-brand-orange uppercase tracking-[.2em]">{selectedRequest.id}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 bg-white border border-slate-100 rounded-2xl space-y-1 shadow-sm">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <User size={12} className="text-brand-gold" /> Execution Lead
+                </p>
+                <p className="text-sm font-black text-brand-text italic uppercase">{selectedRequest.adminName}</p>
+              </div>
+              <div className="p-5 bg-white border border-slate-100 rounded-2xl space-y-1 shadow-sm">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <Mail size={12} className="text-brand-gold" /> System Email
+                </p>
+                <p className="text-sm font-black text-brand-text lowercase italic truncate">{selectedRequest.email}</p>
+              </div>
+              <div className="p-5 bg-white border border-slate-100 rounded-2xl space-y-1 shadow-sm">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <CreditCard size={12} className="text-brand-gold" /> Plan Tier
+                </p>
+                <p className="text-sm font-black text-brand-text italic uppercase">{selectedRequest.plan}</p>
+              </div>
+              <div className="p-5 bg-white border border-slate-100 rounded-2xl space-y-1 shadow-sm">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                  <ShieldCheck size={12} className="text-brand-gold" /> Audit Status
+                </p>
+                <div className="flex items-center gap-2">
+                   <div className={`w-2 h-2 rounded-full ${selectedRequest.status === 'Approved' ? 'bg-emerald-500' : 'bg-red-500'}`} />
+                   <p className={`text-sm font-black italic uppercase ${selectedRequest.status === 'Approved' ? 'text-emerald-600' : 'text-red-600'}`}>{selectedRequest.status}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-6 bg-slate-900 rounded-[2rem] text-white/90 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                <BadgeCheck size={80} />
+              </div>
+              <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-gold mb-3">Onboarding Summary</h4>
+              <p className="text-xs font-medium leading-relaxed italic pr-12">
+                This request has been processed and verified by the platform administration. All operational protocols for the <span className="text-brand-gold font-black">"{selectedRequest.plan}"</span> tier have been initialized.
+              </p>
+              <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                   <Calendar size={14} className="text-brand-orange" />
+                   <span className="text-[9px] font-black uppercase tracking-widest text-white/40">Processed: {new Date(selectedRequest.date).toLocaleDateString()}</span>
+                </div>
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="px-6 py-2.5 bg-brand-red text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-brand-red-dark transition-all shadow-lg shadow-brand-red/20"
+                >
+                  Close Inquiry
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }

@@ -115,42 +115,48 @@ export default function Maintenance() {
           <p className="text-slate-500 text-sm font-bold">Monitor equipment health and manage repair work orders.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-sm h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('equipment')}>
+          <button 
+            className="flex-1 flex items-center justify-center gap-2 font-black bg-slate-900 text-white hover:bg-slate-800 transition-all shadow-lg h-10 sm:h-12 text-[10px] sm:text-xs px-6 rounded-xl" 
+            onClick={() => setActiveModal('equipment')}
+          >
             <ClipboardList size={18} />
             Equipment Status
-          </Button>
-          <Button variant="primary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-xl shadow-blue-500/20 h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('create')}>
+          </button>
+          <button 
+            className="flex-1 flex items-center justify-center gap-2 font-black bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20 h-10 sm:h-12 text-[10px] sm:text-xs px-6 rounded-xl" 
+            onClick={() => setActiveModal('create')}
+          >
             <PenTool size={18} />
             Create Work Order
-          </Button>
+          </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-red-100/50 transition-all group overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-1.5 h-full bg-red-500" />
+        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-red/10 transition-all group overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-brand-red" />
           <CardContent className="p-8">
             <div className="flex items-center gap-5">
-              <div className="p-4 bg-red-50 text-red-600 rounded-[1.25rem] group-hover:scale-110 transition-transform shadow-sm">
+              <div className="p-4 bg-brand-red/5 text-brand-red rounded-[1.25rem] group-hover:scale-110 transition-transform shadow-sm">
                 <AlertTriangle size={28} />
               </div>
               <div>
-                <p className="text-[11px] font-black text-red-400 uppercase tracking-widest">Repair Alerts</p>
+                <p className="text-[11px] font-black text-brand-red/60 uppercase tracking-widest">Repair Alerts</p>
                 <p className="text-3xl font-black text-slate-800 mt-1">{stats.urgent} Urgent</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-amber-100/50 transition-all group overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-1.5 h-full bg-amber-500" />
+        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-gold/10 transition-all group overflow-hidden relative">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-brand-gold" />
           <CardContent className="p-8">
             <div className="flex items-center gap-5">
-              <div className="p-4 bg-amber-50 text-amber-600 rounded-[1.25rem] group-hover:scale-110 transition-transform shadow-sm">
+              <div className="p-4 bg-brand-gold/10 text-brand-gold-dark rounded-[1.25rem] group-hover:scale-110 transition-transform shadow-sm">
                 <Wrench size={28} />
               </div>
               <div>
-                <p className="text-[11px] font-black text-amber-400 uppercase tracking-widest">Pending Orders</p>
+                <p className="text-[11px] font-black text-brand-gold-dark/60 uppercase tracking-widest">Pending Orders</p>
                 <p className="text-3xl font-black text-slate-800 mt-1">{stats.pending} Requests</p>
               </div>
             </div>
@@ -209,20 +215,19 @@ export default function Maintenance() {
                     </td>
                     <td className="px-8 py-5 text-center">
                       <span className={`inline-flex items-center px-4 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-sm ${order.status === 'Completed' ? 'bg-emerald-50 text-emerald-600' :
-                          order.status === 'In Progress' ? 'bg-blue-50 text-blue-600' : 'bg-red-50 text-red-600'
+                          order.status === 'In Progress' ? 'bg-brand-gold/10 text-brand-gold-dark' : 'bg-brand-red/5 text-brand-red'
                         }`}>
                         {order.status}
                       </span>
                     </td>
                     <td className="px-8 py-5 text-[11px] font-black text-slate-500 uppercase tracking-wider">{order.lastService}</td>
                     <td className="px-8 py-5 text-right">
-                      <Button
-                        variant="secondary"
-                        className="h-10 px-5 text-xs font-black uppercase tracking-widest transition-all shadow-sm rounded-xl"
+                      <button
+                        className="h-10 px-6 text-[10px] font-black uppercase tracking-widest bg-brand-red text-white hover:bg-brand-red-dark transition-all shadow-lg shadow-brand-red/20 rounded-xl"
                         onClick={() => handleManageOrder(order)}
                       >
                         Manage
-                      </Button>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -306,9 +311,12 @@ export default function Maintenance() {
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Technical Details</label>
             <textarea name="description" rows={3} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none font-bold shadow-sm shadow-slate-50" placeholder="Describe the fault or required maintenance in detail..."></textarea>
           </div>
-          <Button variant="primary" className="w-full h-11 sm:h-14 font-black uppercase tracking-widest shadow-2xl shadow-blue-500/20 rounded-2xl group flex items-center justify-center gap-3 text-xs sm:text-sm" type="submit">
+          <button 
+            className="w-full h-11 sm:h-14 font-black bg-brand-gold text-brand-text hover:bg-brand-gold-dark uppercase tracking-widest shadow-2xl shadow-brand-gold/20 rounded-2xl group flex items-center justify-center gap-3 text-xs sm:text-sm transition-all" 
+            type="submit"
+          >
             Publish Order <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-          </Button>
+          </button>
         </form>
       </Modal>
 

@@ -99,75 +99,81 @@ export default function Financial() {
           <p className="text-slate-500 text-sm font-bold">Track revenue, expenses, and overall profit status.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex items-center gap-2 font-black shadow-lg shadow-brand-red/20 bg-brand-red text-white border-none" onClick={() => setActiveModal('filter')}>
-            <Filter size={18} className="text-white" />
+          <button 
+            className="flex items-center gap-2 font-black bg-brand-red text-white hover:bg-brand-red-dark transition-all shadow-lg shadow-brand-red/20 h-10 sm:h-12 px-6 rounded-xl text-[10px] sm:text-xs" 
+            onClick={() => setActiveModal('filter')}
+          >
+            <Filter size={18} />
             Filter
-          </Button>
-          <Button variant="primary" className="flex items-center gap-2 font-black shadow-xl shadow-blue-500/20" onClick={() => setActiveModal('export')}>
+          </button>
+          <button 
+            className="flex items-center gap-2 font-black bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20 h-10 sm:h-12 px-6 rounded-xl text-[10px] sm:text-xs" 
+            onClick={() => setActiveModal('export')}
+          >
             <Download size={18} />
             Export Report
-          </Button>
+          </button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-emerald-100/50 transition-all group overflow-hidden relative">
-          <div className="absolute top-0 right-0 p-8 text-emerald-500/5 group-hover:scale-150 transition-transform -rotate-12">
+        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-gold/10 transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 p-8 text-brand-gold/5 group-hover:scale-150 transition-transform -rotate-12">
             <DollarSign size={120} />
           </div>
           <CardContent className="p-8 relative z-10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] font-black text-emerald-500 uppercase tracking-widest">Total Revenue</p>
+                <p className="text-[11px] font-black text-brand-gold-dark uppercase tracking-widest">Total Revenue</p>
                 <p className="text-3xl font-black text-slate-800 mt-1">{totals.revenue}</p>
                 <div className="flex items-center gap-1.5 mt-3 text-emerald-600 text-[10px] font-black bg-emerald-100/30 w-fit px-3 py-1 rounded-full border border-emerald-100/50">
                   <TrendingUp size={12} strokeWidth={3} />
                   <span className="uppercase tracking-widest">+12.5% Growth</span>
                 </div>
               </div>
-              <div className="p-5 bg-emerald-500 text-white rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-emerald-200">
+              <div className="p-5 bg-brand-gold text-brand-text rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-brand-gold/20">
                 <DollarSign size={32} />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-rose-100/50 transition-all group overflow-hidden relative">
-          <div className="absolute top-0 right-0 p-8 text-rose-500/5 group-hover:scale-150 transition-transform -rotate-12">
+        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-red/10 transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 p-8 text-brand-red/5 group-hover:scale-150 transition-transform -rotate-12">
             <Receipt size={120} />
           </div>
           <CardContent className="p-8 relative z-10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] font-black text-rose-500 uppercase tracking-widest">Total Expenses</p>
+                <p className="text-[11px] font-black text-brand-red uppercase tracking-widest">Total Expenses</p>
                 <p className="text-3xl font-black text-slate-800 mt-1">{totals.expenses}</p>
                 <div className="flex items-center gap-1.5 mt-3 text-rose-600 text-[10px] font-black bg-rose-100/30 w-fit px-3 py-1 rounded-full border border-rose-100/50">
                   <TrendingDown size={12} strokeWidth={3} />
                   <span className="uppercase tracking-widest">+4.2% Higher</span>
                 </div>
               </div>
-              <div className="p-5 bg-rose-500 text-white rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-rose-200">
+              <div className="p-5 bg-brand-red text-white rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-brand-red/20">
                 <Receipt size={32} />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-blue-100/50 transition-all group overflow-hidden relative">
-          <div className="absolute top-0 right-0 p-8 text-blue-500/5 group-hover:scale-150 transition-transform -rotate-12">
+        <Card className="bg-white border-none shadow-lg shadow-slate-100/50 hover:shadow-xl hover:shadow-brand-orange/10 transition-all group overflow-hidden relative">
+          <div className="absolute top-0 right-0 p-8 text-brand-orange/5 group-hover:scale-150 transition-transform -rotate-12">
             <TrendingUp size={120} />
           </div>
           <CardContent className="p-8 relative z-10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[11px] font-black text-blue-500 uppercase tracking-widest">Net Profit Summary</p>
+                <p className="text-[11px] font-black text-brand-orange uppercase tracking-widest">Net Profit Summary</p>
                 <p className="text-3xl font-black text-slate-800 mt-1">{totals.profit}</p>
-                <div className="flex items-center gap-1.5 mt-3 text-blue-600 text-[10px] font-black bg-blue-100/30 w-fit px-3 py-1 rounded-full border border-blue-100/50">
+                <div className="flex items-center gap-1.5 mt-3 text-brand-orange-dark text-[10px] font-black bg-brand-orange/10 w-fit px-3 py-1 rounded-full border border-brand-orange/20">
                   <TrendingUp size={12} strokeWidth={3} />
                   <span className="uppercase tracking-widest">Target: $60k</span>
                 </div>
               </div>
-              <div className="p-5 bg-blue-600 text-white rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-blue-200">
+              <div className="p-5 bg-brand-orange text-white rounded-[1.5rem] group-hover:scale-110 transition-transform shadow-xl shadow-brand-orange/20">
                 <TrendingUp size={32} />
               </div>
             </div>
@@ -216,13 +222,12 @@ export default function Financial() {
                       </span>
                     </td>
                     <td className="px-8 py-5 text-right">
-                      <Button
-                        variant="secondary"
-                        className="h-10 px-5 text-xs font-black uppercase tracking-widest transition-all shadow-sm rounded-xl"
+                      <button
+                        className="h-10 px-6 text-[10px] font-black uppercase tracking-widest bg-brand-red text-white hover:bg-brand-red-dark transition-all shadow-lg shadow-brand-red/20 rounded-xl"
                         onClick={() => handleViewReceipt(expense)}
                       >
                         View Receipt
-                      </Button>
+                      </button>
                     </td>
                   </tr>
                 ))}

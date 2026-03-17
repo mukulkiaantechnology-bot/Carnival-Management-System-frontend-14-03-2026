@@ -184,22 +184,20 @@ export default function Calendar() {
               className="pl-12 pr-6 py-3.5 bg-white border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all text-sm font-bold w-72 shadow-sm"
             />
           </div>
-          <Button
-            variant="secondary"
+          <button
             className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-xl shadow-brand-red/20 border-none bg-brand-red text-white text-[10px] sm:text-xs transition-all"
             onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
           >
             {viewMode === 'list' ? <LayoutGrid size={18} strokeWidth={2.5} className="text-white" /> : <List size={18} strokeWidth={2.5} className="text-white" />}
             {viewMode === 'list' ? 'Grid' : 'List'}
-          </Button>
-          <Button
-            variant="primary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs"
+          </button>
+          <button
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20 text-[10px] sm:text-xs"
             onClick={openAddModal}
           >
             <Plus size={18} strokeWidth={3} />
             Add Event
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -207,7 +205,7 @@ export default function Calendar() {
         {/* Sidebar Calendar Widget */}
         <div className="lg:col-span-1 space-y-6">
           <Card className="shadow-2xl shadow-slate-200/50 border-none rounded-[2rem] overflow-hidden">
-            <div className="p-8 bg-gradient-to-br from-blue-600 to-indigo-700 text-white relative overflow-hidden">
+            <div className="p-8 bg-gradient-to-br from-brand-red to-brand-orange text-white relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
               <div className="relative z-10 flex items-center justify-between">
                 <h3 className="text-2xl font-black tracking-tight">{monthName} {year}</h3>
@@ -242,9 +240,9 @@ export default function Calendar() {
                       className={`aspect-square flex flex-col items-center justify-center text-xs rounded-[1rem] cursor-pointer transition-all relative group overflow-hidden ${isSelected
                         ? 'bg-slate-900 text-white font-black z-20 scale-110 shadow-xl'
                         : hasEvent
-                          ? 'bg-blue-600 text-white shadow-xl shadow-blue-100 scale-105 z-10'
+                          ? 'bg-brand-red text-white shadow-xl shadow-brand-red/10 scale-105 z-10'
                           : isToday
-                            ? 'bg-blue-50 text-blue-600 font-black border border-blue-200'
+                            ? 'bg-brand-gold/10 text-brand-gold-dark font-black border border-brand-gold/20'
                             : 'text-slate-600 font-bold hover:bg-slate-50'
                         }`}
                     >
@@ -263,14 +261,14 @@ export default function Calendar() {
                   {UPCOMING_TIMELINE.map((item, i) => (
                     <div key={i} className="flex gap-4 group cursor-pointer">
                       <div className="flex flex-col items-center gap-1">
-                        <div className="w-2.5 h-2.5 rounded-full border-2 border-blue-500 bg-white group-hover:bg-blue-500 transition-colors" />
+                        <div className={`w-2.5 h-2.5 rounded-full border-2 ${i === 0 ? 'border-brand-red' : 'border-brand-gold'} bg-white group-hover:bg-slate-900 transition-colors`} />
                         {i < 2 && <div className="w-0.5 h-full bg-slate-100" />}
                       </div>
                       <div className="flex-1 pb-2">
-                        <p className="text-sm font-black text-slate-800 leading-none group-hover:text-blue-600 transition-colors">{item.title}</p>
+                        <p className="text-sm font-black text-slate-800 leading-none group-hover:text-brand-red transition-colors">{item.title}</p>
                         <div className="flex items-center justify-between mt-1.5">
                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tight italic">{item.time}</p>
-                          <span className="text-[9px] font-black text-blue-500 uppercase px-2 py-0.5 bg-blue-50 rounded-lg">{item.status}</span>
+                          <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-lg ${item.status === 'In 2h' ? 'text-brand-red bg-brand-red/5' : 'text-brand-gold-dark bg-brand-gold/10'}`}>{item.status}</span>
                         </div>
                       </div>
                     </div>
@@ -288,7 +286,7 @@ export default function Calendar() {
               title={selectedDay ? `Schedule for ${monthName} ${selectedDay}` : (viewMode === 'list' ? 'Active Schedule' : 'Grid Layout')}
               subtitle={selectedDay ? `Showing operations for the selected date.` : `Comprehensive real-time schedule of all planned events.`}
               action={selectedDay ? (
-                <button onClick={() => setSelectedDay(null)} className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-xl hover:bg-blue-100 transition-all">
+                <button onClick={() => setSelectedDay(null)} className="text-[10px] font-black text-brand-red uppercase tracking-widest bg-brand-red/5 px-3 py-1.5 rounded-xl hover:bg-brand-red/10 transition-all">
                   Clear Filter
                 </button>
               ) : null}
@@ -364,12 +362,12 @@ export default function Calendar() {
                       <div key={event.id} className="p-6 space-y-4 hover:bg-slate-50/50 transition-all">
                         <div className="flex items-start justify-between">
                           <div className="flex gap-4">
-                            <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 shadow-inner shrink-0 leading-none">
+                            <div className="w-12 h-12 bg-brand-red/5 rounded-2xl flex items-center justify-center text-brand-red shadow-inner shrink-0 leading-none">
                               <CalendarDays size={24} />
                             </div>
                             <div>
                                <h4 className="text-base font-black text-slate-800 leading-tight">{event.name}</h4>
-                               <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mt-1 flex items-center gap-1.5">
+                               <p className="text-[10px] font-black text-brand-gold-dark uppercase tracking-widest mt-1 flex items-center gap-1.5">
                                   <Users size={12} /> {event.staff} Staff
                                </p>
                             </div>
@@ -413,7 +411,7 @@ export default function Calendar() {
                     <div
                       key={event.id}
                       onClick={() => openEditModal(event)}
-                      className="p-6 rounded-[2.5rem] border-2 border-slate-50 bg-white hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-500/10 transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full shadow-sm"
+                      className="p-6 rounded-[2.5rem] border-2 border-slate-50 bg-white hover:border-brand-gold/30 hover:shadow-2xl hover:shadow-brand-gold/10 transition-all group cursor-pointer relative overflow-hidden flex flex-col h-full shadow-sm"
                     >
                       <div className="absolute top-0 right-0 p-6 flex flex-col gap-2">
                         <div className="w-10 h-10 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 group-hover:text-blue-600 group-hover:bg-white transition-all shadow-sm">
@@ -421,22 +419,22 @@ export default function Calendar() {
                         </div>
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-2 text-[10px] font-black text-blue-500 uppercase tracking-widest mb-3">
+                        <div className="flex items-center gap-2 text-[10px] font-black text-brand-gold-dark uppercase tracking-widest mb-3">
                           <MapPin size={12} /> {event.location}
                         </div>
-                        <h4 className="text-xl font-black text-slate-800 mb-2 leading-tight tracking-tight">{event.name}</h4>
+                        <h4 className="text-xl font-black text-slate-800 mb-2 leading-tight tracking-tight group-hover:text-brand-red transition-colors">{event.name}</h4>
                         <p className="text-xs text-slate-500 mb-6 font-bold leading-relaxed line-clamp-2">"{event.description}"</p>
                       </div>
                       <div className="flex items-center justify-between mt-auto pt-6 border-t border-slate-50">
                         <div className="flex items-center gap-3">
                           <div className="flex -space-x-2">
                             {[1, 2, 3].map(i => (
-                              <div key={i} className="w-6 h-6 rounded-full border-2 border-white bg-slate-100 text-[8px] flex items-center justify-center font-black text-slate-400">P</div>
+                              <div key={i} className={`w-6 h-6 rounded-full border-2 border-white bg-slate-100 text-[8px] flex items-center justify-center font-black text-slate-400 ${i === 1 ? 'bg-brand-red/10 text-brand-red' : ''}`}>P</div>
                             ))}
                           </div>
                           <span className="text-[10px] font-black text-slate-700 uppercase">{event.staff} Crew</span>
                         </div>
-                        <div className="px-3 py-1.5 bg-slate-900 text-white rounded-xl text-[9px] font-black tracking-tighter uppercase whitespace-nowrap">
+                        <div className="px-3 py-1.5 bg-slate-900 text-white rounded-xl text-[9px] font-black tracking-tighter uppercase whitespace-nowrap group-hover:bg-brand-red transition-colors">
                           {new Date(event.start).toLocaleString('default', { month: 'short' })} {new Date(event.start).getDate()} - {new Date(event.end).getDate()}
                         </div>
                       </div>
@@ -472,7 +470,7 @@ export default function Calendar() {
               <input
                 type="text"
                 required
-                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-black text-slate-700 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
+                className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-black text-slate-700 focus:ring-4 focus:ring-brand-red/10 focus:border-brand-red/30 transition-all shadow-sm"
                 placeholder="e.g. Annual Midsummer Fair"
                 value={formData.name}
                 onChange={e => setFormData({ ...formData, name: e.target.value })}
@@ -500,7 +498,7 @@ export default function Calendar() {
                 <Users size={16} className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
                   type="number"
-                  className="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-black text-slate-700 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm"
+                  className="w-full pl-14 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none font-black text-slate-700 focus:ring-4 focus:ring-brand-red/10 focus:border-brand-red/30 transition-all shadow-sm"
                   value={formData.staff}
                   onChange={e => setFormData({ ...formData, staff: parseInt(e.target.value) })}
                 />
@@ -541,10 +539,19 @@ export default function Calendar() {
             </div>
           </div>
           <div className="flex gap-4 pt-4">
-            <Button variant="secondary" className="flex-1 font-black h-10 sm:h-14 rounded-2xl bg-slate-50 border-none uppercase tracking-widest text-[9px] sm:text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-[2] font-black h-10 sm:h-14 rounded-2xl shadow-xl shadow-blue-500/20 uppercase tracking-widest text-[9px] sm:text-[10px]" type="submit">
-              {activeModal === 'add' ? 'Confirm & Publish' : 'Update Entry'}
-            </Button>
+           <button 
+             type="button" 
+             className="flex-1 font-black h-10 sm:h-14 rounded-2xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all uppercase tracking-widest text-[9px] sm:text-[10px]" 
+             onClick={() => setActiveModal(null)}
+           >
+             Cancel
+           </button>
+           <button 
+             type="submit" 
+             className="flex-[2] font-black h-10 sm:h-14 rounded-2xl shadow-xl shadow-brand-gold/20 bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all uppercase tracking-widest text-[9px] sm:text-[10px]"
+           >
+             {activeModal === 'add' ? 'Confirm & Publish' : 'Update Entry'}
+           </button>
           </div>
         </form>
       </Modal>

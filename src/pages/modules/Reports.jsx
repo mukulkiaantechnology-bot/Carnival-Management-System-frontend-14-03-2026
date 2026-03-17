@@ -86,10 +86,13 @@ export default function Reports() {
           <p className="text-slate-500 text-sm">Generate and view detailed analytics across all modules.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="primary" className="flex items-center gap-2 group" onClick={() => setActiveModal('generate')}>
+          <button 
+            className="flex items-center gap-2 font-black bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20 h-10 sm:h-12 px-6 rounded-xl text-[10px] sm:text-xs group" 
+            onClick={() => setActiveModal('generate')}
+          >
             <BarChart3 size={18} className="group-hover:rotate-12 transition-transform" />
             Generate Custom Report
-          </Button>
+          </button>
         </div>
       </div>
 
@@ -99,10 +102,10 @@ export default function Reports() {
             <h2 className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">{section.title}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {section.reports.map((report) => (
-                <Card key={report.id} className="hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 transition-all group overflow-hidden border-slate-100">
+                <Card key={report.id} className="hover:border-brand-gold/30 hover:shadow-xl hover:shadow-brand-gold/5 transition-all group overflow-hidden border-slate-100">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between">
-                      <div className="p-3 bg-slate-50 text-slate-500 group-hover:bg-blue-600 group-hover:text-white rounded-xl transition-all duration-300 shadow-sm">
+                      <div className="p-3 bg-slate-50 text-slate-500 group-hover:bg-brand-red group-hover:text-white rounded-xl transition-all duration-300 shadow-sm">
                         <report.icon size={24} />
                       </div>
                       <div className="flex items-center gap-1">
@@ -129,13 +132,13 @@ export default function Reports() {
                     </div>
                     <div className="mt-6 flex items-center justify-between border-t border-slate-50 pt-4 border-dashed">
                       <button 
-                        className="text-[10px] font-black text-blue-600 bg-blue-50 hover:bg-blue-600 hover:text-white px-3 py-1.5 rounded-lg transition-all uppercase tracking-tighter shadow-sm border border-blue-100"
+                        className="text-[10px] font-black text-brand-red bg-brand-red/5 hover:bg-brand-red hover:text-white px-3 py-1.5 rounded-lg transition-all uppercase tracking-tighter shadow-sm border border-brand-red/10"
                         onClick={() => handleExport(report.id)}
                       >
                         PDF / CSV Export
                       </button>
                       <button 
-                        className="text-xs font-black text-slate-600 hover:text-blue-600 transition-all flex items-center gap-1 group/btn uppercase tracking-tight"
+                        className="text-xs font-black text-slate-600 hover:text-brand-red transition-all flex items-center gap-1 group/btn uppercase tracking-tight"
                         onClick={() => openViewReport(report)}
                       >
                         View Report 
@@ -162,9 +165,9 @@ export default function Reports() {
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Select Module</label>
             <div className="grid grid-cols-2 gap-3">
               {['Operations', 'Financial', 'Inventory', 'Personnel'].map(mod => (
-                <label key={mod} className="flex items-center gap-3 p-3 border border-slate-100 rounded-xl hover:bg-slate-50 cursor-pointer group transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
-                  <input type="radio" name="module" className="accent-blue-600" defaultChecked={mod === 'Operations'} />
-                  <span className="text-xs font-bold text-slate-700 group-hover:text-blue-700">{mod}</span>
+                <label key={mod} className="flex items-center gap-3 p-3 border border-slate-100 rounded-xl hover:bg-slate-50 cursor-pointer group transition-all has-[:checked]:border-brand-red has-[:checked]:bg-brand-red/5">
+                  <input type="radio" name="module" className="accent-brand-red" defaultChecked={mod === 'Operations'} />
+                  <span className="text-xs font-bold text-slate-700 group-hover:text-brand-red">{mod}</span>
                 </label>
               ))}
             </div>
@@ -184,13 +187,13 @@ export default function Reports() {
           <div className="space-y-2">
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Export Format</label>
             <div className="flex gap-4">
-              <label className="flex-1 flex items-center justify-center gap-2 p-3 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
-                <input type="radio" name="format" className="accent-blue-600" defaultChecked />
-                <FileType size={16} className="text-red-500" />
+              <label className="flex-1 flex items-center justify-center gap-2 p-3 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:border-brand-red has-[:checked]:bg-brand-red/5">
+                <input type="radio" name="format" className="accent-brand-red" defaultChecked />
+                <FileType size={16} className="text-brand-red" />
                 <span className="text-xs font-black uppercase tracking-tight">PDF</span>
               </label>
-              <label className="flex-1 flex items-center justify-center gap-2 p-3 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50">
-                <input type="radio" name="format" className="accent-blue-600" />
+              <label className="flex-1 flex items-center justify-center gap-2 p-3 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all has-[:checked]:border-brand-gold-dark has-[:checked]:bg-brand-gold/10">
+                <input type="radio" name="format" className="accent-brand-gold" />
                 <FileSpreadsheet size={16} className="text-emerald-500" />
                 <span className="text-xs font-black uppercase tracking-tight">CSV</span>
               </label>
@@ -198,10 +201,13 @@ export default function Reports() {
           </div>
 
           <div className="flex gap-3 pt-4 border-t border-slate-100">
-            <Button variant="secondary" className="flex-1 py-4 font-black uppercase tracking-widest text-[10px]" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-1 py-4 font-black uppercase tracking-widest text-[10px]" type="submit">
+            <button type="button" className="flex-1 py-4 font-black uppercase tracking-widest text-[10px] bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all rounded-xl" onClick={() => setActiveModal(null)}>Cancel</button>
+            <button 
+              type="submit" 
+              className="flex-1 py-4 font-black uppercase tracking-widest text-[10px] bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all rounded-xl shadow-lg shadow-brand-gold/20"
+            >
               Run Analytics
-            </Button>
+            </button>
           </div>
         </form>
       </Modal>
@@ -229,8 +235,8 @@ export default function Reports() {
               <CardContent className="h-48 flex items-end gap-2 p-6">
                 {[45, 65, 35, 85, 55, 95, 75].map((h, i) => (
                   <div key={i} className="flex-1 flex flex-col items-center gap-2 group cursor-pointer">
-                    <div className="w-full bg-blue-600/10 group-hover:bg-blue-600/20 rounded-t-lg transition-all relative overflow-hidden" style={{ height: `${h}%` }}>
-                      <div className="absolute inset-x-0 top-0 h-1 bg-blue-500 shadow-xl shadow-blue-500/50" />
+                    <div className="w-full bg-brand-red/10 group-hover:bg-brand-red/20 rounded-t-lg transition-all relative overflow-hidden" style={{ height: `${h}%` }}>
+                      <div className="absolute inset-x-0 top-0 h-1 bg-brand-red shadow-xl shadow-brand-red/50" />
                       <div className="absolute inset-0 bg-gradient-to-t from-transparent to-white/10" />
                     </div>
                     <span className="text-[8px] font-black text-slate-400 uppercase">Day {i + 1}</span>
@@ -239,23 +245,31 @@ export default function Reports() {
               </CardContent>
             </Card>
 
-            <div className="p-4 bg-blue-50 rounded-2xl border border-blue-100 flex items-start gap-4">
-              <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
+            <div className="p-4 bg-brand-gold/10 rounded-2xl border border-brand-gold/20 flex items-start gap-4">
+              <div className="p-2 bg-brand-gold text-brand-text rounded-lg">
                 <TrendingUp size={20} />
               </div>
               <div>
-                <h4 className="text-sm font-black text-blue-900 uppercase tracking-tight">AI Insight</h4>
-                <p className="text-xs font-semibold text-blue-700 leading-relaxed mt-1">
+                <h4 className="text-sm font-black text-brand-gold-dark uppercase tracking-tight">AI Insight</h4>
+                <p className="text-xs font-semibold text-brand-gold-dark/80 leading-relaxed mt-1">
                   Historical data suggests a potential 15% increase in efficiency by optimizing the current scheduling pattern.
                 </p>
               </div>
             </div>
 
             <div className="flex gap-3 pt-4">
-              <Button variant="secondary" className="flex-1 py-4 font-black uppercase tracking-widest text-[10px]" onClick={() => setActiveModal(null)}>Close Insight</Button>
-              <Button variant="primary" className="flex-1 py-4 font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2" onClick={() => handleExport(selectedReport.id)}>
+              <button 
+                className="flex-1 py-4 font-black uppercase tracking-widest text-[10px] bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all rounded-xl" 
+                onClick={() => setActiveModal(null)}
+              >
+                Close Insight
+              </button>
+              <button 
+                className="flex-1 py-4 font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all rounded-xl shadow-lg shadow-brand-gold/20" 
+                onClick={() => handleExport(selectedReport.id)}
+              >
                 <Download size={16} /> Download Copy
-              </Button>
+              </button>
             </div>
           </div>
         )}

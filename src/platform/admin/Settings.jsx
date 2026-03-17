@@ -206,18 +206,6 @@ export default function PlatformSettings() {
                   Update Security Credentials
                 </button>
               </div>
-              <div className="space-y-4">
-                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Two-Factor Authentication</h4>
-                <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-black text-slate-800">Enable 2FA</p>
-                    <p className="text-xs text-slate-400 font-medium mt-0.5">Add an extra layer of security using an authenticator app.</p>
-                  </div>
-                  <button className="px-4 py-2 bg-brand-gold text-brand-text text-[10px] font-black uppercase rounded-xl tracking-widest hover:bg-brand-gold-dark transition-all shadow-lg shadow-brand-gold/20">
-                    Enable
-                  </button>
-                </div>
-              </div>
             </div>
           )}
         </section>
