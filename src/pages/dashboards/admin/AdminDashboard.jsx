@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Users, ClipboardCheck, Wrench, DollarSign, Clock,
   CheckCircle, AlertCircle, ArrowUpRight, TrendingUp,
-  Download, ExternalLink, RefreshCcw, Eye, X, Globe, Zap,
+  Download, ExternalLink, RefreshCcw, Eye, X,
   TrendingDown, Activity, ShieldCheck, CreditCard
 } from 'lucide-react';
 import {
@@ -65,7 +65,6 @@ export default function AdminDashboard() {
   const navigate = useNavigate();
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [notification, setNotification] = useState(null);
-  const [showLivePreview, setShowLivePreview] = useState(false);
 
   const showNotification = (msg) => {
     setNotification(msg);
@@ -98,73 +97,6 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Enhanced Live Preview Modal */}
-      {showLivePreview && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-12">
-          <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-xl" onClick={() => setShowLivePreview(false)} />
-          <div className="bg-white w-full max-w-6xl h-full rounded-[3rem] shadow-2xl flex flex-col relative overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
-            <div className="bg-brand-light/50 backdrop-blur-sm border-b border-brand-gold/10 p-8 flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 bg-brand-red rounded-2xl shadow-xl shadow-brand-red/30 flex items-center justify-center">
-                  <Globe className="text-white" size={28} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-black text-brand-red tracking-tight uppercase italic leading-none">Public Presence Matrix</h3>
-                  <div className="flex items-center gap-3 mt-1">
-                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest bg-white px-2.5 py-1 rounded-lg border border-brand-gold/10">STAGING</span>
-                    <span className="text-[10px] font-black text-emerald-500 uppercase tracking-tighter">Live Status: Synchronized</span>
-                  </div>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowLivePreview(false)}
-                className="w-12 h-12 flex items-center justify-center bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-500 rounded-2xl transition-all shadow-sm border border-slate-50"
-              >
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto bg-slate-50/30 p-10 space-y-10">
-              <div className="h-80 bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-brand-gold/10 flex flex-col items-center justify-center text-center p-12 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-brand-red/10 via-transparent to-brand-gold/10 opacity-0 group-hover:opacity-100 duration-700 transition-opacity" />
-                <div className="relative z-10">
-                  <Zap size={48} className="text-brand-orange mb-6 mx-auto animate-bounce duration-[2000ms]" />
-                  <h2 className="text-4xl font-black text-brand-red tracking-tight leading-none mb-4 uppercase italic">Summer Carnival 2026</h2>
-                  <p className="text-slate-500 max-w-lg font-bold text-lg leading-relaxed">The pinnacle of excitement is here. Secure your digital pass to the season's premier event.</p>
-                  <div className="mt-10 flex gap-4 justify-center">
-                    <Button variant="primary" className="font-black py-5 px-12 rounded-2xl shadow-2xl shadow-brand-gold/30 uppercase tracking-widest text-[10px]">Access Passes Now</Button>
-                    <Button variant="secondary" className="font-black py-5 px-12 rounded-2xl bg-white border-brand-gold/10 uppercase tracking-widest text-[10px]">Learn More</Button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  { title: 'Extreme Coasters', meta: 'Operational', highlight: 'Active' },
-                  { title: 'Gourmet Plaza', meta: 'Vendor Hub', highlight: 'Stable' },
-                  { title: 'Night Fireworks', meta: 'Event Hub', highlight: 'Pending' }
-                ].map((item, i) => (
-                  <div key={i} className="bg-white p-8 rounded-[2rem] border border-brand-gold/10 shadow-sm hover:shadow-2xl hover:shadow-brand-gold/10 transition-all duration-500 group">
-                    <div className="w-16 h-16 bg-brand-light rounded-2xl mb-6 group-hover:bg-brand-red group-hover:rotate-6 transition-all shadow-inner" />
-                    <p className="text-[10px] font-black text-brand-orange uppercase tracking-widest mb-1.5">{item.meta}</p>
-                    <h4 className="text-xl font-black text-brand-text mb-3 uppercase italic leading-none">{item.title}</h4>
-                    <div className="h-1.5 w-full bg-slate-50 rounded-full overflow-hidden shadow-inner">
-                      <div className="h-full bg-brand-gold w-2/3 rounded-full" />
-                    </div>
-                    <div className="mt-4 flex items-center justify-between">
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-tight">{item.highlight}</span>
-                      <ArrowUpRight size={14} className="text-brand-gold opacity-50" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="p-6 bg-slate-900 text-white/50 text-center">
-              <p className="text-[10px] font-black uppercase tracking-[0.3em]">Operational Dashboard Interface • High Precision Mode</p>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -184,14 +116,6 @@ export default function AdminDashboard() {
           >
             <RefreshCcw size={20} className={isRefreshing ? 'animate-spin' : 'text-white'} />
             SYNC DATA
-          </Button>
-          <Button
-            variant="primary"
-            className="flex items-center gap-3 font-black py-4 px-8 rounded-2xl shadow-2xl shadow-brand-gold/30 bg-brand-gold text-brand-text hover:bg-brand-gold-dark border-none uppercase tracking-widest text-[10px]"
-            onClick={() => setShowLivePreview(true)}
-          >
-            <Eye size={20} />
-            LIVE PREVIEW
           </Button>
         </div>
       </div>
