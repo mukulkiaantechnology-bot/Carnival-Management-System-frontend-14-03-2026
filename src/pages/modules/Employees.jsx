@@ -238,7 +238,7 @@ export default function Employees() {
     ];
   }, [employees]);
 
-  const basePath = window.location.pathname.startsWith('/hr') ? '/hr/employees' : '/employees';
+  const basePath = window.location.pathname.startsWith('/hr') ? '/hr/staff' : '/staff';
 
   return (
     <div className="space-y-6 relative overflow-x-hidden px-1 pb-8">

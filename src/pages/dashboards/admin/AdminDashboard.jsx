@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 import { Button } from '../../../components/ui/Button';
 
 const STATS = [
-  { label: 'Total Employees', value: '142', icon: Users, color: 'text-brand-red', bg: 'bg-brand-light', path: '/employees', trend: '+5%' },
+  { label: 'Total Staff', value: '142', icon: Users, color: 'text-brand-red', bg: 'bg-brand-light', path: '/staff', trend: '+5%' },
   { label: 'Open Inspections', value: '8', icon: ClipboardCheck, color: 'text-brand-orange', bg: 'bg-brand-orange/10', path: '/inspections', trend: '+5%' },
   { label: 'Maintenance Alerts', value: '3', icon: Wrench, color: 'text-brand-red', bg: 'bg-brand-red/10', path: '/maintenance', trend: '+5%' },
   { label: 'Weekly Sales', value: '$42,500', icon: DollarSign, color: 'text-brand-gold', bg: 'bg-brand-gold/10', path: '/financial', trend: '+5%' },
