@@ -1,14 +1,12 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, Layout } from 'lucide-react';
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import logo from '../../assets/logo.png';
 
 export function PublicNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
 
   const handleNav = (target) => {
     if (location.pathname !== '/' && !target.startsWith('#')) {
@@ -62,24 +60,13 @@ export function PublicNavbar() {
             <button onClick={() => handleNav('#pricing')} className="text-[10px] font-black uppercase text-slate-400 hover:text-brand-red tracking-widest transition-colors italic">Pricing</button>
             <button onClick={() => handleNav('#contact')} className="text-[10px] font-black uppercase text-slate-400 hover:text-brand-red tracking-widest transition-colors italic">Contact</button>
             
-            {user ? (
-               <Link 
-                to="/dashboard-home" 
-                className="bg-brand-dark text-white px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-red transition-all shadow-lg shadow-brand-red/10 flex items-center gap-2"
-              >
-                Go to Dashboard <ArrowRight size={18} />
-              </Link>
-            ) : (
-              <>
-                <Link to="/login" className="text-[10px] font-black uppercase text-brand-red hover:text-brand-orange transition-colors italic">Login</Link>
-                <Link 
-                  to="/signup" 
-                  className="bg-brand-gold text-brand-text px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold-dark transition-all shadow-lg shadow-brand-gold/10 flex items-center gap-2"
-                >
-                  Get Started <ArrowRight size={18} />
-                </Link>
-              </>
-            )}
+            <Link to="/login" className="text-[10px] font-black uppercase text-brand-red hover:text-brand-orange transition-colors italic">Login</Link>
+            <Link 
+              to="/signup" 
+              className="bg-brand-gold text-brand-text px-6 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold-dark transition-all shadow-lg shadow-brand-gold/10 flex items-center gap-2"
+            >
+              Get Started <ArrowRight size={18} />
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}

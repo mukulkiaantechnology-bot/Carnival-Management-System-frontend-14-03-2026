@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Calendar, MapPin, Plus, X, Eye, Pencil, Trash2, Search, ChevronDown, Clock, Users, FileText } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
+import { Button } from '../../../components/ui/Button';
 
 const INITIAL_EVENTS = [
   { id: 'EVT-001', name: 'Summer Carnival Kickoff', location: 'Main Arena', startDate: '2026-07-04', endDate: '2026-07-06', status: 'upcoming', staff: 'James Carter (Lead), 12 others', desc: 'Opening ceremony and parade.' },
@@ -9,8 +10,8 @@ const INITIAL_EVENTS = [
 ];
 
 const STATUS_BADGE = {
-  upcoming: 'bg-blue-50 text-blue-700 ring-1 ring-blue-100',
-  ongoing: 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100',
+  upcoming: 'bg-brand-gold/10 text-brand-gold ring-1 ring-brand-gold/20',
+  ongoing: 'bg-emerald-50 text-emerald-600 ring-1 ring-emerald-100',
   completed: 'bg-slate-50 text-slate-500 ring-1 ring-slate-100',
 };
 
@@ -54,14 +55,14 @@ export default function Events() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <Calendar className="text-indigo-500" size={24} /> Events
+          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic flex items-center gap-2">
+            <Calendar className="text-brand-gold" size={24} /> Events
           </h1>
-          <p className="text-sm text-slate-500">Plan and track all scheduled activities.</p>
+          <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">Plan and track all scheduled activities.</p>
         </div>
-        <button onClick={() => setShowModal(true)} className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors font-semibold shadow-sm">
+        <Button onClick={() => setShowModal(true)} variant="primary" className="gap-2 px-6 py-3">
           <Plus size={18} /> Create Event
-        </button>
+        </Button>
       </div>
 
       {/* Events Table */}
@@ -93,12 +94,14 @@ export default function Events() {
                       </span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <button 
+                      <Button 
+                        variant="ghost" 
+                        size="sm"
                         onClick={() => handleEdit(ev)}
-                        className="p-1 px-2 text-indigo-600 hover:bg-indigo-50 rounded-md text-xs font-bold transition-colors"
+                        className="text-brand-red hover:bg-brand-red/5 font-black uppercase tracking-widest text-[10px] px-3 py-1.5"
                       >
                         Edit
-                      </button>
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -115,7 +118,7 @@ export default function Events() {
           {events.map((ev) => (
             <div key={ev.id} className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-4 hover:shadow-md transition-shadow group">
                <div className="flex justify-between items-start">
-                  <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-brand-red/10 text-brand-red flex items-center justify-center group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                     <Calendar size={20} />
                   </div>
                   <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md ${STATUS_BADGE[ev.status]}`}>{ev.status}</span>
@@ -186,10 +189,10 @@ export default function Events() {
             </div>
 
             <div className="flex justify-end gap-3 pt-2">
-               <button onClick={closeModal} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
-               <button onClick={handleSave} className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg shadow-sm">
+               <Button onClick={closeModal} variant="outline" className="px-6">Cancel</Button>
+               <Button onClick={handleSave} variant="secondary" className="px-8 shadow-xl shadow-brand-red/20">
                  {editingEvent ? 'Update Event' : 'Save & Launch'}
-               </button>
+               </Button>
             </div>
           </div>
         </div>

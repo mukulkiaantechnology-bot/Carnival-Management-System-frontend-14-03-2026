@@ -7,6 +7,8 @@ import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 import { useTraining } from '../../context/TrainingContext';
 
+import trainingBg from '../../assets/training_bg.png';
+
 export default function TrainingDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -41,13 +43,18 @@ export default function TrainingDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card className="border-none shadow-md overflow-hidden bg-slate-900 aspect-video flex items-center justify-center relative group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div className="p-5 bg-blue-600 text-white rounded-full shadow-2xl group-hover:scale-110 transition-transform duration-300 z-10">
+            <img 
+              src={trainingBg} 
+              alt="Training Background" 
+              className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div className="p-5 bg-brand-red text-white rounded-full shadow-2xl group-hover:scale-110 transition-transform duration-300 z-10">
               <Play size={32} fill="currentColor" />
             </div>
-            <div className="absolute bottom-6 left-6 text-white z-10">
-              <h3 className="text-xl font-bold">{module.title}</h3>
-              <p className="text-sm text-slate-300">Module {id} • {module.duration}</p>
+            <div className="absolute bottom-8 left-8 text-white z-10">
+              <h3 className="text-2xl font-black italic uppercase tracking-tight">{module.title}</h3>
+              <p className="text-sm text-slate-300 font-bold uppercase tracking-widest mt-1">Module {id} • {module.duration}</p>
             </div>
           </Card>
 

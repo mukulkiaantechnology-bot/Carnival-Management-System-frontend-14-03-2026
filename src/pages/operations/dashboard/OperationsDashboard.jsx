@@ -1,12 +1,12 @@
-import { ClipboardCheck, Calendar, Users, FileText, CheckCircle, Clock, AlertTriangle, ArrowRight } from 'lucide-react';
+import { ClipboardCheck, Calendar, Users, FileText, CheckCircle, Clock, AlertTriangle, ArrowRight, MapPin } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 import { Link } from 'react-router-dom';
 
 const STATS = [
-  { label: 'Open Inspections', value: '12', icon: ClipboardCheck, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-100' },
-  { label: 'Active Events', value: '5', icon: Calendar, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-100' },
-  { label: 'Employees On Duty', value: '87', icon: Users, color: 'text-teal-600', bg: 'bg-teal-50', border: 'border-teal-100' },
-  { label: 'Pending Reports', value: '6', icon: FileText, color: 'text-rose-600', bg: 'bg-rose-50', border: 'border-rose-100' },
+  { label: 'Open Inspections', value: '12', icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10', border: 'border-brand-red/20' },
+  { label: 'Active Events', value: '5', icon: Calendar, color: 'text-brand-gold', bg: 'bg-brand-gold/10', border: 'border-brand-gold/20' },
+  { label: 'Employees On Duty', value: '87', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', border: 'border-brand-orange/20' },
+  { label: 'Pending Reports', value: '6', icon: FileText, color: 'text-brand-text', bg: 'bg-brand-light', border: 'border-brand-gold/10' },
 ];
 
 const RECENT_INSPECTIONS = [
@@ -24,30 +24,35 @@ const UPCOMING_EVENTS = [
 ];
 
 const STATUS_CONFIG = {
-  passed: { label: 'Passed', icon: CheckCircle, className: 'bg-emerald-50 text-emerald-700 border-emerald-100' },
-  pending: { label: 'Pending', icon: Clock, className: 'bg-amber-50 text-amber-700 border-amber-100' },
-  failed: { label: 'Failed', icon: AlertTriangle, className: 'bg-rose-50 text-rose-700 border-rose-100' },
+  passed: { label: 'Passed', icon: CheckCircle, className: 'bg-emerald-50 text-emerald-600 border-emerald-100' },
+  pending: { label: 'Pending', icon: Clock, className: 'bg-brand-gold/10 text-brand-gold border-brand-gold/20' },
+  failed: { label: 'Failed', icon: AlertTriangle, className: 'bg-brand-red/10 text-brand-red border-brand-red/20' },
 };
 
 export default function OperationsDashboard() {
   return (
     <div className="space-y-6 overflow-x-hidden">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
-        <h1 className="text-xl sm:text-2xl font-bold text-slate-800">Operations Dashboard</h1>
-        <p className="text-xs sm:text-sm text-slate-500">Welcome back, Operations Manager</p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 px-1">
+        <div>
+          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic leading-none">Operations Dashboard</h1>
+          <p className="text-slate-500 font-bold text-xs mt-2 uppercase tracking-widest leading-none">Real-time Performance & Safety Overview</p>
+        </div>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest bg-white border border-slate-100 px-4 py-2 rounded-xl shadow-sm">
+          Welcome back, <span className="text-brand-red italic">Operations Manager</span>
+        </p>
       </div>
 
       {/* Top Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {STATS.map((stat) => (
-          <Card key={stat.label} className={`border-l-4 ${stat.border.replace('100', '400')}`}>
-            <CardContent className="p-5 flex items-center justify-between">
+          <Card key={stat.label} className="border-none shadow-xl shadow-slate-100/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+            <CardContent className="p-6 flex items-center justify-between group">
               <div>
-                <p className="text-sm font-medium text-slate-500">{stat.label}</p>
-                <p className="text-3xl font-bold text-slate-800 mt-1">{stat.value}</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1.5">{stat.label}</p>
+                <p className="text-3xl font-black text-brand-text tracking-tight italic leading-none">{stat.value}</p>
               </div>
-              <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
-                <stat.icon size={24} />
+              <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} shadow-sm group-hover:scale-110 transition-transform`}>
+                <stat.icon size={28} />
               </div>
             </CardContent>
           </Card>
@@ -93,9 +98,9 @@ export default function OperationsDashboard() {
                 </table>
               </div>
             </div>
-            <div className="px-5 py-3 border-t border-slate-50">
-              <Link to="/operations/inspections" className="text-blue-600 hover:text-blue-800 text-xs font-bold flex items-center gap-1 transition-colors">
-                View all inspections <ArrowRight size={12} />
+            <div className="px-5 py-4 border-t border-slate-50 bg-slate-50/30">
+              <Link to="/operations/inspections" className="text-brand-red hover:text-brand-red-dark text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 transition-colors group/link">
+                View all inspections <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
               </Link>
             </div>
           </CardContent>
@@ -106,18 +111,18 @@ export default function OperationsDashboard() {
           <CardHeader title="Upcoming Events" subtitle="Next scheduled activities" />
           <CardContent className="p-5 space-y-4">
             {UPCOMING_EVENTS.map((event, idx) => (
-              <div key={idx} className="flex gap-4 p-3 rounded-xl border border-slate-100 hover:bg-slate-50 transition-colors group">
-                <div className="w-12 h-12 rounded-lg bg-indigo-50 text-indigo-600 flex flex-col items-center justify-center font-bold text-xs flex-shrink-0 group-hover:bg-indigo-100 transition-colors">
+              <div key={idx} className="flex gap-4 p-3.5 rounded-2xl border border-slate-50 hover:bg-brand-red/5 hover:border-brand-red/10 transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-xl bg-brand-red/10 text-brand-red flex flex-col items-center justify-center font-black text-xs flex-shrink-0 group-hover:bg-brand-red group-hover:text-white transition-all">
                   <Calendar size={20} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-slate-800 text-sm truncate">{event.name}</p>
-                  <p className="text-slate-500 text-xs mt-0.5 truncate">{event.location}</p>
-                  <p className="text-indigo-600 text-xs mt-1 font-semibold">{event.date}</p>
+                  <p className="font-black text-brand-text text-sm truncate uppercase italic tracking-tight">{event.name}</p>
+                  <p className="text-slate-400 text-[10px] font-bold mt-1 truncate uppercase flex items-center gap-1"><MapPin size={10} className="text-brand-gold" /> {event.location}</p>
+                  <p className="text-brand-red text-[10px] mt-1.5 font-black uppercase tracking-widest font-mono italic">{event.date}</p>
                 </div>
               </div>
             ))}
-            <Link to="/operations/events" className="block text-center text-blue-600 hover:text-blue-800 text-xs font-semibold pt-2 transition-colors">
+            <Link to="/operations/events" className="block text-center text-brand-red hover:text-brand-red-dark text-[10px] font-black uppercase tracking-widest pt-2 transition-colors">
               Show all events
             </Link>
           </CardContent>

@@ -3,12 +3,10 @@ import { ArrowRight, CheckCircle2, Star, Zap, Shield, BarChart3, Users, Clock, G
 import { PublicNavbar } from '../components/PublicNavbar';
 import { PublicFooter } from '../components/PublicFooter';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
 import { PricingSection } from './PricingSection';
 import logo from '../../assets/logo.png';
 
 export default function LandingPage() {
-  const { user } = useAuth();
 
   useEffect(() => {
     if (window.location.hash) {
@@ -59,10 +57,10 @@ export default function LandingPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16">
             <Link 
-              to={user ? "/dashboard-home" : "/signup"} 
+              to="/signup" 
               className="w-full sm:w-auto px-10 py-6 bg-brand-gold text-brand-text rounded-[2rem] text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold-dark hover:scale-105 transition-all shadow-2xl shadow-brand-gold/20 flex items-center justify-center gap-3"
             >
-              {user ? "Go to Dashboard" : "Start Free Trial"} <ArrowRight size={22} />
+              Start Free Trial <ArrowRight size={22} />
             </Link>
             <a 
               href="#features" 

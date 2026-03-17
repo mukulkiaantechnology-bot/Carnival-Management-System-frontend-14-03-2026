@@ -3,17 +3,17 @@ import { BarChart, Download, FileText, ClipboardCheck, Calendar, Users, Briefcas
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 
 const REPORT_CATEGORIES = [
-  { id: 'RC-1', title: 'Inspection Reports', desc: 'Compliance results, safety logs, and failed check deep-dives.', icon: ClipboardCheck, color: 'text-amber-600', bg: 'bg-amber-50', sampleData: [
+  { id: 'RC-1', title: 'Inspection Reports', desc: 'Compliance results, safety logs, and failed check deep-dives.', icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10', sampleData: [
     { id: 1, item: 'Roller Coaster Brake System', status: 'Passed', date: '2026-03-15' },
     { id: 2, item: 'Ferris Wheel Carriage Locks', status: 'Passed', date: '2026-03-15' },
     { id: 3, item: 'Food Stall Hygiene Audit', status: 'Requires Attention', date: '2026-03-14' },
   ]},
-  { id: 'RC-2', title: 'Event Reports', desc: 'Attendance stats, location performance, and crowd density logs.', icon: Calendar, color: 'text-indigo-600', bg: 'bg-indigo-50', sampleData: [
+  { id: 'RC-2', title: 'Event Reports', desc: 'Attendance stats, location performance, and crowd density logs.', icon: Calendar, color: 'text-brand-gold', bg: 'bg-brand-gold/10', sampleData: [
     { id: 1, metric: 'Peak Attendance', value: '4,500', time: '18:00' },
     { id: 2, metric: 'Main Stage Crowd Density', value: 'High', time: '20:30' },
     { id: 3, metric: 'Ticket Conversions', value: '72%', time: 'End of Day' },
   ]},
-  { id: 'RC-3', title: 'Employee Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-teal-600', bg: 'bg-teal-50', sampleData: [
+  { id: 'RC-3', title: 'Employee Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', sampleData: [
     { id: 1, staff: 'James Carter', shift: '08:00 - 16:00', task: 'Ride Ops' },
     { id: 2, staff: 'Maria Lopez', shift: '10:00 - 18:00', task: 'Catering' },
     { id: 3, staff: 'David Kim', shift: 'On Call', task: 'Maintenance' },
@@ -75,14 +75,14 @@ export default function OperationsReports() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <BarChart className="text-emerald-500" size={24} /> Reports
+          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic flex items-center gap-2">
+            <BarChart className="text-brand-gold" size={24} /> Reports
           </h1>
-          <p className="text-sm text-slate-500">Generate and download operations analytics.</p>
+          <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">Generate and download operations analytics.</p>
         </div>
         <button 
           onClick={() => setShowNewReportModal(true)}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-semibold shadow-sm cursor-pointer whitespace-nowrap active:scale-95"
+          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-brand-red hover:bg-brand-red-dark text-white rounded-xl transition-all font-black uppercase tracking-widest text-xs shadow-lg shadow-brand-red/20 cursor-pointer whitespace-nowrap active:scale-95"
         >
           <Plus size={18} /> New Report
         </button>
@@ -147,14 +147,14 @@ export default function OperationsReports() {
                        <button 
                         disabled={downloadingId === rpt.id}
                         onClick={() => handleDownload(rpt.id)}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all transform shrink-0 cursor-pointer ${downloadingId === rpt.id ? 'bg-slate-100 text-slate-400' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95'}`}>
+                        className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all transform shrink-0 cursor-pointer ${downloadingId === rpt.id ? 'bg-slate-100 text-slate-400' : 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20 hover:bg-brand-gold hover:text-brand-text active:scale-95'}`}>
                          {downloadingId === rpt.id ? (
                            <>
                              <Loader2 size={14} className="animate-spin" /> Preparing...
                            </>
                          ) : (
                            <>
-                             <Download size={14} /> Download <span className="text-[10px] opacity-60 ml-1">({rpt.size})</span>
+                             <Download size={14} /> Download <span className="opacity-60 ml-1">({rpt.size})</span>
                            </>
                          )}
                        </button>
@@ -167,11 +167,11 @@ export default function OperationsReports() {
           {reports.length === 0 && (
             <div className="p-10 text-center text-slate-400 italic">No reports found.</div>
           )}
-          <div className="p-5 border-t border-slate-100 bg-slate-50/50">
-             <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-400">
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Auto-Generated</div>
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-blue-500" /> Secure PDF</div>
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-indigo-500" /> Excel Export</div>
+          <div className="p-5 border-t border-slate-100 bg-slate-50/50 rounded-b-2xl">
+             <div className="flex flex-wrap items-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-brand-red shadow-sm shadow-brand-red/40" /> Auto-Generated</div>
+                <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-brand-gold shadow-sm shadow-brand-gold/40" /> Secure PDF</div>
+                <div className="flex items-center gap-2"><div className="w-2.5 h-2.5 rounded-full bg-brand-dark shadow-sm shadow-black/20" /> Excel Export</div>
              </div>
           </div>
         </CardContent>
@@ -213,8 +213,8 @@ export default function OperationsReports() {
             </div>
 
             <div className="flex gap-3 pt-2">
-              <button onClick={() => setShowNewReportModal(false)} className="flex-1 py-3 text-sm font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer">Discard</button>
-              <button onClick={handleCreateReport} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-all active:scale-95 cursor-pointer">Generate Report</button>
+              <button onClick={() => setShowNewReportModal(false)} className="flex-1 py-3 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:bg-slate-50 rounded-xl transition-colors cursor-pointer">Discard</button>
+              <button onClick={handleCreateReport} className="flex-1 py-3 bg-brand-red hover:bg-brand-red-dark text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-lg shadow-brand-red/20 transition-all active:scale-95 cursor-pointer">Generate Report</button>
             </div>
           </div>
         </div>
