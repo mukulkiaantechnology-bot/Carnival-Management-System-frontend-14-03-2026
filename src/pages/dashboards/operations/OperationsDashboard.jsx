@@ -10,13 +10,13 @@ const STATS = [
 
 export default function OperationsDashboard() {
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Operations Dashboard</h1>
+    <div className="space-y-4 md:space-y-6">
+      <h1 className="text-xl md:text-2xl font-bold text-slate-800 tracking-tight">Operations Dashboard</h1>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
         {STATS.map((stat) => (
           <Card key={stat.label}>
-            <CardContent className="p-6 flex items-center space-x-4">
+            <CardContent className="p-4 md:p-6 flex items-center space-x-4">
               <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
                 <stat.icon size={24} />
               </div>

@@ -129,7 +129,14 @@ export default function AddTraining() {
           </div>
 
           <div className="flex gap-4 pt-6">
-            <Button variant="secondary" className="flex-1 font-black h-10 sm:h-12 text-xs sm:text-sm rounded-2xl shadow-sm border-none bg-slate-50 hover:bg-slate-100" type="button" onClick={() => navigate('/hr/training-library')}>Cancel</Button>
+            <Button 
+              variant="ghost" 
+              className="flex-1 font-black h-10 sm:h-12 text-xs sm:text-sm rounded-2xl shadow-sm border border-brand-red/10 bg-brand-red/5 text-brand-red hover:bg-brand-red hover:text-white transition-all" 
+              type="button" 
+              onClick={() => navigate('/hr/training-library')}
+            >
+              Cancel
+            </Button>
             <Button
               variant="primary"
               className="flex-[2] font-black h-10 sm:h-12 text-xs sm:text-sm rounded-2xl shadow-2xl shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed group"

@@ -85,7 +85,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-8 relative overflow-x-hidden px-1 pb-10">
+    <div className="space-y-4 md:space-y-8 relative overflow-x-hidden px-1 pb-10">
       {/* Premium Toast Notification */}
       {notification && (
         <div className="fixed top-24 right-8 z-[110] animate-in slide-in-from-right duration-300">
@@ -197,7 +197,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
         {STATS.map((stat) => (
           <Card
             key={stat.label}
@@ -223,7 +223,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8">
         {/* Recent Activities Feed */}
         <Card className="lg:col-span-2 flex flex-col border-none shadow-2xl shadow-slate-200/40 rounded-[2.5rem] overflow-hidden">
           <CardHeader
@@ -238,7 +238,7 @@ export default function AdminDashboard() {
                   className="px-8 py-5 flex gap-5 hover:bg-slate-50 transition-all group cursor-pointer"
                   onClick={() => navigate(activity.path)}
                 >
-                  <div className={`w-12 h-12 rounded-2xl ${activity.bgColor} ${activity.iconColor} flex items-center justify-center shrink-0 group-hover:rotate-6 group-hover:scale-110 transition-all shadow-sm`}>
+                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl ${activity.bgColor} ${activity.iconColor} flex items-center justify-center shrink-0 group-hover:rotate-6 group-hover:scale-110 transition-all shadow-sm`}>
                     <activity.icon size={20} strokeWidth={2.5} />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -272,8 +272,8 @@ export default function AdminDashboard() {
             title="Global Performance Hub"
             subtitle="High-fidelity revenue visualization for the current fiscal cycle."
           />
-          <CardContent className="flex-1 flex flex-col p-8 pt-4">
-            <div className="h-[320px] w-full pt-8 relative">
+          <CardContent className="flex-1 flex flex-col p-4 md:p-8 pt-2 md:pt-4">
+            <div className="h-[240px] md:h-[320px] w-full pt-4 md:pt-8 relative">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={CHART_DATA} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                   <defs>
@@ -327,7 +327,7 @@ export default function AdminDashboard() {
                   <p className="text-2xl font-black text-brand-red tracking-tighter italic">$50,000</p>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Operational Yield</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Yield</p>
                   <div className="flex items-center gap-3">
                     <p className="text-2xl font-black text-brand-red tracking-tighter italic">$42,500</p>
                     <div className="px-2.5 py-1 bg-emerald-500/10 text-emerald-600 rounded-xl text-[10px] font-black flex items-center gap-1 border border-emerald-500/20 shadow-sm uppercase tracking-tighter">

@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMaintenance } from '../../context/MaintenanceContext';
 import {
   Wrench, AlertTriangle, ClipboardList, PenTool, X, CheckCircle2,
   Clock, User, Settings, Info, ShieldCheck, ChevronRight,
@@ -7,21 +9,7 @@ import {
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
-const INITIAL_WORK_ORDERS = [
-  { id: 1, equipment: 'Ferris Wheel', issue: 'Squeaking Sound', assigned: 'Sam Technic', status: 'In Progress', lastService: '2026-02-10', priority: 'High', description: 'Oiling needed for main axle bearings.' },
-  { id: 2, equipment: 'Bumper Cars', issue: 'Steering Loose', assigned: 'Will Fixit', status: 'Pending', lastService: '2026-03-01', priority: 'Medium', description: 'Cable tension adjustment required on Unit 04.' },
-  { id: 3, equipment: 'Roller Coaster', issue: 'Routine Check', assigned: 'Alex Wright', status: 'Completed', lastService: '2026-03-12', priority: 'Normal', description: 'Weekly structural and brake system audit.' },
-  { id: 4, equipment: 'Generator A', issue: 'Oil Leak', assigned: 'Sam Technic', status: 'In Progress', lastService: '2026-01-20', priority: 'Critical', description: 'Primary seal failure detected during load test.' },
-  { id: 5, equipment: 'Ticket Booth 2', issue: 'Lock Jammed', assigned: 'Jane Door', status: 'Completed', lastService: '2026-03-14', priority: 'Low', description: 'Replacing smart lock battery and re-aligning strike plate.' },
-];
-
-const INITIAL_EQUIPMENT = [
-  { name: 'Ferris Wheel', status: 'Operational', health: 85, lastService: '2026-02-10' },
-  { name: 'Bumper Cars', status: 'Warning', health: 45, lastService: '2026-03-01' },
-  { name: 'Roller Coaster', status: 'Operational', health: 98, lastService: '2026-03-12' },
-  { name: 'Generator A', status: 'Critical', health: 20, lastService: '2026-01-20' },
-  { name: 'Carousel', status: 'Operational', health: 92, lastService: '2026-02-15' },
-];
+// Constants moved to context
 
 // Local Modal Component
 function Modal({ isOpen, onClose, title, children, maxWidth = "max-w-md" }) {
@@ -44,11 +32,23 @@ function Modal({ isOpen, onClose, title, children, maxWidth = "max-w-md" }) {
 }
 
 export default function Maintenance() {
-  const [workOrders, setWorkOrders] = useState(INITIAL_WORK_ORDERS);
-  const [equipmentList, setEquipmentList] = useState(INITIAL_EQUIPMENT);
+  const navigate = useNavigate();
+  const { workOrders: contextWorkOrders, equipmentList: contextEquipment, addWorkOrder, updateWorkOrder } = useMaintenance();
+
+  const [workOrders, setWorkOrders] = useState(contextWorkOrders);
+  const [equipmentList, setEquipmentList] = useState(contextEquipment);
   const [activeModal, setActiveModal] = useState(null); // 'equipment', 'create', 'manage'
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [notification, setNotification] = useState(null);
+
+  // Update local state when context changes
+  useMemo(() => {
+    setWorkOrders(contextWorkOrders);
+  }, [contextWorkOrders]);
+
+  useMemo(() => {
+    setEquipmentList(contextEquipment);
+  }, [contextEquipment]);
 
   const showNotification = (msg) => {
     setNotification(msg);
@@ -56,8 +56,7 @@ export default function Maintenance() {
   };
 
   const handleManageOrder = (order) => {
-    setSelectedOrder(order);
-    setActiveModal('manage');
+    navigate(String(order.id));
   };
 
   const handleStatusChange = (status) => {
@@ -73,15 +72,18 @@ export default function Maintenance() {
     const formData = new FormData(e.target);
     const newOrder = {
       id: workOrders.length + 1,
+      idStr: `WO-00${workOrders.length + 1}`,
       equipment: formData.get('equipment'),
       issue: formData.get('issue'),
       assigned: formData.get('assigned'),
       priority: formData.get('priority'),
       status: 'Pending',
       lastService: new Date().toISOString().split('T')[0],
-      description: formData.get('description')
+      description: formData.get('description'),
+      details: formData.get('description'),
+      updates: []
     };
-    setWorkOrders([newOrder, ...workOrders]);
+    addWorkOrder(newOrder);
     setActiveModal(null);
     showNotification(`New Work Order for ${newOrder.equipment} created!`);
   };
@@ -113,7 +115,7 @@ export default function Maintenance() {
           <p className="text-slate-500 text-sm font-bold">Monitor equipment health and manage repair work orders.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-sm bg-white h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('equipment')}>
+          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-sm h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('equipment')}>
             <ClipboardList size={18} />
             Equipment Status
           </Button>
@@ -216,7 +218,7 @@ export default function Maintenance() {
                     <td className="px-8 py-5 text-right">
                       <Button
                         variant="secondary"
-                        className="h-10 px-5 text-xs font-black uppercase tracking-widest bg-slate-50 border-none hover:bg-slate-900 hover:text-white transition-all shadow-sm rounded-xl"
+                        className="h-10 px-5 text-xs font-black uppercase tracking-widest transition-all shadow-sm rounded-xl"
                         onClick={() => handleManageOrder(order)}
                       >
                         Manage
@@ -310,90 +312,6 @@ export default function Maintenance() {
         </form>
       </Modal>
 
-      <Modal isOpen={activeModal === 'manage'} onClose={() => setActiveModal(null)} title="Update Order Progress" maxWidth="max-w-xl">
-        {selectedOrder && (
-          <div className="space-y-8">
-            <div className="flex items-center justify-between p-7 bg-slate-900 rounded-[2rem] text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 text-white/5 group-hover:rotate-12 transition-transform">
-                <Settings size={120} />
-              </div>
-              <div className="relative z-10">
-                <h3 className="font-black text-2xl tracking-tight leading-tight">{selectedOrder.equipment}</h3>
-                <p className="text-[11px] font-black text-blue-400 uppercase tracking-widest mt-1">Order Ref: WO-00{selectedOrder.id}</p>
-              </div>
-              <div className="relative z-10">
-                <span className={`text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-xl shadow-lg ${selectedOrder.priority === 'Critical' ? 'bg-rose-500 text-white shadow-rose-900/40' :
-                    selectedOrder.priority === 'High' ? 'bg-amber-500 text-white shadow-amber-900/40' : 'bg-blue-600 text-white shadow-blue-900/40'
-                  }`}>{selectedOrder.priority} Priority</span>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-              <div className="p-7 bg-amber-50/40 border border-amber-100 rounded-[2rem] relative shadow-sm">
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="p-1.5 bg-amber-100 text-amber-700 rounded-lg">
-                    <AlertCircle size={14} />
-                  </div>
-                  <span className="text-[10px] font-black text-amber-800 uppercase tracking-widest">Primary Fault Reported</span>
-                </div>
-                <p className="text-lg font-black text-slate-800 leading-tight">{selectedOrder.issue}</p>
-                <div className="mt-4 p-5 bg-white/60 rounded-2xl border border-amber-50 italic text-sm font-bold text-slate-600 leading-relaxed shadow-inner">
-                  "{selectedOrder.description}"
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="p-5 bg-slate-50 border border-slate-100 rounded-2xl flex items-center gap-4 shadow-sm">
-                  <div className="p-3 bg-white rounded-xl shadow-sm text-slate-400">
-                    <User size={18} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Assigned Tech</p>
-                    <p className="text-sm font-black text-slate-700">{selectedOrder.assigned}</p>
-                  </div>
-                </div>
-                <div className="p-5 bg-slate-50 border border-slate-100 rounded-2xl flex items-center gap-4 shadow-sm">
-                  <div className="p-3 bg-white rounded-xl shadow-sm text-slate-400">
-                    <Calendar size={18} className="text-slate-400" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Last Activity</p>
-                    <p className="text-sm font-black text-slate-700">{selectedOrder.lastService}</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4 pt-6 border-t border-slate-100">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2 px-1">
-                  Mission Progress Status
-                </label>
-                <div className="grid grid-cols-3 gap-3">
-                  {['Pending', 'In Progress', 'Completed'].map(status => (
-                    <button
-                      key={status}
-                      type="button"
-                      onClick={() => handleStatusChange(status)}
-                      className={`py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest border-2 transition-all active:scale-95 ${selectedOrder.status === status ?
-                          (status === 'Completed' ? 'bg-emerald-500 border-emerald-500 text-white shadow-xl shadow-emerald-200' :
-                            status === 'In Progress' ? 'bg-blue-600 border-blue-600 text-white shadow-xl shadow-blue-200' :
-                              'bg-rose-500 border-rose-500 text-white shadow-xl shadow-rose-200') :
-                          'bg-white border-slate-100 text-slate-400 hover:border-slate-300 hover:bg-slate-50'
-                        }`}
-                    >
-                      {status}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <Button variant="secondary" className="flex-1 font-black h-10 sm:h-14 rounded-2xl shadow-sm hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-all border-none text-[10px] sm:text-xs" onClick={() => setActiveModal(null)}>Cancel</Button>
-              <Button variant="primary" className="flex-[2] font-black h-10 sm:h-14 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs" onClick={() => setActiveModal(null)}>Confirm All</Button>
-            </div>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }

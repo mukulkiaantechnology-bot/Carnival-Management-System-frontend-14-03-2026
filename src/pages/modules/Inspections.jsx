@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useInspections } from '../../context/InspectionContext';
 import { 
   ClipboardCheck, Plus, FileText, Play, X, CheckCircle2, 
   AlertCircle, Info, User, Calendar, Clock, ArrowRight,
@@ -7,19 +9,7 @@ import {
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
-const INITIAL_REPORTS = [
-  { id: 'INS-001', type: 'Ride Safety', status: 'Completed', date: '2026-03-14', inspector: 'John Doe', details: 'All rides passed safety checks. No issues found.', results: { 'Structure integrity': 'Pass', 'Control panel function': 'Pass', 'Emergency stop test': 'Pass', 'Seatbelt condition': 'Pass' } },
-  { id: 'INS-002', type: 'Food Health', status: 'In Progress', date: '2026-03-14', inspector: 'Jane Smith', details: 'Kitchen inspection ongoing. Sanitization checked.', results: {} },
-  { id: 'INS-003', type: 'Electrical', status: 'Pending', date: '2026-03-13', inspector: 'Mike Johnson', details: 'Waiting for maintenance lead approval.', results: {} },
-  { id: 'INS-004', type: 'Sanitation', status: 'Completed', date: '2026-03-12', inspector: 'Sarah Wilson', details: 'Restrooms and public areas inspected.', results: { 'Floor cleanliness': 'Pass', 'Supply stock': 'Pass', 'Water function': 'Pass' } },
-];
-
-const INITIAL_TEMPLATES = [
-  { name: 'Daily Ride Check', category: 'Operations', questions: ['Structure integrity', 'Control panel function', 'Emergency stop test', 'Seatbelt condition'] },
-  { name: 'Food Stall Safety', category: 'Health', questions: ['Temperature logs', 'Staff hygiene', 'Storage labeling', 'Fire extinguisher check'] },
-  { name: 'Night Shift Security', category: 'Security', questions: ['Perimeter check', 'Light function', 'Gate locks', 'Surveillance status'] },
-  { name: 'Electrical Panel Audit', category: 'Maintenance', questions: ['Breakers check', 'Grounding test', 'Labeling update', 'Load balance'] },
-];
+// Constants moved to context
 
 // Local Modal Component
 function Modal({ isOpen, onClose, title, children, maxWidth = "max-w-md" }) {
@@ -42,8 +32,11 @@ function Modal({ isOpen, onClose, title, children, maxWidth = "max-w-md" }) {
 }
 
 export default function Inspections() {
-  const [reports, setReports] = useState(INITIAL_REPORTS);
-  const [templates, setTemplates] = useState(INITIAL_TEMPLATES);
+  const navigate = useNavigate();
+  const { reports: contextReports, templates: contextTemplates, addReport, addTemplate } = useInspections();
+  
+  const [reports, setReports] = useState(contextReports);
+  const [templates, setTemplates] = useState(contextTemplates);
   const [activeModal, setActiveModal] = useState(null); // 'create', 'start', 'view_template', 'view_report', 'filling'
   const [selectedItem, setSelectedItem] = useState(null);
   const [notification, setNotification] = useState(null);
@@ -54,6 +47,15 @@ export default function Inspections() {
     answers: {},
     notes: ''
   });
+  
+  // Update local state when context changes (though useInspections might be better directly)
+  useMemo(() => {
+    setReports(contextReports);
+  }, [contextReports]);
+
+  useMemo(() => {
+    setTemplates(contextTemplates);
+  }, [contextTemplates]);
 
   const showNotification = (msg) => {
     setNotification(msg);
@@ -61,8 +63,7 @@ export default function Inspections() {
   };
 
   const handleOpenReport = (report) => {
-    setSelectedItem(report);
-    setActiveModal('view_report');
+    navigate(report.id);
   };
 
   const handleOpenTemplate = (template) => {
@@ -87,9 +88,11 @@ export default function Inspections() {
       date: new Date().toISOString().split('T')[0],
       inspector: 'Admin User',
       details: fillingData.notes || 'Inspection completed successfully.',
-      results: fillingData.answers
+      results: fillingData.answers,
+      finalResult: Object.values(fillingData.answers).includes('Fail') ? 'Fail' : 'Pass',
+      photos: []
     };
-    setReports([newReport, ...reports]);
+    addReport(newReport);
     setActiveModal(null);
     showNotification(`Inspection ${newReport.id} submitted!`);
   };
@@ -102,7 +105,7 @@ export default function Inspections() {
       category: formData.get('category'),
       questions: formData.get('questions').split('\n').filter(q => q.trim())
     };
-    setTemplates([...templates, newTemplate]);
+    addTemplate(newTemplate);
     setActiveModal(null);
     showNotification(`Template "${newTemplate.name}" created!`);
   };
@@ -157,7 +160,7 @@ export default function Inspections() {
                   <div className="flex items-center gap-2">
                      <Button 
                         variant="secondary" 
-                        className="h-9 px-4 text-xs font-black uppercase tracking-widest bg-white border-slate-100 hover:text-blue-600 shadow-sm" 
+                        className="h-9 px-4 text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-red/20" 
                         onClick={() => handleOpenTemplate(template)}
                      >
                         View
@@ -209,7 +212,7 @@ export default function Inspections() {
                       <td className="px-6 py-4 text-right">
                         <Button 
                             variant="secondary" 
-                            className="h-9 px-4 text-xs font-black uppercase tracking-widest bg-slate-50 border-none hover:bg-blue-600 hover:text-white transition-all shadow-sm" 
+                            className="h-9 px-4 text-xs font-black uppercase tracking-widest transition-all shadow-sm" 
                             onClick={() => handleOpenReport(report)}
                         >
                             View Report

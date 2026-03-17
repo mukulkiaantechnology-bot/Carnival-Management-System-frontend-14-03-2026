@@ -53,8 +53,8 @@ export default function Login() {
         </div>
 
         <Card className="shadow-xl shadow-slate-200/50">
-          <CardContent className="p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <CardContent className="p-5 md:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               {error && (
                 <div className="p-3 text-sm text-red-600 bg-red-50 rounded-lg border border-red-100">
                   {error}
@@ -83,7 +83,7 @@ export default function Login() {
                 />
               </div>
 
-              <Button type="submit" variant="primary" className="w-full h-16 text-xs font-black uppercase tracking-[3px] shadow-2xl shadow-brand-gold/30 rounded-2xl">
+              <Button type="submit" variant="primary" className="w-full h-12 md:h-16 text-[10px] md:text-xs font-black uppercase tracking-[2px] md:tracking-[3px] shadow-2xl shadow-brand-gold/30 rounded-xl md:rounded-2xl">
                 Sign In
               </Button>
             </form>

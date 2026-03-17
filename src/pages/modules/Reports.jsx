@@ -108,7 +108,7 @@ export default function Reports() {
                       <div className="flex items-center gap-1">
                         <Button 
                           variant="secondary" 
-                          className={`h-8 w-8 !p-0 opacity-0 group-hover:opacity-100 transition-all duration-300 rounded-lg ${exportingId === report.id ? 'animate-pulse bg-blue-50' : ''}`}
+                          className={`h-8 w-8 !p-0 shadow-lg shadow-brand-red/20 rounded-lg ${exportingId === report.id ? 'animate-pulse bg-blue-50' : ''}`}
                           onClick={() => handleExport(report.id)}
                           disabled={exportingId === report.id}
                         >
