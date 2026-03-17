@@ -77,7 +77,7 @@ export default function EmployeeTimeClock() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Time Clock</h1>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Staff Time Clock</h1>
           <p className="text-slate-500 text-sm">Record your working hours and breaks.</p>
         </div>
         <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">

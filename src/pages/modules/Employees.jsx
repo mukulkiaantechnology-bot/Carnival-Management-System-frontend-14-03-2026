@@ -9,26 +9,25 @@ import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
 
 const INITIAL_EMPLOYEES = [
-  { id: 1, name: 'John Doe', role: 'Ride Operator', email: 'john@carnival.com', phone: '+1 (555) 001-2341', department: 'Operations', status: 'Active', joined: '2025-05-12', trainingStatus: 'Completed' },
-  { id: 2, name: 'Jane Smith', role: 'Ticket Manager', email: 'jane@carnival.com', phone: '+1 (555) 001-2342', department: 'Ticketing', status: 'Active', joined: '2025-06-01', trainingStatus: 'Pending' },
-  { id: 3, name: 'Mike Johnson', role: 'Security Lead', email: 'mike@carnival.com', phone: '+1 (555) 001-2343', department: 'Security', status: 'On Leave', joined: '2024-11-20', trainingStatus: 'In Progress' },
-  { id: 4, name: 'Sarah Wilson', role: 'Maintenance Tech', email: 'sarah@carnival.com', phone: '+1 (555) 001-2344', department: 'Maintenance', status: 'Active', joined: '2026-01-10', trainingStatus: 'Completed' },
-  { id: 5, name: 'Robert Brown', role: 'Operations Admin', email: 'robert@carnival.com', phone: '+1 (555) 001-2345', department: 'Operations', status: 'Active', joined: '2023-08-15', trainingStatus: 'Completed' },
+  { id: 1, name: 'John Doe', role: 'Staff', email: 'john@carnival.com', phone: '+1 (555) 001-2341', status: 'Active', joined: '2025-05-12', trainingStatus: 'Completed' },
+  { id: 2, name: 'Jane Smith', role: 'Ticket Manager', email: 'jane@carnival.com', phone: '+1 (555) 001-2342', status: 'Active', joined: '2025-06-01', trainingStatus: 'Pending' },
+  { id: 3, name: 'Mike Johnson', role: 'Staff', email: 'mike@carnival.com', phone: '+1 (555) 001-2343', status: 'On Leave', joined: '2024-11-20', trainingStatus: 'In Progress' },
+  { id: 4, name: 'Sarah Wilson', role: 'Maintenance Manager', email: 'sarah@carnival.com', phone: '+1 (555) 001-2344', status: 'Active', joined: '2026-01-10', trainingStatus: 'Completed' },
+  { id: 5, name: 'Robert Brown', role: 'Operation Manager', email: 'robert@carnival.com', phone: '+1 (555) 001-2345', status: 'Active', joined: '2023-08-15', trainingStatus: 'Completed' },
 ];
 
 function EmployeeForm({ employee, onSave, onCancel, title }) {
   const [formData, setFormData] = useState(employee || {
-    name: '', email: '', phone: '', role: 'Employee', department: 'Operations', status: 'Active', joined: new Date().toISOString().split('T')[0],
+    name: '', email: '', phone: '', role: '', status: 'Active', joined: new Date().toISOString().split('T')[0],
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const roles = ['Employee', 'Operator', 'Technician', 'Manager', 'Lead', 'Admin'];
-  const departments = ['Operations', 'Maintenance', 'Security', 'Ticketing', 'Finance', 'HR', 'Guest Services'];
+  const roles = ['Operation Manager', 'Maintenance Manager', 'Ticket Manager', 'HR Manager', 'Staff'];
 
   return (
     <Card className="max-w-2xl mx-auto border border-brand-gold/20 shadow-xl shadow-brand-gold/5 bg-white">
-      <CardHeader title={title} subtitle="Please fill in all employee details." />
+      <CardHeader title={title} subtitle="Please fill in all staff details." />
       <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="p-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-1.5">
@@ -64,21 +63,13 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
           <div className="space-y-1.5">
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Role</label>
             <select
+              required
               className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             >
+              <option value="" disabled>Select Role</option>
               {roles.map(r => <option key={r} value={r}>{r}</option>)}
-            </select>
-          </div>
-          <div className="space-y-1.5">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Department</label>
-            <select
-              className="w-full px-5 py-3 bg-brand-light border border-brand-gold/10 rounded-xl focus:ring-4 focus:ring-brand-gold/10 focus:border-brand-gold outline-none transition-all font-bold text-sm text-brand-text shadow-inner"
-              value={formData.department}
-              onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-            >
-              {departments.map(d => <option key={d} value={d}>{d}</option>)}
             </select>
           </div>
           <div className="space-y-1.5">
@@ -127,7 +118,7 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
         </div>
         <div className="flex gap-3 pt-6">
           <Button variant="secondary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl" type="button" onClick={onCancel}>Cancel</Button>
-          <Button variant="primary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl shadow-lg shadow-blue-500/20" type="submit">Save Employee</Button>
+          <Button variant="primary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl shadow-lg shadow-blue-500/20" type="submit">Save</Button>
         </div>
       </form>
     </Card>
@@ -165,7 +156,7 @@ function EmployeeView({ employee, onBack }) {
         </Card>
 
         <Card className="lg:col-span-2 border border-brand-gold/20 shadow-xl shadow-brand-gold/5 bg-white">
-          <CardHeader title="Employee Details" subtitle="Full recruitment and role information." />
+          <CardHeader title="Staff Details" subtitle="Full recruitment and role information." />
           <CardContent className="p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               <div className="space-y-6">
@@ -182,15 +173,6 @@ function EmployeeView({ employee, onBack }) {
                     </div>
                   </div>
                 </div>
-                <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Placement</p>
-                  <div className="flex items-center gap-3 text-brand-text">
-                    <div className="p-2 bg-brand-light rounded-lg text-brand-red"><Building2 size={16} /></div>
-                    <span className="text-xs font-black uppercase italic tracking-tight">{employee.department} Department</span>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-6">
                 <div>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5 leading-none">Employment</p>
                   <div className="flex items-center gap-3 text-brand-text">
@@ -245,7 +227,7 @@ export default function Employees() {
   const handleDelete = (id) => {
     setEmployees(employees.filter(e => e.id !== id));
     setDeleteConfirmId(null);
-    showNotification("Employee record deleted successfully.");
+    showNotification("Staff record deleted successfully.");
   };
 
   const directoryStats = useMemo(() => {
@@ -253,7 +235,6 @@ export default function Employees() {
       { label: 'Total Staff', value: employees.length, icon: Users, color: 'text-brand-red', bg: 'bg-brand-red/10' },
       { label: 'Active Now', value: employees.filter(e => e.status === 'Active').length, icon: UserCheck, color: 'text-emerald-600', bg: 'bg-emerald-50' },
       { label: 'Training Pending', value: employees.filter(e => e.trainingStatus !== 'Completed').length, icon: GraduationCap, color: 'text-brand-orange', bg: 'bg-brand-orange/10' },
-      { label: 'Departments', value: new Set(employees.map(e => e.department)).size, icon: Building2, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
     ];
   }, [employees]);
 
@@ -280,7 +261,7 @@ export default function Employees() {
                 <Trash2 size={32} />
               </div>
               <h3 className="text-xl font-bold text-slate-800">Confirm Deletion</h3>
-              <p className="text-slate-500 text-sm mt-2">Are you sure you want to delete this employee? This action cannot be undone.</p>
+              <p className="text-slate-500 text-sm mt-2">Are you sure you want to delete this staff member? This action cannot be undone.</p>
               <div className="flex gap-3 mt-8">
                 <Button variant="secondary" className="flex-1 font-bold" onClick={() => setDeleteConfirmId(null)}>Cancel</Button>
                 <Button variant="danger" className="flex-1 font-bold bg-rose-600 hover:bg-rose-700 text-white" onClick={() => handleDelete(deleteConfirmId)}>Delete</Button>
@@ -295,12 +276,12 @@ export default function Employees() {
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-xl sm:text-2xl font-black text-brand-red tracking-tight uppercase italic">Employee Directory</h1>
+                <h1 className="text-xl sm:text-2xl font-black text-brand-red tracking-tight uppercase italic">Staff Directory</h1>
                 <p className="text-slate-500 text-sm font-bold">Centralized management for carnival personnel.</p>
               </div>
               <Button variant="primary" className="flex items-center justify-center gap-2 font-bold shadow-lg shadow-brand-gold/20" onClick={() => navigate(`${basePath}/add`)}>
                 <UserPlus size={18} />
-                Add Employee
+                Add Staff
               </Button>
             </div>
 
@@ -358,8 +339,8 @@ export default function Employees() {
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
                     <tr className="bg-brand-light">
-                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Employee</th>
-                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Department</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Staff Name</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Role & Email</th>
                       <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest">Status</th>
                       <th className="px-6 py-4 text-[10px] font-black text-brand-red uppercase tracking-widest text-center">Actions</th>
                     </tr>
@@ -380,7 +361,7 @@ export default function Employees() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex flex-col">
-                            <span className="text-xs font-black text-brand-text">{emp.department}</span>
+                            <span className="text-sm font-black text-brand-text uppercase italic">{emp.role}</span>
                             <span className="text-[10px] text-slate-400 font-bold">{emp.email}</span>
                           </div>
                         </td>
@@ -405,14 +386,14 @@ export default function Employees() {
                               variant="primary"
                               className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-brand-gold/20 bg-brand-gold text-brand-text border-none"
                               onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
-                              title="Edit Employee"
+                              title="Edit Staff"
                             >
                               <Pencil size={16} />
                             </Button>
                             <Button 
                               className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-black/10 bg-brand-dark text-white border-none hover:bg-black"
                               onClick={() => setDeleteConfirmId(emp.id)}
-                              title="Delete Employee"
+                              title="Delete Staff"
                             >
                               <Trash2 size={16} />
                             </Button>
@@ -445,11 +426,7 @@ export default function Employees() {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 pt-2">
-                      <div className="space-y-1">
-                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Department</p>
-                        <p className="text-xs font-bold text-slate-700">{emp.department}</p>
-                      </div>
+                    <div className="grid grid-cols-1 gap-4 pt-2">
                       <div className="space-y-1">
                         <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Email</p>
                         <p className="text-[10px] font-bold text-slate-500 truncate">{emp.email}</p>
@@ -482,7 +459,7 @@ export default function Employees() {
                 ))}
                 {filteredEmployees.length === 0 && (
                   <div className="p-12 text-center">
-                    <p className="text-sm font-bold text-slate-400">No employees found matching your criteria.</p>
+                    <p className="text-sm font-bold text-slate-400">No staff found matching your criteria.</p>
                   </div>
                 )}
               </div>
@@ -492,11 +469,11 @@ export default function Employees() {
 
         <Route path="/add" element={
           <EmployeeForm 
-            title="Add New Employee"
+            title="Add New Staff"
             onSave={(data) => {
               setEmployees([...employees, { ...data, id: Date.now(), trainingStatus: 'Pending' }]);
               navigate(basePath);
-              showNotification(`Employee ${data.name} added to data.`);
+              showNotification(`Staff member ${data.name} added to data.`);
             }}
             onCancel={() => navigate(basePath)}
           />
@@ -525,8 +502,8 @@ export default function Employees() {
 function EditEmployeeWrapper({ employees, onSave, onCancel }) {
   const { id } = useParams();
   const employee = employees.find(e => e.id.toString() === id);
-  if (!employee) return <div>Employee not found</div>;
-  return <EmployeeForm title="Edit Employee Profile" employee={employee} onSave={onSave} onCancel={onCancel} />;
+  if (!employee) return <div>Staff member not found</div>;
+  return <EmployeeForm title="Edit Staff Profile" employee={employee} onSave={onSave} onCancel={onCancel} />;
 }
 
 function ViewEmployeeWrapper({ employees, onBack }) {

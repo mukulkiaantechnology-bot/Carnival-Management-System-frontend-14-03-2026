@@ -15,13 +15,6 @@ const RECENT_ACTIVITY = [
   { id: 4, employee: 'Sarah Wilson', module: 'Safety Protocol 101', date: 'Yesterday', status: 'Completed' },
 ];
 
-const DEPARTMENT_PROGRESS = [
-  { name: 'Ride Operations', progress: 85, color: 'bg-brand-red' },
-  { name: 'Guest Services', progress: 92, color: 'bg-brand-gold' },
-  { name: 'Safety & Security', progress: 78, color: 'bg-brand-orange' },
-  { name: 'Food & Beverage', progress: 65, color: 'bg-brand-text' },
-];
-
 export default function HRDashboard() {
   return (
     <div className="space-y-8 pb-12">
@@ -53,9 +46,9 @@ export default function HRDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         {/* Recent Activity */}
-        <div className="lg:col-span-2">
+        <div>
           <Card className="border-none shadow-xl shadow-slate-100/50 h-full overflow-hidden">
             <div className="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/30">
               <h3 className="text-sm font-black text-brand-text uppercase tracking-widest flex items-center gap-2">
@@ -68,7 +61,7 @@ export default function HRDashboard() {
                 <table className="w-full text-left">
                   <thead>
                     <tr className="bg-slate-50/50">
-                      <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Employee</th>
+                      <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Staff</th>
                       <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Module</th>
                       <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">Time</th>
                       <th className="px-6 py-4 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Status</th>
@@ -95,46 +88,6 @@ export default function HRDashboard() {
                     ))}
                   </tbody>
                 </table>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Departmental Progress */}
-        <div>
-          <Card className="border-none shadow-xl shadow-slate-100/50 h-full">
-            <div className="p-6 border-b border-slate-50 bg-slate-50/30">
-              <h3 className="text-sm font-black text-brand-text uppercase tracking-widest flex items-center gap-2">
-                <GraduationCap size={16} className="text-brand-gold" />
-                Training Progress
-              </h3>
-            </div>
-            <CardContent className="p-6 space-y-6">
-              {DEPARTMENT_PROGRESS.map((dept) => (
-                <div key={dept.name} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-black text-slate-600 uppercase tracking-tight">{dept.name}</span>
-                    <span className="text-[10px] font-black text-brand-text">{dept.progress}%</span>
-                  </div>
-                  <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full rounded-full transition-all duration-1000 ${dept.color}`}
-                      style={{ width: `${dept.progress}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
-              
-              <div className="pt-4 mt-6 border-t border-slate-50">
-                <div className="bg-brand-light p-4 rounded-xl flex items-center gap-4">
-                  <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-brand-red font-black text-sm italic">
-                    84%
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Global average</p>
-                    <p className="text-xs font-black text-brand-text uppercase">Ahead of Goal</p>
-                  </div>
-                </div>
               </div>
             </CardContent>
           </Card>

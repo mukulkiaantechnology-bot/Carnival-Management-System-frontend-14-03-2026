@@ -45,7 +45,7 @@ export default function Reports() {
       ]
     },
     {
-      title: 'Employee Reports',
+      title: 'Staff Reports',
       reports: [
         { id: 'emp-1', name: 'Training Completion Status', icon: Users, date: 'Mar 11, 2026', stats: { completed: '85%', pending: '15%', total_staff: 85 } },
         { id: 'emp-2', name: 'Attendance & Time Logs', icon: Calendar, date: 'Mar 14, 2026', stats: { on_time: '92%', late: '5%', absent: '3%' } },

@@ -4,10 +4,10 @@ import { ArrowLeft, CheckCircle, Clock, Award, Calendar, BookOpen, ChevronRight 
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 
 const MOCK_EMPLOYEES = [
-  { id: 101, name: 'John Doe', department: 'Ride Operator', status: 'Completed' },
-  { id: 102, name: 'Jane Smith', department: 'Ticket Manager', status: 'In Progress' },
-  { id: 103, name: 'Mike Johnson', department: 'Security', status: 'Pending' },
-  { id: 104, name: 'Sarah Wilson', department: 'Maintenance', status: 'In Progress' },
+  { id: 101, name: 'John Doe', status: 'Completed' },
+  { id: 102, name: 'Jane Smith', status: 'In Progress' },
+  { id: 103, name: 'Mike Johnson', status: 'Pending' },
+  { id: 104, name: 'Sarah Wilson', status: 'In Progress' },
 ];
 
 export default function TrainingProgressDetail() {
@@ -22,7 +22,7 @@ export default function TrainingProgressDetail() {
         className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-sm transition-colors group"
       >
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        Back to Training List
+        Back to Staff Training
       </button>
 
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -32,7 +32,7 @@ export default function TrainingProgressDetail() {
           </div>
           <div>
             <h1 className="text-2xl font-bold text-slate-800 tracking-tight">{employee.name}</h1>
-            <p className="text-slate-500 font-medium">{employee.department} • Staff ID: CMS-{id}</p>
+            <p className="text-slate-500 font-medium">Staff ID: CMS-{id}</p>
           </div>
         </div>
         <div className={`px-4 py-2 rounded-xl border flex items-center gap-2 font-bold text-sm ${

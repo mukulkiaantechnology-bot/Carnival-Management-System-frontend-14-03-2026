@@ -69,8 +69,8 @@ export default function TimeClock() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Time Clock</h1>
-          <p className="text-slate-500 text-sm">Manage employee attendance and shifts.</p>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Staff Time Clock</h1>
+          <p className="text-slate-500 text-sm">Manage staff attendance and shifts.</p>
         </div>
         <div className="flex items-center gap-3">
           <Button 
@@ -97,7 +97,7 @@ export default function TimeClock() {
       <Card>
         <CardHeader 
           title="Recent Shift Logs" 
-          subtitle="A track of all employee clock-in and clock-out times."
+          subtitle="A track of all staff clock-in and clock-out times."
         />
         <CardContent className="p-0">
           <div className="overflow-x-auto">
@@ -105,7 +105,7 @@ export default function TimeClock() {
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-100">
                   <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Date</th>
-                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Employee Name</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Staff Name</th>
                   <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Clock In</th>
                   <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Clock Out</th>
                   <th className="px-6 py-4 text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Hours</th>

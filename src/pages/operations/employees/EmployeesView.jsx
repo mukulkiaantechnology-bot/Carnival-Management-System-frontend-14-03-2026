@@ -3,14 +3,14 @@ import { Users, Search, Phone, Briefcase, Calendar, CheckCircle, Clock, XCircle,
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 
 const EMPLOYEES = [
-  { id: 'EMP-001', name: 'James Carter', role: 'Ride Operator', phone: '+1 555-0101', assignedEvent: 'Summer Carnival Kickoff', status: 'active' },
-  { id: 'EMP-002', name: 'Maria Lopez', role: 'Food Stall Manager', phone: '+1 555-0102', assignedEvent: 'Kids Fun Day', status: 'active' },
-  { id: 'EMP-003', name: 'David Kim', role: 'Technician', phone: '+1 555-0103', assignedEvent: '—', status: 'on_leave' },
-  { id: 'EMP-004', name: 'Sarah Ahmed', role: 'Security Guard', phone: '+1 555-0104', assignedEvent: 'Safety Drill Exercise', status: 'active' },
-  { id: 'EMP-005', name: 'Tom Bradley', role: 'Water Ride Attendant', phone: '+1 555-0105', assignedEvent: 'Summer Carnival Kickoff', status: 'active' },
-  { id: 'EMP-006', name: 'Emily Davis', role: 'First Aid Officer', phone: '+1 555-0106', assignedEvent: 'Safety Drill Exercise', status: 'active' },
-  { id: 'EMP-007', name: 'Ryan Patel', role: 'Ticketing Staff', phone: '+1 555-0107', assignedEvent: '—', status: 'inactive' },
-  { id: 'EMP-008', name: 'Nina Russo', role: 'Event Coordinator', phone: '+1 555-0108', assignedEvent: 'Night Lights Festival', status: 'active' },
+  { id: 'EMP-001', name: 'James Carter', role: 'Employee', phone: '+1 555-0101', assignedEvent: 'Summer Carnival Kickoff', status: 'active' },
+  { id: 'EMP-002', name: 'Maria Lopez', role: 'Employee', phone: '+1 555-0102', assignedEvent: 'Kids Fun Day', status: 'active' },
+  { id: 'EMP-003', name: 'David Kim', role: 'Maintenance Manager', phone: '+1 555-0103', assignedEvent: '—', status: 'on_leave' },
+  { id: 'EMP-004', name: 'Sarah Ahmed', role: 'Employee', phone: '+1 555-0104', assignedEvent: 'Safety Drill Exercise', status: 'active' },
+  { id: 'EMP-005', name: 'Tom Bradley', role: 'Employee', phone: '+1 555-0105', assignedEvent: 'Summer Carnival Kickoff', status: 'active' },
+  { id: 'EMP-006', name: 'Emily Davis', role: 'HR Manager', phone: '+1 555-0106', assignedEvent: 'Safety Drill Exercise', status: 'active' },
+  { id: 'EMP-007', name: 'Ryan Patel', role: 'Ticket Manager', phone: '+1 555-0107', assignedEvent: '—', status: 'inactive' },
+  { id: 'EMP-008', name: 'Nina Russo', role: 'Operation Manager', phone: '+1 555-0108', assignedEvent: 'Night Lights Festival', status: 'active' },
 ];
 
 const STATUS_BADGE = {
@@ -33,7 +33,7 @@ export default function EmployeesView() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic flex items-center gap-2">
-            <Users className="text-brand-gold" size={24} /> Employees
+            <Users className="text-brand-gold" size={24} /> Staff
           </h1>
           <p className="text-sm text-slate-500 font-bold uppercase tracking-widest mt-1">View-only workforce directory.</p>
         </div>
@@ -53,7 +53,7 @@ export default function EmployeesView() {
       </div>
 
       <Card>
-        <CardHeader title="Employee List" subtitle={`${filtered.length} members found`} />
+        <CardHeader title="Staff List" subtitle={`${filtered.length} members found`} />
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">

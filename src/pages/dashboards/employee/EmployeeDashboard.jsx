@@ -41,7 +41,7 @@ export default function EmployeeDashboard() {
     <div className="space-y-8 pb-10">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
-          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic leading-none">Employee Portal</h1>
+          <h1 className="text-2xl font-black text-brand-red tracking-tight uppercase italic leading-none">Staff Portal</h1>
           <p className="text-slate-500 text-sm font-bold mt-2 flex items-center gap-2">
             <span className="w-2 h-2 bg-brand-orange rounded-full animate-pulse" />
             Welcome back! Operational Pulse is optimal.
@@ -139,7 +139,7 @@ export default function EmployeeDashboard() {
               <Button 
                 variant="secondary" 
                 className="w-full py-5 font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-brand-red/20 active:scale-95 transition-all"
-                onClick={() => navigate('/employee-training')}
+                onClick={() => navigate('/staff-training')}
               >
                 Launch Course
               </Button>

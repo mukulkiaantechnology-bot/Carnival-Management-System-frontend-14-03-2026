@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const MOCK_NOTIFICATIONS = [
-  { id: 1, text: 'New employee "Sarah Wilson" added', time: '5m ago', type: 'info', icon: Info },
+  { id: 1, text: 'New staff member "Sarah Wilson" added', time: '5m ago', type: 'info', icon: Info },
   { id: 2, text: 'Safety inspection due in 2 hours', time: '1h ago', type: 'warning', icon: AlertCircle },
   { id: 3, text: 'Shift log approved by Admin', time: '2h ago', type: 'success', icon: CheckCircle2 },
 ];
@@ -34,12 +34,12 @@ export function Navbar({ toggleSidebar }) {
 
   const getPageTitle = (path) => {
     if (path === '/' || path === '/hr-dashboard' || path.includes('dashboard')) return 'Portal Overview';
-    if (path.includes('/hr/employees')) return 'Employee Directory';
+    if (path.includes('/hr/staff') || path === '/staff' || path.includes('/operations/staff')) return 'Staff Directory';
     if (path.includes('/hr/training-library')) return 'Training Library';
-    if (path.includes('/hr/employee-training')) return 'Employee Training Tracking';
+    if (path.includes('/hr/staff-training')) return 'Staff Training Tracking';
     if (path.includes('/hr/training/add')) return 'Upload Training Module';
     if (path.match(/\/hr\/training\/\d+/)) return 'Training Details';
-    if (path.match(/\/hr\/training-progress\/\d+/)) return 'Employee Training Progress';
+    if (path.match(/\/hr\/training-progress\/\d+/)) return 'Staff Training Progress';
     if (path.includes('/tickets/boxes')) return 'Manage Counters';
     if (path.includes('/tickets/tracking')) return 'Ticket Tracking';
     if (path.includes('/tickets/settlement')) return 'Settlement';

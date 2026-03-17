@@ -11,7 +11,7 @@ import { useTraining } from '../../context/TrainingContext';
 export default function TrainingLibrary() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isEmployeeView = location.pathname.startsWith('/employee-training');
+  const isEmployeeView = location.pathname.startsWith('/staff-training');
   
   const { trainings, deleteTraining } = useTraining();
   const [searchTerm, setSearchTerm] = useState('');
@@ -49,7 +49,7 @@ export default function TrainingLibrary() {
         <div className="flex items-center gap-4">
           {isEmployeeView && (
             <button 
-              onClick={() => navigate('/employee-training')}
+              onClick={() => navigate('/staff-training')}
               className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
             >
               <ArrowLeft size={20} />
@@ -143,7 +143,7 @@ export default function TrainingLibrary() {
                     <div className="flex items-center justify-end gap-2 text-slate-400">
                       <button
                         className="p-2.5 hover:text-blue-600 bg-slate-50 hover:bg-blue-50 rounded-xl transition-all shadow-sm border border-slate-100"
-                        onClick={() => navigate(isEmployeeView ? `/employee-training/module/${module.id}` : `/hr/training/${module.id}`)}
+                        onClick={() => navigate(isEmployeeView ? `/staff-training/module/${module.id}` : `/hr/training/${module.id}`)}
                         title="View Details"
                       >
                         <Eye size={18} />

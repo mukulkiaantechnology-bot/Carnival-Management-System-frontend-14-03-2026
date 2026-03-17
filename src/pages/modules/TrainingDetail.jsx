@@ -17,8 +17,8 @@ export default function TrainingDetail() {
   
   const module = trainings.find(m => m.id === parseInt(id)) || trainings[0];
 
-  const backPath = location.pathname.startsWith('/employee-training') 
-    ? '/employee-training' 
+  const backPath = location.pathname.startsWith('/staff-training') 
+    ? '/staff-training' 
     : '/hr/training-library';
 
   if (!module) {
@@ -37,7 +37,7 @@ export default function TrainingDetail() {
         className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-bold text-sm transition-colors group"
       >
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        Back to {location.pathname.startsWith('/employee-training') ? 'Training' : 'Library'}
+        Back to {location.pathname.startsWith('/staff-training') ? 'Training' : 'Library'}
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

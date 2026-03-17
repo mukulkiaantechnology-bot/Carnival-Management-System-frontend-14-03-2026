@@ -9,10 +9,10 @@ import { Button } from '../../components/ui/Button';
 import { useTraining } from '../../context/TrainingContext';
 
 const MOCK_EMPLOYEE_TRAINING = [
-  { id: 101, name: 'John Doe', department: 'Operations', assignedTraining: 'Safety Protocol 101', progress: '95%', status: 'Active' },
-  { id: 102, name: 'Jane Smith', department: 'Ticketing', assignedTraining: 'Customer Service', progress: '80%', status: 'Active' },
-  { id: 103, name: 'Mike Johnson', department: 'Security', assignedTraining: 'Emergency Response', progress: '60%', status: 'Active' },
-  { id: 104, name: 'Sarah Wilson', department: 'Maintenance', assignedTraining: 'Safety Protocol 101', progress: '40%', status: 'Active' },
+  { id: 101, name: 'John Doe', assignedTraining: 'Safety Protocol 101', progress: '95%', status: 'Active' },
+  { id: 102, name: 'Jane Smith', assignedTraining: 'Customer Service', progress: '80%', status: 'Active' },
+  { id: 103, name: 'Mike Johnson', assignedTraining: 'Emergency Response', progress: '60%', status: 'Active' },
+  { id: 104, name: 'Sarah Wilson', assignedTraining: 'Safety Protocol 101', progress: '40%', status: 'Active' },
 ];
 
 function TrainingUploadForm({ onBack }) {
@@ -181,8 +181,7 @@ function EmployeeTraining() {
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Employee Name</th>
-                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Department</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Staff Name</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Assigned Training</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Progress</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Status</th>
@@ -200,7 +199,6 @@ function EmployeeTraining() {
                       <span className="text-sm font-bold text-slate-700">{emp.name}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">{emp.department}</td>
                   <td className="px-6 py-4">
                     <span className="text-sm text-slate-600">{emp.assignedTraining}</span>
                   </td>

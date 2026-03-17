@@ -14,7 +14,7 @@ export default function EmployeeTasks() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">My Tasks</h1>
+          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Staff Tasks</h1>
           <p className="text-slate-500 text-sm">Organize and track your daily assignments.</p>
         </div>
         <div className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-2 rounded-xl border border-emerald-100 shadow-sm">

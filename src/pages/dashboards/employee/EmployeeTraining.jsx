@@ -82,7 +82,7 @@ export default function EmployeeTraining() {
       {/* Header & Compliance Section */}
       <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-stretch">
         <div className="flex-1 space-y-2">
-          <h1 className="text-3xl font-black text-slate-800 tracking-tight">My Training</h1>
+          <h1 className="text-3xl font-black text-slate-800 tracking-tight">My Staff Training</h1>
           <p className="text-slate-500 font-medium">Elevate your skills and stay compliant with carnival-wide safety standards.</p>
         </div>
         
@@ -156,7 +156,7 @@ export default function EmployeeTraining() {
 
                 <Button 
                   variant={module.status === 'Completed' ? 'success' : 'primary'}
-                  onClick={() => navigate(`/employee-training/module/${module.id}`)}
+                  onClick={() => navigate(`/staff-training/module/${module.id}`)}
                   className="w-full py-4 rounded-2xl flex items-center justify-center gap-2"
                 >
                   {module.status === 'Completed' ? (
@@ -214,13 +214,13 @@ export default function EmployeeTraining() {
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Button 
                   className="bg-white text-indigo-600 hover:bg-indigo-50 border-none px-10 py-5 rounded-2xl font-black text-base shadow-xl transition-all hover:scale-105 active:scale-95"
-                  onClick={() => navigate('/employee-training/module/1')}
+                  onClick={() => navigate('/staff-training/module/1')}
                 >
                   Start Training
                 </Button>
                 <Button 
                   className="bg-indigo-500/30 text-white hover:bg-indigo-500/50 border border-white/20 px-8 py-5 rounded-2xl font-bold transition-all backdrop-blur-sm"
-                  onClick={() => navigate('/employee-training/catalog')}
+                  onClick={() => navigate('/staff-training/catalog')}
                 >
                   View Curriculum
                 </Button>

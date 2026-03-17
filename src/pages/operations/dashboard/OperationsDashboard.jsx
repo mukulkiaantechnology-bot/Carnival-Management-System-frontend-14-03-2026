@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const STATS = [
   { label: 'Open Inspections', value: '12', icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10', border: 'border-brand-red/20' },
   { label: 'Active Events', value: '5', icon: Calendar, color: 'text-brand-gold', bg: 'bg-brand-gold/10', border: 'border-brand-gold/20' },
-  { label: 'Employees On Duty', value: '87', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', border: 'border-brand-orange/20' },
+  { label: 'Staff On Duty', value: '87', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', border: 'border-brand-orange/20' },
   { label: 'Pending Reports', value: '6', icon: FileText, color: 'text-brand-text', bg: 'bg-brand-light', border: 'border-brand-gold/10' },
 ];
 

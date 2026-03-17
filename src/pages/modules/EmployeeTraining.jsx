@@ -6,17 +6,17 @@ import {
 import { Card, CardHeader, CardContent } from '../../components/ui/Card';
 
 const MOCK_EMPLOYEE_TRAINING = [
-  { id: 101, name: 'John Doe', department: 'Ride Operator', assignedTraining: 'Safety Protocol 101', progress: '90%', status: 'Completed' },
-  { id: 102, name: 'Jane Smith', department: 'Ticket Manager', assignedTraining: 'Customer Service Excellence', progress: '60%', status: 'In Progress' },
-  { id: 103, name: 'Mike Johnson', department: 'Security', assignedTraining: 'Emergency Response Training', progress: '40%', status: 'Pending' },
-  { id: 104, name: 'Sarah Wilson', department: 'Maintenance', assignedTraining: 'Safety Protocol 101', progress: '40%', status: 'In Progress' },
+  { id: 101, name: 'John Doe', assignedTraining: 'Safety Protocol 101', progress: '90%', status: 'Completed' },
+  { id: 102, name: 'Jane Smith', assignedTraining: 'Customer Service Excellence', progress: '60%', status: 'In Progress' },
+  { id: 103, name: 'Mike Johnson', assignedTraining: 'Emergency Response Training', progress: '40%', status: 'Pending' },
+  { id: 104, name: 'Sarah Wilson', assignedTraining: 'Safety Protocol 101', progress: '40%', status: 'In Progress' },
 ];
 
 export default function EmployeeTraining() {
   const navigate = useNavigate();
 
   const cards = [
-    { title: 'Total Employees', value: '124', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { title: 'Total Staff', value: '124', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
     { title: 'Training Completed', value: '85', icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { title: 'Training In Progress', value: '32', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-50' },
     { title: 'Training Pending', value: '7', icon: AlertCircle, color: 'text-rose-600', bg: 'bg-rose-50' },
@@ -26,8 +26,8 @@ export default function EmployeeTraining() {
     <div className="space-y-6 px-1 pb-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Employee Training</h1>
-          <p className="text-slate-500 text-sm">Monitor employee training progress.</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Staff Training</h1>
+          <p className="text-slate-500 text-sm">Monitor staff training progress.</p>
         </div>
       </div>
 
@@ -50,13 +50,12 @@ export default function EmployeeTraining() {
       </div>
 
       <Card className="border-none shadow-sm overflow-hidden">
-        <CardHeader title="Training Progress" subtitle="Track completion levels for all employees." />
+        <CardHeader title="Training Progress" subtitle="Track completion levels for all staff." />
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead className="bg-slate-50">
               <tr>
-                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Employee Name</th>
-                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Department</th>
+                <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Staff Name</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Assigned Training</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Progress</th>
                 <th className="px-6 py-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">Status</th>
@@ -73,9 +72,6 @@ export default function EmployeeTraining() {
                       </div>
                       <span className="text-sm font-bold text-slate-700">{emp.name}</span>
                     </div>
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="text-xs font-bold text-slate-500 uppercase tracking-tight">{emp.department}</span>
                   </td>
                   <td className="px-6 py-4">
                     <span className="text-sm text-slate-600 font-medium">{emp.assignedTraining}</span>

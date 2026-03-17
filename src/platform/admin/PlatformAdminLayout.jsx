@@ -77,18 +77,18 @@ export default function PlatformAdminLayout() {
 
       {/* Sidebar */}
       <aside 
-        className={`fixed lg:relative z-50 h-full bg-white border-r border-slate-200 transition-all duration-300 ease-in-out flex-shrink-0 ${
+        className={`fixed lg:relative z-50 h-full bg-brand-dark border-r border-brand-gold/10 transition-all duration-300 ease-in-out flex-shrink-0 ${
           isSidebarOpen ? 'w-64 translate-x-0' : '-translate-x-full lg:translate-x-0 lg:w-20'
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Logo Section */}
-          <div className={`h-20 flex items-center border-b border-slate-200 sticky top-0 bg-white z-10 transition-all duration-300 gap-4 ${isSidebarOpen ? 'px-4' : 'px-4 justify-center'}`}>
-             <div className={`${isSidebarOpen ? 'h-16 w-24' : 'h-10 w-10'} shrink-0 overflow-hidden flex items-center justify-center rounded-xl`}>
+          <div className={`h-20 flex items-center border-b border-brand-gold/10 sticky top-0 bg-brand-dark z-10 transition-all duration-300 gap-4 ${isSidebarOpen ? 'px-4' : 'px-4 justify-center'}`}>
+             <div className={`${isSidebarOpen ? 'h-16 w-24' : 'h-10 w-10'} shrink-0 overflow-hidden flex items-center justify-center rounded-xl bg-white/5`}>
                <img src={logo} alt="Showmensinfo" className={`h-full w-auto object-contain ${isSidebarOpen ? 'scale-125' : ''}`} />
              </div>
              {isSidebarOpen && (
-               <span className="text-sm font-black text-slate-800 tracking-tight uppercase truncate flex-1 ml-[-12px]">
+               <span className="text-sm font-black text-white tracking-tight uppercase truncate flex-1 ml-[-12px]">
                  Showmens<span className="text-brand-gold">info</span>
                </span>
              )}
@@ -104,7 +104,7 @@ export default function PlatformAdminLayout() {
 
           <div className="p-4 flex-1 overflow-y-auto no-scrollbar">
             {isSidebarOpen && (
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] mb-6 px-3">
+              <p className="text-[10px] font-black text-white/40 uppercase tracking-[3px] mb-6 px-3">
                 Platform Admin
               </p>
             )}
@@ -113,12 +113,13 @@ export default function PlatformAdminLayout() {
                 <NavLink
                   key={item.path}
                   to={item.path}
+                  end={item.path === '/platform-admin'}
                   onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${
                       isActive
-                        ? 'bg-brand-red text-white shadow-lg shadow-brand-red/40'
-                        : 'text-slate-600 hover:bg-brand-gold hover:text-brand-dark'
+                        ? 'bg-brand-red text-white shadow-[0_10px_20px_-5px_rgba(181,18,27,0.4)]'
+                        : 'text-white/70 hover:bg-brand-gold hover:text-brand-dark'
                     }`
                   }
                 >
@@ -134,16 +135,21 @@ export default function PlatformAdminLayout() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Header (Navbar Style) */}
-        <header className="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-20">
+        <header className="bg-brand-red border-b border-brand-red-dark shadow-xl sticky top-0 z-20">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="p-2 -ml-2 text-slate-600 hover:bg-slate-100 rounded-md transition-colors lg:hidden"
+                className="p-2 -ml-2 text-white hover:bg-white/10 rounded-md transition-colors lg:hidden"
               >
                 <Menu size={24} />
               </button>
               
+              <div className="hidden lg:flex items-center gap-4">
+                <h2 className="text-xl font-black text-white tracking-tight uppercase italic truncate">
+                  {getPageTitle(location.pathname)}
+                </h2>
+              </div>
             </div>
 
             <div className="flex items-center space-x-2 sm:space-x-4">
@@ -153,18 +159,18 @@ export default function PlatformAdminLayout() {
                 <button 
                   onClick={() => setShowNotifications(!showNotifications)}
                   className={`p-2 rounded-full transition-all duration-200 ${
-                    showNotifications ? 'bg-brand-red/10 text-brand-red' : 'text-slate-400 hover:text-brand-red hover:bg-brand-light'
+                    showNotifications ? 'bg-white/10 text-brand-gold' : 'text-white/80 hover:text-white hover:bg-white/10'
                   } relative`}
                 >
                   <Bell size={20} />
-                  <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-brand-red ring-2 ring-white"></span>
+                  <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-brand-gold ring-2 ring-brand-red"></span>
                 </button>
 
                 {showNotifications && (
-                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                    <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-brand-light/50">
+                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                    <div className="p-4 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
                       <h3 className="font-bold text-slate-800 text-sm">Notifications</h3>
-                      <span className="text-[10px] font-bold text-brand-red bg-brand-red/10 px-2 py-0.5 rounded-full uppercase tracking-wider">3 New</span>
+                      <span className="text-[10px] font-bold text-brand-red bg-brand-red/5 px-2 py-0.5 rounded-full uppercase tracking-wider">3 New</span>
                     </div>
                     {/* ... (replicate notification items) */}
                     <div className="max-h-[300px] overflow-y-auto">
@@ -194,21 +200,21 @@ export default function PlatformAdminLayout() {
               <div className="relative" ref={profileRef}>
                 <button 
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className="flex items-center space-x-1 sm:space-x-3 border-l border-slate-200 pl-2 sm:pl-4 py-1 group"
+                  className="flex items-center space-x-1 sm:space-x-3 border-l border-white/20 pl-2 sm:pl-4 py-1 group"
                 >
                   <div className="text-right hidden md:block max-w-[150px]">
-                    <p className="text-sm font-bold text-slate-700 group-hover:text-brand-red transition-colors truncate">
+                    <p className="text-sm font-bold text-white group-hover:text-brand-gold transition-colors truncate">
                       {user?.email?.split('@')[0]}
                     </p>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                    <p className="text-[10px] font-bold text-white/60 uppercase tracking-wider">
                       {user?.role?.replace('_', ' ')}
                     </p>
                   </div>
                   <div className="relative">
-                    <UserCircle size={28} className="sm:w-8 sm:h-8 text-slate-400 group-hover:text-brand-red transition-colors" />
-                    <div className="absolute -bottom-0.5 -right-0.5 bg-green-500 w-2.5 h-2.5 rounded-full border-2 border-white"></div>
+                    <UserCircle size={28} className="sm:w-8 sm:h-8 text-white/80 group-hover:text-white transition-colors" />
+                    <div className="absolute -bottom-0.5 -right-0.5 bg-green-500 w-2.5 h-2.5 rounded-full border-2 border-brand-red"></div>
                   </div>
-                  <ChevronDown size={14} className={`text-slate-400 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown size={14} className={`text-white transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {isProfileOpen && (

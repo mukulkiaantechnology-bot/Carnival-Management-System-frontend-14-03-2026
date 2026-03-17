@@ -125,10 +125,10 @@ export default function LandingPage() {
                <div className="w-16 h-16 bg-brand-light rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-gold group-hover:text-white transition-all shadow-inner relative z-10">
                   <Users className="text-brand-gold group-hover:text-white" size={32} />
                </div>
-               <h4 className="text-xl font-black text-brand-text mb-4 uppercase italic tracking-tight relative z-10">Workforce Management</h4>
-               <p className="text-slate-500 font-bold leading-relaxed relative z-10">
-                  Track employee schedules, training progress, and time clock activity across all locations.
-               </p>
+                <h4 className="text-xl font-black text-brand-text mb-4 uppercase italic tracking-tight relative z-10">Workforce Management</h4>
+                <p className="text-slate-500 font-bold leading-relaxed relative z-10">
+                   Track staff schedules, training progress, and time clock activity across all locations.
+                </p>
             </div>
             
             <div className="p-8 rounded-[2.5rem] bg-white border border-brand-gold/10 hover:border-brand-orange hover:shadow-2xl hover:shadow-brand-orange/5 transition-all group overflow-hidden relative">

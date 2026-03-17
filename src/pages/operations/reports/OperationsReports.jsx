@@ -13,7 +13,7 @@ const REPORT_CATEGORIES = [
     { id: 2, metric: 'Main Stage Crowd Density', value: 'High', time: '20:30' },
     { id: 3, metric: 'Ticket Conversions', value: '72%', time: 'End of Day' },
   ]},
-  { id: 'RC-3', title: 'Employee Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', sampleData: [
+  { id: 'RC-3', title: 'Staff Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', sampleData: [
     { id: 1, staff: 'James Carter', shift: '08:00 - 16:00', task: 'Ride Ops' },
     { id: 2, staff: 'Maria Lopez', shift: '10:00 - 18:00', task: 'Catering' },
     { id: 3, staff: 'David Kim', shift: 'On Call', task: 'Maintenance' },
@@ -23,9 +23,9 @@ const REPORT_CATEGORIES = [
 const INITIAL_REPORTS = [
   { id: 1, name: 'Weekly Ride Safety Audit', type: 'Inspection', date: '2026-03-10', size: '1.2 MB' },
   { id: 2, name: 'Opening Festival Attendance', type: 'Event', date: '2026-03-08', size: '845 KB' },
-  { id: 3, name: 'March Workforce Deployment', type: 'Employee Activity', date: '2026-03-05', size: '2.4 MB' },
+  { id: 3, name: 'March Workforce Deployment', type: 'Staff Activity', date: '2026-03-05', size: '2.4 MB' },
   { id: 4, name: 'Incident Log Summary Q1', type: 'Inspection', date: '2026-03-01', size: '1.8 MB' },
-  { id: 5, name: 'Staff Orientation Metrics', type: 'Employee Activity', date: '2026-02-28', size: '980 KB' },
+  { id: 5, name: 'Staff Orientation Metrics', type: 'Staff Activity', date: '2026-02-28', size: '980 KB' },
 ];
 
 export default function OperationsReports() {
@@ -197,7 +197,7 @@ export default function OperationsReports() {
                 >
                   <option value="Inspection">Inspection Report</option>
                   <option value="Event">Event Report</option>
-                  <option value="Employee Activity">Employee Activity Report</option>
+                  <option value="Staff Activity">Staff Activity Report</option>
                 </select>
               </div>
               <div>

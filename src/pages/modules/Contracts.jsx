@@ -309,21 +309,6 @@ export default function Contracts() {
               onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-1">Category / Department</label>
-            <div className="grid grid-cols-2 gap-3">
-              {['Legal', 'Operations', 'Vendor', 'Partnership'].map(cat => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setNewTemplate({ ...newTemplate, category: cat })}
-                  className={`py-3 px-4 rounded-xl text-xs font-black transition-all border ${newTemplate.category === cat ? 'bg-brand-red text-white border-brand-red shadow-lg shadow-brand-red/20' : 'bg-white text-slate-400 border-slate-100 hover:bg-slate-50'}`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
           <div className="pt-4">
             <button 
               className="w-full h-11 sm:h-14 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl bg-brand-gold text-brand-text hover:bg-brand-gold-dark transition-all shadow-xl shadow-brand-gold/20" 

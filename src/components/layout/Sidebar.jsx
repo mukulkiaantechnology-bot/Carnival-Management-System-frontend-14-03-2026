@@ -10,7 +10,7 @@ import logo from '../../assets/logo.png';
 // Portal Navigation Items
 const ADMIN_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/admin-dashboard' },
-  { name: 'Employees', icon: Users, path: '/employees' },
+  { name: 'Staff', icon: Users, path: '/staff' },
   { name: 'Time Clock', icon: Clock, path: '/time-clock' },
   { name: 'Inspections', icon: ClipboardCheck, path: '/inspections' },
   { name: 'Maintenance', icon: Wrench, path: '/maintenance' },
@@ -27,7 +27,7 @@ const OPS_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/operations/dashboard' },
   { name: 'Inspections', icon: ClipboardCheck, path: '/operations/inspections' },
   { name: 'Events', icon: Calendar, path: '/operations/events' },
-  { name: 'Employees', icon: Users, path: '/operations/employees' },
+  { name: 'Staff', icon: Users, path: '/operations/staff' },
   { name: 'Reports', icon: BarChart, path: '/operations/reports' },
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
@@ -40,18 +40,18 @@ const MAINTENANCE_NAV_ITEMS = [
 ];
 
 const EMPLOYEE_NAV_ITEMS = [
-  { name: 'Dashboard', icon: LayoutDashboard, path: '/employee-dashboard' },
-  { name: 'Time Clock', icon: Clock, path: '/employee-timeclock' },
-  { name: 'My Tasks', icon: ClipboardCheck, path: '/employee-tasks' },
-  { name: 'Training', icon: GraduationCap, path: '/employee-training' },
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/staff-dashboard' },
+  { name: 'Time Clock', icon: Clock, path: '/staff-timeclock' },
+  { name: 'My Tasks', icon: ClipboardCheck, path: '/staff-tasks' },
+  { name: 'Training', icon: GraduationCap, path: '/staff-training' },
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
 const HR_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/hr-dashboard' },
-  { name: 'Employees', icon: Users, path: '/hr/employees' },
+  { name: 'Staff', icon: Users, path: '/hr/staff' },
   { name: 'Training Library', icon: GraduationCap, path: '/hr/training-library' },
-  { name: 'Employee Training', icon: ClipboardCheck, path: '/hr/employee-training' },
+  { name: 'Staff Training', icon: ClipboardCheck, path: '/hr/staff-training' },
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
@@ -87,7 +87,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
     sectionTitle = 'Maintenance Hub';
   } else if (role === 'employee') {
     menuItems = EMPLOYEE_NAV_ITEMS;
-    sectionTitle = 'Employee Portal';
+    sectionTitle = 'Staff Portal';
   }
 
   return (
