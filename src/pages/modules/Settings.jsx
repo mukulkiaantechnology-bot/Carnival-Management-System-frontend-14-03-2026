@@ -15,7 +15,7 @@ function Toggle({ label, subtitle, enabled, onToggle }) {
       </div>
       <div 
         onClick={onToggle}
-        className={`w-11 h-6 rounded-full relative cursor-pointer transition-all duration-300 ${enabled ? 'bg-blue-600 shadow-inner' : 'bg-slate-200'}`}
+        className={`w-11 h-6 rounded-full relative cursor-pointer transition-all duration-300 ${enabled ? 'bg-brand-gold shadow-inner' : 'bg-slate-200'}`}
       >
         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-lg transition-all duration-300 ${enabled ? 'right-1' : 'left-1'}`} />
       </div>
@@ -60,9 +60,9 @@ export default function Settings() {
   }, [user]);
 
   const tabs = useMemo(() => [
-    { id: 'profile', label: 'My Profile', icon: User, color: 'emerald' },
-    { id: 'company', label: 'Company Information', icon: Building, color: 'blue', adminOnly: true },
-    { id: 'security', label: 'Security', icon: Lock, color: 'red' },
+    { id: 'profile', label: 'My Profile', icon: User, color: 'brand-red', iconColor: 'text-brand-red', bgColor: 'bg-brand-red/10', borderColor: 'border-brand-red/20' },
+    { id: 'company', label: 'Company Information', icon: Building, color: 'brand-gold', iconColor: 'text-brand-gold', bgColor: 'bg-brand-gold/10', borderColor: 'border-brand-gold/20', adminOnly: true },
+    { id: 'security', label: 'Security', icon: Lock, color: 'brand-red', iconColor: 'text-brand-red', bgColor: 'bg-brand-red/10', borderColor: 'border-brand-red/20' },
   ].filter(tab => !tab.adminOnly || user?.role === 'admin'), [user?.role]);
 
   // Handle tab switching from URL and Access Control
@@ -104,17 +104,19 @@ export default function Settings() {
       {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 duration-300">
-          <div className="bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-800">
-            <CheckCircle2 size={18} className="text-emerald-400" />
-            <span className="text-sm font-bold tracking-tight">{toast}</span>
+          <div className="bg-brand-red text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-brand-red/20">
+            <CheckCircle2 size={18} className="text-brand-gold" />
+            <span className="text-sm font-black tracking-tight uppercase">{toast}</span>
           </div>
         </div>
       )}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">System Settings</h1>
-          <p className="text-slate-500 text-sm">Configure your carnival management system preferences.</p>
+          <h1 className="text-2xl font-black text-brand-red tracking-tight leading-none italic uppercase flex items-center gap-3">
+             <SettingsIcon size={26} className="text-brand-red" /> System Settings
+          </h1>
+          <p className="text-slate-500 text-sm font-bold mt-2">Configure your carnival management system preferences.</p>
         </div>
         <div className="flex items-center gap-3">
           <Button 
@@ -139,13 +141,13 @@ export default function Settings() {
             <button 
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 ${
+              className={`w-full flex items-center gap-3 px-6 py-4 text-[10px] font-black uppercase tracking-widest rounded-2xl transition-all duration-300 ${
                 activeTab === tab.id 
-                  ? `bg-${tab.color}-50 text-${tab.color}-700 shadow-sm border border-${tab.color}-100` 
-                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'
+                  ? `${tab.bgColor} ${tab.iconColor} shadow-xl shadow-brand-red/5 border ${tab.borderColor}` 
+                  : 'text-slate-400 hover:bg-slate-50 hover:text-slate-600'
               }`}
             >
-              <tab.icon size={18} className={activeTab === tab.id ? `text-${tab.color}-600` : 'text-slate-400'} />
+              <tab.icon size={18} className={activeTab === tab.id ? tab.iconColor : 'text-slate-400'} strokeWidth={3} />
               {tab.label}
             </button>
           ))}
@@ -157,19 +159,19 @@ export default function Settings() {
               <Card className="border-slate-100 shadow-sm">
                 <CardHeader title="My Profile" subtitle="Manage your personal information and preferences." />
                 <CardContent className="space-y-8">
-                  <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-slate-50">
+                  <div className="flex flex-col sm:flex-row items-center gap-8 pb-8 border-b border-slate-50">
                     <div className="relative group">
-                      <div className="w-24 h-24 rounded-3xl bg-emerald-50 flex items-center justify-center text-emerald-600 border-2 border-emerald-100 overflow-hidden">
-                        <User size={40} />
+                      <div className="w-28 h-28 rounded-[2.5rem] bg-brand-red/5 flex items-center justify-center text-brand-red border-2 border-brand-red/10 overflow-hidden shadow-inner transform group-hover:scale-105 transition-all duration-500">
+                        <User size={48} strokeWidth={1} />
                       </div>
-                      <button className="absolute -bottom-2 -right-2 p-2 bg-white rounded-xl shadow-lg border border-slate-100 text-slate-600 hover:text-emerald-600 transition-colors">
-                        <Camera size={16} />
+                      <button className="absolute -bottom-2 -right-2 p-3 bg-white rounded-2xl shadow-xl border border-brand-red/10 text-brand-red hover:bg-brand-red hover:text-white transition-all transform hover:scale-110 active:scale-90 cursor-pointer">
+                        <Camera size={18} strokeWidth={3} />
                       </button>
                     </div>
-                    <div className="text-center sm:text-left space-y-1">
-                      <h3 className="text-lg font-bold text-slate-800">{profileData.fullName}</h3>
-                      <p className="text-sm font-bold text-emerald-600 uppercase tracking-widest">{user?.role?.replace('_', ' ')}</p>
-                      <p className="text-xs text-slate-400 font-medium">Last Login: Just now</p>
+                    <div className="text-center sm:text-left space-y-2">
+                      <h3 className="text-xl font-black text-brand-red italic uppercase tracking-tight">{profileData.fullName}</h3>
+                      <p className="text-xs font-black text-brand-gold uppercase tracking-[0.2em] bg-brand-gold/10 px-3 py-1 rounded-full inline-block">{user?.role?.replace('_', ' ')}</p>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest block mt-1">Last Login: Just now</p>
                     </div>
                   </div>
 
@@ -180,7 +182,7 @@ export default function Settings() {
                         type="text" 
                         value={profileData.fullName} 
                         onChange={(e) => setProfileData({...profileData, fullName: e.target.value})}
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all" 
                       />
                     </div>
                     <div className="space-y-2">
@@ -189,7 +191,7 @@ export default function Settings() {
                         type="email" 
                         value={profileData.email} 
                         onChange={(e) => setProfileData({...profileData, email: e.target.value})}
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all" 
                       />
                     </div>
                     <div className="space-y-2">
@@ -199,7 +201,7 @@ export default function Settings() {
                         value={profileData.phone}
                         onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
                         placeholder="+1 (555) 000-0000" 
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all" 
                       />
                     </div>
                     <div className="space-y-2">
@@ -207,7 +209,7 @@ export default function Settings() {
                       <select 
                         value={profileData.timezone}
                         onChange={(e) => setProfileData({...profileData, timezone: e.target.value})}
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all appearance-none cursor-pointer"
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all appearance-none cursor-pointer"
                       >
                         <option>Pacific Time (PT)</option>
                         <option>Mountain Time (MT)</option>
@@ -289,7 +291,7 @@ export default function Settings() {
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Current Password</label>
-                      <input type="password" placeholder="••••••••" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-red-500/50 focus:ring-4 focus:ring-red-50 transition-all" />
+                      <input type="password" placeholder="••••••••" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-brand-red focus:ring-4 focus:ring-brand-red/5 transition-all" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -301,7 +303,7 @@ export default function Settings() {
                         <input type="password" placeholder="Must match new password" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" />
                       </div>
                     </div>
-                    <Button variant="secondary" className="w-fit px-8 py-3 text-[10px] font-black uppercase tracking-widest text-red-600 border-red-100 hover:bg-red-50 transition-all">Update Security Credentials</Button>
+                    <Button variant="secondary" className="w-fit px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-white bg-brand-red hover:bg-brand-red-dark shadow-xl shadow-brand-red/20 border-none transition-all">Update Security Credentials</Button>
                   </CardContent>
                 </Card>
               </div>

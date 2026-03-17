@@ -16,9 +16,9 @@ import {
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 
 const SETTLEMENT_SUMMARY = [
-  { label: 'Total Cash Collected', value: '$8,450.00', icon: Wallet, color: 'text-amber-600', bg: 'bg-amber-50' },
-  { label: 'Total Online Payments', value: '$4,000.00', icon: CreditCard, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-  { label: 'Total Tickets Sold', value: '1,284', icon: Ticket, color: 'text-blue-600', bg: 'bg-blue-50' },
+  { label: 'Total Cash Collected', value: '$8,450.00', icon: Wallet, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
+  { label: 'Total Online Payments', value: '$4,000.00', icon: CreditCard, color: 'text-brand-red', bg: 'bg-brand-red/10' },
+  { label: 'Total Tickets Sold', value: '1,284', icon: Ticket, color: 'text-brand-gold', bg: 'bg-brand-gold/10' },
 ];
 
 const INITIAL_SETTLEMENT_DATA = [
@@ -46,28 +46,28 @@ export default function Settlement() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
-          <h1 className="text-3xl font-black text-slate-800 flex items-center gap-4">
-            <div className="p-3 bg-amber-50 rounded-2xl text-amber-600 shadow-lg shadow-amber-100">
-               <HandCoins size={32} />
+          <h1 className="text-3xl font-black text-brand-red flex items-center gap-4 italic uppercase tracking-tight">
+            <div className="p-3 bg-brand-red/5 rounded-2xl text-brand-red shadow-xl shadow-brand-red/10">
+               <HandCoins size={36} strokeWidth={2.5} />
             </div>
             Daily Settlement
           </h1>
           <p className="text-sm text-slate-500 mt-2 font-black uppercase tracking-widest opacity-60 ml-1 leading-none">Financial Hub</p>
         </div>
-        <button className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 text-white rounded-2xl transition-all font-black text-xs uppercase tracking-[3px]">
-          <Printer size={20} /> Export Report
+        <button className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-brand-gold text-brand-text rounded-[1.2rem] transition-all font-black text-[10px] uppercase tracking-[0.3em] shadow-2xl shadow-brand-gold/20 active:scale-95 cursor-pointer">
+          <Printer size={22} strokeWidth={3} /> Export Metrics
         </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {SETTLEMENT_SUMMARY.map((stat) => (
-          <div key={stat.label} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100 flex items-center gap-8 group cursor-pointer hover:shadow-xl transition-all">
-            <div className={`p-5 rounded-3xl ${stat.bg} ${stat.color} group-hover:scale-110 transition-transform shadow-lg shadow-slate-100`}>
-              <stat.icon size={36} />
+          <div key={stat.label} className="bg-white p-8 rounded-[3rem] shadow-xl shadow-slate-200/50 border border-slate-50 flex items-center gap-8 group cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all">
+            <div className={`p-6 rounded-[1.8rem] ${stat.bg} ${stat.color} group-hover:rotate-6 transition-transform shadow-lg`}>
+              <stat.icon size={40} strokeWidth={2.5} />
             </div>
             <div>
-              <p className="text-[11px] font-black text-slate-400 uppercase tracking-[3px] leading-none mb-2">{stat.label}</p>
-              <p className="text-3xl font-black text-slate-900 tracking-tighter">{stat.value}</p>
+              <p className="text-[11px] font-black text-slate-400 uppercase tracking-[0.3em] leading-none mb-3">{stat.label}</p>
+              <p className="text-3xl font-black text-slate-900 tracking-tighter group-hover:text-brand-red transition-colors">{stat.value}</p>
             </div>
           </div>
         ))}
@@ -78,8 +78,8 @@ export default function Settlement() {
            title="Box Reconciliation" 
            subtitle="Opening and closing balance verification" 
            action={
-              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest px-5 py-2 rounded-full border bg-amber-50 text-amber-500 border-amber-200">
-                 <Clock size={16} className="animate-spin" /> {pendingCount} Pending
+              <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] px-6 py-2.5 rounded-full border bg-brand-gold/10 text-brand-text border-brand-gold/20 shadow-sm italic">
+                 <Clock size={16} className="animate-spin text-brand-red" strokeWidth={3} /> {pendingCount} Pending Reconciliation
               </div>
            }
         />
@@ -105,21 +105,21 @@ export default function Settlement() {
                        <p>{row.cash} [Cash]</p>
                        <p className="opacity-40">{row.online} [Online]</p>
                     </td>
-                    <td className="px-4 py-6 text-center text-blue-600 text-lg tracking-tighter font-black">{row.closing}</td>
+                    <td className="px-4 py-6 text-center text-brand-red text-xl tracking-tighter font-black group-hover:scale-110 transition-transform">{row.closing}</td>
                     <td className="px-4 py-6 text-center">
-                       <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase ring-1 ring-inset ${
-                         row.status === 'Completed' ? 'bg-emerald-50 text-emerald-700 ring-emerald-200' : 'bg-amber-50 text-amber-700 ring-amber-200'
+                       <span className={`px-5 py-2 rounded-full text-[9px] font-black uppercase ring-1 ring-inset shadow-sm ${
+                         row.status === 'Completed' ? 'bg-brand-red/5 text-brand-red ring-brand-red/10' : 'bg-brand-gold/10 text-brand-text ring-brand-gold/20'
                        }`}>
                           {row.status}
                        </span>
                     </td>
                     <td className="px-8 py-6 text-right">
                       {row.status === 'Pending' ? (
-                        <button 
+                         <button 
                           onClick={() => handleComplete(row.id)}
-                          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-[10px] font-black uppercase transition-all shadow-xl shadow-blue-100"
+                          className="px-8 py-3.5 bg-brand-gold hover:bg-brand-gold-dark text-brand-text rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-brand-gold/20 active:scale-95 cursor-pointer"
                         >
-                          Settle
+                          Settle Now
                         </button>
                       ) : (
                         <div className="flex items-center justify-end gap-2 text-slate-300 px-6">
@@ -133,13 +133,13 @@ export default function Settlement() {
             </table>
           </div>
           <div className="px-10 py-10 bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-8 border-t border-white/5">
-            <div className="flex items-center gap-6">
-               <div className="p-5 bg-amber-500 rounded-[2rem] text-white shadow-2xl shadow-amber-900/20">
-                  <TrendingUp size={32} />
+            <div className="flex items-center gap-8">
+               <div className="p-6 bg-brand-red rounded-[2rem] text-white shadow-2xl shadow-brand-red/30 transform -rotate-3">
+                  <TrendingUp size={40} strokeWidth={3} />
                </div>
                <div>
-                 <p className="text-[11px] font-black uppercase tracking-[4px] text-amber-400 mb-2">Grand Total</p>
-                 <p className="text-xs font-bold text-slate-400 tracking-widest leading-none">Verified system-wide revenue</p>
+                 <p className="text-[11px] font-black uppercase tracking-[0.5em] text-brand-gold mb-3">Grand Total Revenue</p>
+                 <p className="text-xs font-bold text-slate-400 tracking-widest leading-none italic uppercase">Verified system-wide financial integrity</p>
                </div>
             </div>
             <div className="text-center md:text-right">
@@ -150,25 +150,25 @@ export default function Settlement() {
       </Card>
 
       <div className="flex flex-col xl:flex-row items-stretch justify-between gap-8 px-2 pb-10">
-         <div className="flex-1 bg-amber-50 border border-amber-200 rounded-[2.5rem] p-8 flex gap-6 items-center">
-             <AlertCircle className="text-amber-500 shrink-0" size={28} />
+         <div className="flex-1 bg-brand-gold/5 border border-brand-gold/10 rounded-[3rem] p-10 flex gap-8 items-center shadow-inner">
+             <AlertCircle className="text-brand-red shrink-0" size={32} strokeWidth={3} />
              <div>
-                <p className="text-sm font-black text-amber-800 uppercase tracking-widest mb-1">Notice</p>
-                <p className="text-[13px] text-amber-700 font-bold opacity-80 leading-snug">
-                   Settlement is irreversible. Please verify all cash flows before confirming.
+                <p className="text-[10px] font-black text-brand-red uppercase tracking-[0.3em] mb-2">CRITICAL FINANCIAL NOTICE</p>
+                <p className="text-sm text-slate-600 font-bold opacity-80 leading-relaxed italic">
+                   Settlement is an irreversible financial operation. Please verify all box registries and cash flows before final confirmation.
                 </p>
              </div>
          </div>
          <button 
             onClick={finalizeAll}
             disabled={pendingCount === 0}
-            className={`min-w-[280px] px-12 py-6 rounded-[2.5rem] font-black text-sm uppercase tracking-[4px] shadow-2xl transition-all ${
+            className={`min-w-[320px] px-14 py-8 rounded-[3rem] font-black text-[12px] uppercase tracking-[0.5em] shadow-2xl transition-all active:scale-95 cursor-pointer ${
                 pendingCount === 0 
-                ? 'bg-slate-100 text-slate-300 shadow-none' 
-                : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                ? 'bg-slate-100 text-slate-300 shadow-none border border-slate-200' 
+                : 'bg-brand-red hover:bg-brand-red-dark text-white shadow-brand-red/30'
             }`}
          >
-            Finalize Day
+            Finalize Daily Ledger
          </button>
       </div>
     </div>

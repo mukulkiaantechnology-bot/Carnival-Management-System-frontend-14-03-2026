@@ -3,17 +3,17 @@ import { BarChart, Download, FileText, ClipboardCheck, Calendar, Users, Briefcas
 import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 
 const REPORT_CATEGORIES = [
-  { id: 'RC-1', title: 'Inspection Reports', desc: 'Compliance results, safety logs, and failed check deep-dives.', icon: ClipboardCheck, color: 'text-amber-600', bg: 'bg-amber-50', sampleData: [
+  { id: 'RC-1', title: 'Inspection Reports', desc: 'Compliance results, safety logs, and failed check deep-dives.', icon: ClipboardCheck, color: 'text-brand-red', bg: 'bg-brand-red/10', sampleData: [
     { id: 1, item: 'Roller Coaster Brake System', status: 'Passed', date: '2026-03-15' },
     { id: 2, item: 'Ferris Wheel Carriage Locks', status: 'Passed', date: '2026-03-15' },
     { id: 3, item: 'Food Stall Hygiene Audit', status: 'Requires Attention', date: '2026-03-14' },
   ]},
-  { id: 'RC-2', title: 'Event Reports', desc: 'Attendance stats, location performance, and crowd density logs.', icon: Calendar, color: 'text-indigo-600', bg: 'bg-indigo-50', sampleData: [
+  { id: 'RC-2', title: 'Event Reports', desc: 'Attendance stats, location performance, and crowd density logs.', icon: Calendar, color: 'text-brand-gold', bg: 'bg-brand-gold/10', sampleData: [
     { id: 1, metric: 'Peak Attendance', value: '4,500', time: '18:00' },
     { id: 2, metric: 'Main Stage Crowd Density', value: 'High', time: '20:30' },
     { id: 3, metric: 'Ticket Conversions', value: '72%', time: 'End of Day' },
   ]},
-  { id: 'RC-3', title: 'Employee Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-teal-600', bg: 'bg-teal-50', sampleData: [
+  { id: 'RC-3', title: 'Employee Activity Reports', desc: 'Shift clock-ins, on-duty hours, and event-staff mapping.', icon: Users, color: 'text-brand-orange', bg: 'bg-brand-orange/10', sampleData: [
     { id: 1, staff: 'James Carter', shift: '08:00 - 16:00', task: 'Ride Ops' },
     { id: 2, staff: 'Maria Lopez', shift: '10:00 - 18:00', task: 'Catering' },
     { id: 3, staff: 'David Kim', shift: 'On Call', task: 'Maintenance' },
@@ -75,16 +75,16 @@ export default function OperationsReports() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
-            <BarChart className="text-emerald-500" size={24} /> Reports
+          <h1 className="text-2xl font-black text-brand-red tracking-tight leading-none italic uppercase flex items-center gap-3">
+            <BarChart className="text-brand-red" size={26} /> Reports
           </h1>
-          <p className="text-sm text-slate-500">Generate and download operations analytics.</p>
+          <p className="text-slate-500 text-sm font-bold mt-2">Generate and download operations analytics.</p>
         </div>
         <button 
           onClick={() => setShowNewReportModal(true)}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-colors font-semibold shadow-sm cursor-pointer whitespace-nowrap active:scale-95"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-gold hover:bg-brand-gold-dark text-brand-text rounded-2xl transition-all font-black shadow-xl shadow-brand-gold/20 uppercase tracking-widest text-xs cursor-pointer whitespace-nowrap active:scale-95"
         >
-          <Plus size={18} /> New Report
+          <Plus size={18} strokeWidth={3} /> New Report
         </button>
       </div>
 
@@ -103,7 +103,7 @@ export default function OperationsReports() {
                </div>
                <button 
                  onClick={() => handleGeneratePreview(cat)}
-                 className="mt-5 w-full py-2 bg-slate-50 text-slate-600 text-xs font-bold rounded-lg border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer active:scale-[0.98]"
+                 className="mt-5 w-full py-3 bg-brand-red text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-lg shadow-brand-red/10 hover:bg-brand-red-dark transition-all cursor-pointer active:scale-[0.98]"
                >
                  Generate Preview
                </button>
@@ -143,18 +143,18 @@ export default function OperationsReports() {
                       </span>
                     </td>
                     <td className="px-5 py-4 text-slate-500 whitespace-nowrap">{rpt.date}</td>
-                    <td className="px-5 py-4 text-right">
+                     <td className="px-5 py-4 text-right">
                        <button 
                         disabled={downloadingId === rpt.id}
                         onClick={() => handleDownload(rpt.id)}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all transform shrink-0 cursor-pointer ${downloadingId === rpt.id ? 'bg-slate-100 text-slate-400' : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 active:scale-95'}`}>
+                        className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all transform shrink-0 cursor-pointer shadow-lg ${downloadingId === rpt.id ? 'bg-slate-100 text-slate-400' : 'bg-brand-red text-white shadow-brand-red/20 hover:bg-brand-red-dark active:scale-95'}`}>
                          {downloadingId === rpt.id ? (
                            <>
                              <Loader2 size={14} className="animate-spin" /> Preparing...
                            </>
                          ) : (
                            <>
-                             <Download size={14} /> Download <span className="text-[10px] opacity-60 ml-1">({rpt.size})</span>
+                             <Download size={14} strokeWidth={3} /> Download <span className="text-[8px] opacity-70 ml-1">({rpt.size})</span>
                            </>
                          )}
                        </button>
@@ -169,9 +169,9 @@ export default function OperationsReports() {
           )}
           <div className="p-5 border-t border-slate-100 bg-slate-50/50">
              <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-400">
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-emerald-500" /> Auto-Generated</div>
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-blue-500" /> Secure PDF</div>
-                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-indigo-500" /> Excel Export</div>
+                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-brand-red" /> Auto-Generated</div>
+                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-brand-gold" /> Secure PDF</div>
+                <div className="flex items-center gap-1"><div className="w-2 h-2 rounded-full bg-brand-orange" /> Excel Export</div>
              </div>
           </div>
         </CardContent>
@@ -193,7 +193,7 @@ export default function OperationsReports() {
                 <select 
                   value={newReport.type} 
                   onChange={(e) => setNewReport({...newReport, type: e.target.value})}
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all appearance-none"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-red/20 outline-none transition-all appearance-none"
                 >
                   <option value="Inspection">Inspection Report</option>
                   <option value="Event">Event Report</option>
@@ -207,14 +207,14 @@ export default function OperationsReports() {
                   value={newReport.name}
                   onChange={(e) => setNewReport({...newReport, name: e.target.value})}
                   placeholder="e.g. Monthly Safety Audit"
-                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all shadow-inner"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-red/20 outline-none transition-all shadow-inner"
                 />
               </div>
             </div>
 
-            <div className="flex gap-3 pt-2">
-              <button onClick={() => setShowNewReportModal(false)} className="flex-1 py-3 text-sm font-bold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer">Discard</button>
-              <button onClick={handleCreateReport} className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl shadow-lg shadow-emerald-600/20 transition-all active:scale-95 cursor-pointer">Generate Report</button>
+            <div className="flex gap-4 pt-4">
+              <button onClick={() => setShowNewReportModal(false)} className="flex-1 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:bg-slate-50 rounded-2xl transition-all border border-slate-100 cursor-pointer">Discard</button>
+              <button onClick={handleCreateReport} className="flex-1 py-3 bg-brand-red hover:bg-brand-red-dark text-white text-xs font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-brand-red/20 transition-all active:scale-95 cursor-pointer">Generate Report</button>
             </div>
           </div>
         </div>
@@ -238,7 +238,7 @@ export default function OperationsReports() {
             <div className="bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden">
                <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-white/50">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Live Sample Data</span>
-                  <span className="flex items-center gap-1.5 text-xs text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" /> SYNCED</span>
+                  <span className="flex items-center gap-1.5 text-[10px] text-brand-red font-black bg-brand-red/10 px-3 py-1 rounded-full uppercase tracking-widest"><div className="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse" /> SYNCED</span>
                </div>
                <div className="p-0 overflow-x-auto">
                  <table className="w-full text-xs">
@@ -253,7 +253,7 @@ export default function OperationsReports() {
                        {previewData.sampleData.map(row => (
                          <tr key={row.id} className="bg-white/50">
                             {Object.entries(row).filter(([k])=>k!=='id').map(([key, val]) => (
-                               <td key={key} className={`px-5 py-3 font-medium ${val === 'Passed' ? 'text-emerald-600' : 'text-slate-700'}`}>{val}</td>
+                               <td key={key} className={`px-5 py-3 font-bold ${val === 'Passed' ? 'text-emerald-600' : 'text-slate-700'}`}>{val}</td>
                             ))}
                          </tr>
                        ))}
@@ -262,12 +262,12 @@ export default function OperationsReports() {
                </div>
             </div>
 
-            <div className="flex justify-between items-center bg-amber-50 rounded-xl p-4 border border-amber-100">
+            <div className="flex justify-between items-center bg-brand-gold/10 rounded-xl p-4 border border-brand-gold/20">
                <div className="flex items-center gap-3">
-                  <Eye className="text-amber-600" size={20} />
-                  <p className="text-xs font-medium text-amber-800 leading-tight">This is a dynamic preview of the current system state. Some fields may update live.</p>
+                  <Eye className="text-brand-gold" size={20} />
+                  <p className="text-xs font-bold text-brand-text leading-tight">This is a dynamic preview of the current system state. Some fields may update live.</p>
                </div>
-               <button onClick={() => setShowPreviewModal(false)} className="px-4 py-2 bg-white text-amber-700 text-xs font-bold rounded-lg border border-amber-200 whitespace-nowrap hover:bg-amber-100 transition-all cursor-pointer">Got It</button>
+               <button onClick={() => setShowPreviewModal(false)} className="px-6 py-2 bg-brand-red text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-lg shadow-brand-red/20 whitespace-nowrap hover:bg-brand-red-dark transition-all cursor-pointer">Got It</button>
             </div>
           </div>
         </div>

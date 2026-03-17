@@ -32,19 +32,19 @@ export default function TicketTracking() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-800 flex items-center gap-3">
-            <Activity className="text-blue-500" size={28} /> Activity Hub
+          <h1 className="text-2xl font-black text-brand-red flex items-center gap-3 italic uppercase tracking-tight">
+            <Activity size={28} className="text-brand-red" strokeWidth={3} /> Activity Hub
           </h1>
-          <p className="text-sm text-slate-500 mt-1 font-medium">Real-time ticket issuance and scan logs.</p>
+          <p className="text-sm text-slate-500 mt-2 font-bold">Real-time ticket issuance and scan logs.</p>
         </div>
         
-        <div className="relative w-full sm:w-80">
-          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+        <div className="relative w-full sm:w-80 group">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-red transition-colors" />
           <input 
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-10 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-blue-500/10 shadow-sm transition-all transition-all placeholder:text-slate-300"
+            className="w-full pl-12 pr-10 py-4 bg-white border border-brand-red/10 rounded-2xl text-sm font-bold focus:outline-none focus:ring-4 focus:ring-brand-red/5 shadow-lg shadow-brand-red/5 transition-all placeholder:text-slate-300 italic"
             placeholder="Search ticket ID..."
           />
         </div>
@@ -56,7 +56,7 @@ export default function TicketTracking() {
             title="Issuance Log" 
             subtitle="Recent tickets generated at counters" 
             action={
-               <button className="p-2 text-slate-400 hover:text-blue-600 transition-colors">
+               <button className="p-2.5 bg-white text-brand-red border border-brand-red/10 hover:bg-brand-red hover:text-white rounded-xl transition-all shadow-lg active:scale-95 cursor-pointer">
                   <Download size={20} />
                </button>
             }
@@ -78,7 +78,7 @@ export default function TicketTracking() {
                     <tr key={ticket.id} className="hover:bg-slate-50/30 transition-all group">
                       <td className="px-6 py-5">
                           <div className="flex items-center gap-3">
-                            <TicketIcon size={14} className="text-blue-500" />
+                            <TicketIcon size={16} className="text-brand-red" strokeWidth={3} />
                             <span className="font-mono text-xs font-black text-slate-800 tracking-tight">{ticket.id}</span>
                           </div>
                       </td>
@@ -94,7 +94,11 @@ export default function TicketTracking() {
                           </div>
                       </td>
                       <td className="px-6 py-5 text-right">
-                          <span className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-[9px] font-black uppercase ring-1 ring-blue-100">
+                          <span className={`px-4 py-1.5 rounded-full text-[9px] font-black uppercase ring-1 shadow-sm ${
+                            ticket.status === 'Used' ? 'bg-brand-gold/10 text-brand-text ring-brand-gold/20' : 
+                            ticket.status === 'Valid' ? 'bg-brand-red/5 text-brand-red ring-brand-red/10' : 
+                            'bg-slate-50 text-slate-400 ring-slate-100'
+                          }`}>
                             {ticket.status}
                           </span>
                       </td>
@@ -107,24 +111,24 @@ export default function TicketTracking() {
         </Card>
 
         <div className="space-y-6">
-          <h2 className="text-xs font-black text-slate-800 uppercase tracking-widest flex items-center gap-3 px-1">
-             <RotateCcw size={18} className="text-emerald-500" /> Recent Scans
+          <h2 className="text-xs font-black text-brand-red uppercase tracking-[0.2em] italic flex items-center gap-3 px-1">
+             <RotateCcw size={18} className="text-brand-red" strokeWidth={3} /> Recent Scans
           </h2>
           
           <div className="space-y-4">
              {RECENT_SCANS.map((scan) => (
-               <div key={scan.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 font-bold hover:shadow-lg transition-all border-l-4 border-l-emerald-500 cursor-pointer">
-                   <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest leading-none mb-1">{scan.id}</p>
-                   <p className="text-sm font-black text-slate-800 tracking-tight leading-tight">{scan.ride}</p>
-                   <p className="text-[10px] text-slate-400 mt-2 font-black uppercase tracking-widest flex items-center gap-1">
-                      <Clock size={12} /> {scan.time}
+               <div key={scan.id} className="bg-white p-6 rounded-[1.5rem] shadow-xl shadow-slate-200/50 border border-slate-50 font-bold hover:shadow-2xl hover:-translate-y-1 transition-all border-l-4 border-l-brand-gold cursor-pointer group">
+                   <p className="text-[10px] font-black text-brand-gold uppercase tracking-[0.2em] leading-none mb-2">{scan.id}</p>
+                   <p className="text-base font-black text-slate-800 tracking-tight leading-tight group-hover:text-brand-red transition-colors">{scan.ride}</p>
+                   <p className="text-[10px] text-slate-400 mt-3 font-black uppercase tracking-widest flex items-center gap-2">
+                      <Clock size={14} className="text-slate-300" strokeWidth={3} /> {scan.time}
                    </p>
                </div>
              ))}
           </div>
 
-          <button className="w-full py-4 bg-slate-50 text-slate-400 border border-slate-100 rounded-2xl text-[10px] font-black uppercase tracking-[3px] hover:bg-slate-100 transition-all">
-            Load More
+          <button className="w-full py-5 bg-brand-red/5 text-brand-red border border-brand-red/10 rounded-[1.2rem] text-[10px] font-black uppercase tracking-[0.4em] hover:bg-brand-red hover:text-white transition-all shadow-xl shadow-brand-red/5 active:scale-95 cursor-pointer">
+            Load More Metrics
           </button>
         </div>
       </div>

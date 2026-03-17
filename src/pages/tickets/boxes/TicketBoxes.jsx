@@ -59,23 +59,23 @@ export default function TicketBoxes() {
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
-            <Store className="text-blue-600" size={24} /> Manage Counters
+          <h1 className="text-xl sm:text-2xl font-black text-brand-red flex items-center gap-3 italic uppercase tracking-tight">
+            <Store className="text-brand-red" size={26} /> Manage Counters
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1 font-medium">Control and monitor all ticket boxes.</p>
+          <p className="text-xs sm:text-sm text-slate-500 mt-2 font-bold">Control and monitor all ticket boxes.</p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-3 sm:py-4 bg-brand-red hover:bg-brand-maroon-dark text-white rounded-2xl transition-all font-black shadow-xl shadow-brand-red/20 active:scale-95 text-xs uppercase tracking-widest"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-10 py-4 bg-brand-gold hover:bg-brand-gold-dark text-brand-text rounded-2xl transition-all font-black shadow-2xl shadow-brand-gold/20 active:scale-95 text-[10px] uppercase tracking-[0.2em] cursor-pointer"
         >
-          <Plus size={20} /> Add Box
+          <Plus size={20} strokeWidth={3} /> Add Box
         </button>
       </div>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between px-4 sm:px-0">
-          <h2 className="text-lg font-black text-slate-800 uppercase tracking-tight">Active Counters Registry</h2>
-          <button className="p-2 sm:p-2.5 bg-slate-100 text-slate-400 hover:text-blue-600 rounded-xl transition-all">
+          <h2 className="text-lg font-black text-brand-red uppercase tracking-tighter italic">Active Counters Registry</h2>
+          <button className="p-2.5 bg-white text-brand-red border border-brand-red/10 hover:bg-brand-red hover:text-white rounded-xl transition-all shadow-lg active:scale-95 cursor-pointer">
             <Download size={20} />
           </button>
         </div>
@@ -106,7 +106,7 @@ export default function TicketBoxes() {
                       <td className="px-4 py-5 text-center">
                         <button
                           onClick={() => toggleStatus(box.id)}
-                          className={`inline-flex items-center gap-2 px-3 py-1 ring-1 ring-inset rounded-full text-[9px] font-black uppercase transition-all ${box.status === 'Open' ? 'bg-emerald-50 text-emerald-700 ring-emerald-200' : 'bg-slate-50 text-slate-400 ring-slate-200'
+                          className={`inline-flex items-center gap-2 px-4 py-1.5 ring-1 ring-inset rounded-full text-[9px] font-black uppercase transition-all shadow-sm cursor-pointer ${box.status === 'Open' ? 'bg-brand-gold/10 text-brand-text ring-brand-gold/30' : 'bg-slate-50 text-slate-400 ring-slate-200'
                             }`}>
                           <Circle size={8} fill="currentColor" className={box.status === 'Open' ? 'animate-pulse' : ''} />
                           {box.status}
@@ -136,7 +136,7 @@ export default function TicketBoxes() {
                   <span className="font-mono text-[10px] font-black text-slate-400 uppercase tracking-tighter">{box.id}</span>
                   <button
                     onClick={() => toggleStatus(box.id)}
-                    className={`px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest ring-1 ring-inset ${box.status === 'Open' ? 'bg-emerald-50 text-emerald-700 ring-emerald-200' : 'bg-slate-50 text-slate-400 ring-slate-200'}`}
+                    className={`px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-[0.2em] ring-1 ring-inset shadow-sm cursor-pointer ${box.status === 'Open' ? 'bg-brand-gold/10 text-brand-text ring-brand-gold/30' : 'bg-slate-50 text-slate-400 ring-slate-200'}`}
                   >
                     {box.status}
                   </button>
@@ -167,10 +167,10 @@ export default function TicketBoxes() {
           <Card key={box.id} className="hover:shadow-2xl hover:-translate-y-1 transition-all group border-none shadow-xl shadow-slate-200/50">
             <CardContent className="p-6 sm:p-8">
               <div className="flex items-start justify-between mb-8">
-                <div className="p-4 rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-lg shadow-blue-50">
-                  <Store size={24} />
+                <div className="p-5 rounded-[1.5rem] bg-brand-red/5 text-brand-red group-hover:bg-brand-red group-hover:text-white transition-all shadow-2xl shadow-brand-red/10">
+                  <Store size={26} strokeWidth={2.5} />
                 </div>
-                <div className={`text-[10px] font-black uppercase tracking-[2px] px-3 py-1.5 rounded-full ${box.status === 'Open' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-500'
+                <div className={`text-[10px] font-black uppercase tracking-[2px] px-4 py-2 rounded-xl shadow-sm ${box.status === 'Open' ? 'bg-brand-gold text-brand-text' : 'bg-slate-100 text-slate-400'
                   }`}>
                   {box.status}
                 </div>
@@ -186,9 +186,9 @@ export default function TicketBoxes() {
                 </div>
                 <button 
                   onClick={() => navigate(`/tickets/boxes/${box.id}`)}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-cream flex items-center justify-center text-brand-red hover:bg-brand-red hover:text-white transition-all shadow-lg hover:shadow-brand-red/20 active:scale-90 cursor-pointer border-none"
+                  className="w-12 h-12 rounded-[1.2rem] bg-brand-red/5 flex items-center justify-center text-brand-red hover:bg-brand-red hover:text-white transition-all shadow-xl hover:shadow-brand-red/20 active:scale-90 cursor-pointer border border-brand-red/10"
                 >
-                  <ArrowRight size={24} />
+                  <ArrowRight size={26} strokeWidth={3} />
                 </button>
               </div>
             </CardContent>
@@ -228,16 +228,16 @@ export default function TicketBoxes() {
                   placeholder="ZONE A"
                 />
               </div>
-              <div className="pt-8 flex gap-4">
-                <button onClick={() => setShowModal(false)} className="flex-1 h-16 bg-slate-50 text-slate-400 rounded-2xl text-xs font-black uppercase tracking-[3px] hover:bg-slate-100 transition-all">
-                  Cancel
+              <div className="pt-10 flex gap-4">
+                <button onClick={() => setShowModal(false)} className="flex-1 h-16 bg-slate-50 text-slate-400 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] hover:bg-slate-100 transition-all border border-slate-100 cursor-pointer">
+                  Discard
                 </button>
                 <button
                   onClick={handleAddBox}
-                  className="flex-1 h-16 bg-blue-600 text-white rounded-2xl text-xs font-black uppercase tracking-[3px] hover:bg-blue-700 transition-all shadow-2xl shadow-blue-200 active:scale-95 disabled:opacity-50"
+                  className="flex-1 h-16 bg-brand-red text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] hover:bg-brand-red-dark transition-all shadow-2xl shadow-brand-red/20 active:scale-95 disabled:opacity-50 cursor-pointer"
                   disabled={!newBox.name || !newBox.location}
                 >
-                  Confirm
+                  Create Now
                 </button>
               </div>
             </div>

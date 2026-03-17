@@ -16,10 +16,10 @@ import { Card, CardContent, CardHeader } from '../../../components/ui/Card';
 import { useNavigate } from 'react-router-dom';
 
 const STATS = [
-  { id: 'sold', label: 'Total Tickets Sold Today', value: '1,284', icon: Ticket, color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-400', path: '/tickets/tracking' },
-  { id: 'counters', label: 'Active Ticket Counters', value: '8', icon: Store, color: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-400', path: '/tickets/boxes' },
-  { id: 'settlements', label: 'Pending Settlements', value: '3', icon: HandCoins, color: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-400', path: '/tickets/settlement' },
-  { id: 'revenue', label: 'Total Revenue Today', value: '$12,450', icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-400', path: '/tickets/settlement' },
+  { id: 'sold', label: 'Total Tickets Sold Today', value: '1,284', icon: Ticket, color: 'text-brand-red', bg: 'bg-brand-red/10', border: 'border-brand-red/20', path: '/tickets/tracking' },
+  { id: 'counters', label: 'Active Ticket Counters', value: '8', icon: Store, color: 'text-brand-gold', bg: 'bg-brand-gold/10', border: 'border-brand-gold/20', path: '/tickets/boxes' },
+  { id: 'settlements', label: 'Pending Settlements', value: '3', icon: HandCoins, color: 'text-brand-red', bg: 'bg-brand-red/10', border: 'border-brand-red/20', path: '/tickets/settlement' },
+  { id: 'revenue', label: 'Total Revenue Today', value: '$12,450', icon: TrendingUp, color: 'text-brand-gold', bg: 'bg-brand-gold/10', border: 'border-brand-gold/20', path: '/tickets/settlement' },
 ];
 
 const SALES_SUMMARY = [
@@ -57,9 +57,9 @@ export default function TicketDashboard() {
       {/* Toast Notification */}
       {toast && (
         <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 duration-300">
-          <div className="bg-slate-900 text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-800">
-            <CheckCircle2 size={18} className="text-emerald-400" />
-            <span className="text-sm font-bold tracking-tight">{toast}</span>
+          <div className="bg-brand-red text-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-brand-red/20">
+            <CheckCircle2 size={18} className="text-brand-gold" />
+            <span className="text-sm font-black tracking-tight uppercase">{toast}</span>
           </div>
         </div>
       )}
@@ -67,16 +67,17 @@ export default function TicketDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Ticket Dashboard</h1>
-          <p className="text-sm text-slate-500 mt-1 font-medium">Real-time ticketing overview and sales tracking.</p>
+          <h1 className="text-2xl font-black text-brand-red tracking-tight leading-none italic uppercase flex items-center gap-3">
+             <Activity size={26} className="text-brand-red" /> Ticket Dashboard
+          </h1>
+          <p className="text-slate-500 text-sm font-bold mt-2">Real-time ticketing overview and sales tracking.</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-blue-600 transition-all shadow-sm relative cursor-pointer">
+          <button className="p-2.5 bg-white border border-brand-red/10 rounded-2xl text-brand-red hover:bg-brand-red hover:text-white transition-all shadow-lg active:scale-95 cursor-pointer">
             <Bell size={20} />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-white" />
           </button>
-          <div className="flex items-center gap-2 px-4 py-2.5 bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-xl border border-blue-100 shadow-sm">
-            <Activity size={16} className="animate-pulse" /> Live
+          <div className="flex items-center gap-2 px-5 py-2.5 bg-brand-gold text-brand-text text-[10px] font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-brand-gold/20">
+            <Activity size={16} className="animate-pulse" /> Live Metrics
           </div>
         </div>
       </div>
@@ -92,7 +93,7 @@ export default function TicketDashboard() {
             <CardContent className="p-5 flex items-center justify-between">
               <div className="min-w-0">
                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] leading-tight truncate">{stat.label}</p>
-                <p className="text-2xl font-black text-slate-800 mt-2 group-hover:text-blue-600 transition-colors tracking-tight">{stat.value}</p>
+                <p className="text-2xl font-black text-slate-800 mt-2 group-hover:text-brand-red transition-colors tracking-tight">{stat.value}</p>
               </div>
               <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} group-hover:rotate-12 transition-transform shrink-0`}>
                 <stat.icon size={24} />
@@ -112,9 +113,9 @@ export default function TicketDashboard() {
             action={
               <button
                 onClick={() => navigate('/tickets/boxes')}
-                className="group flex items-center gap-2 text-xs font-black text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-xl transition-all uppercase tracking-widest cursor-pointer"
+                className="group flex items-center gap-2 text-[10px] font-black text-brand-red hover:bg-brand-red/5 px-4 py-2 rounded-xl transition-all uppercase tracking-widest cursor-pointer"
               >
-                Boxes <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                View Boxes <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </button>
             }
           />
@@ -134,7 +135,7 @@ export default function TicketDashboard() {
                   {SALES_SUMMARY.map((row, idx) => (
                     <tr key={idx} className="hover:bg-slate-50/30 transition-colors group cursor-pointer" onClick={() => navigate('/tickets/boxes')}>
                       <td className="px-6 py-5">
-                        <p className="font-black text-slate-800 group-hover:text-blue-600 transition-colors tracking-tight truncate">{row.box}</p>
+                        <p className="font-black text-slate-800 group-hover:text-brand-red transition-colors tracking-tight truncate">{row.box}</p>
                       </td>
                       <td className="px-4 py-5 text-center">
                         <span className="px-2.5 py-1 bg-slate-100 rounded-lg text-[10px] font-black text-slate-600">{row.sold}</span>
@@ -155,29 +156,29 @@ export default function TicketDashboard() {
           <button
             disabled={isSettling}
             onClick={handleSettlement}
-            className={`w-full p-5 bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white rounded-[2rem] shadow-xl shadow-emerald-200 transition-all flex items-center justify-between group active:scale-95 cursor-pointer ${isSettling ? 'opacity-80' : ''}`}
+            className={`w-full p-6 bg-brand-red hover:bg-brand-red-dark text-white rounded-[2.5rem] shadow-2xl shadow-brand-red/30 transition-all flex items-center justify-between group active:scale-95 cursor-pointer ${isSettling ? 'opacity-80' : ''}`}
           >
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-white/20 rounded-2xl group-hover:bg-white group-hover:text-emerald-700 transition-all">
+            <div className="flex items-center gap-5">
+              <div className="p-4 bg-white/10 rounded-[1.5rem] group-hover:bg-white group-hover:text-brand-red transition-all shadow-inner">
                 {isSettling ? <Loader2 size={24} className="animate-spin" /> : <HandCoins size={24} />}
               </div>
               <div className="text-left">
-                <p className="text-base font-black tracking-tight leading-none uppercase tracking-[1px]">{isSettling ? 'Settling...' : 'Settlement'}</p>
-                <p className="text-[10px] opacity-80 mt-1 font-bold">Close revenue today</p>
+                <p className="text-lg font-black tracking-tight leading-none uppercase italic">{isSettling ? 'Settling...' : 'Settlement'}</p>
+                <p className="text-[10px] font-bold uppercase tracking-widest opacity-80 mt-1">Close revenue today</p>
               </div>
             </div>
-            {!isSettling && <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />}
+            {!isSettling && <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" strokeWidth={3} />}
           </button>
 
           {/* This section can be used for summary or another required view-only module widget */}
-          <Card className="rounded-[2rem] bg-indigo-50/50 border-indigo-100 overflow-hidden border-dashed border-2">
-            <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-lg shadow-indigo-200">
-                <TrendingUp size={24} />
+          <Card className="rounded-[2.5rem] bg-brand-gold/5 border-brand-gold/10 overflow-hidden border-2">
+            <CardContent className="p-8 flex flex-col items-center text-center space-y-5">
+              <div className="w-16 h-16 rounded-[1.5rem] bg-brand-gold text-brand-text flex items-center justify-center shadow-2xl shadow-brand-gold/30 transform hover:rotate-6 transition-transform">
+                <TrendingUp size={32} strokeWidth={3} />
               </div>
               <div>
-                <p className="text-xs font-black text-indigo-900 uppercase tracking-widest">Market Trend</p>
-                <p className="text-xs text-indigo-700 mt-2 leading-relaxed">Sales are up by <span className="font-black">12%</span> compared to last Friday. Recommend opening extra counters at Gateway 2.</p>
+                <p className="text-xs font-black text-brand-text uppercase tracking-[0.3em] mb-3">Market Trend</p>
+                <p className="text-xs text-slate-500 font-bold leading-relaxed px-2">Sales are up by <span className="text-brand-red font-black text-sm italic">12%</span> compared to last Friday. Recommend opening extra counters at Gateway 2.</p>
               </div>
             </CardContent>
           </Card>
@@ -226,12 +227,12 @@ export default function TicketDashboard() {
               </tbody>
             </table>
           </div>
-          <div className="px-6 py-6 border-t border-slate-50 flex justify-center sm:justify-end">
+          <div className="px-8 py-8 border-t border-slate-50 flex justify-center sm:justify-end">
             <button
               onClick={() => navigate('/tickets/tracking')}
-              className="group flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-[3px] hover:bg-blue-700 transition-all shadow-xl shadow-blue-100 active:scale-95 cursor-pointer w-full sm:w-auto"
+              className="group flex items-center justify-center gap-4 px-10 py-5 bg-brand-red text-white rounded-2xl font-black text-xs uppercase tracking-[0.3em] hover:bg-brand-red-dark transition-all shadow-2xl shadow-brand-red/20 active:scale-95 cursor-pointer w-full sm:w-auto mt-2"
             >
-              Full History <ArrowRight size={18} />
+              Full History <ArrowRight size={20} strokeWidth={3} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         </CardContent>
