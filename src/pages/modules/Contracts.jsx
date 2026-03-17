@@ -32,7 +32,7 @@ function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-md' }) {
           <div>
             <h2 className="text-2xl font-bold text-slate-800 tracking-tight leading-none">{title}</h2>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-rose-500 p-2 hover:bg-rose-50 rounded-2xl transition-all">
+          <button onClick={onClose} className="text-slate-600 hover:text-rose-500 p-2 hover:bg-rose-50 rounded-2xl transition-all" title="Close">
             <X size={24} />
           </button>
         </div>
@@ -136,7 +136,7 @@ export default function Contracts() {
           </div>
           <Button
             variant="secondary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50 text-[10px] sm:text-xs"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-lg text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_template')}
           >
             <Plus size={18} strokeWidth={3} />
@@ -144,7 +144,7 @@ export default function Contracts() {
           </Button>
           <Button
             variant="primary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-xl shadow-brand-gold/20 text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_contract')}
           >
             <FileSignature size={18} />
@@ -199,15 +199,17 @@ export default function Contracts() {
                       </div>
                     </td>
                     <td className="px-8 py-6 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0">
+                      <div className="flex items-center justify-end gap-2 transition-all">
                         <button
-                          className="p-3 text-slate-400 hover:text-blue-600 hover:bg-white rounded-2xl transition-all shadow-sm border border-transparent hover:border-slate-100 bg-slate-50/50"
+                          className="p-3 text-slate-400 hover:text-blue-600 hover:bg-white rounded-2xl transition-all shadow-sm border border-slate-100 bg-white"
+                          title="View Details"
                           onClick={() => { setSelectedContract(contract); setActiveModal('view_details'); }}
                         >
                           <Eye size={18} />
                         </button>
                         <button
-                          className="p-3 text-slate-400 hover:text-rose-600 hover:bg-white rounded-2xl transition-all shadow-sm border border-transparent hover:border-slate-100 bg-slate-50/50"
+                          className="p-3 text-slate-400 hover:text-rose-600 hover:bg-white rounded-2xl transition-all shadow-sm border border-slate-100 bg-white"
+                          title="Delete Contract"
                           onClick={() => handleDelete(contract.id, contract.event)}
                         >
                           <Trash2 size={18} />
@@ -373,8 +375,8 @@ export default function Contracts() {
             </div>
           </div>
           <div className="pt-4 flex gap-4">
-            <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl bg-slate-50 border-none text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-[2] h-10 sm:h-12 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-blue-500/20" type="submit">Publish Draft</Button>
+            <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
+            <Button variant="primary" className="flex-[2] h-10 sm:h-12 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-brand-gold/20" type="submit">Publish Draft</Button>
           </div>
         </form>
       </Modal>
@@ -422,8 +424,8 @@ export default function Contracts() {
             </div>
 
             <div className="flex gap-4 pt-2">
-              <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl bg-slate-50 border-none text-[10px]" onClick={() => setActiveModal(null)}>Close</Button>
-              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-[9px] sm:text-[10px] h-10 sm:h-12 rounded-2xl shadow-2xl shadow-blue-500/20 flex items-center justify-center gap-2 group">
+              <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl text-[10px]" onClick={() => setActiveModal(null)}>Close</Button>
+              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-[9px] sm:text-[10px] h-10 sm:h-12 rounded-2xl shadow-2xl shadow-brand-gold/20 flex items-center justify-center gap-2 group">
                 <Download size={16} className="group-hover:-translate-y-0.5 transition-transform" />
                 Download Copy
               </Button>

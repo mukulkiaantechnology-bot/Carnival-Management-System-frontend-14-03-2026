@@ -218,7 +218,7 @@ export default function Financial() {
                     <td className="px-8 py-5 text-right">
                       <Button
                         variant="secondary"
-                        className="h-10 px-5 text-xs font-black uppercase tracking-widest bg-slate-50 border-none hover:bg-slate-900 hover:text-white transition-all shadow-sm rounded-xl"
+                        className="h-10 px-5 text-xs font-black uppercase tracking-widest transition-all shadow-sm rounded-xl"
                         onClick={() => handleViewReceipt(expense)}
                       >
                         View Receipt

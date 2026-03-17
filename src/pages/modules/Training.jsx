@@ -130,15 +130,29 @@ function TrainingLibrary({ onUpload }) {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" onClick={() => navigate(`/hr/training/${module.id}`)}>
+                      <Button 
+                        variant="secondary"
+                        className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-blue-50 hover:text-blue-600 text-slate-600"
+                        onClick={() => navigate(`/hr/training/${module.id}`)}
+                        title="View Module"
+                      >
                         <Eye size={16} />
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
+                      </Button>
+                      <Button 
+                        variant="secondary"
+                        className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-amber-50 hover:text-amber-600 text-slate-600"
+                        title="Edit Module"
+                      >
                         <Pencil size={16} />
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" onClick={() => deleteTraining(module.id)}>
+                      </Button>
+                      <Button 
+                        variant="secondary"
+                        className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-rose-50 hover:text-rose-600 text-slate-600"
+                        onClick={() => deleteTraining(module.id)}
+                        title="Delete Module"
+                      >
                         <Trash2 size={16} />
-                      </button>
+                      </Button>
                     </div>
                   </td>
                 </tr>

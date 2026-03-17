@@ -393,24 +393,30 @@ export default function Employees() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center justify-center gap-2">
-                            <button 
+                            <Button 
+                              variant="secondary"
+                              className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-slate-50 text-slate-600"
                               onClick={() => navigate(`${basePath}/${emp.id}`)}
-                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+                              title="View Details"
                             >
                               <Eye size={16} />
-                            </button>
-                            <button 
+                            </Button>
+                            <Button 
+                              variant="secondary"
+                              className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-amber-50 hover:text-amber-600 text-slate-600"
                               onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
-                              className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all"
+                              title="Edit Employee"
                             >
                               <Pencil size={16} />
-                            </button>
-                            <button 
+                            </Button>
+                            <Button 
+                              variant="secondary"
+                              className="h-9 px-3 text-[10px] font-black uppercase tracking-widest transition-all shadow-sm border-slate-100 bg-white hover:bg-rose-50 hover:text-rose-600 text-slate-600"
                               onClick={() => setDeleteConfirmId(emp.id)}
-                              className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
+                              title="Delete Employee"
                             >
                               <Trash2 size={16} />
-                            </button>
+                            </Button>
                           </div>
                         </td>
                       </tr>
