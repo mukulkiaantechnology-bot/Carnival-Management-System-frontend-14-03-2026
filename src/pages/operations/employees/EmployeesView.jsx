@@ -22,8 +22,8 @@ const STATUS_BADGE = {
 export default function EmployeesView() {
   const [search, setSearch] = useState('');
 
-  const filtered = EMPLOYEES.filter(emp => 
-    emp.name.toLowerCase().includes(search.toLowerCase()) || 
+  const filtered = EMPLOYEES.filter(emp =>
+    emp.name.toLowerCase().includes(search.toLowerCase()) ||
     emp.role.toLowerCase().includes(search.toLowerCase()) ||
     emp.assignedEvent.toLowerCase().includes(search.toLowerCase())
   );
@@ -44,12 +44,12 @@ export default function EmployeesView() {
 
       <div className="relative max-w-md">
         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-        <input 
+        <input
           type="text" value={search} onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name, role, or event..."
           className="w-full pl-9 pr-4 py-2 text-sm border border-slate-200 rounded-lg focus:ring-2 focus:ring-teal-400/40 outline-none bg-white transition-shadow"
         />
-        {search && <button onClick={()=>setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><X size={14} /></button>}
+        {search && <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"><X size={14} /></button>}
       </div>
 
       <Card>
@@ -72,7 +72,7 @@ export default function EmployeesView() {
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center font-bold text-xs">
-                          {emp.name.split(' ').map(n=>n[0]).join('')}
+                          {emp.name.split(' ').map(n => n[0]).join('')}
                         </div>
                         <div>
                           <p className="font-bold text-slate-800">{emp.name}</p>
@@ -87,15 +87,15 @@ export default function EmployeesView() {
                     </td>
                     <td className="px-5 py-4 font-medium flex items-center gap-1.5"><Phone size={12} className="text-slate-400" /> {emp.phone}</td>
                     <td className="px-5 py-4">
-                       {emp.assignedEvent === '—' ? 
-                         <span className="text-slate-300 italic text-xs">Not assigned</span> :
-                         <span className="flex items-center gap-1.5 text-slate-600 text-xs font-medium"><Calendar size={12} className="text-teal-400" /> {emp.assignedEvent}</span>
-                       }
+                      {emp.assignedEvent === '—' ?
+                        <span className="text-slate-300 italic text-xs">Not assigned</span> :
+                        <span className="flex items-center gap-1.5 text-slate-600 text-xs font-medium"><Calendar size={12} className="text-teal-400" /> {emp.assignedEvent}</span>
+                      }
                     </td>
                     <td className="px-5 py-4">
-                       <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${STATUS_BADGE[emp.status]}`}>
-                         {emp.status}
-                       </span>
+                      <span className={`inline-block px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${STATUS_BADGE[emp.status]}`}>
+                        {emp.status}
+                      </span>
                     </td>
                   </tr>
                 ))}
@@ -104,7 +104,7 @@ export default function EmployeesView() {
           </div>
           <div className="px-5 py-3 border-t border-slate-100 bg-slate-50/50">
             <p className="text-xs text-slate-400 flex items-center gap-1.5">
-               <Info size={12} /> Contact Administration to modify employee records.
+              <Info size={12} /> Contact Administration to modify employee records.
             </p>
           </div>
         </CardContent>

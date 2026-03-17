@@ -126,8 +126,8 @@ function EmployeeForm({ employee, onSave, onCancel, title }) {
           </div>
         </div>
         <div className="flex gap-3 pt-6">
-          <Button variant="secondary" className="flex-1 font-bold" type="button" onClick={onCancel}>Cancel</Button>
-          <Button variant="primary" className="flex-1 font-bold shadow-lg shadow-blue-500/20" type="submit">Save Employee</Button>
+          <Button variant="secondary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl" type="button" onClick={onCancel}>Cancel</Button>
+          <Button variant="primary" className="flex-1 font-bold h-10 sm:h-12 text-sm sm:text-base rounded-xl shadow-lg shadow-blue-500/20" type="submit">Save Employee</Button>
         </div>
       </form>
     </Card>
@@ -353,7 +353,8 @@ export default function Employees() {
                 </div>
               </div>
 
-              <div className="overflow-x-auto">
+              {/* Desktop View */}
+              <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
                     <tr className="bg-brand-light">
@@ -416,6 +417,70 @@ export default function Employees() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Mobile View */}
+              <div className="md:hidden divide-y divide-slate-50">
+                {filteredEmployees.map((emp) => (
+                  <div key={emp.id} className="p-4 space-y-4 active:bg-slate-50 transition-colors">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center font-bold text-blue-600 text-base shadow-sm">
+                          {emp.name[0]}
+                        </div>
+                        <div>
+                          <p className="text-base font-bold text-slate-800">{emp.name}</p>
+                          <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">{emp.role}</p>
+                        </div>
+                      </div>
+                      <span className={`px-2 py-1 rounded-lg text-[8px] font-black uppercase tracking-widest ${
+                        emp.status === 'Active' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                      }`}>
+                        {emp.status}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 pt-2">
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Department</p>
+                        <p className="text-xs font-bold text-slate-700">{emp.department}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Email</p>
+                        <p className="text-[10px] font-bold text-slate-500 truncate">{emp.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-2">
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => navigate(`${basePath}/${emp.id}`)}
+                        className="flex-1 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest border-slate-100 hover:bg-slate-50"
+                      >
+                        Details
+                      </Button>
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
+                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-amber-50 hover:text-amber-600"
+                      >
+                        <Pencil size={16} />
+                      </Button>
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => setDeleteConfirmId(emp.id)}
+                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-rose-50 hover:text-rose-600"
+                      >
+                        <Trash2 size={16} />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+                {filteredEmployees.length === 0 && (
+                  <div className="p-12 text-center">
+                    <p className="text-sm font-bold text-slate-400">No employees found matching your criteria.</p>
+                  </div>
+                )}
               </div>
             </Card>
           </div>

@@ -5,8 +5,9 @@ import {
   BarChart, Settings, X, Store, Scan, HandCoins, ClipboardList, FileBarChart
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.png';
 
-// Default Admin navigation (Local Refined)
+// Portal Navigation Items
 const ADMIN_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/admin-dashboard' },
   { name: 'Employees', icon: Users, path: '/employees' },
@@ -22,7 +23,31 @@ const ADMIN_NAV_ITEMS = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
-const hrNavItems = [
+const OPS_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/operations/dashboard' },
+  { name: 'Inspections', icon: ClipboardCheck, path: '/operations/inspections' },
+  { name: 'Events', icon: Calendar, path: '/operations/events' },
+  { name: 'Employees', icon: Users, path: '/operations/employees' },
+  { name: 'Reports', icon: BarChart, path: '/operations/reports' },
+  { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
+const MAINTENANCE_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/maintenance/dashboard' },
+  { name: 'Work Orders', icon: ClipboardList, path: '/maintenance/work-orders' },
+  { name: 'Maintenance Reports', icon: FileBarChart, path: '/maintenance/reports' },
+  { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
+const EMPLOYEE_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/employee-dashboard' },
+  { name: 'Time Clock', icon: Clock, path: '/employee-timeclock' },
+  { name: 'My Tasks', icon: ClipboardCheck, path: '/employee-tasks' },
+  { name: 'Training', icon: GraduationCap, path: '/employee-training' },
+  { name: 'Settings', icon: Settings, path: '/settings' },
+];
+
+const HR_NAV_ITEMS = [
   { name: 'Dashboard', icon: LayoutDashboard, path: '/hr-dashboard' },
   { name: 'Employees', icon: Users, path: '/hr/employees' },
   { name: 'Training Library', icon: GraduationCap, path: '/hr/training-library' },
@@ -30,59 +55,38 @@ const hrNavItems = [
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
 
-const maintenanceMenu = [
-  { name: "Dashboard", path: "/maintenance/dashboard", icon: LayoutDashboard },
-  { name: "Work Orders", path: "/maintenance/work-orders", icon: ClipboardList },
-  { name: "Maintenance Reports", path: "/maintenance/reports", icon: FileBarChart },
+const TICKET_NAV_ITEMS = [
+  { name: 'Dashboard', icon: LayoutDashboard, path: '/tickets/dashboard' },
+  { name: 'Ticket Boxes', icon: Store, path: '/tickets/boxes' },
+  { name: 'Ticket Tracking', icon: Scan, path: '/tickets/tracking' },
+  { name: 'Settlement', icon: HandCoins, path: '/tickets/settlement' },
   { name: 'Settings', icon: Settings, path: '/settings' },
 ];
-
-import logo from '../../assets/logo.png';
 
 export function Sidebar({ isOpen, toggleSidebar }) {
   const { user } = useAuth();
   const role = user?.role;
-
-  // Operations roles navigation (Remote)
-  const opsNavItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/operations/dashboard' },
-    { name: 'Inspections', icon: ClipboardCheck, path: '/operations/inspections' },
-    { name: 'Events', icon: Calendar, path: '/operations/events' },
-    { name: 'Employees', icon: Users, path: '/operations/employees' },
-    { name: 'Reports', icon: BarChart, path: '/operations/reports' },
-    { name: 'Settings', icon: Settings, path: '/settings' },
-  ];
-
-  // Ticket roles navigation (Remote)
-  const ticketNavItems = [
-    { name: 'Dashboard', icon: LayoutDashboard, path: '/tickets/dashboard' },
-    { name: 'Ticket Boxes', icon: Store, path: '/tickets/boxes' },
-    { name: 'Ticket Tracking', icon: Scan, path: '/tickets/tracking' },
-    { name: 'Settlement', icon: HandCoins, path: '/tickets/settlement' },
-    { name: 'Settings', icon: Settings, path: '/settings' },
-  ];
-
+  
   let menuItems = ADMIN_NAV_ITEMS;
-  let sectionTitle = 'Navigation';
+  let sectionTitle = 'Portal';
 
-  if (role === 'hr' || role === 'hr_manager') {
-    menuItems = hrNavItems;
+  if (role === 'admin') {
+    menuItems = ADMIN_NAV_ITEMS;
+    sectionTitle = 'Admin Portal';
+  } else if (role === 'hr' || role === 'hr_manager') {
+    menuItems = HR_NAV_ITEMS;
     sectionTitle = 'HR Hub';
   } else if (role === 'operations' || role === 'operations_manager') {
-    menuItems = opsNavItems;
+    menuItems = OPS_NAV_ITEMS;
     sectionTitle = 'Operations Hub';
   } else if (role === 'ticket' || role === 'ticket_manager') {
-    menuItems = ticketNavItems;
+    menuItems = TICKET_NAV_ITEMS;
     sectionTitle = 'Ticketing Hub';
-  } else if (role === 'maintenance_manager' || role === 'maintenance') {
-    menuItems = maintenanceMenu;
+  } else if (role === 'maintenance' || role === 'maintenance_manager') {
+    menuItems = MAINTENANCE_NAV_ITEMS;
     sectionTitle = 'Maintenance Hub';
   } else if (role === 'employee') {
-    menuItems = [
-      { name: 'Dashboard', icon: LayoutDashboard, path: '/employee-dashboard' },
-      { name: 'Time Clock', icon: Clock, path: '/time-clock-shared' },
-      { name: 'Settings', icon: Settings, path: '/settings' },
-    ];
+    menuItems = EMPLOYEE_NAV_ITEMS;
     sectionTitle = 'Employee Portal';
   }
 
@@ -98,8 +102,9 @@ export function Sidebar({ isOpen, toggleSidebar }) {
 
       {/* Sidebar container */}
       <aside
-        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-brand-dark border-r border-brand-gold/10 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
+        className={`fixed top-0 left-0 z-30 h-screen w-64 bg-brand-dark border-r border-brand-gold/10 transition-transform duration-300 ease-in-out lg:translate-x-0 overflow-y-auto ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
         <div className="h-20 flex items-center border-b border-brand-gold/10 sticky top-0 bg-brand-dark z-10 px-4 gap-4">
           <div className="h-16 w-24 shrink-0 overflow-hidden flex items-center justify-center rounded-xl bg-white/5">
@@ -117,8 +122,8 @@ export function Sidebar({ isOpen, toggleSidebar }) {
         </div>
 
         <div className="p-4">
-          <p className="text-xs font-bold text-white/30 uppercase tracking-[2px] mb-6 px-3">
-            {/* {sectionTitle} */}
+          <p className="text-[10px] font-black text-white/40 uppercase tracking-[3px] mb-6 px-3">
+             {sectionTitle}
           </p>
           <nav className="space-y-1">
             {menuItems.map((item) => (
@@ -127,9 +132,10 @@ export function Sidebar({ isOpen, toggleSidebar }) {
                 to={item.path}
                 onClick={() => isOpen && toggleSidebar()}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${isActive
-                    ? 'bg-brand-red text-white shadow-lg shadow-brand-red/40'
-                    : 'text-white/70 hover:bg-brand-gold hover:text-brand-dark'
+                  `flex items-center gap-3 px-3 py-3 text-sm font-bold rounded-xl transition-all ${
+                    isActive
+                      ? 'bg-brand-red text-white shadow-[0_10px_20px_-5px_rgba(181,18,27,0.4)]'
+                      : 'text-white/70 hover:bg-brand-gold hover:text-brand-dark'
                   }`
                 }
               >

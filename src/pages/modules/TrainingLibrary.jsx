@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Video, Eye, Pencil, Trash2, Clock, FileText, BookOpen,
-  Search, Filter, CheckCircle2, AlertCircle, X
+  Search, Filter, CheckCircle2, AlertCircle, X, ArrowLeft
 } from 'lucide-react';
 import { Card, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -10,6 +10,9 @@ import { useTraining } from '../../context/TrainingContext';
 
 export default function TrainingLibrary() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const isEmployeeView = location.pathname.startsWith('/employee-training');
+  
   const { trainings, deleteTraining } = useTraining();
   const [searchTerm, setSearchTerm] = useState('');
   const [notification, setNotification] = useState(null);
@@ -45,10 +48,25 @@ export default function TrainingLibrary() {
       )}
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Training Library</h1>
-          <p className="text-slate-500 text-sm font-bold">Manage and organize carnival training materials.</p>
+        <div className="flex items-center gap-4">
+          {isEmployeeView && (
+            <button 
+              onClick={() => navigate('/employee-training')}
+              className="p-2 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-blue-600 transition-all"
+            >
+              <ArrowLeft size={20} />
+            </button>
+          )}
+          <div>
+            <h1 className="text-2xl font-bold text-slate-800 tracking-tight">
+              {isEmployeeView ? 'Training Catalog' : 'Training Library'}
+            </h1>
+            <p className="text-slate-500 text-sm font-bold">
+              {isEmployeeView ? 'Browse all available training modules.' : 'Manage and organize carnival training materials.'}
+            </p>
+          </div>
         </div>
+
         <div className="flex items-center gap-3">
           <div className="relative group hidden sm:block">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={16} />
@@ -60,27 +78,32 @@ export default function TrainingLibrary() {
               className="pl-11 pr-4 py-2.5 bg-white border border-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm font-bold w-64 shadow-sm"
             />
           </div>
-          <Button
-            variant="primary"
-            className="flex items-center justify-center gap-2 font-black shadow-xl shadow-blue-500/20"
-            onClick={() => navigate('/hr/training/add')}
-          >
-            <Video size={18} />
-            Upload Training
-          </Button>
+          {!isEmployeeView && (
+            <Button
+              variant="primary"
+              className="flex items-center justify-center gap-2 font-black shadow-xl shadow-blue-500/20 py-2.5 sm:py-3 px-6 sm:px-8"
+              onClick={() => navigate('/hr/training/add')}
+            >
+              <Video size={18} />
+              Upload Training
+            </Button>
+          )}
         </div>
       </div>
 
       <Card className="border-none shadow-xl shadow-slate-100/50 overflow-hidden">
-        <CardHeader title="Available Materials" subtitle="All training videos, PDFs, and courses." />
+        <CardHeader 
+          title="Available Materials" 
+          subtitle={isEmployeeView ? "Explore assigned and optional learning resources." : "All training videos, PDFs, and courses."} 
+        />
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead>
               <tr className="bg-slate-50/50 border-b border-slate-100">
                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Training Name</th>
                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Type</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Assigned</th>
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Completion</th>
+                {!isEmployeeView && <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Assigned</th>}
+                {!isEmployeeView && <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Completion</th>}
                 <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
@@ -103,40 +126,48 @@ export default function TrainingLibrary() {
                       {module.type}
                     </span>
                   </td>
-                  <td className="px-8 py-5 text-center">
-                    <span className="text-sm font-black text-slate-700">{module.assigned} Staff</span>
-                  </td>
-                  <td className="px-8 py-5 text-center">
-                    <div className="flex flex-col items-center gap-1.5">
-                      <span className="text-xs font-black text-blue-600">{module.completion}</span>
-                      <div className="w-16 h-1 bg-slate-100 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-500 rounded-full" style={{ width: module.completion }} />
+                  {!isEmployeeView && (
+                    <td className="px-8 py-5 text-center">
+                      <span className="text-sm font-black text-slate-700">{module.assigned} Staff</span>
+                    </td>
+                  )}
+                  {!isEmployeeView && (
+                    <td className="px-8 py-5 text-center">
+                      <div className="flex flex-col items-center gap-1.5">
+                        <span className="text-xs font-black text-blue-600">{module.completion}</span>
+                        <div className="w-16 h-1 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-blue-500 rounded-full" style={{ width: module.completion }} />
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
+                  )}
                   <td className="px-8 py-5 text-right">
                     <div className="flex items-center justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-0 translate-x-4">
                       <button
                         className="p-2.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
-                        onClick={() => navigate(`/hr/training/${module.id}`)}
+                        onClick={() => navigate(isEmployeeView ? `/employee-training/module/${module.id}` : `/hr/training/${module.id}`)}
                         title="View Details"
                       >
                         <Eye size={18} />
                       </button>
-                      <button
-                        className="p-2.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
-                        onClick={() => showNotification("Edit functionality is coming soon.")}
-                        title="Edit Module"
-                      >
-                        <Pencil size={18} />
-                      </button>
-                      <button
-                        className="p-2.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
-                        onClick={() => handleDelete(module.id, module.title)}
-                        title="Delete Module"
-                      >
-                        <Trash2 size={18} />
-                      </button>
+                      {!isEmployeeView && (
+                        <>
+                          <button
+                            className="p-2.5 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
+                            onClick={() => showNotification("Edit functionality is coming soon.")}
+                            title="Edit Module"
+                          >
+                            <Pencil size={18} />
+                          </button>
+                          <button
+                            className="p-2.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all shadow-sm bg-white border border-slate-50"
+                            onClick={() => handleDelete(module.id, module.title)}
+                            title="Delete Module"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -146,8 +177,15 @@ export default function TrainingLibrary() {
           {filteredTrainings.length === 0 && (
             <div className="p-20 text-center bg-slate-50/30">
               <Search size={48} className="mx-auto text-slate-200 mb-4" />
-              <p className="text-sm font-black text-slate-400 uppercase tracking-widest leading-relaxed">No training materials matching "{searchTerm}"</p>
-              <button onClick={() => setSearchTerm('')} className="mt-4 text-[10px] font-black text-blue-500 uppercase tracking-widest hover:underline">Clear search filter</button>
+              <p className="text-sm font-black text-slate-400 uppercase tracking-widest leading-relaxed">
+                No training materials matching "{searchTerm}"
+              </p>
+              <button 
+                onClick={() => setSearchTerm('')} 
+                className="mt-4 text-[10px] font-black text-blue-500 uppercase tracking-widest hover:underline"
+              >
+                Clear search filter
+              </button>
             </div>
           )}
         </div>

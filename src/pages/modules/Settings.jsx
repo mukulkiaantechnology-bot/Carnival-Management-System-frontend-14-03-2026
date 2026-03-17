@@ -24,11 +24,40 @@ function Toggle({ label, subtitle, enabled, onToggle }) {
 }
 
 export default function Settings() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState('profile');
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState(null);
+
+  // Form States
+  const [profileData, setProfileData] = useState({
+    fullName: user?.email?.split('@')[0] || '',
+    email: user?.email || '',
+    phone: '+1 (555) 000-0000',
+    timezone: 'Pacific Time (PT)'
+  });
+
+  const [companyData, setCompanyData] = useState({
+    name: 'Grand Carnival Management',
+    taxId: 'CARN-2026-X89',
+    email: 'info@grandcarnival.com',
+    phone: '+1 (555) 123-4567',
+    address: '123 Adventure Lane, Festive City, FC 90021'
+  });
+
+  // Sync profile data if user object changes (e.g. on login/reload)
+  useEffect(() => {
+    if (user) {
+      setProfileData(prev => ({
+        ...prev,
+        fullName: user.fullName || user.email?.split('@')[0] || '',
+        email: user.email || '',
+        phone: user.phone || prev.phone,
+        timezone: user.timezone || prev.timezone
+      }));
+    }
+  }, [user]);
 
   const tabs = useMemo(() => [
     { id: 'profile', label: 'My Profile', icon: User, color: 'emerald' },
@@ -51,11 +80,23 @@ export default function Settings() {
 
   const handleSave = () => {
     setSaving(true);
+    
+    // Simulate API call
     setTimeout(() => {
+      // Persist changes
+      if (activeTab === 'profile') {
+        updateUser({
+          ...profileData,
+        });
+      } else if (activeTab === 'company') {
+        // In a real app, this would update company context
+        console.log('Company data saved:', companyData);
+      }
+      
       setSaving(false);
       setToast('Settings saved successfully!');
       setTimeout(() => setToast(null), 3000);
-    }, 1500);
+    }, 1000);
   };
 
   return (
@@ -126,7 +167,7 @@ export default function Settings() {
                       </button>
                     </div>
                     <div className="text-center sm:text-left space-y-1">
-                      <h3 className="text-lg font-bold text-slate-800">{user?.email?.split('@')[0]}</h3>
+                      <h3 className="text-lg font-bold text-slate-800">{profileData.fullName}</h3>
                       <p className="text-sm font-bold text-emerald-600 uppercase tracking-widest">{user?.role?.replace('_', ' ')}</p>
                       <p className="text-xs text-slate-400 font-medium">Last Login: Just now</p>
                     </div>
@@ -135,19 +176,39 @@ export default function Settings() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Full Name</label>
-                      <input type="text" defaultValue={user?.email?.split('@')[0]} className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                      <input 
+                        type="text" 
+                        value={profileData.fullName} 
+                        onChange={(e) => setProfileData({...profileData, fullName: e.target.value})}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Email Address</label>
-                      <input type="email" defaultValue={user?.email} className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                      <input 
+                        type="email" 
+                        value={profileData.email} 
+                        onChange={(e) => setProfileData({...profileData, email: e.target.value})}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Phone Number</label>
-                      <input type="tel" placeholder="+1 (555) 000-0000" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" />
+                      <input 
+                        type="tel" 
+                        value={profileData.phone}
+                        onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                        placeholder="+1 (555) 000-0000" 
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Timezone</label>
-                      <select className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all appearance-none cursor-pointer">
+                      <select 
+                        value={profileData.timezone}
+                        onChange={(e) => setProfileData({...profileData, timezone: e.target.value})}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-50 transition-all appearance-none cursor-pointer"
+                      >
                         <option>Pacific Time (PT)</option>
                         <option>Mountain Time (MT)</option>
                         <option>Central Time (CT)</option>
@@ -167,30 +228,55 @@ export default function Settings() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Company Name</label>
-                      <input type="text" defaultValue="Grand Carnival Management" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" />
+                      <input 
+                        type="text" 
+                        value={companyData.name} 
+                        onChange={(e) => setCompanyData({...companyData, name: e.target.value})}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tax ID / Registration</label>
-                      <input type="text" defaultValue="CARN-2026-X89" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" />
+                      <input 
+                        type="text" 
+                        value={companyData.taxId} 
+                        onChange={(e) => setCompanyData({...companyData, taxId: e.target.value})}
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" 
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Business Email</label>
                     <div className="relative group">
                       <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
-                      <input type="email" defaultValue="info@grandcarnival.com" className="w-full pl-12 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" />
+                      <input 
+                        type="email" 
+                        value={companyData.email} 
+                        onChange={(e) => setCompanyData({...companyData, email: e.target.value})}
+                        className="w-full pl-12 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" 
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Phone Number</label>
                     <div className="relative group">
                       <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
-                      <input type="tel" defaultValue="+1 (555) 123-4567" className="w-full pl-12 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" />
+                      <input 
+                        type="tel" 
+                        value={companyData.phone} 
+                        onChange={(e) => setCompanyData({...companyData, phone: e.target.value})}
+                        className="w-full pl-12 pr-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all" 
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Headquarters Address</label>
-                    <textarea rows={3} defaultValue="123 Adventure Lane, Festive City, FC 90021" className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all resize-none" />
+                    <textarea 
+                      rows={3} 
+                      value={companyData.address} 
+                      onChange={(e) => setCompanyData({...companyData, address: e.target.value})}
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-bold text-slate-800 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-50 transition-all resize-none" 
+                    />
                   </div>
                 </CardContent>
               </Card>

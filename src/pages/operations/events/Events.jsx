@@ -17,13 +17,36 @@ const STATUS_BADGE = {
 export default function Events() {
   const [events, setEvents] = useState(INITIAL_EVENTS);
   const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ name: '', location: '', startDate: '', endDate: '', desc: '' });
+  const [editingEvent, setEditingEvent] = useState(null);
+  const [form, setForm] = useState({ name: '', location: '', startDate: '', endDate: '', desc: '', status: 'upcoming' });
 
-  const handleCreate = () => {
-    const newEvt = { ...form, id: `EVT-00${events.length + 1}`, status: 'upcoming', staff: 'Unassigned' };
-    setEvents([newEvt, ...events]);
+  const closeModal = () => {
     setShowModal(false);
-    setForm({ name: '', location: '', startDate: '', endDate: '', desc: '' });
+    setEditingEvent(null);
+    setForm({ name: '', location: '', startDate: '', endDate: '', desc: '', status: 'upcoming' });
+  };
+
+  const handleEdit = (ev) => {
+    setEditingEvent(ev);
+    setForm({
+      name: ev.name,
+      location: ev.location,
+      startDate: ev.startDate,
+      endDate: ev.endDate,
+      desc: ev.desc,
+      status: ev.status
+    });
+    setShowModal(true);
+  };
+
+  const handleSave = () => {
+    if (editingEvent) {
+      setEvents(events.map(ev => ev.id === editingEvent.id ? { ...ev, ...form } : ev));
+    } else {
+      const newEvt = { ...form, id: `EVT-00${events.length + 1}`, staff: 'Unassigned' };
+      setEvents([newEvt, ...events]);
+    }
+    closeModal();
   };
 
   return (
@@ -70,7 +93,12 @@ export default function Events() {
                       </span>
                     </td>
                     <td className="px-5 py-4 text-right">
-                      <button className="p-1 px-2 text-indigo-600 hover:bg-indigo-50 rounded-md text-xs font-bold transition-colors">Edit</button>
+                      <button 
+                        onClick={() => handleEdit(ev)}
+                        className="p-1 px-2 text-indigo-600 hover:bg-indigo-50 rounded-md text-xs font-bold transition-colors"
+                      >
+                        Edit
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -112,14 +140,14 @@ export default function Events() {
         </div>
       </div>
 
-      {/* CREATE EVENT MODAL */}
+      {/* MODAL */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]" onClick={() => setShowModal(false)} />
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px]" onClick={closeModal} />
           <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 space-y-5">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-               <h2 className="font-bold text-slate-800 text-lg">Create New Event</h2>
-               <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
+               <h2 className="font-bold text-slate-800 text-lg">{editingEvent ? 'Edit Event' : 'Create New Event'}</h2>
+               <button onClick={closeModal} className="text-slate-400 hover:text-slate-600"><X size={20} /></button>
             </div>
             
             <div className="space-y-4">
@@ -127,9 +155,19 @@ export default function Events() {
                 <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Event Name</label>
                 <input value={form.name} onChange={e=>setForm({...form, name: e.target.value})} type="text" className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50 outline-none" placeholder="e.g. Grand Parade" />
               </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Location</label>
-                <input value={form.location} onChange={e=>setForm({...form, location: e.target.value})} type="text" className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50 outline-none" placeholder="e.g. Arena B" />
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Location</label>
+                  <input value={form.location} onChange={e=>setForm({...form, location: e.target.value})} type="text" className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50 outline-none" placeholder="e.g. Arena B" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1">Status</label>
+                  <select value={form.status} onChange={e=>setForm({...form, status: e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50 outline-none">
+                    <option value="upcoming">Upcoming</option>
+                    <option value="ongoing">Ongoing</option>
+                    <option value="completed">Completed</option>
+                  </select>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -148,8 +186,10 @@ export default function Events() {
             </div>
 
             <div className="flex justify-end gap-3 pt-2">
-               <button onClick={() => setShowModal(false)} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
-               <button onClick={handleCreate} className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg shadow-sm">Save & Launch</button>
+               <button onClick={closeModal} className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">Cancel</button>
+               <button onClick={handleSave} className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold rounded-lg shadow-sm">
+                 {editingEvent ? 'Update Event' : 'Save & Launch'}
+               </button>
             </div>
           </div>
         </div>

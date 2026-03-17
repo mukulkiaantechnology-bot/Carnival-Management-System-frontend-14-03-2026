@@ -136,18 +136,18 @@ export default function Contracts() {
           </div>
           <Button
             variant="secondary"
-            className="flex items-center gap-3 font-black py-4 px-6 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50 text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_template')}
           >
-            <Plus size={20} strokeWidth={3} />
+            <Plus size={18} strokeWidth={3} />
             Create Template
           </Button>
           <Button
             variant="primary"
-            className="flex items-center gap-3 font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-500/20"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 px-4 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs"
             onClick={() => setActiveModal('create_contract')}
           >
-            <FileSignature size={20} />
+            <FileSignature size={18} />
             Draft Contract
           </Button>
         </div>
@@ -325,8 +325,8 @@ export default function Contracts() {
             </div>
           </div>
           <div className="pt-4">
-            <Button variant="primary" className="w-full py-5 font-black uppercase tracking-widest text-[10px] rounded-2xl shadow-xl shadow-blue-500/20" type="submit">
-              Save Structure Template
+            <Button variant="primary" className="w-full h-11 sm:h-14 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-blue-500/20" type="submit">
+              Save Template
             </Button>
           </div>
         </form>
@@ -373,8 +373,8 @@ export default function Contracts() {
             </div>
           </div>
           <div className="pt-4 flex gap-4">
-            <Button variant="secondary" className="flex-1 py-4 font-black rounded-2xl bg-slate-50 border-none" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-[2] py-4 font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl shadow-blue-500/20" type="submit">Publish & Send Draft</Button>
+            <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl bg-slate-50 border-none text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
+            <Button variant="primary" className="flex-[2] h-10 sm:h-12 font-black uppercase tracking-widest text-[9px] sm:text-[10px] rounded-2xl shadow-xl shadow-blue-500/20" type="submit">Publish Draft</Button>
           </div>
         </form>
       </Modal>
@@ -422,10 +422,10 @@ export default function Contracts() {
             </div>
 
             <div className="flex gap-4 pt-2">
-              <Button variant="secondary" className="flex-1 font-black rounded-2xl bg-slate-50 border-none" onClick={() => setActiveModal(null)}>Close View</Button>
-              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-[10px] py-4 rounded-2xl shadow-2xl shadow-blue-500/20 flex items-center justify-center gap-3 group">
-                <Download size={18} className="group-hover:-translate-y-0.5 transition-transform" />
-                Download Digital Copy
+              <Button variant="secondary" className="flex-1 h-10 sm:h-12 font-black rounded-2xl bg-slate-50 border-none text-[10px]" onClick={() => setActiveModal(null)}>Close</Button>
+              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-[9px] sm:text-[10px] h-10 sm:h-12 rounded-2xl shadow-2xl shadow-blue-500/20 flex items-center justify-center gap-2 group">
+                <Download size={16} className="group-hover:-translate-y-0.5 transition-transform" />
+                Download Copy
               </Button>
             </div>
           </div>

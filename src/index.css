@@ -14,5 +14,8 @@
 @layer base {
   body {
     @apply bg-brand-light text-brand-text;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
   }
 }

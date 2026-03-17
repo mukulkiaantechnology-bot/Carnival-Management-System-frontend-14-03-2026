@@ -75,7 +75,7 @@ export default function TimeClock() {
         <div className="flex items-center gap-3">
           <Button 
             variant="primary" 
-            className={`flex items-center gap-2 ${isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center gap-2 py-2.5 sm:py-3 px-6 sm:px-8 ${isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handleClockIn}
             disabled={isClockedIn}
           >
@@ -84,7 +84,7 @@ export default function TimeClock() {
           </Button>
           <Button 
             variant="secondary" 
-            className={`flex items-center gap-2 ${!isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center gap-2 py-2.5 sm:py-3 px-6 sm:px-8 ${!isClockedIn ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={handleClockOut}
             disabled={!isClockedIn}
           >

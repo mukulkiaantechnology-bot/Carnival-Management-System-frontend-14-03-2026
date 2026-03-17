@@ -43,8 +43,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('carnival_user', JSON.stringify(adminUser));
   };
 
+  const updateUser = (newData) => {
+    setUser(prev => {
+      const updated = { ...prev, ...newData };
+      localStorage.setItem('carnival_user', JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, impersonateAsAdmin }}>
+    <AuthContext.Provider value={{ user, login, logout, impersonateAsAdmin, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

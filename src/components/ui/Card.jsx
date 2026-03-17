@@ -1,6 +1,12 @@
-export function Card({ children, className = '' }) {
+export function Card({ children, className = '', accent = null }) {
+  const accentClasses = {
+    red: "border-t-4 border-t-brand-red",
+    gold: "border-t-4 border-t-brand-gold",
+    maroon: "border-t-4 border-t-brand-maroon",
+  };
+
   return (
-    <div className={`bg-white rounded-[2rem] shadow-xl shadow-brand-gold/5 border border-brand-gold/20 overflow-hidden transition-all duration-300 ${className}`}>
+    <div className={`bg-white rounded-[2rem] shadow-xl shadow-brand-gold/5 border border-brand-gold/20 overflow-hidden transition-all duration-300 ${accent ? accentClasses[accent] : ''} ${className}`}>
       {children}
     </div>
   );

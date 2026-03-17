@@ -282,7 +282,7 @@ export default function AdminDashboard() {
                       <stop offset="95%" stopColor="#B5121B" stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="colorTarget" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#F5C542" stopOpacity={0.05} />
+                      <stop offset="5%" stopColor="#F5C542" stopOpacity={0.1} />
                       <stop offset="95%" stopColor="#F5C542" stopOpacity={0} />
                     </linearGradient>
                   </defs>

@@ -28,6 +28,10 @@ import Contracts from './pages/modules/Contracts';
 import Calendar from './pages/modules/Calendar';
 import Reports from './pages/modules/Reports';
 import Settings from './pages/modules/Settings';
+import MyTasks from './pages/modules/MyTasks';
+import EmployeeTimeClock from './pages/dashboards/employee/EmployeeTimeClock';
+import EmployeeTasks from './pages/dashboards/employee/EmployeeTasks';
+import EmployeeTrainingPersonal from './pages/dashboards/employee/EmployeeTraining';
 
 // Specialized Modules (from Remote)
 import PlaceholderPage from './pages/modules/PlaceholderPage';
@@ -45,6 +49,7 @@ import TicketManagerDashboard from './pages/tickets/dashboard/TicketDashboard';
 import TicketBoxes from './pages/tickets/boxes/TicketBoxes';
 import TicketTracking from './pages/tickets/tracking/TicketTracking';
 import Settlement from './pages/tickets/settlement/Settlement';
+import TicketBoxDetail from './pages/tickets/boxes/TicketBoxDetail';
 
 // SaaS Platform Layer
 import LandingPage from './platform/landing/LandingPage';
@@ -143,6 +148,7 @@ export default function App() {
             <Route element={<ProtectedRoute allowedRoles={['admin', 'ticket', 'ticket_manager']} />}>
               <Route path="/tickets/dashboard" element={<TicketManagerDashboard />} />
               <Route path="/tickets/boxes" element={<TicketBoxes />} />
+              <Route path="/tickets/boxes/:id" element={<TicketBoxDetail />} />
               <Route path="/tickets/tracking" element={<TicketTracking />} />
               <Route path="/tickets/settlement" element={<Settlement />} />
             </Route>
@@ -162,6 +168,12 @@ export default function App() {
             {/* Employee Routes */}
             <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
               <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+              <Route path="/employee-timeclock" element={<EmployeeTimeClock />} />
+              <Route path="/employee-tasks" element={<EmployeeTasks />} />
+              <Route path="/employee-training" element={<EmployeeTrainingPersonal />} />
+              <Route path="/employee-training/module/:id" element={<TrainingDetail />} />
+              <Route path="/employee-training/catalog" element={<TrainingLibrary />} />
+              {/* Shared Time Clock Link from Remote logic if needed, but we have specific one */}
               <Route path="/time-clock-shared" element={<TimeClock />} />
             </Route>
           </Route>

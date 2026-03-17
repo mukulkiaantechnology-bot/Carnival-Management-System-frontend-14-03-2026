@@ -129,16 +129,16 @@ export default function AddTraining() {
           </div>
 
           <div className="flex gap-4 pt-6">
-            <Button variant="secondary" className="flex-1 font-black py-4 rounded-2xl shadow-sm border-none bg-slate-50 hover:bg-slate-100" type="button" onClick={() => navigate('/hr/training-library')}>Cancel</Button>
+            <Button variant="secondary" className="flex-1 font-black h-10 sm:h-12 text-xs sm:text-sm rounded-2xl shadow-sm border-none bg-slate-50 hover:bg-slate-100" type="button" onClick={() => navigate('/hr/training-library')}>Cancel</Button>
             <Button
               variant="primary"
-              className="flex-[2] font-black py-4 rounded-2xl shadow-2xl shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed group"
+              className="flex-[2] font-black h-10 sm:h-12 text-xs sm:text-sm rounded-2xl shadow-2xl shadow-blue-500/20 disabled:opacity-50 disabled:cursor-not-allowed group"
               type="submit"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Processing Content...' : (
                 <span className="flex items-center justify-center gap-2">
-                  Save & Publish <Clock size={18} className="group-hover:rotate-12 transition-transform" />
+                  Save & Publish <Clock size={14} className="group-hover:rotate-12 transition-transform" />
                 </span>
               )}
             </Button>

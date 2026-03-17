@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import {
   Calendar as CalendarIcon, MapPin, Clock, Users, Plus, ChevronLeft,
   ChevronRight, List, X, LayoutGrid, CalendarDays, CheckCircle2,
-  AlertCircle, ArrowUpRight, Search, Info, Trash2
+  AlertCircle, ArrowUpRight, Search, Info, Trash2, Pencil
 } from 'lucide-react';
 import { Card, CardContent, CardHeader } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
@@ -186,18 +186,18 @@ export default function Calendar() {
           </div>
           <Button
             variant="secondary"
-            className="flex items-center gap-2 font-black py-4 px-6 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50 text-[10px] sm:text-xs"
             onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
           >
-            {viewMode === 'list' ? <LayoutGrid size={20} strokeWidth={2.5} /> : <List size={20} strokeWidth={2.5} />}
-            {viewMode === 'list' ? 'Grid View' : 'List View'}
+            {viewMode === 'list' ? <LayoutGrid size={18} strokeWidth={2.5} /> : <List size={18} strokeWidth={2.5} />}
+            {viewMode === 'list' ? 'Grid' : 'List'}
           </Button>
           <Button
             variant="primary"
-            className="flex items-center gap-2 font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-500/20"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs"
             onClick={openAddModal}
           >
-            <Plus size={20} strokeWidth={3} />
+            <Plus size={18} strokeWidth={3} />
             Add Event
           </Button>
         </div>
@@ -295,65 +295,117 @@ export default function Calendar() {
             />
             <CardContent className={`flex-1 ${viewMode === 'list' ? 'p-0' : 'p-8'}`}>
               {viewMode === 'list' ? (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse min-w-[700px]">
-                    <thead>
-                      <tr className="bg-slate-50/50 border-b border-slate-100">
-                        <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Live Events</th>
-                        <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Operational Zone</th>
-                        <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Timeline</th>
-                        <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-50">
-                      {filteredEvents.map((event) => (
-                        <tr key={event.id} className="hover:bg-slate-50/40 transition-all group">
-                          <td className="px-8 py-6">
-                            <div className="flex items-center gap-4">
-                              <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shadow-inner group-hover:rotate-6 transition-transform">
-                                <CalendarDays size={20} />
-                              </div>
-                              <div>
-                                <p className="text-sm font-black text-slate-800 leading-tight">{event.name}</p>
-                                <div className="flex items-center gap-2 mt-1">
-                                  <Users size={12} className="text-slate-400" />
-                                  <span className="text-[10px] font-black text-blue-500 uppercase tracking-tighter">{event.staff} Staff Allocated</span>
+                <div className="flex flex-col h-full">
+                  {/* Desktop Table View */}
+                  <div className="hidden md:block overflow-x-auto">
+                    <table className="w-full text-left border-collapse min-w-[700px]">
+                      <thead>
+                        <tr className="bg-slate-50/50 border-b border-slate-100">
+                          <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Live Events</th>
+                          <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Operational Zone</th>
+                          <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Timeline</th>
+                          <th className="px-8 py-6 text-[11px] font-black text-slate-400 uppercase tracking-[0.2em] text-right">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-50">
+                        {filteredEvents.map((event) => (
+                          <tr key={event.id} className="hover:bg-slate-50/40 transition-all group">
+                            <td className="px-8 py-6">
+                              <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 shadow-inner group-hover:rotate-6 transition-transform">
+                                  <CalendarDays size={20} />
+                                </div>
+                                <div>
+                                  <p className="text-sm font-black text-slate-800 leading-tight">{event.name}</p>
+                                  <div className="flex items-center gap-2 mt-1">
+                                    <Users size={12} className="text-slate-400" />
+                                    <span className="text-[10px] font-black text-blue-500 uppercase tracking-tighter">{event.staff} Staff Allocated</span>
+                                  </div>
                                 </div>
                               </div>
+                            </td>
+                            <td className="px-8 py-6">
+                              <div className="flex items-center gap-2 text-sm font-black text-slate-600">
+                                <MapPin size={16} className="text-slate-300" />
+                                {event.location}
+                              </div>
+                            </td>
+                            <td className="px-8 py-6">
+                              <div className="flex flex-col">
+                                <span className="text-xs font-black text-slate-800">{event.start}</span>
+                                <span className="text-[10px] font-bold text-slate-400 uppercase italic">to {event.end}</span>
+                              </div>
+                            </td>
+                            <td className="px-8 py-6 text-right">
+                              <div className="flex items-center justify-end gap-2 transition-all">
+                                <button
+                                  className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 hover:bg-white bg-slate-50 rounded-xl border border-transparent hover:border-slate-100 shadow-sm transition-all"
+                                  onClick={() => openEditModal(event)}
+                                >
+                                  Manage
+                                </button>
+                                <button
+                                  className="p-2.5 text-slate-300 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
+                                  onClick={() => handleDelete(event.id, event.name)}
+                                >
+                                  <Trash2 size={16} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Mobile Card List View */}
+                  <div className="md:hidden divide-y divide-slate-50">
+                    {filteredEvents.map((event) => (
+                      <div key={event.id} className="p-6 space-y-4 hover:bg-slate-50/50 transition-all">
+                        <div className="flex items-start justify-between">
+                          <div className="flex gap-4">
+                            <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 shadow-inner shrink-0 leading-none">
+                              <CalendarDays size={24} />
                             </div>
-                          </td>
-                          <td className="px-8 py-6">
-                            <div className="flex items-center gap-2 text-sm font-black text-slate-600">
-                              <MapPin size={16} className="text-slate-300" />
-                              {event.location}
+                            <div>
+                               <h4 className="text-base font-black text-slate-800 leading-tight">{event.name}</h4>
+                               <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mt-1 flex items-center gap-1.5">
+                                  <Users size={12} /> {event.staff} Staff
+                               </p>
                             </div>
-                          </td>
-                          <td className="px-8 py-6">
-                            <div className="flex flex-col">
-                              <span className="text-xs font-black text-slate-800">{event.start}</span>
-                              <span className="text-[10px] font-bold text-slate-400 uppercase italic">to {event.end}</span>
-                            </div>
-                          </td>
-                          <td className="px-8 py-6 text-right">
-                            <div className="flex items-center justify-end gap-2 transition-all">
-                              <button
-                                className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 hover:bg-white bg-slate-50 rounded-xl border border-transparent hover:border-slate-100 shadow-sm transition-all"
-                                onClick={() => openEditModal(event)}
-                              >
-                                Manage
-                              </button>
-                              <button
-                                className="p-2.5 text-slate-300 hover:text-rose-500 hover:bg-rose-50 rounded-xl transition-all"
-                                onClick={() => handleDelete(event.id, event.name)}
-                              >
+                          </div>
+                          <div className="flex gap-1">
+                             <button
+                               onClick={() => openEditModal(event)}
+                               className="p-2.5 bg-slate-50 text-slate-400 hover:text-blue-600 rounded-xl transition-all border border-slate-100"
+                             >
+                                <Pencil size={16} />
+                             </button>
+                             <button
+                               onClick={() => handleDelete(event.id, event.name)}
+                               className="p-2.5 bg-slate-50 text-slate-400 hover:text-rose-600 rounded-xl transition-all border border-slate-100"
+                             >
                                 <Trash2 size={16} />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                             </button>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                           <div className="p-3 bg-slate-50/50 rounded-2xl border border-slate-100 flex items-center gap-2.5">
+                              <MapPin size={14} className="text-slate-400" />
+                              <span className="text-xs font-bold text-slate-600">{event.location}</span>
+                           </div>
+                           <div className="p-3 bg-slate-50/50 rounded-2xl border border-slate-100 flex items-center gap-2.5">
+                              <Clock size={14} className="text-slate-400" />
+                              <div className="flex flex-col">
+                                 <span className="text-[10px] font-black text-slate-700 leading-none">{event.start}</span>
+                                 <span className="text-[8px] font-bold text-slate-400 uppercase tracking-tighter mt-0.5">to {event.end}</span>
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -489,9 +541,9 @@ export default function Calendar() {
             </div>
           </div>
           <div className="flex gap-4 pt-4">
-            <Button variant="secondary" className="flex-1 font-black py-4 rounded-2xl bg-slate-50 border-none uppercase tracking-widest text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
-            <Button variant="primary" className="flex-[2] font-black py-4 rounded-2xl shadow-xl shadow-blue-500/20 uppercase tracking-widest text-[10px]" type="submit">
-              {activeModal === 'add' ? 'Confirm & Publish' : 'Update Schedule Entry'}
+            <Button variant="secondary" className="flex-1 font-black h-10 sm:h-14 rounded-2xl bg-slate-50 border-none uppercase tracking-widest text-[9px] sm:text-[10px]" type="button" onClick={() => setActiveModal(null)}>Cancel</Button>
+            <Button variant="primary" className="flex-[2] font-black h-10 sm:h-14 rounded-2xl shadow-xl shadow-blue-500/20 uppercase tracking-widest text-[9px] sm:text-[10px]" type="submit">
+              {activeModal === 'add' ? 'Confirm & Publish' : 'Update Entry'}
             </Button>
           </div>
         </form>

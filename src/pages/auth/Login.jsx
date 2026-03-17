@@ -83,7 +83,7 @@ export default function Login() {
                 />
               </div>
 
-              <Button type="submit" className="w-full py-2.5 text-base shadow-md shadow-blue-500/20">
+              <Button type="submit" variant="primary" className="w-full h-16 text-xs font-black uppercase tracking-[3px] shadow-2xl shadow-brand-gold/30 rounded-2xl">
                 Sign In
               </Button>
             </form>

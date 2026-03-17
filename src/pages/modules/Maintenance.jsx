@@ -113,11 +113,11 @@ export default function Maintenance() {
           <p className="text-slate-500 text-sm font-bold">Monitor equipment health and manage repair work orders.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex items-center gap-2 font-black shadow-sm bg-white" onClick={() => setActiveModal('equipment')}>
+          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-sm bg-white h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('equipment')}>
             <ClipboardList size={18} />
             Equipment Status
           </Button>
-          <Button variant="primary" className="flex items-center gap-2 font-black shadow-xl shadow-blue-500/20" onClick={() => setActiveModal('create')}>
+          <Button variant="primary" className="flex-1 flex items-center justify-center gap-2 font-black shadow-xl shadow-blue-500/20 h-10 sm:h-12 text-[10px] sm:text-xs" onClick={() => setActiveModal('create')}>
             <PenTool size={18} />
             Create Work Order
           </Button>
@@ -304,8 +304,8 @@ export default function Maintenance() {
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Technical Details</label>
             <textarea name="description" rows={3} className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none font-bold shadow-sm shadow-slate-50" placeholder="Describe the fault or required maintenance in detail..."></textarea>
           </div>
-          <Button variant="primary" className="w-full py-5 font-black uppercase tracking-widest shadow-2xl shadow-blue-500/20 rounded-2xl group flex items-center justify-center gap-3" type="submit">
-            Publish Work Order <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+          <Button variant="primary" className="w-full h-11 sm:h-14 font-black uppercase tracking-widest shadow-2xl shadow-blue-500/20 rounded-2xl group flex items-center justify-center gap-3 text-xs sm:text-sm" type="submit">
+            Publish Order <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </Button>
         </form>
       </Modal>
@@ -388,8 +388,8 @@ export default function Maintenance() {
             </div>
 
             <div className="flex gap-4">
-              <Button variant="secondary" className="flex-1 font-black py-4 rounded-2xl shadow-sm hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-all border-none" onClick={() => setActiveModal(null)}>Cancel</Button>
-              <Button variant="primary" className="flex-[2] font-black py-4 rounded-2xl shadow-xl shadow-blue-500/20" onClick={() => setActiveModal(null)}>Confirm All Changes</Button>
+              <Button variant="secondary" className="flex-1 font-black h-10 sm:h-14 rounded-2xl shadow-sm hover:bg-rose-50 hover:text-rose-600 hover:border-rose-100 transition-all border-none text-[10px] sm:text-xs" onClick={() => setActiveModal(null)}>Cancel</Button>
+              <Button variant="primary" className="flex-[2] font-black h-10 sm:h-14 rounded-2xl shadow-xl shadow-blue-500/20 text-[10px] sm:text-xs" onClick={() => setActiveModal(null)}>Confirm All</Button>
             </div>
           </div>
         )}

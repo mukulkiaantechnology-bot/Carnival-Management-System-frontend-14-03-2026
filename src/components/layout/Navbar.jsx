@@ -40,6 +40,9 @@ export function Navbar({ toggleSidebar }) {
     if (path.includes('/hr/training/add')) return 'Upload Training Module';
     if (path.match(/\/hr\/training\/\d+/)) return 'Training Details';
     if (path.match(/\/hr\/training-progress\/\d+/)) return 'Employee Training Progress';
+    if (path.includes('/tickets/boxes')) return 'Manage Counters';
+    if (path.includes('/tickets/tracking')) return 'Ticket Tracking';
+    if (path.includes('/tickets/settlement')) return 'Settlement';
     if (path === '/settings') return 'System Settings';
     return 'Portal Overview';
   };
@@ -59,7 +62,7 @@ export function Navbar({ toggleSidebar }) {
           <div className="hidden lg:flex items-center gap-4">
             {!['maintenance_manager', 'maintenance'].includes(user?.role) && 
              !['Portal Overview', 'System Settings'].includes(getPageTitle(location.pathname)) && (
-              <h2 className="text-xl font-black text-white tracking-tight uppercase italic">
+              <h2 className="text-xl font-black text-white tracking-tight uppercase italic truncate max-w-[150px] sm:max-w-none">
                 {getPageTitle(location.pathname)}
               </h2>
             )}

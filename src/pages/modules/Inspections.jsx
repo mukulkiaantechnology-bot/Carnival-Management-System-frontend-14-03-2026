@@ -127,11 +127,11 @@ export default function Inspections() {
           <p className="text-slate-500 text-sm font-medium">Manage safety templates and inspection reports.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex items-center gap-2 font-bold shadow-sm" onClick={() => setActiveModal('create')}>
+          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-bold shadow-sm h-10 sm:h-11 text-xs sm:text-sm rounded-xl" onClick={() => setActiveModal('create')}>
             <Plus size={18} />
             Create Template
           </Button>
-          <Button variant="primary" className="flex items-center gap-2 font-bold shadow-lg shadow-blue-500/20" onClick={() => setActiveModal('start')}>
+          <Button variant="primary" className="flex-1 flex items-center justify-center gap-2 font-bold shadow-lg shadow-blue-500/20 h-10 sm:h-11 text-xs sm:text-sm rounded-xl" onClick={() => setActiveModal('start')}>
             <Play size={18} />
             Start Inspection
           </Button>
@@ -244,7 +244,7 @@ export default function Inspections() {
             <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Checklist Items (One per line)</label>
             <textarea name="questions" rows={4} className="w-full px-5 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none font-bold" placeholder="Enter inspection points..." required></textarea>
           </div>
-          <Button variant="primary" className="w-full py-4 font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 rounded-2xl" type="submit">Save Template</Button>
+          <Button variant="primary" className="w-full h-11 sm:h-14 font-black uppercase tracking-widest shadow-xl shadow-blue-500/20 rounded-2xl text-xs sm:text-sm" type="submit">Save Template</Button>
         </form>
       </Modal>
 
@@ -330,8 +330,8 @@ export default function Inspections() {
              </div>
 
              <div className="flex gap-4">
-                <Button variant="secondary" className="flex-1 py-4 font-black rounded-2xl" onClick={() => setActiveModal(null)}>Discard</Button>
-                <Button variant="primary" className="flex-[2] py-4 font-black rounded-2xl shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3" onClick={handleCompleteInspection}>
+                <Button variant="secondary" className="flex-1 py-3 sm:py-4 font-black rounded-2xl" onClick={() => setActiveModal(null)}>Discard</Button>
+                <Button variant="primary" className="flex-[2] py-3 sm:py-4 font-black rounded-2xl shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3" onClick={handleCompleteInspection}>
                    Submit Inspection <ArrowRight size={20} />
                 </Button>
              </div>
@@ -364,7 +364,7 @@ export default function Inspections() {
                 ))}
               </ul>
             </div>
-            <Button variant="primary" className="w-full py-4 font-black uppercase tracking-widest rounded-2xl" onClick={() => handleStartInspection(selectedItem)}>Use This Template</Button>
+            <Button variant="primary" className="w-full py-3 sm:py-4 font-black uppercase tracking-widest rounded-2xl" onClick={() => handleStartInspection(selectedItem)}>Use This Template</Button>
           </div>
         )}
       </Modal>
@@ -440,7 +440,7 @@ export default function Inspections() {
               </div>
             </div>
             
-            <Button variant="primary" className="w-full py-4 font-black uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 shadow-xl bg-slate-900 border-none hover:bg-slate-800" onClick={() => showNotification("Generating PDF Report...")}>
+            <Button variant="primary" className="w-full py-3 sm:py-4 font-black uppercase tracking-widest rounded-2xl flex items-center justify-center gap-3 shadow-xl bg-slate-900 border-none hover:bg-slate-800" onClick={() => showNotification("Generating PDF Report...")}>
                <Download size={20} /> Download Report (PDF)
             </Button>
           </div>

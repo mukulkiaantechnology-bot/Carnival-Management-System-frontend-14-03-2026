@@ -78,11 +78,11 @@ export default function TicketSales() {
           <p className="text-slate-500 text-sm">Monitor real-time ticket distribution and revenue.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex items-center gap-2" onClick={() => setActiveModal('assign')}>
+          <Button variant="secondary" className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 text-[10px] sm:text-xs px-4" onClick={() => setActiveModal('assign')}>
             <Plus size={18} />
             Assign Seller
           </Button>
-          <Button variant="primary" className="flex items-center gap-2" onClick={() => setActiveModal('generate')}>
+          <Button variant="primary" className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-12 text-[10px] sm:text-xs px-4 shadow-xl shadow-blue-500/20" onClick={() => setActiveModal('generate')}>
             <Ticket size={18} />
             Generate Batch
           </Button>
@@ -213,7 +213,7 @@ export default function TicketSales() {
               onChange={(e) => setBatchCount(e.target.value)}
             />
           </div>
-          <Button variant="primary" className="w-full py-3 font-bold uppercase tracking-widest text-xs" type="submit">Confirm Assignment</Button>
+          <Button variant="primary" className="w-full h-10 sm:h-12 font-bold uppercase tracking-widest text-[10px] sm:text-xs" type="submit">Confirm Assignment</Button>
         </form>
       </Modal>
 
@@ -245,7 +245,7 @@ export default function TicketSales() {
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-bold text-slate-300">PCS</span>
             </div>
           </div>
-          <Button variant="primary" className="w-full py-3 font-bold uppercase tracking-widest text-xs" type="submit">Update Stock</Button>
+          <Button variant="primary" className="w-full h-10 sm:h-12 font-bold uppercase tracking-widest text-[10px] sm:text-xs" type="submit">Update Stock</Button>
         </form>
       </Modal>
 
@@ -283,8 +283,8 @@ export default function TicketSales() {
             </div>
 
             <div className="pt-4 flex gap-3">
-              <Button variant="secondary" className="flex-1 font-bold rounded-xl" onClick={() => setActiveModal(null)}>Later</Button>
-              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-xs h-12 shadow-lg shadow-blue-100 rounded-xl flex items-center justify-center gap-2" onClick={() => setActiveModal(null)}>
+              <Button variant="secondary" className="flex-1 font-bold h-10 sm:h-12 rounded-xl" onClick={() => setActiveModal(null)}>Later</Button>
+              <Button variant="primary" className="flex-[2] font-black uppercase tracking-widest text-xs h-10 sm:h-12 shadow-lg shadow-blue-100 rounded-xl flex items-center justify-center gap-2" onClick={() => setActiveModal(null)}>
                 <ArrowUpRight size={18} />
                 Confirm Collection
               </Button>
