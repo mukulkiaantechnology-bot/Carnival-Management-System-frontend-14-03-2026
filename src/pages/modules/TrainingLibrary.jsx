@@ -15,6 +15,7 @@ export default function TrainingLibrary() {
   
   const { trainings, deleteTraining } = useTraining();
   const [searchTerm, setSearchTerm] = useState('');
+  const [deleteConfirmId, setDeleteConfirmId] = useState(null);
   const [notification, setNotification] = useState(null);
 
   const showNotification = (msg) => {
@@ -24,6 +25,7 @@ export default function TrainingLibrary() {
 
   const handleDelete = (id, title) => {
     deleteTraining(id);
+    setDeleteConfirmId(null);
     showNotification(`"${title}" has been removed from the library.`);
   };
 
@@ -33,6 +35,28 @@ export default function TrainingLibrary() {
 
   return (
     <div className="space-y-6 px-1 relative pb-10">
+      {/* Delete Confirmation Modal */}
+      {deleteConfirmId && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[120] flex items-center justify-center p-4">
+          <Card className="w-full max-w-sm border-none shadow-2xl animate-in zoom-in-95 duration-200 bg-white rounded-[2rem]">
+            <div className="p-8 text-center font-black">
+              <div className="w-16 h-16 bg-brand-red/10 text-brand-red rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trash2 size={32} />
+              </div>
+              <h3 className="text-xl font-black text-brand-text uppercase italic">Confirm Deletion</h3>
+              <p className="text-slate-500 text-[10px] uppercase font-bold mt-2 tracking-widest">Are you sure you want to remove this training module? This action cannot be undone.</p>
+              <div className="flex gap-3 mt-8">
+                <Button variant="secondary" className="flex-1 font-bold h-12 rounded-xl" onClick={() => setDeleteConfirmId(null)}>Cancel</Button>
+                <Button variant="primary" className="flex-1 font-bold h-12 rounded-xl bg-brand-dark text-white hover:bg-black border-none" onClick={() => { 
+                  const t = trainings.find(x => x.id === deleteConfirmId);
+                  handleDelete(deleteConfirmId, t?.title); 
+                }}>Delete</Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+      )}
+
       {/* Toast Notification */}
       {notification && (
         <div className="fixed top-20 right-8 z-[110] animate-in slide-in-from-right duration-300">
@@ -152,14 +176,14 @@ export default function TrainingLibrary() {
                         <>
                           <button
                             className="p-2.5 hover:text-brand-orange bg-slate-50 hover:bg-brand-orange/10 rounded-xl transition-all shadow-sm border border-slate-100"
-                            onClick={() => showNotification("Edit functionality is coming soon.")}
+                            onClick={() => navigate(`/hr/training/edit/${module.id}`)}
                             title="Edit Module"
                           >
                             <Pencil size={18} />
                           </button>
                           <button
                             className="p-2.5 hover:text-brand-red bg-slate-50 hover:bg-brand-red/10 rounded-xl transition-all shadow-sm border border-slate-100"
-                            onClick={() => handleDelete(module.id, module.title)}
+                            onClick={() => setDeleteConfirmId(module.id)}
                             title="Delete Module"
                           >
                             <Trash2 size={18} />

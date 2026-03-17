@@ -1,6 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
-import { TrainingProvider } from './context/TrainingContext';
+import { TrainingProvider, useTraining } from './context/TrainingContext';
 import { InspectionProvider } from './context/InspectionContext';
 import { MaintenanceProvider } from './context/MaintenanceContext';
 import { ProtectedRoute } from './app/routes/ProtectedRoute';
@@ -21,7 +21,7 @@ import Maintenance from './pages/modules/Maintenance';
 import WorkOrderDetail from './pages/modules/WorkOrderDetail';
 import Financial from './pages/modules/Financial';
 import TicketSales from './pages/modules/TicketSales';
-import Training from './pages/modules/Training';
+import Training, { EditTrainingWrapper } from './pages/modules/Training';
 import TrainingLibrary from './pages/modules/TrainingLibrary';
 import EmployeeTraining from './pages/modules/EmployeeTraining';
 import AddTraining from './pages/modules/AddTraining';
@@ -78,7 +78,7 @@ function RootRedirect() {
     ticket: '/tickets/dashboard',
     ticket_manager: '/tickets/dashboard',
     hr: '/hr-dashboard',
-    employee: '/employee-dashboard',
+    staff: '/staff-dashboard',
     super_admin: '/platform-admin',
   };
   
@@ -132,7 +132,7 @@ export default function App() {
               </Route>
 
               {/* Shared Settings Route (All Roles) */}
-              <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager', 'maintenance', 'maintenance_manager', 'ticket', 'ticket_manager', 'hr', 'employee']} />}>
+              <Route element={<ProtectedRoute allowedRoles={['admin', 'operations', 'operations_manager', 'maintenance', 'maintenance_manager', 'ticket', 'ticket_manager', 'hr', 'staff']} militaryTime={true} />}>
                 <Route path="/settings" element={<Settings />} />
               </Route>
 
@@ -175,13 +175,16 @@ export default function App() {
               <Route path="/hr/training-library" element={<TrainingLibrary />} />
               <Route path="/hr/staff-training" element={<EmployeeTraining />} />
               <Route path="/hr/training/add" element={<AddTraining />} />
+              <Route path="/hr/training/edit/:id" element={
+                <EditTrainingWrapperHR />
+              } />
               <Route path="/hr/training/:id" element={<TrainingDetail />} />
               <Route path="/hr/training-progress/:id" element={<TrainingProgressDetail />} />
               <Route path="/training/all/*" element={<Training />} />
             </Route>
 
             {/* Staff Routes */}
-            <Route element={<ProtectedRoute allowedRoles={['admin', 'employee']} />}>
+            <Route element={<ProtectedRoute allowedRoles={['admin', 'staff']} />}>
               <Route path="/staff-dashboard" element={<EmployeeDashboard />} />
               <Route path="/staff-timeclock" element={<EmployeeTimeClock />} />
               <Route path="/staff-tasks" element={<EmployeeTasks />} />
@@ -200,5 +203,19 @@ export default function App() {
         </MaintenanceProvider>
       </InspectionProvider>
     </TrainingProvider>
+  );
+}
+function EditTrainingWrapperHR() {
+  const { trainings, updateTraining } = useTraining();
+  const navigate = useNavigate();
+  return (
+    <EditTrainingWrapper 
+      trainings={trainings} 
+      onSave={(id, data) => {
+        updateTraining(id, data);
+        navigate('/hr/training-library');
+      }}
+      onCancel={() => navigate('/hr/training-library')}
+    />
   );
 }

@@ -12,7 +12,7 @@ const mockUsers = {
   'ticket@demo.com': { id: 4, email: 'ticket@demo.com', role: 'ticket', companyId: 1 },
   'ticket_manager@demo.com': { id: 8, email: 'ticket_manager@demo.com', role: 'ticket_manager', companyId: 1 },
   'hr@demo.com': { id: 5, email: 'hr@demo.com', role: 'hr', companyId: 1 },
-  'emp@demo.com': { id: 6, email: 'emp@demo.com', role: 'employee', companyId: 1 },
+  'emp@demo.com': { id: 6, email: 'emp@demo.com', role: 'staff', companyId: 1 },
   'platform@demo.com': { id: 9, email: 'platform@demo.com', role: 'super_admin', companyId: 0 },
 };
 

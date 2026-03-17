@@ -85,7 +85,7 @@ export function Sidebar({ isOpen, toggleSidebar }) {
   } else if (role === 'maintenance' || role === 'maintenance_manager') {
     menuItems = MAINTENANCE_NAV_ITEMS;
     sectionTitle = 'Maintenance Hub';
-  } else if (role === 'employee') {
+  } else if (role === 'staff') {
     menuItems = EMPLOYEE_NAV_ITEMS;
     sectionTitle = 'Staff Portal';
   }
