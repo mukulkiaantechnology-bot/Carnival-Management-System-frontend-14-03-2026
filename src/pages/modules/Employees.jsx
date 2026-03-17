@@ -393,24 +393,29 @@ export default function Employees() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center justify-center gap-2">
-                            <button 
+                            <Button 
+                              variant="secondary"
+                              className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-brand-red/20 bg-brand-red text-white border-none"
                               onClick={() => navigate(`${basePath}/${emp.id}`)}
-                              className="p-2 text-slate-400 hover:text-brand-red hover:bg-brand-light rounded-lg transition-all"
+                              title="View Details"
                             >
                               <Eye size={16} />
-                            </button>
-                            <button 
+                            </Button>
+                            <Button 
+                              variant="primary"
+                              className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-brand-gold/20 bg-brand-gold text-brand-text border-none"
                               onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
-                              className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all"
+                              title="Edit Employee"
                             >
                               <Pencil size={16} />
-                            </button>
-                            <button 
+                            </Button>
+                            <Button 
+                              className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-black/10 bg-brand-dark text-white border-none hover:bg-black"
                               onClick={() => setDeleteConfirmId(emp.id)}
-                              className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all"
+                              title="Delete Employee"
                             >
                               <Trash2 size={16} />
-                            </button>
+                            </Button>
                           </div>
                         </td>
                       </tr>
@@ -455,21 +460,20 @@ export default function Employees() {
                       <Button 
                         variant="secondary" 
                         onClick={() => navigate(`${basePath}/${emp.id}`)}
-                        className="flex-1 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest border-slate-100 hover:bg-slate-50"
+                        className="flex-1 h-10 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-red/10"
                       >
                         Details
                       </Button>
                       <Button 
-                        variant="secondary" 
+                        variant="primary" 
                         onClick={() => navigate(`${basePath}/edit/${emp.id}`)}
-                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-amber-50 hover:text-amber-600"
+                        className="h-10 w-10 p-0 rounded-xl shadow-lg shadow-brand-gold/10"
                       >
                         <Pencil size={16} />
                       </Button>
                       <Button 
-                        variant="secondary" 
                         onClick={() => setDeleteConfirmId(emp.id)}
-                        className="h-10 w-10 p-0 rounded-xl border-slate-100 hover:bg-rose-50 hover:text-rose-600"
+                        className="h-10 w-10 p-0 rounded-xl bg-brand-dark text-white hover:bg-black shadow-lg shadow-black/10"
                       >
                         <Trash2 size={16} />
                       </Button>

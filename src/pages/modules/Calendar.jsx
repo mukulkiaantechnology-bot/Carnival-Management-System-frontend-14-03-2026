@@ -186,10 +186,10 @@ export default function Calendar() {
           </div>
           <Button
             variant="secondary"
-            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-lg shadow-slate-200/50 border-none bg-white hover:bg-slate-50 text-[10px] sm:text-xs"
+            className="flex-1 flex items-center justify-center gap-2 font-black h-10 sm:h-14 px-6 rounded-2xl shadow-xl shadow-brand-red/20 border-none bg-brand-red text-white text-[10px] sm:text-xs transition-all"
             onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
           >
-            {viewMode === 'list' ? <LayoutGrid size={18} strokeWidth={2.5} /> : <List size={18} strokeWidth={2.5} />}
+            {viewMode === 'list' ? <LayoutGrid size={18} strokeWidth={2.5} className="text-white" /> : <List size={18} strokeWidth={2.5} className="text-white" />}
             {viewMode === 'list' ? 'Grid' : 'List'}
           </Button>
           <Button

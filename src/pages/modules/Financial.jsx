@@ -99,8 +99,8 @@ export default function Financial() {
           <p className="text-slate-500 text-sm font-bold">Track revenue, expenses, and overall profit status.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="secondary" className="flex items-center gap-2 font-black shadow-sm bg-white" onClick={() => setActiveModal('filter')}>
-            <Filter size={18} />
+          <Button variant="secondary" className="flex items-center gap-2 font-black shadow-lg shadow-brand-red/20 bg-brand-red text-white border-none" onClick={() => setActiveModal('filter')}>
+            <Filter size={18} className="text-white" />
             Filter
           </Button>
           <Button variant="primary" className="flex items-center gap-2 font-black shadow-xl shadow-blue-500/20" onClick={() => setActiveModal('export')}>
@@ -218,7 +218,7 @@ export default function Financial() {
                     <td className="px-8 py-5 text-right">
                       <Button
                         variant="secondary"
-                        className="h-10 px-5 text-xs font-black uppercase tracking-widest bg-slate-50 border-none hover:bg-slate-900 hover:text-white transition-all shadow-sm rounded-xl"
+                        className="h-10 px-5 text-xs font-black uppercase tracking-widest transition-all shadow-sm rounded-xl"
                         onClick={() => handleViewReceipt(expense)}
                       >
                         View Receipt

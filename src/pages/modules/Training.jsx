@@ -130,15 +130,28 @@ function TrainingLibrary({ onUpload }) {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all" onClick={() => navigate(`/hr/training/${module.id}`)}>
+                      <Button 
+                        variant="secondary"
+                        className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-brand-red/20 bg-brand-red text-white border-none"
+                        onClick={() => navigate(`/hr/training/${module.id}`)}
+                        title="View Module"
+                      >
                         <Eye size={16} />
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
+                      </Button>
+                      <Button 
+                        variant="primary"
+                        className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-brand-gold/20 bg-brand-gold text-brand-text border-none"
+                        title="Edit Module"
+                      >
                         <Pencil size={16} />
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-all" onClick={() => deleteTraining(module.id)}>
+                      </Button>
+                      <Button 
+                        className="h-9 w-9 !p-0 rounded-xl transition-all shadow-lg shadow-black/10 bg-brand-dark text-white border-none hover:bg-black"
+                        onClick={() => deleteTraining(module.id)}
+                        title="Delete Module"
+                      >
                         <Trash2 size={16} />
-                      </button>
+                      </Button>
                     </div>
                   </td>
                 </tr>

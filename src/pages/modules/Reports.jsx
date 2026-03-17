@@ -11,7 +11,7 @@ function Modal({ isOpen, onClose, title, children, maxWidth = 'max-w-md' }) {
       <div className={`bg-white rounded-2xl shadow-xl w-full ${maxWidth} animate-in zoom-in-95 duration-200 overflow-hidden`}>
         <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
           <h2 className="text-xl font-bold text-slate-800">{title}</h2>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 p-1 hover:bg-slate-100 rounded-lg transition-colors">
+          <button onClick={onClose} className="text-slate-600 hover:text-slate-800 p-1 hover:bg-slate-100 rounded-lg transition-colors" title="Close">
             <X size={20} />
           </button>
         </div>

@@ -107,11 +107,11 @@ export default function PlatformDashboard() {
         <div className="flex items-center gap-4">
           <Button
             variant="secondary"
-            className={`flex items-center gap-3 font-black py-4 px-8 rounded-2xl shadow-lg border-none bg-white hover:bg-brand-light transition-all ${isRefreshing ? 'opacity-50' : ''}`}
+            className={`flex items-center gap-3 font-black py-4 px-8 rounded-2xl shadow-xl shadow-brand-red/20 bg-brand-red text-white hover:bg-brand-red-dark transition-all ${isRefreshing ? 'opacity-50' : ''}`}
             onClick={handleRefresh}
             disabled={isRefreshing}
           >
-            <RefreshCcw size={20} className={isRefreshing ? 'animate-spin' : 'text-brand-red'} />
+            <RefreshCcw size={20} className={isRefreshing ? 'animate-spin' : 'text-white'} />
             SYNC DATA
           </Button>
           <Button

@@ -128,10 +128,10 @@ export default function Plans() {
           </div>
           <Button
             variant="secondary"
-            className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-white border border-brand-gold/10 rounded-2xl hover:bg-brand-light text-[10px] font-black uppercase tracking-widest text-slate-600 transition-all shadow-sm"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white transition-all shadow-lg shadow-brand-red/20"
             onClick={() => showNotification("Feature Matrix Exported")}
           >
-            <Shield size={16} className="text-brand-gold" /> <span className="hidden xs:inline">Feature Matrix</span><span className="xs:hidden">Matrix</span>
+            <Shield size={16} className="text-white" /> <span className="hidden xs:inline">Feature Matrix</span><span className="xs:hidden">Matrix</span>
           </Button>
           <Button
             className="flex-1 sm:flex-none flex items-center justify-center gap-3 px-4 sm:px-8 py-3 sm:py-4 bg-brand-gold text-brand-text rounded-2xl hover:bg-brand-gold-dark text-[10px] font-black uppercase tracking-widest shadow-2xl shadow-brand-gold/20 transition-all border border-brand-gold/20"
