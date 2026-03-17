@@ -24,7 +24,7 @@ export default function LandingPage() {
       <PublicNavbar />
       
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+      <section className="relative pt-24 pb-20 lg:pt-28 lg:pb-32 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
           <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-brand-red blur-[120px] rounded-full animate-pulse transition-all duration-1000"></div>
           <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-brand-gold blur-[100px] rounded-full animate-pulse transition-all duration-700"></div>
