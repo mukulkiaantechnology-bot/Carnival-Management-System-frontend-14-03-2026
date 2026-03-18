@@ -34,6 +34,7 @@ export default function Requests() {
   const [requests, setRequests] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -60,9 +61,16 @@ export default function Requests() {
     localStorage.setItem('platform_requests', JSON.stringify(updated));
   };
 
-  const filteredRequests = filter === 'All'
-    ? requests
-    : requests.filter(r => r.status === filter);
+  const filteredRequests = requests.filter(req => {
+    const matchesStatus = filter === 'All Status' || filter === 'All' || req.status === filter;
+    const matchesSearch = 
+      req.companyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      req.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      req.adminName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      req.email.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    return matchesStatus && matchesSearch;
+  });
 
   return (
     <div className="space-y-6 sm:space-y-10 animate-in fade-in duration-500 pb-20">
@@ -81,6 +89,8 @@ export default function Requests() {
             <input
               type="text"
               placeholder="Search active requests..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full sm:w-64 pl-11 pr-6 py-3 bg-brand-light border border-brand-gold/10 rounded-2xl outline-none focus:border-brand-gold focus:ring-4 focus:ring-brand-gold/10 transition-all text-sm font-black text-brand-text shadow-inner"
             />
           </div>
